@@ -6,7 +6,7 @@ namespace Reservatie
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("cats > dogs btw");
             Class1.dog();
         }
     }
