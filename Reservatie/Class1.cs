@@ -6,7 +6,7 @@ namespace Reservatie
 {
     class Class1
     {
-        static void dog(string[] args)
+        public static void dog()
         {
             Console.WriteLine("Hello World!ez");
         }
