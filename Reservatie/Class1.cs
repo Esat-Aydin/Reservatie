@@ -18,7 +18,9 @@ namespace Reservatie
             Console.WriteLine("- Thriller");
             Console.WriteLine("Type hier de uitgekozen genre in en toets dan op ENTER: ");
             string genre = Console.ReadLine();
-            
+            if(genre == "Action"){
+                Console.WriteLine("De volgende Action films worden actueel getoond:");
+            }
         }
     }
 }
