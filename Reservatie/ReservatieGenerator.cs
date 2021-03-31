@@ -48,6 +48,7 @@ namespace Cinema
             {
                     Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
                     Console.WriteLine("");
+                    //Json file met alle snacks.
             }
             
             // informatie voor eventueel mailen reservatie code.
