@@ -27,17 +27,18 @@ namespace Reservering_bevestiging
             Console.WriteLine("Zou je een bevestiging in je mail willen ontvangen?");
             Console.WriteLine("Toets 'JA' als je een bevestinging wil ontvangen toets 'NEE' als je geen bevestiging per mail wil ontvangen.");
             // Email bevestiging.
-            string Mail_Bevestiging = Console.ReadLine();
+            var Mail_Bevestiging = Console.ReadLine();
            
-            if (Mail_Bevestiging == "JA");
+            if (Mail_Bevestiging == "JA")
             {
+
                 try
                 {
                     var message = new MimeMessage();
                     // Email verzender
-                    message.From.Add(new MailboxAddress("Wouter van Krugten", "wouterschiedam98@gmail.com"));
+                    message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
                     // Email geadresseerde
-                    message.To.Add(new MailboxAddress("cor", "g.riedijk@gmail.com"));
+                    message.To.Add(new MailboxAddress("cor", "wouterschiedam98@gmail.com"));
                     // Email onderwerp
                     message.Subject = "Bevestiging online reservatie.";
                     // Email text
@@ -47,6 +48,7 @@ namespace Reservering_bevestiging
 Bedankt voor het reserveren via onze bioscoop applicatie.
 Hieronder vind je de reservatie code.
 Reservatie code: " + finalString
+
                     };
 
 
@@ -54,9 +56,9 @@ Reservatie code: " + finalString
                     {
                         client.Connect("smtp.gmail.com", 587, false);
 
-                        // Note: only needed if the SMTP server requires authentication
-                        client.Authenticate("Wouterschiedam98@gmail.com", "Feyenoord1");
-
+                        // authenticate smtp server
+                        client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
+                        // verzenden email
                         client.Send(message);
                         client.Disconnect(true);
                         
@@ -68,17 +70,17 @@ Reservatie code: " + finalString
                     Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
                 }
             }
-            if (Mail_Bevestiging == "NEE")
+            else if (Mail_Bevestiging == "NEE")
             {
                     Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
-                    Console.WriteLine("Bedankt voor het online reserveren en we zien u graag bij onze bioscoop.");
+                   
             
 
 
 
             }
+            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag bij onze bioscoop.");
 
-            
         }
     }
 }
