@@ -32,21 +32,18 @@ namespace Reservering_bevestiging
 
 
 
-
+            // informatie voor eventueel mailen reservatie code.
             Console.WriteLine("Om te kunnen reserveren hebben wij een aantal gegevens van u nodig.");
             Console.Write("Naam: ");
             string Naam_klant = Console.ReadLine();
             Console.Write("Email adress: ");
             string Naam_email = Console.ReadLine();
-
-
-
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
             Thread.Sleep(3000);
             // Random generator voor het maken van de reservatie code.
-            var chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var stringChars = new char[16];
             var random = new Random();
 
@@ -56,7 +53,7 @@ namespace Reservering_bevestiging
             }
             
             var Reservatiecode = new String(stringChars);
-
+            
 
             Console.WriteLine("reservatie code:" + Reservatiecode);
             Console.WriteLine("Zou je een bevestiging in je mail willen ontvangen?");
