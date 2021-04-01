@@ -4,6 +4,12 @@ using MailKit.Net.Smtp;
 using MimeKit;
 namespace Cinema
 {
+    class Data
+    {
+
+
+
+    }
     class Program
     {
         static void Main(string[] args)
@@ -104,7 +110,7 @@ namespace Cinema
                     // Email text
                     message.Body = new TextPart("plain")
                     {
-                        Text = @"hallo,
+                        Text = @"Hallo,
 Bedankt voor het reserveren via onze bioscoop.
 Hieronder vind je de reservatie code.
 Reservatie code: " + Reservatiecode
