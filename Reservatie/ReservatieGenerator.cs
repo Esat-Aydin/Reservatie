@@ -18,7 +18,6 @@ namespace Cinema
         public string Drink5 { get; set; }
         public string Drink6 { get; set; }
         public string Drink7 { get; set; }
-
         public string Drink8 { get; set; }
         public string Drink9 { get; set; }
         public string Drink10 { get; set; }
@@ -29,19 +28,12 @@ namespace Cinema
     {
         static void Main(string[] args)
         {
+            // Inladen Json Module snacks
             var myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
             var myJObject = JObject.Parse(myJsonString);
-            var myJsonObject = JsonConvert.DeserializeObject<Data>(myJsonString);
-            Console.WriteLine(myJsonObject.Drink1);
-            Console.WriteLine(myJsonObject.Drink2);
-            Console.WriteLine(myJsonObject.Drink3);
-            Console.WriteLine(myJsonObject.Drink4);
-            Console.WriteLine(myJsonObject.Drink5);
-            Console.WriteLine(myJsonObject.Drink6);
-            Console.WriteLine(myJsonObject.Drink7);
-            Console.WriteLine(myJsonObject.Drink8);
-            Console.WriteLine(myJsonObject.Drink9);
-            //Console.WriteLine(myJsonObject.Price1);
+            var MyJsonSnacks = JsonConvert.DeserializeObject<Data>(myJsonString);
+            
+            //Console.WriteLine(MyJsonSnacks.Price1);
             // Startpagina applicatie
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
@@ -88,8 +80,17 @@ namespace Cinema
             if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
             {
                     Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
-                    Console.WriteLine("");
                     //Json file met alle snacks.
+                    Console.WriteLine(MyJsonSnacks.Drink1);
+                    Console.WriteLine(MyJsonSnacks.Drink2);
+                    Console.WriteLine(MyJsonSnacks.Drink3);
+                    Console.WriteLine(MyJsonSnacks.Drink4);
+                    Console.WriteLine(MyJsonSnacks.Drink5);
+                    Console.WriteLine(MyJsonSnacks.Drink6);
+                    Console.WriteLine(MyJsonSnacks.Drink7);
+                    Console.WriteLine(MyJsonSnacks.Drink8);
+                    Console.WriteLine(MyJsonSnacks.Drink9);
+               
             }
           
             
