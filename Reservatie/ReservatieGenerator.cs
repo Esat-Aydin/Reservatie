@@ -15,20 +15,20 @@ namespace Cinema
             Console.WriteLine("Selecteer '3' om uw reservering te bekijken.");
             var Start_options = Console.ReadLine();
             if (Start_options == "1") {
+                Console.Write("Op welke genre wilt u zoeken: ");
+                var Genre_search = Console.ReadLine();
 
 
             }
             else if (Start_options == "2") {
+                Console.Write("Naar welke film bent u opzoek: ");
+                var Film_search = Console.ReadLine();
 
 
             }
             else if (Start_options == "3") {
                 Console.Write("Voer hier uw reservatie code in:");
                 var Reservatie_code = Console.ReadLine();
-
-
-
-
             }
            
             //Eventuele snacks tijdens het reserveren
@@ -44,12 +44,19 @@ namespace Cinema
                     Online_snacks_secondchange = Console.ReadLine();
                     
             }
+            else
+            {
+                Console.WriteLine("U heeft de verkeerde input gegeven.");
+                Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");
+                Online_snacks_secondchange = Console.ReadLine();
+            }
             if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
             {
                     Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
                     Console.WriteLine("");
                     //Json file met alle snacks.
             }
+          
             
             // informatie voor eventueel mailen reservatie code.
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
