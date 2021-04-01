@@ -35,6 +35,7 @@ namespace Cinema
             else if (Start_options == "3") {
                 Console.Write("Voer hier uw reservatie code in:");
                 var Reservatie_code = Console.ReadLine();
+                
             }
            
             //Eventuele snacks tijdens het reserveren
@@ -71,6 +72,7 @@ namespace Cinema
             Console.Write("Email adress: ");
             string Naam_email = Console.ReadLine();
             // Eventuele betaal methode?
+
 
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
