@@ -1,19 +1,47 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using MailKit.Net.Smtp;
 using MimeKit;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace Cinema
 {
     class Data
     {
 
-        .
+        public string Drink1 { get; set; }
+        public string Drink2 { get; set; }
+        public string Drink3 { get; set; }
+        public string Drink4 { get; set; }
+        public string Drink5 { get; set; }
+        public string Drink6 { get; set; }
+        public string Drink7 { get; set; }
+
+        public string Drink8 { get; set; }
+        public string Drink9 { get; set; }
+        public string Drink10 { get; set; }
+        public string Drink11 { get; set; }
 
     }
     class Program
     {
         static void Main(string[] args)
         {
+            var myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
+            var myJObject = JObject.Parse(myJsonString);
+            var myJsonObject = JsonConvert.DeserializeObject<Data>(myJsonString);
+            Console.WriteLine(myJsonObject.Drink1);
+            Console.WriteLine(myJsonObject.Drink2);
+            Console.WriteLine(myJsonObject.Drink3);
+            Console.WriteLine(myJsonObject.Drink4);
+            Console.WriteLine(myJsonObject.Drink5);
+            Console.WriteLine(myJsonObject.Drink6);
+            Console.WriteLine(myJsonObject.Drink7);
+            Console.WriteLine(myJsonObject.Drink8);
+            Console.WriteLine(myJsonObject.Drink9);
+            //Console.WriteLine(myJsonObject.Price1);
             // Startpagina applicatie
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
