@@ -11,17 +11,7 @@ namespace Cinema
     class Data
     {
 
-        public string Drink1 { get; set; }
-        public string Drink2 { get; set; }
-        public string Drink3 { get; set; }
-        public string Drink4 { get; set; }
-        public string Drink5 { get; set; }
-        public string Drink6 { get; set; }
-        public string Drink7 { get; set; }
-        public string Drink8 { get; set; }
-        public string Drink9 { get; set; }
-        public string Drink10 { get; set; }
-        public string Drink11 { get; set; }
+
 
     }
     class Program
@@ -29,11 +19,12 @@ namespace Cinema
         static void Main(string[] args)
         {
             // Inladen Json Module snacks
-            var myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
+            string myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
             var myJObject = JObject.Parse(myJsonString);
-            var MyJsonSnacks = JsonConvert.DeserializeObject<Data>(myJsonString);
-            
-            //Console.WriteLine(MyJsonSnacks.Price1);
+            //var MyJsonSnacks = JsonConvert.DeserializeObject<Data>(myJsonString);
+            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
+
+           
             // Startpagina applicatie
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
@@ -81,16 +72,50 @@ namespace Cinema
             {
                     Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
                     //Json file met alle snacks.
-                    Console.WriteLine(MyJsonSnacks.Drink1);
-                    Console.WriteLine(MyJsonSnacks.Drink2);
-                    Console.WriteLine(MyJsonSnacks.Drink3);
-                    Console.WriteLine(MyJsonSnacks.Drink4);
-                    Console.WriteLine(MyJsonSnacks.Drink5);
-                    Console.WriteLine(MyJsonSnacks.Drink6);
-                    Console.WriteLine(MyJsonSnacks.Drink7);
-                    Console.WriteLine(MyJsonSnacks.Drink8);
-                    Console.WriteLine(MyJsonSnacks.Drink9);
-               
+                    Console.WriteLine("Dranken:");
+                    Console.WriteLine("-------------------------------------------------------------------------------");
+                    Console.WriteLine(DynamicData.dranken[0].Name);
+                    Console.WriteLine(DynamicData.dranken[0].Price);
+                    Console.WriteLine(DynamicData.dranken[1].Name);
+                    Console.WriteLine(DynamicData.dranken[1].Price);
+                    Console.WriteLine(DynamicData.dranken[2].Name);
+                    Console.WriteLine(DynamicData.dranken[2].Price);
+                    Console.WriteLine(DynamicData.dranken[3].Name);
+                    Console.WriteLine(DynamicData.dranken[3].Price);
+                    Console.WriteLine(DynamicData.dranken[4].Name);
+                    Console.WriteLine(DynamicData.dranken[4].Price);
+                    Console.WriteLine(DynamicData.dranken[5].Name);
+                    Console.WriteLine(DynamicData.dranken[5].Price);
+                    Console.WriteLine(DynamicData.dranken[6].Name);
+                    Console.WriteLine(DynamicData.dranken[6].Price);
+                    Console.WriteLine(DynamicData.dranken[7].Name);
+                    Console.WriteLine(DynamicData.dranken[7].Price);
+                    Console.WriteLine(DynamicData.dranken[8].Name);
+                    Console.WriteLine(DynamicData.dranken[8].Price);
+                    Console.WriteLine(DynamicData.dranken[9].Name);
+                    Console.WriteLine(DynamicData.dranken[9].Price);
+                    Console.WriteLine(DynamicData.dranken[10].Name);
+                    Console.WriteLine(DynamicData.dranken[10].Price);
+                    Console.WriteLine(DynamicData.dranken[11].Name);
+                    Console.WriteLine(DynamicData.dranken[11].Price);
+                    Console.WriteLine("Snacks:");
+                    Console.WriteLine("-------------------------------------------------------------------------------");
+                    Console.WriteLine(DynamicData.snacks[0].Name);
+                    Console.WriteLine(DynamicData.snacks[0].Price);
+                    Console.WriteLine(DynamicData.snacks[1].Name);
+                    Console.WriteLine(DynamicData.snacks[1].Price);
+                    Console.WriteLine(DynamicData.snacks[2].Name);
+                    Console.WriteLine(DynamicData.snacks[2].Price);
+                    Console.WriteLine(DynamicData.snacks[3].Name);
+                    Console.WriteLine(DynamicData.snacks[3].Price);
+                    Console.WriteLine(DynamicData.snacks[4].Name);
+                    Console.WriteLine(DynamicData.snacks[4].Price);
+                    Console.WriteLine(DynamicData.snacks[5].Name);
+                    Console.WriteLine(DynamicData.snacks[5].Price);
+                    Console.WriteLine(DynamicData.snacks[6].Name);
+                    Console.WriteLine(DynamicData.snacks[6].Price);
+
+
             }
           
             
