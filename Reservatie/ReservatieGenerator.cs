@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using MailKit.Net.Smtp;
 using MimeKit;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows;
+
 
 namespace Cinema
 {
@@ -23,22 +24,23 @@ namespace Cinema
 
 
     }
+
     class Program
     {
 
-        
+
         static void Main(string[] args)
         {
-            
+
             // Inladen Json Module snacks
             string myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
             string myUserData = File.ReadAllText("C:\\Users\\woute\\Samplelog.json");
-
+            string MyFilmsData = File.ReadAllText("C:\\Users\\woute\\Desktop\\Filmsdata.json");
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            
-            
+            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
+
 
 
             // Startpagina applicatie
@@ -49,8 +51,35 @@ namespace Cinema
             var Start_options = Console.ReadLine();
             if (Start_options == "1")
             {
+                List<string> Show_films = new List<string>();
+
                 Console.Write("Op welke genre wilt u zoeken: ");
                 var Genre_search = Console.ReadLine();
+                Console.WriteLine("We hebben deze film(s) gevonden onder het genre: ");
+                for (int i = 0; i < 5; i++)
+                {
+
+                    for (int j = 0; j <= 1; j++)
+                    {
+                        string Genre_zoeken = (string)DynamicFilmData["Films"][i]["genre"][j];
+                        if (Genre_search == Genre_zoeken)
+                        {
+                            Genre_check(DynamicFilmData, i);
+                            Show_films.Add(DynamicFilmData["Films"][i]["film"].ToString());
+                        }
+                    }
+                }
+                Console.WriteLine("Voor welke van de bovenstaande films zou u willen reserveren?");
+                string Chosen_film = Console.ReadLine();
+                for (int i = 0; i < Show_films.Count; i++)
+                {
+                    if (Chosen_film == Show_films.ElementAt(i))
+                    {
+                        Console.WriteLine("U heeft gekozen voor de film:" + Chosen_film);
+                        Console.WriteLine("Hieronder staan de dagen en tijden wanneer deze film draait.");
+
+                    }
+                }
 
 
             }
@@ -58,7 +87,15 @@ namespace Cinema
             {
                 Console.Write("Naar welke film bent u opzoek: ");
                 var Film_search = Console.ReadLine();
-
+                for (int i = 0; i < 5; i++)
+                {
+                    string Film_zoeken = (string)DynamicFilmData["Films"][i]["film"];
+                    if (Film_search == Film_zoeken)
+                    {
+                        Console.WriteLine("U heeft gezocht naar de volgende film:");
+                        Film_check(DynamicFilmData, i);
+                    }
+                }
 
             }
             else if (Start_options == "3")
@@ -86,7 +123,7 @@ namespace Cinema
 
 
             }
-            
+
             //Eventuele snacks tijdens het reserveren
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
             Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
@@ -220,7 +257,15 @@ Reservatie code: " + Reservatiecode
             File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
 
         }
+        private static void Genre_check(dynamic dynamicFilmData, int i)
+        {
+            Console.Write(dynamicFilmData["Films"][i]["film"] + "\n");
 
+        }
+        private static void Film_check(dynamic dynamicFilmData, int i)
+        {
+            Console.WriteLine(dynamicFilmData["Films"][i]["film"] + "\n");
+        }
 
         private static void Reservering_check(dynamic dynamicUserData, int i)
         {
