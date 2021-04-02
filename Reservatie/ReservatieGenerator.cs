@@ -4,11 +4,9 @@ using System.Threading;
 using MailKit.Net.Smtp;
 using MimeKit;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
-using Xamarin.Essentials;
+using System.Diagnostics;
+using System.Windows;
 
 namespace Cinema
 {
@@ -27,16 +25,20 @@ namespace Cinema
     }
     class Program
     {
+
+        
         static void Main(string[] args)
         {
-
+            
             // Inladen Json Module snacks
             string myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
             string myUserData = File.ReadAllText("C:\\Users\\woute\\Samplelog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
-            dynamic DynamicDataUser = JsonConvert.DeserializeObject(myUserData);
+            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
+            
+            
 
 
             // Startpagina applicatie
@@ -63,13 +65,28 @@ namespace Cinema
             {
                 Console.Write("Voer hier uw reservatie code in:");
                 var Reservatie_code = Console.ReadLine();
-                //if (Reservatie_code)
-                //{
+                for (int i = 0; i < 3; i++)
+                {
+                    string Res_code = (string)DynamicUserData[i]["Reservatie_code"];
+                    if (Res_code == Reservatie_code)
+                    {
+                        Console.WriteLine("Uw reservering:");
+                        Reservering_check(DynamicUserData, i);
+                        break;
+                    }
+                }
 
-                //}
+                Console.WriteLine("Toets 'R' om het progamma opnieuw op te starten.");
+                string restart = Console.ReadLine();
+                if (restart.ToUpper() == "R")
+                {
+                    Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                    Environment.Exit(1);
+                }
+
 
             }
-
+            
             //Eventuele snacks tijdens het reserveren
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
             Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
@@ -201,6 +218,20 @@ Reservatie code: " + Reservatiecode
 
             DataUser = JsonConvert.SerializeObject(JsonData);
             File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
+
+        }
+
+
+        private static void Reservering_check(dynamic dynamicUserData, int i)
+        {
+
+            Console.WriteLine(dynamicUserData[i]["Naam"]);
+            Console.WriteLine(dynamicUserData[i]["Email"]);
+            Console.WriteLine(dynamicUserData[i]["Reservatie_code"]);
+            Console.WriteLine(dynamicUserData[i]["Film"]);
+            Console.WriteLine(dynamicUserData[i]["Zaal"]);
+            Console.WriteLine(dynamicUserData[i]["Stoel_num"]);
+
 
         }
 
