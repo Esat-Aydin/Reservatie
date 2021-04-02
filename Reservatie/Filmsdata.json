@@ -1,0 +1,45 @@
+{
+    "Films": [{
+            "genre" : "Action",
+            "film" : "John Wick",
+            "room" : 1,
+            "premiere_date" : "28-3-2021",
+            "end_date" : "28-5-2021"
+        },
+        {
+            "genre" : "Comedy",
+            "film" : "Norbit",
+            "room" : 2,
+            "premiere_date" : "29-3-2021",
+            "end_date" : "29-5-2021"
+        },
+        {
+            "genre" : "Thriller",
+            "film" : "The Joker",
+            "room" : 3,
+            "premiere_date" : "28-3-2021",
+            "end_date" : "28-5-2021"
+        },
+        {
+            "genre" : "Romantic",
+            "film" : "Fifty Shades of Grey",
+            "room" : 2,
+            "premiere_date" : "28-3-2021",
+            "end_date" : "28-5-2021"
+        },
+        {
+            "genre" : "Family",
+            "film" : "Home Alone",
+            "room" : 1,
+            "premiere_date" : "28-3-2021",
+            "end_date" : "28-5-2021"
+        },
+        {
+            "genre" : "Sci-Fi",
+            "film" : "The Avengers: Endgame",
+            "room" : 3,
+            "premiere_date" : "28-3-2021",
+            "end_date" : "28-5-2021"
+        }
+    ]
+}
