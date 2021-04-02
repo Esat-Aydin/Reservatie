@@ -144,7 +144,6 @@ namespace Cinema
             
             var Reservatiecode = new String(stringChars);
             
-
             Console.WriteLine("reservatie code:" + Reservatiecode);
             Console.WriteLine("Zou je een bevestiging in je mail willen ontvangen?");
             Console.WriteLine("Toets 'JA' als je een bevestinging wil ontvangen toets 'NEE' als je geen bevestiging per mail wil ontvangen.");
