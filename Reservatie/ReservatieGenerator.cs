@@ -24,8 +24,15 @@ namespace Cinema
 
 
     }
-
-    class Program
+    public class Gebruiker : Program // MOET NOG GEMAAKT WORDEN
+    {
+        public string Admin_Level = "Gebruiker";
+    }
+    public class Medewerker : Program // MOET NOG GEMAAKT WORDEN
+    {
+        public string Admin_Level = "Bioscoop Medewerker";
+    }
+    public class Program
     {
 
 
@@ -76,7 +83,13 @@ namespace Cinema
                     if (Chosen_film == Show_films.ElementAt(i))
                     {
                         Console.WriteLine("U heeft gekozen voor de film:" + Chosen_film);
-                        Console.WriteLine("Hieronder staan de dagen en tijden wanneer deze film draait.");
+                        string Chosen_date = " ";
+                        Console.WriteLine("Type uw gewenste datum in, om uw gekozen film te bekijken in onze bioscoop.\n dd/mm/jjjj");
+                        Chosen_date = Console.ReadLine();
+                        if (Chosen_date.Length != 10)
+                        {
+                            Console.WriteLine("Ongeldige datum gebruik dit patroon\n dd/mm/jjjj \n om uw datum in te voeren.");
+                        }
 
                     }
                 }
