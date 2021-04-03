@@ -30,7 +30,8 @@ namespace Cinema
     }
     public class Medewerker : Program // MOET NOG GEMAAKT WORDEN
     {
-        public string Admin_Level = "Bioscoop Medewerker";
+        public static string Admin_Level = "Bioscoop Medewerker";
+        public static string Admin_Password = "admin";
     }
     public class Program
     {
@@ -55,6 +56,7 @@ namespace Cinema
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
             Console.WriteLine("Selecteer '2' om te zoeken op een specifieke film.");
             Console.WriteLine("Selecteer '3' om uw reservering te bekijken.");
+            Console.WriteLine("Selecteer '4' om in te loggen als Bioscoop Medewerker.");
             var Start_options = Console.ReadLine();
             if (Start_options == "1")
             {
@@ -136,7 +138,22 @@ namespace Cinema
 
 
             }
-
+            else if (Start_options == "4")
+            {
+                bool isAdmin = false;
+                Console.Write("Voer hier de ingestelde admin password in:");
+                string input_password = Console.ReadLine();
+                if (input_password != Medewerker.Admin_Password)
+                {
+                    Console.Write("Het ingevoerde wachtwoord is incorrect. Probeer het nogmaals:"); // NOG NIET AF!!
+                }
+                else if (input_password == Medewerker.Admin_Password)
+                {
+                    isAdmin = true;
+                    Medewerker admin = new Medewerker();
+                    Console.Write("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
+                }
+            }
             //Eventuele snacks tijdens het reserveren
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
             Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
