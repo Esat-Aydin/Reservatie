@@ -7,7 +7,7 @@ using MimeKit;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Net;
 
 namespace Cinema
 {
@@ -33,9 +33,9 @@ namespace Cinema
         public static string Admin_Level = "Bioscoop Medewerker";
         public static string Admin_Password = "admin";
         public Admin_Password(string New_Password)
-            {    
+        {
             this.Admin_Password = New_Password;
-            }
+        }
     }
     public class Program
     {
@@ -45,14 +45,19 @@ namespace Cinema
         {
 
             // Inladen Json Module snacks
+            WebClient wc = new WebClient();
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            string MyFilmsData = wc.DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
+
             string myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
             string myUserData = File.ReadAllText("C:\\Users\\woute\\Samplelog.json");
-            string MyFilmsData = File.ReadAllText("C:\\Users\\woute\\Desktop\\Filmsdata.json");
-            // Omzetten
+
+            Console.WriteLine(MyFilmsData);
+            // Omzetten 
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-
+            Console.WriteLine(MyFilmsData);
 
 
             // Startpagina applicatie
@@ -68,11 +73,11 @@ namespace Cinema
 
                 Console.Write("Op welke genre wilt u zoeken: ");
                 var Genre_search = Console.ReadLine();
-                Console.WriteLine("We hebben deze film(s) gevonden onder het genre: ");
-                for (int i = 0; i < 5; i++)
+                Console.WriteLine("We hebben deze film(s) gevonden onder het genre: " + Genre_search);
+                for (int i = 0; i < 10; i++)
                 {
 
-                    for (int j = 0; j <= 1; j++)
+                    for (int j = 0; j <= 10; j++)
                     {
                         string Genre_zoeken = (string)DynamicFilmData["Films"][i]["genre"][j];
                         if (Genre_search == Genre_zoeken)
@@ -156,17 +161,24 @@ namespace Cinema
                     isAdmin = true;
                     Medewerker admin = new Medewerker(input_password);
                     Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
+
                 }
-                if (isAdmin == true && (Console.ReadLine == "!help"))
+                bool Admin_Commands = false;
+                string Admin_Help = Console.ReadLine();
+                if (Admin_Help == "!help")
+                {
+                    Admin_Commands = true;
+                }
+                if (isAdmin == true && (Admin_Commands))
                 {
                     string help_UserInput = null;
                     Console.WriteLine("1. Om het admin-wachtwoord opnieuw in te stellen type: !password [HUIDIGE WACHTWOORD] [NIEUWE WACHTWOORD]");
                     help_UserInput = Console.ReadLine;
                     string[] help_UserInput_PW = help_UserInput.Split("!password ", " ");
-                    if (help_UserInput_PW.Item1 == Medewerker.Admin_Password) 
+                    if (help_UserInput_PW.Item1 == Medewerker.Admin_Password)
                     {
                         Medewerker admin = Medewerker(help_UserInput_PW.Item2);
-                        Console.WriteLine($"Het wachtwoord is veranderd naar " + {help_UserInput_PW.Item2});
+                        Console.WriteLine($"Het wachtwoord is veranderd naar " + { help_UserInput_PW.Item2});
                     }
                 }
             }
