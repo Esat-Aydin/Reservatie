@@ -39,39 +39,23 @@ namespace Cinema
     //}
     public class Program
     {
-        private static string MyFilmsData;
+
 
         static void Main(string[] args)
         {
-
+            var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
             // Inladen Json Module snacks
-            using (WebClient wc = new System.Net.WebClient()) {
-                try
-                {
-                    string MyFilmsData = wc.DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
-                }
-                catch
-                {
-                    Console.WriteLine("Het is niet gelukt om de data te downloaden.");
-                }
-            }
-
-           
-            Console.WriteLine(MyFilmsData);
             
-          
-
             string myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
             string myUserData = File.ReadAllText("C:\\Users\\woute\\Samplelog.json");
-            
-
-            // Omzetten 
+            //string MyFilmsData = File.ReadAllText("C:\\Users\\woute\\Desktop\\Filmsdata.json");
+            // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            //dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            
+            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
 
-            Console.WriteLine(myJsonString);
+
+            Console.WriteLine(DynamicFilmData);
             // Startpagina applicatie
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
@@ -82,14 +66,14 @@ namespace Cinema
             if (Start_options == "1")
             {
                 List<string> Show_films = new List<string>();
-                
+
                 Console.Write("Op welke genre wilt u zoeken: ");
                 var Genre_search = Console.ReadLine();
-                Console.WriteLine("We hebben deze film(s) gevonden onder het genre: " + Genre_search);
-                for (int i = 0; i < 10; i++)
+                Console.WriteLine("We hebben deze film(s) gevonden onder het genre: ");
+                for (int i = 0; i < 5; i++)
                 {
 
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 1; j++)
                     {
                         string Genre_zoeken = (string)DynamicFilmData["Films"][i]["genre"][j];
                         if (Genre_search == Genre_zoeken)
@@ -173,15 +157,8 @@ namespace Cinema
             //        isAdmin = true;
             //        Medewerker admin = new Medewerker(input_password);
             //        Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
-
             //    }
-            //    bool Admin_Commands = false;
-            //    string Admin_Help = Console.ReadLine();
-            //    if (Admin_Help == "!help")
-            //    {
-            //        Admin_Commands = true;
-            //    }
-            //    if (isAdmin == true && (Admin_Commands))
+            //    if (isAdmin == true && (Console.ReadLine == "!help"))
             //    {
             //        string help_UserInput = null;
             //        Console.WriteLine("1. Om het admin-wachtwoord opnieuw in te stellen type: !password [HUIDIGE WACHTWOORD] [NIEUWE WACHTWOORD]");
@@ -327,14 +304,14 @@ Reservatie code: " + Reservatiecode
             File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
 
         }
-        private static void Genre_check(dynamic dynamicFilmData, int i)
+        private static void Genre_check(dynamic DynamicFilmData, int i)
         {
-            Console.Write(dynamicFilmData["Films"][i]["film"] + "\n");
+            Console.Write(DynamicFilmData["Films"][i]["film"] + "\n");
 
         }
-        private static void Film_check(dynamic dynamicFilmData, int i)
+        private static void Film_check(dynamic DynamicFilmData, int i)
         {
-            Console.WriteLine(dynamicFilmData["Films"][i]["film"] + "\n");
+            Console.WriteLine(DynamicFilmData["Films"][i]["film"] + "\n");
         }
 
         private static void Reservering_check(dynamic dynamicUserData, int i)
