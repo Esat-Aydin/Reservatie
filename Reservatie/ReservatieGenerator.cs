@@ -43,19 +43,17 @@ namespace Cinema
 
         static void Main(string[] args)
         {
-            var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
-            // Inladen Json Module snacks
             
-            string myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
-            string myUserData = File.ReadAllText("C:\\Users\\woute\\Samplelog.json");
-            //string MyFilmsData = File.ReadAllText("C:\\Users\\woute\\Desktop\\Filmsdata.json");
+            // Inladen Json Module 
+            var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Samplelog.json");
+            
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-
-
-            Console.WriteLine(DynamicFilmData);
+            
             // Startpagina applicatie
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
@@ -70,10 +68,10 @@ namespace Cinema
                 Console.Write("Op welke genre wilt u zoeken: ");
                 var Genre_search = Console.ReadLine();
                 Console.WriteLine("We hebben deze film(s) gevonden onder het genre: ");
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < DynamicFilmData["Films"].Count; i++)
                 {
 
-                    for (int j = 0; j <= 1; j++)
+                    for (int j = 0; j < DynamicFilmData["Films"][i]["genre"].Count; j++)
                     {
                         string Genre_zoeken = (string)DynamicFilmData["Films"][i]["genre"][j];
                         if (Genre_search == Genre_zoeken)
@@ -317,12 +315,12 @@ Reservatie code: " + Reservatiecode
         private static void Reservering_check(dynamic dynamicUserData, int i)
         {
 
-            Console.WriteLine(dynamicUserData[i]["Naam"]);
-            Console.WriteLine(dynamicUserData[i]["Email"]);
-            Console.WriteLine(dynamicUserData[i]["Reservatie_code"]);
-            Console.WriteLine(dynamicUserData[i]["Film"]);
-            Console.WriteLine(dynamicUserData[i]["Zaal"]);
-            Console.WriteLine(dynamicUserData[i]["Stoel_num"]);
+            Console.WriteLine("Naam: "+ dynamicUserData[i]["Naam"]);
+            Console.WriteLine("Email: "+dynamicUserData[i]["Email"]);
+            Console.WriteLine("Reservatie code: "+dynamicUserData[i]["Reservatie_code"]);
+            Console.WriteLine("Film: "+dynamicUserData[i]["Film"]);
+            Console.WriteLine("Zaal: "+ dynamicUserData[i]["Zaal"]);
+            Console.WriteLine("Stoel nummer: " + dynamicUserData[i]["Stoel_num"]);
 
 
         }
