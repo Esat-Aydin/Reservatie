@@ -44,18 +44,16 @@ namespace Cinema
         static void Main(string[] args)
         {
             
-            // Inladen Json Module snacks
+            // Inladen Json Module 
             var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
             string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
             string myUserData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Samplelog.json");
-            //string MyFilmsData = File.ReadAllText("C:\\Users\\woute\\Desktop\\Filmsdata.json");
+            
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-
-
-           
+            
             // Startpagina applicatie
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
@@ -317,12 +315,12 @@ Reservatie code: " + Reservatiecode
         private static void Reservering_check(dynamic dynamicUserData, int i)
         {
 
-            Console.WriteLine(dynamicUserData[i]["Naam"]);
-            Console.WriteLine(dynamicUserData[i]["Email"]);
-            Console.WriteLine(dynamicUserData[i]["Reservatie_code"]);
-            Console.WriteLine(dynamicUserData[i]["Film"]);
-            Console.WriteLine(dynamicUserData[i]["Zaal"]);
-            Console.WriteLine(dynamicUserData[i]["Stoel_num"]);
+            Console.WriteLine("Naam: "+ dynamicUserData[i]["Naam"]);
+            Console.WriteLine("Email: "+dynamicUserData[i]["Email"]);
+            Console.WriteLine("Reservatie code: "+dynamicUserData[i]["Reservatie_code"]);
+            Console.WriteLine("Film: "+dynamicUserData[i]["Film"]);
+            Console.WriteLine("Zaal: "+ dynamicUserData[i]["Zaal"]);
+            Console.WriteLine("Stoel nummer: " + dynamicUserData[i]["Stoel_num"]);
 
 
         }
