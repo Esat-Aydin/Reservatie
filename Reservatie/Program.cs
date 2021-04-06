@@ -1,5 +1,8 @@
 ﻿using System;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6db69b3eb3fb46b65d96f99e5302951805358100
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +19,9 @@ namespace Reservatie
         static void Main(string[] args)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6db69b3eb3fb46b65d96f99e5302951805358100
             try
             {
                 String Json = File.ReadAllText("C:\\Genre.json");
@@ -27,6 +33,7 @@ namespace Reservatie
                 Console.WriteLine(e.Message);
             }
             Console.Read();
+<<<<<<< HEAD
 =======
             Console.WriteLine("Bedankt voor het reserveren!");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
@@ -47,6 +54,8 @@ namespace Reservatie
 
             Console.WriteLine("Dit is uw reservatie code, neem deze mee wanneer u naar de film komt.");
 >>>>>>> .
+=======
+>>>>>>> 6db69b3eb3fb46b65d96f99e5302951805358100
         }
     }
 
