@@ -43,11 +43,11 @@ namespace Cinema
 
         static void Main(string[] args)
         {
-            var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
-            // Inladen Json Module snacks
             
-            string myJsonString = File.ReadAllText("C:\\Users\\woute\\Downloads\\snacksdrinks.json");
-            string myUserData = File.ReadAllText("C:\\Users\\woute\\Samplelog.json");
+            // Inladen Json Module snacks
+            var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Samplelog.json");
             //string MyFilmsData = File.ReadAllText("C:\\Users\\woute\\Desktop\\Filmsdata.json");
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -55,7 +55,7 @@ namespace Cinema
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
 
 
-            Console.WriteLine(DynamicFilmData);
+           
             // Startpagina applicatie
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
@@ -70,10 +70,10 @@ namespace Cinema
                 Console.Write("Op welke genre wilt u zoeken: ");
                 var Genre_search = Console.ReadLine();
                 Console.WriteLine("We hebben deze film(s) gevonden onder het genre: ");
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < DynamicFilmData["Films"].Count; i++)
                 {
 
-                    for (int j = 0; j <= 1; j++)
+                    for (int j = 0; j < DynamicFilmData["Films"][i]["genre"].Count; j++)
                     {
                         string Genre_zoeken = (string)DynamicFilmData["Films"][i]["genre"][j];
                         if (Genre_search == Genre_zoeken)
