@@ -369,6 +369,7 @@ Reservatie code: " + Reservatiecode
             Console.WriteLine(DynamicData.snacks[5].Price);
             Console.WriteLine(DynamicData.snacks[6].Name);
             Console.WriteLine(DynamicData.snacks[6].Price);
+
         }
     }
 }
