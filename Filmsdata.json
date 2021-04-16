@@ -1,71 +1,69 @@
-{
-  "Films": [
-    {
-      "genre": [ "Action", "", "" ],
-      "film": "John Wick",
-      "room": 1,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Comedy", "Action", "" ],
-      "film": "Norbit",
-      "room": 2,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Thriller", "", "" ],
-      "film": "The Joker",
-      "room": 3,
-      "date": "28-4-2021",
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Romantic", "", "" ],
-      "film": "Fifty Shades of Grey",
-      "room": 2,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Family", "", "" ],
-      "film": "Home Alone",
-      "room": 1,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Drama", "Action", "Thriller" ],
-      "film": "Inception",
-      "room": 3,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Sci-Fi", "Action", "Thriller" ],
-      "film": "Venom",
-      "room": 3,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Sci-Fi", "Drama", "" ],
-      "film": "Interstellar",
-      "room": 1,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Comedy", "Drama", ""],
-      "film": "The wolf of wall street",
-      "room": 3,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Action", "Drama", ""],
-      "film": "Django Unchained",
-      "room": 2,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    },
-    {
-      "genre": [ "Drama", "", ""],
-      "film": "Godfather",
-      "room": 3,
-      "Time": [ "15:00", "19:00", "22:00" ]
-    }
-  ]
-}
+[
+  {
+    "genre": [ "Action", "", "" ],
+    "film": "John Wick",
+    "room": 1,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Comedy", "Action", "" ],
+    "film": "Norbit",
+    "room": 2,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Thriller", "", "" ],
+    "film": "The Joker",
+    "room": 3,
+    "date": "28-4-2021",
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Romantic", "", "" ],
+    "film": "Fifty Shades of Grey",
+    "room": 2,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Family", "", "" ],
+    "film": "Home Alone",
+    "room": 1,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Drama", "Action", "Thriller" ],
+    "film": "Inception",
+    "room": 3,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Sci-Fi", "Action", "Thriller" ],
+    "film": "Venom",
+    "room": 3,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Sci-Fi", "Drama", "" ],
+    "film": "Interstellar",
+    "room": 1,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Comedy", "Drama", "" ],
+    "film": "The wolf of wall street",
+    "room": 3,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Action", "Drama", "" ],
+    "film": "Django Unchained",
+    "room": 2,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "genre": [ "Drama", "", "" ],
+    "film": "Godfather",
+    "room": 3,
+    "Time": [ "15:00", "19:00", "22:00" ]
+  }
+]
