@@ -32,11 +32,14 @@ namespace Cinema
     {
         public string Name;
         public string Admin_Password;
+        public List<string> ListofAdmins;
         
         public Medewerker(string name, string AdminPass)
         {
             this.Name = name;
             this.Admin_Password = AdminPass;
+            this.ListofAdmins.Add(name);
+
         }
 
     }
