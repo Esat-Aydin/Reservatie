@@ -70,6 +70,7 @@ namespace Cinema
             FilmTimesArray[0] = "12:00";
             string TitleofFilm = "John Wick";
             int RoomofFilm = 3;
+            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
             var UserInput = "To be declared";
             bool isAdmin = false;
             Medewerker admin = new Medewerker("admin", "admin");
@@ -357,32 +358,167 @@ namespace Cinema
                         string TitleFilm = null;
                         string GenreFilm = null;
                         Textkleur("groen");
+                        Console.WriteLine("Hoeveel genre's heeft de nieuwe film? Er is een maximum van drie genre's!");
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("blauw");
+                        var StringArrayGenreLength_Input = Console.ReadLine();
+                        int StringArrayGenreLength = Int32.Parse(StringArrayGenreLength_Input);
+                        string[] FilmGenresArray = new string[StringArrayGenreLength];
+                        if (StringArrayGenreLength == 1)
+                        {
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de genre van de film in:");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmGenresArray[0] = Console.ReadLine();
+                        }
+                        else if (StringArrayGenreLength == 2)
+                        {
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de eerste genre van de film in:");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmGenresArray[0] = Console.ReadLine();
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de tweede genre van de film in:");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmGenresArray[1] = Console.ReadLine();
+                        }
+                        else if (StringArrayGenreLength == 3)
+                        {
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de eerste genre van de film in:");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmGenresArray[0] = Console.ReadLine();
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de tweede genre van de film in:");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmGenresArray[1] = Console.ReadLine();
+                            Console.WriteLine("Voer nu de derde genre van de film in:");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmGenresArray[2] = Console.ReadLine();
+                        }
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("groen");
                         Console.WriteLine("Voer nu de titel van de nieuwe film in:");
                         Textkleur("wit");
                         Console.WriteLine("-----------------------------------------------------------------");
                         Textkleur("blauw");
-                        TitleFilm = Console.ReadLine();
+                        TitleofFilm = Console.ReadLine();
                         Textkleur("wit");
                         Console.WriteLine("-----------------------------------------------------------------");
                         Textkleur("groen");
-                        Console.WriteLine("Voer nu de genre van de nieuwe film in:");
+                        Console.WriteLine("Voer nu de zaal in van de film " + TitleofFilm + ": ");
+                        Textkleur("blauw");
+                        var FilmZaalInput = Console.ReadLine();
+                        int RoomofFilm = Int32.Parse(FilmZaalInput);
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("groen");
+                        Console.WriteLine("Hoeveel tijdssloten wilt u beschikbaar stellen per dag? (maximaal 3): ");
                         Textkleur("wit");
                         Console.WriteLine("-----------------------------------------------------------------");
                         Textkleur("blauw");
-                        GenreFilm = Console.ReadLine();
+                        var tijdsSlotenInput = Console.ReadLine();
+                        int TimeSlots = Int32.Parse(tijdsSlotenInput);
+                        string[] FilmTimesArray = new string[TimeSlots];
+                        if (TimeSlots == 1)
+                        {
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de eerste tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmTimesArray[0] = Console.ReadLine();
+                        }
+                        else if (TimeSlots == 2)
+                        {
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de eerste tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmTimesArray[0] = Console.ReadLine();
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de tweede tijd van de film in: ");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmTimesArray[1] = Console.ReadLine();
+                        }
+                        else if (TimeSlots == 3)
+                        {
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de eerste tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmTimesArray[0] = Console.ReadLine();
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de tweede tijd van de film in: ");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmTimesArray[1] = Console.ReadLine();
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Voer nu de derde tijd van de film in: ");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            FilmTimesArray[2] = Console.ReadLine();
+                        }
+
+                        FilmObject.FilmGenres = FilmGenresArray;
+                        FilmObject.FilmTitle = TitleofFilm;
+                        FilmObject.FilmTimes = FilmTimesArray;
+                        FilmObject.FilmRoom = RoomofFilm;
+                        Textkleur("blauw");
                         Textkleur("wit");
                         Console.WriteLine("-----------------------------------------------------------------");
                         Textkleur("groen");
-                        Console.WriteLine("De film: " + TitleFilm + " van genre: " + GenreFilm + " is succesvol toegevoegd aan de database.");
-                        Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
-                        FilmDataBase();
+                        Console.WriteLine("De film: " + TitleofFilm +  " is succesvol toegevoegd aan de database.");
+                        FilmDataBaseAdd();
                         {
 
                         }
 
                     }
                 }
-                 void FilmDataBase()
+                 void FilmDataBaseAdd()
                 {
 
                     List<Film> _data = new List<Film>();
