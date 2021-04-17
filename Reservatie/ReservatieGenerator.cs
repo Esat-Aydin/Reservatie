@@ -39,34 +39,50 @@ namespace Cinema
     //}
     public class Program
     {
-
+        private static string Genre_search;
+        private static object Show_films;
 
         static void Main(string[] args)
         {
-            
+
             // Inladen Json Module 
             var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
             string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
             string myUserData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Samplelog.json");
-            
+
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            
+
             // Startpagina applicatie
+            Textkleur("groen");
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
             Console.WriteLine("Selecteer '1' om te zoeken op genre.");
             Console.WriteLine("Selecteer '2' om te zoeken op een specifieke film.");
             Console.WriteLine("Selecteer '3' om uw reservering te bekijken.");
             Console.WriteLine("Selecteer '4' om in te loggen als Bioscoop Medewerker.");
+            Textkleur("wit");
+            Console.WriteLine("-----------------------------------------------------------------");
+            Textkleur("blauw");
             var Start_options = Console.ReadLine();
+            Textkleur("wit");
+            Console.WriteLine("-----------------------------------------------------------------");
             if (Start_options == "1")
             {
                 List<string> Show_films = new List<string>();
-
-                Console.Write("Op welke genre wilt u zoeken: ");
-                var Genre_search = Console.ReadLine();
+                Textkleur("groen");
+                Console.WriteLine("Op welke genre wilt u zoeken: ");
+                Textkleur("groen");
+                Console.WriteLine("Toets [1] voor Action.\nToets [2] voor Comedy.\nToets [3] voor Thriller.\nToets [4] voor Romantiek.\nToets [5] voor Drama.\nToets [6] voor Sci-Fi.\nToets [7] voor Familie films. ");
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("blauw");
+                var Genre_select = Console.ReadLine();
+                Genre(Genre_select);
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("groen");
                 Console.WriteLine("We hebben deze film(s) gevonden onder het genre: ");
                 for (int i = 0; i < DynamicFilmData["Films"].Count; i++)
                 {
@@ -76,20 +92,44 @@ namespace Cinema
                         string Genre_zoeken = (string)DynamicFilmData["Films"][i]["genre"][j];
                         if (Genre_search == Genre_zoeken)
                         {
-                            Genre_check(DynamicFilmData, i);
+                            //Genre_check(DynamicFilmData, i);
                             Show_films.Add(DynamicFilmData["Films"][i]["film"].ToString());
+
                         }
                     }
+                   
                 }
-                Console.WriteLine("Voor welke van de bovenstaande films zou u willen reserveren?");
-                string Chosen_film = Console.ReadLine();
-                for (int i = 0; i < Show_films.Count; i++)
+                int count = 1;
+                for (int y = 0; y < Show_films.Count; y++)
                 {
-                    if (Chosen_film == Show_films.ElementAt(i))
+                    
+                    Console.WriteLine("Toets ["+ (count) + "] voor: "+Show_films[y]);
+                    count++;
+                }
+
+                
+                Console.WriteLine("Voor welke van de bovenstaande films zou u willen reserveren?");
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("blauw");
+                string Chosen_film = Console.ReadLine();
+               
+
+                for (int i = 0; i < Show_films.Count+1; i++)
+                {
+                    string film_showw = i.ToString();
+                    if (Chosen_film == (film_showw))
                     {
-                        Console.WriteLine("U heeft gekozen voor de film:" + Chosen_film);
+                        
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("groen");
+
+                        Films(Chosen_film, Show_films);
+                        
                         string Chosen_date = " ";
-                        Console.WriteLine("Type uw gewenste datum in, om uw gekozen film te bekijken in onze bioscoop.\n dd/mm/jjjj");
+                        Textkleur("groen");
+                        Console.WriteLine("Type uw gewenste datum in, om uw gekozen film te bekijken in onze bioscoop.\ndd/mm/jjjj");
                         Chosen_date = Console.ReadLine();
                         if (Chosen_date.Length != 10)
                         {
@@ -118,9 +158,16 @@ namespace Cinema
             }
             else if (Start_options == "3")
             {
+                Textkleur("groen");
                 Console.Write("Voer hier uw reservatie code in:");
+                Textkleur("blauw");
                 var Reservatie_code = Console.ReadLine();
-                for (int i = 0; i < 3; i++)
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+
+
+                Textkleur("groen");
+                for (int i = 0; i < DynamicUserData.Count; i++)
                 {
                     string Res_code = (string)DynamicUserData[i]["Reservatie_code"];
                     if (Res_code == Reservatie_code)
@@ -130,8 +177,11 @@ namespace Cinema
                         break;
                     }
                 }
-
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("groen");
                 Console.WriteLine("Toets 'R' om het progamma opnieuw op te starten.");
+                Textkleur("blauw");
                 string restart = Console.ReadLine();
                 if (restart.ToUpper() == "R")
                 {
@@ -304,9 +354,11 @@ Reservatie code: " + Reservatiecode
         }
         private static void Genre_check(dynamic DynamicFilmData, int i)
         {
-            Console.Write(DynamicFilmData["Films"][i]["film"] + "\n");
-
+            
+                Console.Write(DynamicFilmData["Films"][i]["film"] + "\n");
+            
         }
+
         private static void Film_check(dynamic DynamicFilmData, int i)
         {
             Console.WriteLine(DynamicFilmData["Films"][i]["film"] + "\n");
@@ -315,16 +367,95 @@ Reservatie code: " + Reservatiecode
         private static void Reservering_check(dynamic dynamicUserData, int i)
         {
 
-            Console.WriteLine("Naam: "+ dynamicUserData[i]["Naam"]);
-            Console.WriteLine("Email: "+dynamicUserData[i]["Email"]);
-            Console.WriteLine("Reservatie code: "+dynamicUserData[i]["Reservatie_code"]);
-            Console.WriteLine("Film: "+dynamicUserData[i]["Film"]);
-            Console.WriteLine("Zaal: "+ dynamicUserData[i]["Zaal"]);
+            Console.WriteLine("Naam: " + dynamicUserData[i]["Naam"]);
+            Console.WriteLine("Email: " + dynamicUserData[i]["Email"]);
+            Console.WriteLine("Reservatie code: " + dynamicUserData[i]["Reservatie_code"]);
+            Console.WriteLine("Film: " + dynamicUserData[i]["Film"]);
+            Console.WriteLine("Zaal: " + dynamicUserData[i]["Zaal"]);
             Console.WriteLine("Stoel nummer: " + dynamicUserData[i]["Stoel_num"]);
 
 
         }
+        public static void Textkleur(string kleur)
+        {
+            if (kleur == "groen")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            else if (kleur == "blauw")
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+            }
+            else if (kleur == "wit")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (kleur == "rood")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+        }
+        public static void Films(string Chosen_film, dynamic Show_films)
+        {
+            if (Chosen_film == "1")
+            {
+                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[0]);
+            }
+            else if (Chosen_film == "2")
+            {
+                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[1]);
+            }
+            else if (Chosen_film == "3")
+            {
+                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[2]);
+            }
+            else if (Chosen_film == "4")
+            {
+                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[3]);
+            }
+            else if (Chosen_film == "5")
+            {
+                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[4]);
+            }
+            else if (Chosen_film == "6")
+            {
+                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[5]);
+            }
 
+        }
+        public static void Genre(string Genre_select)
+        {
+           
+
+            if (Genre_select == "1")
+            {
+                 Genre_search = "Action";
+            }
+            else if (Genre_select == "2")
+            {
+                 Genre_search = "Comedy";
+            }
+            else if (Genre_select == "3")
+            {
+                 Genre_search = "Thriller";
+            }
+            else if (Genre_select == "4")
+            {
+                 Genre_search = "Romantiek";
+            }
+            else if (Genre_select == "5")
+            {
+                 Genre_search = "Drama";
+            }
+            else if (Genre_select == "6")
+            {
+                 Genre_search = "Sci-Fi";
+            }
+            else if (Genre_select == "7")
+            {
+                 Genre_search = "Familie";
+            }
+        }
         private static void Snacks(dynamic DynamicData)
         {
             Console.WriteLine(DynamicData.dranken[0].Name);
