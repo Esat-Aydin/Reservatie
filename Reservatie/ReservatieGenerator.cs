@@ -10,20 +10,23 @@ using System.Diagnostics;
 using System.Net;
 
 namespace Cinema
-{
+{ 
     public class Medewerker : Program // MOET NOG GEMAAKT WORDEN
-    {
-        public string Name;
-        public string Admin_Password;
+{
+    public string Name;
+    public string Admin_Password;
+    public List<string> ListofAdmins;
 
-        public Medewerker(string name, string AdminPass)
-        {
-            this.Name = name;
-            this.Admin_Password = AdminPass;
-        }
+    public Medewerker(string name, string AdminPass)
+    {
+        this.Name = name;
+        this.Admin_Password = AdminPass;
+        this.ListofAdmins.Add(name);
 
     }
-    public class JsonData
+
+}
+public class JsonData
     {
 
         public string Naam { get; set; }
@@ -181,6 +184,7 @@ namespace Cinema
                     {
                         Console.WriteLine("Uw reservering:");
                         Reservering_check(DynamicUserData, i);
+                        SnacksOption();
                         break;
                     }
                 }
@@ -311,33 +315,36 @@ namespace Cinema
 
                 }
             }
-            //Eventuele snacks tijdens het reserveren
-            Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
-            Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
-            Console.WriteLine("Toets 'JA' als u online snacks wilt bestellen, toets 'NEE' als u dit niet wilt.");
-            string Online_snacks = Console.ReadLine();
-            string Online_snacks_secondchange = null;
-
-            if (Online_snacks == "NEE")
+            void SnacksOption()
             {
-                Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
-                Console.WriteLine("Weet u het zeker? Toets 'JA' om door te gaan en 'NEE' om het overzicht te bekijken met de snacks.");
-                Online_snacks_secondchange = Console.ReadLine();
+                //Eventuele snacks tijdens het reserveren
+                Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
+                Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
+                Console.WriteLine("Toets 'JA' als u online snacks wilt bestellen, toets 'NEE' als u dit niet wilt.");
+                string Online_snacks = Console.ReadLine();
+                string Online_snacks_secondchange = null;
 
-            }
-            else
-            {
-                Console.WriteLine("U heeft de verkeerde input gegeven.");
-                Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");
-                Online_snacks_secondchange = Console.ReadLine();
-            }
-            if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
-            {
-                Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
-                //Json file met alle snacks.
-                Snacks(DynamicData);
+                if (Online_snacks == "NEE")
+                {
+                    Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
+                    Console.WriteLine("Weet u het zeker? Toets 'JA' om door te gaan en 'NEE' om het overzicht te bekijken met de snacks.");
+                    Online_snacks_secondchange = Console.ReadLine();
+
+                }
+                else
+                {
+                    Console.WriteLine("U heeft de verkeerde input gegeven.");
+                    Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");
+                    Online_snacks_secondchange = Console.ReadLine();
+                }
+                if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
+                {
+                    Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
+                    //Json file met alle snacks.
+                    Snacks(DynamicData);
 
 
+                }
             }
 
 
