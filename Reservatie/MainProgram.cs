@@ -84,7 +84,6 @@ namespace Cinema
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
 
-
             // Startpagina applicatie
             Textkleur("groen");
             Console.WriteLine("Welkom op de startpagina van de bioscoop.");
@@ -516,14 +515,13 @@ namespace Cinema
                         {
 
                         }
-
                     }
                 }
                 void FilmDataBaseAdd()
                 {
 
                     List<Film> _data = new List<Film>();
-                    var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\Documents\Filmsdata.json");
+                    var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
                     var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
                     FilmObjectJson.Add(FilmObject);
                     FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
