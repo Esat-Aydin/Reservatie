@@ -70,7 +70,6 @@ namespace Cinema
             FilmTimesArray[0] = "12:00";
             string TitleofFilm = "John Wick";
             int RoomofFilm = 3;
-            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
             var UserInput = "To be declared";
             bool isAdmin = false;
             Medewerker admin = new Medewerker("admin", "admin");
@@ -375,6 +374,7 @@ namespace Cinema
                         Console.WriteLine("-----------------------------------------------------------------");
                         Textkleur("groen");
                         Console.WriteLine("De film: " + TitleFilm + " van genre: " + GenreFilm + " is succesvol toegevoegd aan de database.");
+                        Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
                         FilmDataBase();
                         {
 
