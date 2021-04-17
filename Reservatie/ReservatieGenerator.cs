@@ -526,7 +526,7 @@ namespace Cinema
                     var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
                     FilmObjectJson.Add(FilmObject);
                     FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-                    File.WriteAllText(@"C:\Users\abdel\Documents\Filmsdata.json", FilmDataJson);
+                    File.WriteAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json", FilmDataJson);
                 }
                 void SnacksOption()
                 {
