@@ -11,7 +11,18 @@ using System.Net;
 
 namespace Cinema
 {
+    public class Medewerker : Program // MOET NOG GEMAAKT WORDEN
+    {
+        public string Name;
+        public string Admin_Password;
 
+        public Medewerker(string name, string AdminPass)
+        {
+            this.Name = name;
+            this.Admin_Password = AdminPass;
+        }
+
+    }
     public class JsonData
     {
 
@@ -24,27 +35,16 @@ namespace Cinema
 
 
     }
-    //public class Gebruiker : Program // MOET NOG GEMAAKT WORDEN
-    //{
-    //    public string Admin_Level = "Gebruiker";
-    //}
-    //public class Medewerker : Program // MOET NOG GEMAAKT WORDEN
-    //{
-    //    public static string Admin_Level = "Bioscoop Medewerker";
-    //    public static string Admin_Password = "admin";
-    //    public Admin_Password(string New_Password)
-    //    {
-    //        this.Admin_Password = New_Password;
-    //    }
-    //}
+
     public class Program
     {
         private static string Genre_search;
-        private static object Show_films;
 
         static void Main(string[] args)
         {
-
+            var UserInput = "To be declared";
+            bool isAdmin = false;
+            Medewerker admin = new Medewerker("admin", "admin");
             // Inladen Json Module 
             var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
             string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
@@ -143,14 +143,21 @@ namespace Cinema
             }
             else if (Start_options == "2")
             {
-                Console.Write("Naar welke film bent u opzoek: ");
+                Textkleur("groen");
+                Console.WriteLine("Naar welke film bent u opzoek: ");
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("blauw");
                 var Film_search = Console.ReadLine();
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
                 for (int i = 0; i < 5; i++)
                 {
                     string Film_zoeken = (string)DynamicFilmData["Films"][i]["film"];
                     if (Film_search == Film_zoeken)
                     {
-                        Console.WriteLine("U heeft gezocht naar de volgende film:");
+                        Textkleur("groen");
+                        Console.WriteLine("U heeft gezocht de volgende film:");
                         Film_check(DynamicFilmData, i);
                     }
                 }
@@ -191,34 +198,119 @@ namespace Cinema
 
 
             }
-            //else if (Start_options == "4")
-            //{
-            //    bool isAdmin = false;
-            //    Console.WriteLine("Voer hier de ingestelde admin password in:");
-            //    string input_password = Console.ReadLine();
-            //    if (input_password != Medewerker.Admin_Password)
-            //    {
-            //        Console.WriteLine("Het ingevoerde wachtwoord is incorrect. Probeer het nogmaals:"); // NOG NIET AF!!
-            //    }
-            //    else if (input_password == Medewerker.Admin_Password)
-            //    {
-            //        isAdmin = true;
-            //        Medewerker admin = new Medewerker(input_password);
-            //        Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
-            //    }
-            //    if (isAdmin == true && (Console.ReadLine == "!help"))
-            //    {
-            //        string help_UserInput = null;
-            //        Console.WriteLine("1. Om het admin-wachtwoord opnieuw in te stellen type: !password [HUIDIGE WACHTWOORD] [NIEUWE WACHTWOORD]");
-            //        help_UserInput = Console.ReadLine;
-            //        string[] help_UserInput_PW = help_UserInput.Split("!password ", " ");
-            //        if (help_UserInput_PW.Item1 == Medewerker.Admin_Password)
-            //        {
-            //            Medewerker admin = Medewerker(help_UserInput_PW.Item2);
-            //            Console.WriteLine($"Het wachtwoord is veranderd naar " + { help_UserInput_PW.Item2});
-            //        }
-            //    }
-            //}
+            else if (Start_options == "4")
+            {
+                Textkleur("groen");
+                Console.WriteLine("Voer hier uw naam in:");
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("blauw");
+                string input_name = Console.ReadLine();
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("groen");
+                Console.WriteLine("Welkom, " + input_name + ". Voer nu het ingestelde admin wachtwoord in: ");
+                admin.Name = input_name;
+                Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                Textkleur("blauw");
+                string input_password = Console.ReadLine();
+                if (input_password == admin.Admin_Password)
+                {
+                    Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    isAdmin = true;
+                    Textkleur("groen");
+                    Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
+                    Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Textkleur("blauw");
+                    UserInput = Console.ReadLine();
+                    UserInputMethod(UserInput);
+                    
+                }
+                else
+                {
+                    Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Textkleur("groen");
+                    Console.WriteLine("Het ingevoerde wachtwoord is incorrect, probeer het nogmaals: ");
+                    Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Textkleur("blauw");
+                    UserInput = Console.ReadLine();
+                  
+                    if (UserInput == admin.Admin_Password)
+                    {
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("groen");
+                        isAdmin = true;
+                        Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("blauw");
+                        UserInput = Console.ReadLine();
+                        UserInputMethod(UserInput);
+
+                    }
+                    else
+                    {
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("groen");
+                        Console.WriteLine("Dat is incorrect, het programma wordt nu voor u gesloten.");
+                        return; // Dit sluit het programma af na twee verkeerde password inputs.
+                    }
+                }
+                Textkleur("blauw");
+                UserInput = Console.ReadLine();
+                UserInputMethod(UserInput);
+                UserInput = Console.ReadLine();
+                UserInputMethod(UserInput);
+
+
+                void UserInputMethod(string UserInput)
+                {
+                    Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Textkleur("groen");
+                    if (isAdmin == true && (UserInput == "!password"))
+                    {
+
+                        Console.WriteLine("Type nu het huidige admin wachtwoord in: ");
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Textkleur("blauw");
+                        UserInput = Console.ReadLine();
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        if (UserInput == admin.Admin_Password)
+                        {
+                            Textkleur("groen");
+                            Console.WriteLine("Type nu het nieuwe wachtwoord in: ");
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("blauw");
+                            UserInput = Console.ReadLine();
+                            admin.Admin_Password = UserInput;
+                            Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            Textkleur("groen");
+                            Console.WriteLine("Het wachtwoord is succesvol veranderd naar: " + admin.Admin_Password);
+                        }
+                    }
+                    if (isAdmin == true && (UserInput == "!help"))
+                    {
+
+                        Console.WriteLine("Om het admin-wachtwoord opnieuw in te stellen type: !password");
+
+                        Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                    }
+
+                }
+            }
             //Eventuele snacks tijdens het reserveren
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
             Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
