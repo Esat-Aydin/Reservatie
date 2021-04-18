@@ -1,1 +1,69 @@
-[{"FilmGenres":["Action","Comedy","Thriller"],"FilmTitle":"Norbit","FilmRoom":3,"FilmTimes":["12:00"]},{"FilmGenres":["Action","Comedy","Thriller"],"FilmTitle":"John Wick","FilmRoom":3,"FilmTimes":["12:00"]},{"FilmGenres":["Action","Thriller"],"FilmTitle":"John Wick","FilmRoom":3,"FilmTimes":["12:00","14:15"]},{"FilmGenres":["Action","Thriller","Comedy"],"FilmTitle":"Jason Bourne","FilmRoom":6,"FilmTimes":["12:15","09:45"]},{"FilmGenres":["Action","Comedy"],"FilmTitle":"Weet ik veel, cupcake ofzo","FilmRoom":3,"FilmTimes":["12:30","15:15"]}]
+[
+  {
+    "FilmGenres": [ "Action", "", "" ],
+    "FilmTitle": "John Wick",
+    "FilmRoom": 1,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Comedy", "Action", "" ],
+    "FilmTitle": "Norbit",
+    "FilmRoom": 2,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Thriller", "", "" ],
+    "FilmTitle": "The Joker",
+    "FilmRoom": 3,
+    "date": "28-4-2021",
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Romantic", "", "" ],
+    "FilmTitle": "Fifty Shades of Grey",
+    "FilmRoom": 2,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Family", "", "" ],
+    "FilmTitle": "Home Alone",
+    "FilmRoom": 1,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Drama", "Action", "Thriller" ],
+    "FilmTitle": "Inception",
+    "FilmRoom": 3,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Sci-Fi", "Action", "Thriller" ],
+    "FilmTitle": "Venom",
+    "FilmRoom": 3,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Sci-Fi", "Drama", "" ],
+    "FilmTitle": "Interstellar",
+    "FilmRoom": 1,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Comedy", "Drama", "" ],
+    "FilmTitle": "The wolf of wall street",
+    "FilmRoom": 3,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Action", "Drama", "" ],
+    "FilmTitle": "Django Unchained",
+    "FilmRoom": 2,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  },
+  {
+    "FilmGenres": [ "Drama", "", "" ],
+    "FilmTitle": "Godfather",
+    "FilmRoom": 3,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ]
+  }
+]
