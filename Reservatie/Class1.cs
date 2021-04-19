@@ -236,11 +236,11 @@ Reservatie code: " + GeneratedCode
         {
 
             List<Film> _data = new List<Film>();
-            var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
             FilmObjectJson.Add(FilmObject);
             FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-            File.WriteAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
+            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
 
 
@@ -291,11 +291,14 @@ Reservatie code: " + GeneratedCode
             string TitleofFilm = "John Wick";
             int RoomofFilm = 3;
             var UserInput = "To be declared";
+            string DefaultAdmin_Password = "admin";
             bool isAdmin = false;
+
             // Objects
             Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
-            Medewerker admin = new Medewerker(null, "admin");
+            Medewerker admin = new Medewerker(null, DefaultAdmin_Password);
             Gebruiker Klant = new Gebruiker();
+
             // Inladen Json Module 
             var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
             string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
