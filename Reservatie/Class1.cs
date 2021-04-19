@@ -18,14 +18,16 @@ namespace Cinema
         public string Password;
         public bool isAdmin;
 
-        public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = false) // Password en isAdmin worden alleen gebruikt als de user al een existing account heeft en admin level True assigned heeft gekregen!
+        public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = false) 
         {
             this.Naam = Naam;
             this.Email = Email;
-            this.Password = Password;
+            // Password word gebruikt als de user of (A): een nieuw account maakt of (B): een bestaand account heeft en in wilt loggen
+            this.Password = Password; 
+            // isAdmin word gebruikt als de user admin rechten heeft 
             this.isAdmin = isAdmin;
         }
-        public string ReserveringsCodeGenerator()
+        public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var stringChars = new char[16];
@@ -39,7 +41,7 @@ namespace Cinema
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail()
+        public void ReserveerCodeMail() // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker
         {
             // informatie voor eventueel mailen reservatie code.
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
@@ -158,13 +160,13 @@ Reservatie code: " + GeneratedCode
 
     }
 
-    public class Medewerker : Program
+    public class Medewerker : Gebruiker
     {
         public string Name;
         public string Admin_Password;
         public List<string> ListofAdmins;
 
-        public Medewerker(string name, string AdminPass)
+        public Medewerker(string name = null, string AdminPass = null)
         {
             this.Name = name;
             this.Admin_Password = AdminPass;
