@@ -15,8 +15,10 @@ namespace Cinema
     {
         public string Naam;
         public string Email;
+        public string Password;
+        public bool isAdmin;
 
-        public Gebruiker(string Naam, string Email)
+        public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = false) // Password en isAdmin worden alleen gebruikt als de user al een existing account heeft en admin level True assigned heeft gekregen!
         {
             this.Naam = Naam;
             this.Email = Email;
@@ -35,6 +37,105 @@ namespace Cinema
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
+        public void ReserveerCodeMail()
+        {
+            // informatie voor eventueel mailen reservatie code.
+            Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
+            Console.Write("Naam: ");
+            string Naam_klant = Console.ReadLine();
+            Console.Write("Email adress: ");
+            string Naam_email = Console.ReadLine();
+            // Eventuele betaal methode?
+            this.Naam = Naam_klant;
+            this.Email = Naam_email;
+
+
+            // Einde reserveren.
+            Console.WriteLine("Bedankt voor het reserveren!");
+            Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
+            Thread.Sleep(3000);
+            string GeneratedCode = this.ReserveringsCodeGenerator();
+            // Random generator voor het maken van de reservatie code.
+
+
+
+            Console.WriteLine("Reserverings code: " + GeneratedCode);
+            Console.WriteLine("Zou u een bevestiging in uw mail willen ontvangen?");
+            Console.WriteLine("Toets (1)'JA' als u een mail-bevestinging wilt ontvangen of toets (2)'NEE' als u geen mail-bevestiging .");
+            // Email bevestiging.
+            string Mail_Bevestiging = Console.ReadLine();
+
+            if (Mail_Bevestiging == "JA" || Mail_Bevestiging == "1")
+            {
+
+                try
+                {
+                    var message = new MimeMessage();
+                    // Email verzender
+                    message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
+                    // Email geadresseerde
+                    message.To.Add(new MailboxAddress(this.Naam, this.Email));
+                    // Email onderwerp
+                    message.Subject = "Bevestiging online reservatie.";
+                    // Email text
+                    message.Body = new TextPart("plain")
+                    {
+                        Text = @"Hallo,
+Bedankt voor het reserveren via onze bioscoop.
+Hieronder vindt u de reservatie code.
+Reservatie code: " + GeneratedCode
+
+                    };
+
+
+                    using (var client = new SmtpClient())
+                    {
+                        client.Connect("smtp.gmail.com", 587, false);
+
+                        // authenticate smtp server
+                        client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
+                        // verzenden email
+                        client.Send(message);
+                        client.Disconnect(true);
+
+                        Console.WriteLine("De bevestiging is verstuurd per Email.");
+                    };
+                }
+                catch
+                {
+                    Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
+                }
+            }
+            else if (Mail_Bevestiging == "NEE" || Mail_Bevestiging == "2")
+            {
+                Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
+            }
+            else
+            {
+                Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
+            }
+            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
+            // Data Reservering toevoegen.
+            List<JsonData> _data = new List<JsonData>();
+            var DataUser = File.ReadAllText(@"https://stud.hosted.hr.nl/1010746/Samplelog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+            var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
+                      ?? new List<JsonData>();
+
+            JsonData.Add(new JsonData()
+            {
+                Reservatie_code = GeneratedCode,
+                Naam = this.Naam,
+                Email = this.Email,
+                //Film =
+                //Zaal =
+                //Stoel_num =
+
+            });
+
+            DataUser = JsonConvert.SerializeObject(JsonData);
+            File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
+
+        }
     }
     public class Film : Program
     {
@@ -50,6 +151,8 @@ namespace Cinema
             this.FilmRoom = FilmRoom;
             this.FilmTimes = FilmTimes;
         }
+
+
 
     }
 
@@ -99,6 +202,7 @@ namespace Cinema
             var UserInput = "To be declared";
             bool isAdmin = false;
             Medewerker admin = new Medewerker("admin", "admin");
+            Gebruiker Klant = new Gebruiker();
             // Inladen Json Module 
             var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
             string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
@@ -189,7 +293,7 @@ namespace Cinema
                         {
                             Console.WriteLine("Ongeldige datum gebruik dit patroon\n dd/mm/jjjj \n om uw datum in te voeren.");
                         }
-                        //else ReserveerCodeMail();
+                        else { Klant.ReserveerCodeMail(); }
 
                     }
                 }
@@ -507,6 +611,7 @@ namespace Cinema
                         FilmObject.FilmGenres = FilmGenresArray; FilmObject.FilmTitle = TitleofFilm; FilmObject.FilmTimes = FilmTimesArray; FilmObject.FilmRoom = RoomofFilm;
                         Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); Textkleur("groen");
                         Console.WriteLine("De film: " + TitleofFilm + " is succesvol toegevoegd aan de database.");
+                        //-------------------------------------------------------------------------------------------------------------------------//
                         FilmDataBaseAdd(); // Dit voegt het object toe aan de Json file
 
                         // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
@@ -558,104 +663,7 @@ namespace Cinema
                     }
                 }
 
-                void ReserveerCodeMail()
-                {
-                    // informatie voor eventueel mailen reservatie code.
-                    Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
-                    Console.Write("Naam: ");
-                    string Naam_klant = Console.ReadLine();
-                    Console.Write("Email adress: ");
-                    string Naam_email = Console.ReadLine();
-                    // Eventuele betaal methode?
-                    Gebruiker Klant = new Gebruiker(Naam_klant, Naam_email);
-
-
-                    // Einde reserveren.
-                    Console.WriteLine("Bedankt voor het reserveren!");
-                    Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
-                    Thread.Sleep(3000);
-                    string GeneratedCode = Klant.ReserveringsCodeGenerator();
-                    // Random generator voor het maken van de reservatie code.
-                   
-
-
-                    Console.WriteLine("reservatie code:" + GeneratedCode);
-                    Console.WriteLine("Zou je een bevestiging in je mail willen ontvangen?");
-                    Console.WriteLine("Toets 'JA' als je een bevestinging wil ontvangen toets 'NEE' als je geen bevestiging per mail wil ontvangen.");
-                    // Email bevestiging.
-                    string Mail_Bevestiging = Console.ReadLine();
-
-                    if (Mail_Bevestiging == "JA")
-                    {
-
-                        try
-                        {
-                            var message = new MimeMessage();
-                            // Email verzender
-                            message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
-                            // Email geadresseerde
-                            message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
-                            // Email onderwerp
-                            message.Subject = "Bevestiging online reservatie.";
-                            // Email text
-                            message.Body = new TextPart("plain")
-                            {
-                                Text = @"Hallo,
-Bedankt voor het reserveren via onze bioscoop.
-Hieronder vind je de reservatie code.
-Reservatie code: " + GeneratedCode
-
-                            };
-
-
-                            using (var client = new SmtpClient())
-                            {
-                                client.Connect("smtp.gmail.com", 587, false);
-
-                                // authenticate smtp server
-                                client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
-                                // verzenden email
-                                client.Send(message);
-                                client.Disconnect(true);
-
-                                Console.WriteLine("De bevestiging is verstuurd per Email.");
-                            };
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
-                        }
-                    }
-                    else if (Mail_Bevestiging == "NEE")
-                    {
-                        Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
-                    }
-                    Console.WriteLine("Bedankt voor het online reserveren en we zien u graag bij onze bioscoop.");
-                    // Data Reservering toevoegen.
-                    List<JsonData> _data = new List<JsonData>();
-                    var DataUser = File.ReadAllText(@"C:\Users\woute\SampleLog.json");
-                    var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
-                              ?? new List<JsonData>();
-
-                    JsonData.Add(new JsonData()
-                    {
-                        Reservatie_code = GeneratedCode,
-                        Naam = Klant.Naam,
-                        Email = Klant.Email,
-                        //Film =
-                        //Zaal =
-                        //Stoel_num =
-
-                    });
-
-                    DataUser = JsonConvert.SerializeObject(JsonData);
-                    File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
-
-                }
+                
             }
             static void Genre_check(dynamic DynamicFilmData, int i)
             {
