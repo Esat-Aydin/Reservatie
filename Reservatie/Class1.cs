@@ -364,16 +364,31 @@ namespace Cinema
                         var StringArrayGenreLength_Input = Console.ReadLine();
                         int StringArrayGenreLength = Int32.Parse(StringArrayGenreLength_Input);
                         string[] FilmGenresArray = new string[StringArrayGenreLength];
+
+                        //-Dictionary met alle genres-//
+                        Dictionary<string, string> DictOfGenres = new Dictionary<string, string>()
+                        {
+                            {"Action", "1"},
+                            {"Comedy", "2"},
+                            {"Thriller", "3"},
+                            {"Romantic", "4"},
+                            {"Horror", "5"},
+                            {"Drama", "6" }
+                        };
+                        //---------------------------// Moet nog worden ingecodeerd in de code hieronder //
+                        bool KeyExists;
                         if (StringArrayGenreLength == 1)
                         {
                             Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             Textkleur("groen");
-                            Console.WriteLine("Voer nu de genre van de film in:");
+                            Console.WriteLine("U kunt kiezen uit de volgende genres: \n1. Action \n2. Comedy \n3. Thriller \n4. Romantic \n5. Horror \n6. Drama ");
+                            Console.WriteLine("Voer nu de genre van de film in");
                             Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             Textkleur("blauw");
                             FilmGenresArray[0] = Console.ReadLine();
+
                         }
                         else if (StringArrayGenreLength == 2)
                         {
