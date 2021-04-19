@@ -137,7 +137,7 @@ namespace Cinema
                 Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 Textkleur("groen");
-                Console.WriteLine("We hebben deze film(s) gevonden onder het genre: ");
+                Console.WriteLine("We hebben deze film(s) gevonden onder de genre: ");
                 for (int i = 0; i < DynamicFilmData["Films"].Count; i++)
                 {
 
@@ -519,7 +519,7 @@ namespace Cinema
                 {
 
                     List<Film> _data = new List<Film>();
-                    var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
+                    var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
                     var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
                     FilmObjectJson.Add(FilmObject);
                     FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
