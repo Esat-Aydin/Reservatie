@@ -140,6 +140,18 @@ Reservatie code: " + GeneratedCode
             File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
 
         }
+        public static void Reservering_check(dynamic dynamicUserData, int i)
+        {
+
+            Console.WriteLine("Naam: " + dynamicUserData[i]["Naam"]);
+            Console.WriteLine("Email: " + dynamicUserData[i]["Email"]);
+            Console.WriteLine("Reservatie code: " + dynamicUserData[i]["Reservatie_code"]);
+            Console.WriteLine("Film: " + dynamicUserData[i]["Film"]);
+            Console.WriteLine("Zaal: " + dynamicUserData[i]["Zaal"]);
+            Console.WriteLine("Stoel nummer: " + dynamicUserData[i]["Stoel_num"]);
+
+
+        }
         public static void Snacks(dynamic DynamicData) // Om deze te callen: Gebruiker.Snacks(parameter invullen);
         {
             Console.WriteLine(DynamicData.dranken[0].Name);
@@ -434,8 +446,8 @@ Reservatie code: " + GeneratedCode
                     string Res_code = (string)DynamicUserData[i]["Reservatie_code"];
                     if (Res_code == Reservatie_code)
                     {
-                        Console.WriteLine("Uw reservering:");
-                        Reservering_check(DynamicUserData, i);
+                        Console.WriteLine("Uw reservering: ");
+                        Gebruiker.Reservering_check(DynamicUserData, i);
                         //SnacksOption();
                         break;
                     }
@@ -579,8 +591,6 @@ Reservatie code: " + GeneratedCode
                     }
                     if (isAdmin == true && (UserInput == "!newfilm"))
                     {
-                        string TitleFilm = null;
-                        string GenreFilm = null;
                         Textkleur("groen");
                         Console.WriteLine("Hoeveel genre's heeft de nieuwe film? Er is een maximum van drie genre's!");
                         Textkleur("wit");
@@ -734,18 +744,7 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine(DynamicFilmData["Films"][i]["film"] + "\n");
             }
 
-            static void Reservering_check(dynamic dynamicUserData, int i)
-            {
-
-                Console.WriteLine("Naam: " + dynamicUserData[i]["Naam"]);
-                Console.WriteLine("Email: " + dynamicUserData[i]["Email"]);
-                Console.WriteLine("Reservatie code: " + dynamicUserData[i]["Reservatie_code"]);
-                Console.WriteLine("Film: " + dynamicUserData[i]["Film"]);
-                Console.WriteLine("Zaal: " + dynamicUserData[i]["Zaal"]);
-                Console.WriteLine("Stoel nummer: " + dynamicUserData[i]["Stoel_num"]);
-
-
-            }
+            
             static void Textkleur(string kleur)
             {
                 if (kleur == "groen")
