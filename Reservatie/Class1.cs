@@ -18,12 +18,12 @@ namespace Cinema
         public string Password;
         public bool isAdmin;
 
-        public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = true) 
+        public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = true)
         {
             this.Naam = Naam;
             this.Email = Email;
             // Password word gebruikt als de user of (A): een nieuw account maakt of (B): een bestaand account heeft en in wilt loggen
-            this.Password = Password; 
+            this.Password = Password;
             // isAdmin word gebruikt als de user admin rechten heeft 
             this.isAdmin = isAdmin;
         }
@@ -335,7 +335,7 @@ Reservatie code: " + GeneratedCode
         }
         public void Genre(string Genre_select)
         {
-            
+
 
             if (Genre_select == "1")
             {
@@ -379,6 +379,8 @@ Reservatie code: " + GeneratedCode
             this.Admin_Password = AdminPass;
 
         }
+
+
         public void UserInputMethod(string UserInput)
         {
             string TitleofFilm = null;
@@ -626,19 +628,25 @@ Reservatie code: " + GeneratedCode
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
 
             // Startpagina applicatie
-            void StartOptiesGebruiker() { 
-            ConsoleCommands.Textkleur("groen");
-            Console.WriteLine("Welkom op de startpagina van de bioscoop.");
-            Console.WriteLine("Selecteer '1' om te zoeken op genre.");
-            Console.WriteLine("Selecteer '2' om te zoeken op een specifieke film.");
-            Console.WriteLine("Selecteer '3' om uw reservering te bekijken.");
-            Console.WriteLine("Selecteer '4' om in te loggen als Bioscoop Medewerker.");
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
-            ConsoleCommands.Textkleur("blauw");
-            var Start_options = Console.ReadLine();
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            string StartOptiesGebruiker()
+            {
+                ConsoleCommands.Textkleur("groen");
+                Console.WriteLine("Welkom op de startpagina van de bioscoop.");
+                Console.WriteLine("Selecteer '1' om te zoeken op genre.");
+                Console.WriteLine("Selecteer '2' om te zoeken op een specifieke film.");
+                Console.WriteLine("Selecteer '3' om uw reservering te bekijken.");
+                Console.WriteLine("Selecteer '4' om in te loggen als Bioscoop Medewerker.");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("blauw");
+                var Start_options = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                return Start_options;
+            }
+
+            void StartVervolgGebruiker(string Start_options)
+            {
                 if (Start_options == "1")
                 {
                     List<string> Show_films = new List<string>();
@@ -835,21 +843,23 @@ Reservatie code: " + GeneratedCode
                     UserInput = Console.ReadLine();
                     admin.UserInputMethod(UserInput);
                 }
-
-
-                
-
-                
-
-
-
-                
             }
-            
+            StartVervolgGebruiker(StartOptiesGebruiker());
 
-            
 
-            
+
+
+
+
+
+
+
         }
+
+
+
+    
+            
+        
     }
 }
