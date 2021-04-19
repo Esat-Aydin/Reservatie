@@ -27,7 +27,7 @@ namespace Cinema
             // isAdmin word gebruikt als de user admin rechten heeft 
             this.isAdmin = isAdmin;
         }
-        public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode
+        public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var stringChars = new char[16];
@@ -41,7 +41,7 @@ namespace Cinema
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail() // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker
+        public void ReserveerCodeMail() // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             // informatie voor eventueel mailen reservatie code.
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
@@ -140,8 +140,85 @@ Reservatie code: " + GeneratedCode
             File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
 
         }
+        public static void Snacks(dynamic DynamicData) // Om deze te callen: Gebruiker.Snacks(parameter invullen);
+        {
+            Console.WriteLine(DynamicData.dranken[0].Name);
+            Console.WriteLine(DynamicData.dranken[0].Price);
+            Console.WriteLine(DynamicData.dranken[1].Name);
+            Console.WriteLine(DynamicData.dranken[1].Price);
+            Console.WriteLine(DynamicData.dranken[2].Name);
+            Console.WriteLine(DynamicData.dranken[2].Price);
+            Console.WriteLine(DynamicData.dranken[3].Name);
+            Console.WriteLine(DynamicData.dranken[3].Price);
+            Console.WriteLine(DynamicData.dranken[4].Name);
+            Console.WriteLine(DynamicData.dranken[4].Price);
+            Console.WriteLine(DynamicData.dranken[5].Name);
+            Console.WriteLine(DynamicData.dranken[5].Price);
+            Console.WriteLine(DynamicData.dranken[6].Name);
+            Console.WriteLine(DynamicData.dranken[6].Price);
+            Console.WriteLine(DynamicData.dranken[7].Name);
+            Console.WriteLine(DynamicData.dranken[7].Price);
+            Console.WriteLine(DynamicData.dranken[8].Name);
+            Console.WriteLine(DynamicData.dranken[8].Price);
+            Console.WriteLine(DynamicData.dranken[9].Name);
+            Console.WriteLine(DynamicData.dranken[9].Price);
+            Console.WriteLine(DynamicData.dranken[10].Name);
+            Console.WriteLine(DynamicData.dranken[10].Price);
+            Console.WriteLine(DynamicData.dranken[11].Name);
+            Console.WriteLine(DynamicData.dranken[11].Price);
+            Console.WriteLine("Snacks:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine(DynamicData.snacks[0].Name);
+            Console.WriteLine(DynamicData.snacks[0].Price);
+            Console.WriteLine(DynamicData.snacks[1].Name);
+            Console.WriteLine(DynamicData.snacks[1].Price);
+            Console.WriteLine(DynamicData.snacks[2].Name);
+            Console.WriteLine(DynamicData.snacks[2].Price);
+            Console.WriteLine(DynamicData.snacks[3].Name);
+            Console.WriteLine(DynamicData.snacks[3].Price);
+            Console.WriteLine(DynamicData.snacks[4].Name);
+            Console.WriteLine(DynamicData.snacks[4].Price);
+            Console.WriteLine(DynamicData.snacks[5].Name);
+            Console.WriteLine(DynamicData.snacks[5].Price);
+            Console.WriteLine(DynamicData.snacks[6].Name);
+            Console.WriteLine(DynamicData.snacks[6].Price);
+
+        }
+        public void SnacksOption() // Om deze te callen: Gebruiker.SnacksOption();
+        {
+            //Eventuele snacks tijdens het reserveren
+            Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
+            Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
+            Console.WriteLine("Toets 'JA' als u online snacks wilt bestellen, toets 'NEE' als u dit niet wilt.");
+            string Online_snacks = Console.ReadLine();
+            string Online_snacks_secondchange = null;
+
+            if (Online_snacks == "NEE")
+            {
+                Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
+                Console.WriteLine("Weet u het zeker? Toets 'JA' om door te gaan en 'NEE' om het overzicht te bekijken met de snacks.");
+                Online_snacks_secondchange = Console.ReadLine();
+
+            }
+            else
+            {
+                Console.WriteLine("U heeft de verkeerde input gegeven.");
+                Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");
+                Online_snacks_secondchange = Console.ReadLine();
+            }
+            if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
+            {
+                Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
+                //Json file met alle snacks.
+                string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
+                dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
+                Snacks(DynamicData);
+
+
+            }
+        }
     }
-    public class Film : Program
+    public class Film // Object van deze class wordt toegevoegd aan de Json file die dan aan de gebruiker kan worden getoond (voor het toevoegen/verwijderen/bewerken van films)
     {
         public string[] FilmGenres { get; set; }
         public string FilmTitle { get; set; }
@@ -154,6 +231,16 @@ Reservatie code: " + GeneratedCode
             this.FilmTitle = FilmTitle;
             this.FilmRoom = FilmRoom;
             this.FilmTimes = FilmTimes;
+        }
+        public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
+        {
+
+            List<Film> _data = new List<Film>();
+            var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
+            FilmObjectJson.Add(FilmObject);
+            FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
+            File.WriteAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
 
 
@@ -194,6 +281,7 @@ Reservatie code: " + GeneratedCode
 
         static void Main(string[] args)
         {
+            // Voor de creation van de objects
             string[] FilmGenresArray = new string[3];
             FilmGenresArray[0] = "Action";
             FilmGenresArray[1] = "Comedy";
@@ -202,10 +290,11 @@ Reservatie code: " + GeneratedCode
             FilmTimesArray[0] = "12:00";
             string TitleofFilm = "John Wick";
             int RoomofFilm = 3;
-            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
             var UserInput = "To be declared";
             bool isAdmin = false;
-            Medewerker admin = new Medewerker("admin", "admin");
+            // Objects
+            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
+            Medewerker admin = new Medewerker(null, "admin");
             Gebruiker Klant = new Gebruiker();
             // Inladen Json Module 
             var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
@@ -329,7 +418,7 @@ Reservatie code: " + GeneratedCode
             else if (Start_options == "3")
             {
                 Textkleur("groen");
-                Console.Write("Voer hier uw reservatie code in:");
+                Console.Write("Voer hier uw reserverings code in:");
                 Textkleur("blauw");
                 var Reservatie_code = Console.ReadLine();
                 Textkleur("wit");
@@ -370,11 +459,11 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("-----------------------------------------------------------------");
                 Textkleur("blauw");
                 string input_name = Console.ReadLine();
+                admin.Name = input_name;
                 Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 Textkleur("groen");
-                Console.WriteLine("Welkom, " + input_name + ". Voer nu het ingestelde admin wachtwoord in: ");
-                admin.Name = input_name;
+                Console.WriteLine("Welkom, " + admin.Name + ". Voer nu het ingestelde admin wachtwoord in: ");
                 Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 Textkleur("blauw");
@@ -613,59 +702,20 @@ Reservatie code: " + GeneratedCode
                         }
                         // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                         FilmObject.FilmGenres = FilmGenresArray; FilmObject.FilmTitle = TitleofFilm; FilmObject.FilmTimes = FilmTimesArray; FilmObject.FilmRoom = RoomofFilm;
+                        FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
                         Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); Textkleur("groen");
-                        Console.WriteLine("De film: " + TitleofFilm + " is succesvol toegevoegd aan de database.");
+                        Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
+                        Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); Textkleur("blauw");
                         //-------------------------------------------------------------------------------------------------------------------------//
-                        FilmDataBaseAdd(); // Dit voegt het object toe aan de Json file
-
                         // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
                         UserInput = Console.ReadLine();
                         UserInputMethod(UserInput);
                     }
                 }
 
-                void FilmDataBaseAdd() // Dit voegt de FilmObject object toe aan de Json file
-                {
-
-                    List<Film> _data = new List<Film>();
-                    var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
-                    var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
-                    FilmObjectJson.Add(FilmObject);
-                    FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-                    File.WriteAllText(@"C:\Users\abdel\Source\Repos\Reservatie\Reservatie\Filmsdata.json", FilmDataJson);
-                }
-
-                void SnacksOption()
-                {
-                    //Eventuele snacks tijdens het reserveren
-                    Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
-                    Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
-                    Console.WriteLine("Toets 'JA' als u online snacks wilt bestellen, toets 'NEE' als u dit niet wilt.");
-                    string Online_snacks = Console.ReadLine();
-                    string Online_snacks_secondchange = null;
-
-                    if (Online_snacks == "NEE")
-                    {
-                        Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
-                        Console.WriteLine("Weet u het zeker? Toets 'JA' om door te gaan en 'NEE' om het overzicht te bekijken met de snacks.");
-                        Online_snacks_secondchange = Console.ReadLine();
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("U heeft de verkeerde input gegeven.");
-                        Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");
-                        Online_snacks_secondchange = Console.ReadLine();
-                    }
-                    if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
-                    {
-                        Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
-                        //Json file met alle snacks.
-                        Snacks(DynamicData);
+                
 
 
-                    }
-                }
 
                 
             }
@@ -773,50 +823,7 @@ Reservatie code: " + GeneratedCode
                     Genre_search = "Familie";
                 }
             }
-            static void Snacks(dynamic DynamicData)
-            {
-                Console.WriteLine(DynamicData.dranken[0].Name);
-                Console.WriteLine(DynamicData.dranken[0].Price);
-                Console.WriteLine(DynamicData.dranken[1].Name);
-                Console.WriteLine(DynamicData.dranken[1].Price);
-                Console.WriteLine(DynamicData.dranken[2].Name);
-                Console.WriteLine(DynamicData.dranken[2].Price);
-                Console.WriteLine(DynamicData.dranken[3].Name);
-                Console.WriteLine(DynamicData.dranken[3].Price);
-                Console.WriteLine(DynamicData.dranken[4].Name);
-                Console.WriteLine(DynamicData.dranken[4].Price);
-                Console.WriteLine(DynamicData.dranken[5].Name);
-                Console.WriteLine(DynamicData.dranken[5].Price);
-                Console.WriteLine(DynamicData.dranken[6].Name);
-                Console.WriteLine(DynamicData.dranken[6].Price);
-                Console.WriteLine(DynamicData.dranken[7].Name);
-                Console.WriteLine(DynamicData.dranken[7].Price);
-                Console.WriteLine(DynamicData.dranken[8].Name);
-                Console.WriteLine(DynamicData.dranken[8].Price);
-                Console.WriteLine(DynamicData.dranken[9].Name);
-                Console.WriteLine(DynamicData.dranken[9].Price);
-                Console.WriteLine(DynamicData.dranken[10].Name);
-                Console.WriteLine(DynamicData.dranken[10].Price);
-                Console.WriteLine(DynamicData.dranken[11].Name);
-                Console.WriteLine(DynamicData.dranken[11].Price);
-                Console.WriteLine("Snacks:");
-                Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine(DynamicData.snacks[0].Name);
-                Console.WriteLine(DynamicData.snacks[0].Price);
-                Console.WriteLine(DynamicData.snacks[1].Name);
-                Console.WriteLine(DynamicData.snacks[1].Price);
-                Console.WriteLine(DynamicData.snacks[2].Name);
-                Console.WriteLine(DynamicData.snacks[2].Price);
-                Console.WriteLine(DynamicData.snacks[3].Name);
-                Console.WriteLine(DynamicData.snacks[3].Price);
-                Console.WriteLine(DynamicData.snacks[4].Name);
-                Console.WriteLine(DynamicData.snacks[4].Price);
-                Console.WriteLine(DynamicData.snacks[5].Name);
-                Console.WriteLine(DynamicData.snacks[5].Price);
-                Console.WriteLine(DynamicData.snacks[6].Name);
-                Console.WriteLine(DynamicData.snacks[6].Price);
-
-            }
+            
         }
     }
 }
