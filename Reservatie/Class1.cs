@@ -22,6 +22,8 @@ namespace Cinema
         {
             this.Naam = Naam;
             this.Email = Email;
+            this.Password = Password;
+            this.isAdmin = isAdmin;
         }
         public string ReserveringsCodeGenerator()
         {
