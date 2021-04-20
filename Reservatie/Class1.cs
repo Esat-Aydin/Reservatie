@@ -17,7 +17,6 @@ namespace Cinema
         public string Email { get; set; }
         public string Password { get; set; }
         public bool isAdmin { get; set; }
-        public Medewerker admin;
 
 
         public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = false)
@@ -238,6 +237,7 @@ namespace Cinema
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
                             FilmTimesArray[2] = Console.ReadLine();
+                            
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                             // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
                             Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
@@ -629,13 +629,17 @@ Reservatie code: " + GeneratedCode
         public string FilmTitle { get; set; }
         public int FilmRoom { get; set; }
         public string[] FilmTimes { get; set; }
+        
+        public Dictionary<string, string> FilmData { get; set; }
 
-        public Film(string[] FilmGenres = null, string FilmTitle = null, int FilmRoom = 0, string[] FilmTimes = null)
+        public Film(string[] FilmGenres = null, string FilmTitle = null, int FilmRoom = 0, string[] FilmTimes = null, Dictionary<string,string> FilmData = null)
         {
             this.FilmGenres = FilmGenres;
             this.FilmTitle = FilmTitle;
             this.FilmRoom = FilmRoom;
             this.FilmTimes = FilmTimes;
+            this.FilmData = FilmData;
+
         }
         public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
@@ -683,6 +687,12 @@ Reservatie code: " + GeneratedCode
         }
 
 
+
+    }
+    public class DataTijd
+    {
+        public string Data;
+        public string Tijd;
 
     }
     public class ConsoleCommands
@@ -1212,7 +1222,7 @@ Reservatie code: " + GeneratedCode
                     ConsoleCommands.Textkleur("rood");
                     Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
                     ConsoleCommands.Textkleur("rood");
-                    Console.WriteLine("    ***** C O M P L E T E *****  ");
+                    Console.WriteLine("         ***** C O M P L E T E *****  ");
                     Gebruiker KlantObject = new Gebruiker(KlantNaamInput, KlantEmailInput, KlantPassInput);
                     ConsoleCommands.Textkleur("groen");
                     Console.WriteLine("Uw gegevens: \n" + KlantNaamInput + "\n" + KlantEmailInput);
