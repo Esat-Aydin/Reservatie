@@ -152,6 +152,10 @@ namespace Cinema
                     var FilmZaalInput = Console.ReadLine(); int RoomofFilm = Int32.Parse(FilmZaalInput); // Userinput (string) word hier verandert naar een int variabel
 
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); ConsoleCommands.Textkleur("groen");
+                    Console.WriteLine("Voer nu de gewenste dag in"); ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("blauw");
+                    var dag_UserInput = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("Hoeveel tijdssloten wilt u beschikbaar stellen per dag? (maximaal 3): ");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); ConsoleCommands.Textkleur("blauw");
                     try
@@ -159,9 +163,34 @@ namespace Cinema
                         var tijdsSlotenInput = Console.ReadLine();
                         int TimeSlots = Int32.Parse(tijdsSlotenInput); // Userinput (string) word hier verandert naar een int variabel
                         string[] FilmTimesArray = new string[TimeSlots];
+                        var listoftimes1 = new List<string>();
+
+                        var listoftimes2 = new List<string>();
+
+                        var listoftimes3 = new List<string>();
+
+                        var listoftimes4 = new List<string>();
+
+                        var listoftimes5 = new List<string>();
+
+                        var listoftimes6 = new List<string>();
+
+                        var listoftimes7 = new List<string>();
+
+
 
                         if (TimeSlots == 1)
                         {
+                            Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
+                        {
+                            {"Maandag", listoftimes1},
+                            {"Dinsdag", listoftimes2 },
+                            {"Woensdag", listoftimes3},
+                            {"Donderdag", listoftimes4},
+                            {"Vrijdag", listoftimes5},
+                            {"Zaterdag", listoftimes6},
+                            {"Zondag", listoftimes7}
+                        };
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("groen");
@@ -169,10 +198,27 @@ namespace Cinema
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
+
                             FilmTimesArray[0] = Console.ReadLine();
+                            if (dag_UserInput == "Maandag")
+                                DictOf["Maandag"].Add(FilmTimesArray[0]);
+                            else if (dag_UserInput == "Dinsdag")
+                                DictOf["Dinsdag"].Add(FilmTimesArray[0]);
+                            else if (dag_UserInput == "Woensdag")
+                                DictOf["Woensdag"].Add(FilmTimesArray[0]);
+                            else if (dag_UserInput == "Donderdag")
+                                DictOf["Donderdag"].Add(FilmTimesArray[0]);
+                            else if (dag_UserInput == "Vrijdag")
+                                DictOf["Vrijdag"].Add(FilmTimesArray[0]);
+                            else if (dag_UserInput == "Zaterdag")
+                                DictOf["Zaterdag"].Add(FilmTimesArray[0]);
+                            else
+                            {
+                                DictOf["Zondag"].Add(FilmTimesArray[0]);
+                            }
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                             // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
-                            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
+                            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
                             FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); ConsoleCommands.Textkleur("groen");
                             Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
@@ -184,6 +230,16 @@ namespace Cinema
                         }
                         else if (TimeSlots == 2)
                         {
+                            Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
+                        {
+                            {"Maandag", listoftimes1},
+                            {"Dinsdag", listoftimes2 },
+                            {"Woensdag", listoftimes3},
+                            {"Donderdag", listoftimes4},
+                            {"Vrijdag", listoftimes5},
+                            {"Zaterdag", listoftimes6},
+                            {"Zondag", listoftimes7}
+                        };
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("groen");
@@ -200,9 +256,37 @@ namespace Cinema
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
                             FilmTimesArray[1] = Console.ReadLine();
+                            if (dag_UserInput == "Maandag")
+                            {
+                                DictOf["Maandag"].Add(FilmTimesArray[0]); DictOf["Maandag"].Add(FilmTimesArray[1]);
+                            }
+                            else if (dag_UserInput == "Dinsdag")
+                            {
+                                DictOf["Dinsdag"].Add(FilmTimesArray[0]); DictOf["Dinsdag"].Add(FilmTimesArray[1]);
+                            }
+                            else if (dag_UserInput == "Woensdag") 
+                            {
+                                DictOf["Woensdag"].Add(FilmTimesArray[0]); DictOf["Woensdag"].Add(FilmTimesArray[1]); 
+                            }
+                            else if (dag_UserInput == "Donderdag")
+                            {
+                                DictOf["Donderdag"].Add(FilmTimesArray[0]); DictOf["Donderdag"].Add(FilmTimesArray[1]);
+                            }
+                            else if (dag_UserInput == "Vrijdag")
+                            {
+                                DictOf["Vrijdag"].Add(FilmTimesArray[0]); DictOf["Vrijdag"].Add(FilmTimesArray[1]);
+                            }
+                            else if (dag_UserInput == "Zaterdag")
+                            {
+                                DictOf["Zaterdag"].Add(FilmTimesArray[0]); DictOf["Zaterdag"].Add(FilmTimesArray[1]);
+                            }
+                            else
+                            {
+                                DictOf["Zondag"].Add(FilmTimesArray[0]); DictOf["Zondag"].Add(FilmTimesArray[1]);
+                            }
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                             // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
-                            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
+                            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
                             FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); ConsoleCommands.Textkleur("groen");
                             Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
@@ -214,6 +298,16 @@ namespace Cinema
                         }
                         else if (TimeSlots == 3)
                         {
+                            Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
+                        {
+                            {"Maandag", listoftimes1},
+                            {"Dinsdag", listoftimes2 },
+                            {"Woensdag", listoftimes3},
+                            {"Donderdag", listoftimes4},
+                            {"Vrijdag", listoftimes5},
+                            {"Zaterdag", listoftimes6},
+                            {"Zondag", listoftimes7}
+                        };
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("groen");
@@ -238,9 +332,37 @@ namespace Cinema
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
                             FilmTimesArray[2] = Console.ReadLine();
+                            if (dag_UserInput == "Maandag")
+                            {
+                                DictOf["Maandag"].Add(FilmTimesArray[0]); DictOf["Maandag"].Add(FilmTimesArray[1]); DictOf["Maandag"].Add(FilmTimesArray[2]);
+                            }
+                            else if (dag_UserInput == "Dinsdag")
+                            {
+                                DictOf["Dinsdag"].Add(FilmTimesArray[0]); DictOf["Dinsdag"].Add(FilmTimesArray[1]); DictOf["Dinsdag"].Add(FilmTimesArray[2]);
+                            }
+                            else if (dag_UserInput == "Woensdag")
+                            {
+                                DictOf["Woensdag"].Add(FilmTimesArray[0]); DictOf["Woensdag"].Add(FilmTimesArray[1]); DictOf["Woensdag"].Add(FilmTimesArray[2]);
+                            }
+                            else if (dag_UserInput == "Donderdag")
+                            {
+                                DictOf["Donderdag"].Add(FilmTimesArray[0]); DictOf["Donderdag"].Add(FilmTimesArray[1]); DictOf["Donderdag"].Add(FilmTimesArray[2]);
+                            }
+                            else if (dag_UserInput == "Vrijdag")
+                            {
+                                DictOf["Vrijdag"].Add(FilmTimesArray[0]); DictOf["Vrijdag"].Add(FilmTimesArray[1]); DictOf["Vrijdag"].Add(FilmTimesArray[2]);
+                            }
+                            else if (dag_UserInput == "Zaterdag")
+                            {
+                                DictOf["Zaterdag"].Add(FilmTimesArray[0]); DictOf["Zaterdag"].Add(FilmTimesArray[1]); DictOf["Zaterdag"].Add(FilmTimesArray[2]);
+                            }
+                            else
+                            {
+                                DictOf["Zondag"].Add(FilmTimesArray[0]); DictOf["Zondag"].Add(FilmTimesArray[1]); DictOf["Zondag"].Add(FilmTimesArray[2]);
+                            }
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                             // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
-                            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray);
+                            Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
                             FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); ConsoleCommands.Textkleur("groen");
                             Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
@@ -294,7 +416,7 @@ namespace Cinema
         public void AccountCheck(string Naam)
         {
             bool ReturnValue = false;
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
             List<string> ListofAccountsNames = new List<string>();
             List<string> ListofAccountsPasswords = new List<string>();
@@ -408,11 +530,11 @@ namespace Cinema
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
             List<Gebruiker> _data = new List<Gebruiker>();
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var AccountUsers_Gebruiker = JsonConvert.DeserializeObject<List<Gebruiker>>(AccountUsers);
             AccountUsers_Gebruiker.Add(Object);
             AccountUsers = JsonConvert.SerializeObject(AccountUsers_Gebruiker);
-            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
+            File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
         }
 
 
@@ -629,23 +751,25 @@ Reservatie code: " + GeneratedCode
         public string FilmTitle { get; set; }
         public int FilmRoom { get; set; }
         public string[] FilmTimes { get; set; }
+        public Dictionary<string, List<string>> FilmDays { get; set; }
 
-        public Film(string[] FilmGenres = null, string FilmTitle = null, int FilmRoom = 0, string[] FilmTimes = null)
+        public Film(string[] FilmGenres = null, string FilmTitle = null, int FilmRoom = 0, string[] FilmTimes = null, Dictionary<string, List<string>> Filmdata= null)
         {
             this.FilmGenres = FilmGenres;
             this.FilmTitle = FilmTitle;
             this.FilmRoom = FilmRoom;
             this.FilmTimes = FilmTimes;
+            this.FilmDays = Filmdata;
         }
         public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
 
             List<Film> _data = new List<Film>();
-            var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var FilmDataJson = File.ReadAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
             FilmObjectJson.Add(FilmObject);
             FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
+            File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
         public void Film_check(dynamic DynamicFilmData, int i)
         {
@@ -984,6 +1108,7 @@ Reservatie code: " + GeneratedCode
 
 
 
+
     }
 
     public class Program
@@ -1096,7 +1221,7 @@ Reservatie code: " + GeneratedCode
 
                             string Chosen_date = " ";
                             ConsoleCommands.Textkleur("groen");
-                            Console.WriteLine("Type uw gewenste datum in om uw gekozen film te bekijken in onze bioscoop.\ndd/mm/jjjj");
+                            Console.WriteLine("Voer uw gewenste dag in(nummer)\nMaandag(1)\nDinsdag(2)");
                             Chosen_date = Console.ReadLine();
                             if (Chosen_date.Length != 10)
                             {
