@@ -18,7 +18,7 @@
     "FilmTitle": "The Joker",
     "FilmRoom": 3,
     "FilmTimes": [ "17:00", "22:00", "00:00" ]
-    "FilmDays":{"Maandag":["17:00", "22:00", "00:00"],"Dinsdag":"17:00", "22:00", "00:00"],"Woensdag":["17:00", "22:00", "00:00"],"Donderdag":[],"Vrijdag":[],"Zaterdag":[],"Zondag":[]}
+    "FilmDays":{"Maandag":["17:00", "22:00", "00:00"],"Dinsdag":["17:00", "22:00", "00:00"],"Woensdag":["17:00", "22:00", "00:00"],"Donderdag":[],"Vrijdag":[],"Zaterdag":[],"Zondag":[]}
   },
   {
     "FilmGenres": [ "Romantic", "", "" ],
