@@ -855,7 +855,7 @@ Reservatie code: " + GeneratedCode
         }
         public void Film_check(dynamic DynamicFilmData, int i)
         {
-            Console.WriteLine(DynamicFilmData["Films"][i]["film"] + "\n");
+            Console.WriteLine(DynamicFilmData[i]["FilmTitle"] + "\n");
         }
 
 
@@ -934,6 +934,7 @@ Reservatie code: " + GeneratedCode
             string restart = Console.ReadLine();
             if (restart.ToUpper() == "R")
             {
+                Console.Clear();
                 Process.Start(Process.GetCurrentProcess().MainModule.FileName);
                 Environment.Exit(1);
             }
