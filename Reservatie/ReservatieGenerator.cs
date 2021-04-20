@@ -524,7 +524,22 @@ namespace Cinema
 
 
         }
+        public void ShowSimplePercentage()
+        {
+            Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            Textkleur("rood");
+            for (int i = 0; i <= 100; i++)
+            {
+                Console.Write($"\rProgress: {i}%   ");
+                Thread.Sleep(25);
 
+            }
+            Console.WriteLine("");
+            Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+
+        }
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
             List<Gebruiker> _data = new List<Gebruiker>();
@@ -534,7 +549,6 @@ namespace Cinema
             AccountUsers = JsonConvert.SerializeObject(AccountUsers_Gebruiker);
             File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
         }
-
         public void ZoekOptie(string Gezochte_Film, dynamic DynamicMyFilmsData)
         {
             ConsoleCommands.Textkleur("wit");
@@ -587,10 +601,6 @@ namespace Cinema
             }
 
         }
-
-
-
-
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -608,31 +618,46 @@ namespace Cinema
         public void ReserveerCodeMail() // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             // informatie voor eventueel mailen reservatie code.
+            Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Textkleur("groen");
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
+            Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            Textkleur("rood");
             Console.Write("Naam: ");
+            Textkleur("blauw");
             string Naam_klant = Console.ReadLine();
+            Textkleur("rood");
             Console.Write("Email adress: ");
+            Textkleur("blauw");
             string Naam_email = Console.ReadLine();
             // Eventuele betaal methode?
             this.Naam = Naam_klant;
             this.Email = Naam_email;
 
-
+            Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Textkleur("groen");
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
+            ShowSimplePercentage();
             string GeneratedCode = this.ReserveringsCodeGenerator();
             // Random generator voor het maken van de reservatie code.
 
 
-
+            Textkleur("groen");
             Console.WriteLine("Reserverings code: " + GeneratedCode);
             Console.WriteLine("Zou u een bevestiging in uw mail willen ontvangen?");
             Console.WriteLine("Toets [JA] als u een mail-bevestinging wilt ontvangen of toets [NEE] als u geen mail-bevestiging .");
             // Email bevestiging.
+            Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Textkleur("blauw");
             string Mail_Bevestiging = Console.ReadLine();
-
+                
             if (Mail_Bevestiging == "JA")
             {
 
@@ -665,22 +690,30 @@ Reservatie code: " + GeneratedCode
                         // verzenden email
                         client.Send(message);
                         client.Disconnect(true);
-
+                        Textkleur("wit");
+                        Console.WriteLine("-------------------------------------------------------------------------------");
+                        Textkleur("groen");
                         Console.WriteLine("De bevestiging is verstuurd per Email.");
                     };
                 }
                 catch
                 {
+                    Textkleur("wit");
+                    Console.WriteLine("-------------------------------------------------------------------------------");
+                    Textkleur("groen");
                     Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
                 }
             }
             else if (Mail_Bevestiging == "NEE")
             {
+                Textkleur("wit");
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Textkleur("groen");
                 Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
             }
             else
             {
-                Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
+                ReserveerCodeMail();
             }
             Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
             RestartOption();
@@ -793,8 +826,6 @@ Reservatie code: " + GeneratedCode
 
             }
         }
-
-
     }
     public class Film // Object van deze class wordt toegevoegd aan de Json file die dan aan de gebruiker kan worden getoond (voor het toevoegen/verwijderen/bewerken van films)
     {
@@ -1167,7 +1198,6 @@ Reservatie code: " + GeneratedCode
 
 
     }
-
     public class Program
     {
         static void Main(string[] args)
@@ -1289,7 +1319,7 @@ Reservatie code: " + GeneratedCode
                             Console.WriteLine("Ongeldige datum.");
                         }
                         else { Klant.ReserveerCodeMail(); }
-
+                
                     }
                 }
 
