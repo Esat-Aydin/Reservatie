@@ -9,12 +9,7 @@
     <PackageReference Include="MailKit" Version="2.11.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="5.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ReservatieGenerator.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+	<PackageReference Include="SmtpServer" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Reservatie
+namespace Reservatie
 {
     internal class SmtpServer
     {
