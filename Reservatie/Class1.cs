@@ -17,19 +17,16 @@ namespace Cinema
         public string Email { get; set; }
         public string Password { get; set; }
         public bool isAdmin { get; set; }
+        public Medewerker admin;
 
 
         public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = false)
         {
-
             this.Naam = Naam;
             this.Email = Email;
             // Password word gebruikt als de user of (A): een nieuw account maakt of (B): een bestaand account heeft en in wilt loggen
-            // if (Password == jsonfilePassword) {this.Password = Password;}
             this.Password = Password;
-
             // isAdmin word gebruikt als de user admin rechten heeft 
-            // (nested onder if statement van password) -- > if (jsonfileAdmin == true){this.Admin = true;}
             this.isAdmin = isAdmin;
 
         }
@@ -767,7 +764,6 @@ Reservatie code: " + GeneratedCode
     {
         public string Name { get; set; }
         public string Admin_Password { get; set; }
-        public List<string> ListofAdmins;
 
         public Medewerker(string name = null, string AdminPass = null)
         {
