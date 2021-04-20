@@ -245,123 +245,136 @@ namespace Cinema
                 AccountCheck(adminInputName);
 
             }
+        }
+        public void AccountCheck(string Naam)
+        {
+            bool ReturnValue = false;
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
+            List<string> ListofAccountsNames = new List<string>();
+            List<string> ListofAccountsPasswords = new List<string>();
+            List<string> ListofAccountsisAdmin = new List<string>();
+            List<string> ListofAccountsEmails = new List<string>();
 
-            void AccountCheck(string Naam)
+            for (int i = 0; i < AccountUsers_Gebruiker.Count; i++)
             {
-                bool ReturnValue = false;
-                var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
-                dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
-                List<string> ListofAccountsNames = new List<string>();
-                List<string> ListofAccountsPasswords = new List<string>();
-                List<string> ListofAccountsisAdmin = new List<string>();
-                List<string> ListofAccountsEmails = new List<string>();
+                ListofAccountsNames.Add(AccountUsers_Gebruiker[i]["Naam"].ToString());
+                ListofAccountsPasswords.Add(AccountUsers_Gebruiker[i]["Password"].ToString());
+                ListofAccountsisAdmin.Add(AccountUsers_Gebruiker[i]["isAdmin"].ToString());
+                ListofAccountsEmails.Add(AccountUsers_Gebruiker[i]["Email"].ToString());
+                string StoredName = ListofAccountsNames[i];
+                Console.WriteLine(ListofAccountsNames[i]);
 
-                for (int i = 0; i < AccountUsers_Gebruiker.Count; i++)
+                if (StoredName == Naam)
                 {
-                    ListofAccountsNames.Add(AccountUsers_Gebruiker[i]["Naam"].ToString());
-                    ListofAccountsPasswords.Add(AccountUsers_Gebruiker[i]["Password"].ToString());
-                    ListofAccountsisAdmin.Add(AccountUsers_Gebruiker[i]["isAdmin"].ToString());
-                    ListofAccountsEmails.Add(AccountUsers_Gebruiker[i]["Email"].ToString());
-                    string StoredName = ListofAccountsNames[i];
-
-                    if (StoredName == Naam)
+                    ReturnValue = true;
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("groen");
+                    Console.WriteLine("Welkom, " + Naam + ". Voer nu het ingestelde admin wachtwoord in: ");
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("blauw");
+                    string input_password = Console.ReadLine();
+                    if (input_password == ListofAccountsPasswords[i])
                     {
-                        ReturnValue = true;
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("-----------------------------------------------------------------");
-                        ConsoleCommands.Textkleur("groen");
-                        Console.WriteLine("Welkom, " + Naam + ". Voer nu het ingestelde admin wachtwoord in: ");
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("-----------------------------------------------------------------");
-                        ConsoleCommands.Textkleur("blauw");
-                        string input_password = Console.ReadLine();
-                        if (input_password == ListofAccountsPasswords[i])
-                        {
-                            if (ListofAccountsisAdmin[i] == "True")
-                            {
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine("-----------------------------------------------------------------");
-                                ConsoleCommands.Textkleur("groen");
-                                Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine("-----------------------------------------------------------------");
-                                ConsoleCommands.Textkleur("blauw");
-                                Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
-                                UserInput = Console.ReadLine();
-                                UserInputMethod(UserInput);
-                            }
-                        }
-
-                        else
+                        if (ListofAccountsisAdmin[i] == "True")
                         {
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("groen");
-                            Console.WriteLine("Het ingevoerde wachtwoord is incorrect, probeer het nogmaals: ");
+                            Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
+                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
                             UserInput = Console.ReadLine();
-
-                            if (UserInput == ListofAccountsPasswords[i] && ListofAccountsisAdmin[i] == "True")
-                            {
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine("-----------------------------------------------------------------");
-                                ConsoleCommands.Textkleur("groen");
-                                Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
-                                Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine("-----------------------------------------------------------------");
-                                ConsoleCommands.Textkleur("blauw");
-                                UserInput = Console.ReadLine();
-                                UserInputMethod(UserInput);
-                            }
-                            else
-                            {
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine("-----------------------------------------------------------------");
-                                ConsoleCommands.Textkleur("groen");
-                                Console.WriteLine("Het ingevoerde wachtwoord is incorrect, het programma wordt nu voor u afgesloten. ");
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine("-----------------------------------------------------------------");
-                                ConsoleCommands.Textkleur("blauw"); RestartOption();
-                                UserInput = Console.ReadLine();
-                            }
+                            UserInputMethod(UserInput);
                         }
                     }
+
                     else
                     {
                         ConsoleCommands.Textkleur("wit");
                         Console.WriteLine("-----------------------------------------------------------------");
                         ConsoleCommands.Textkleur("groen");
-                        Console.WriteLine("We hebben geen account kunnen vinden met deze naam: " + Naam);
-                        ConsoleCommands.Textkleur("blauw");
-                        RestartOption(); // Dit sluit het programma af na twee verkeerde password inputs.
+                        Console.WriteLine("Het ingevoerde wachtwoord is incorrect, probeer het nogmaals: ");
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
                         ConsoleCommands.Textkleur("blauw");
                         UserInput = Console.ReadLine();
-                        UserInputMethod(UserInput);
-                        UserInput = Console.ReadLine();
-                        UserInputMethod(UserInput);
+
+                        if (UserInput == ListofAccountsPasswords[i] && ListofAccountsisAdmin[i] == "True")
+                        {
+                            ConsoleCommands.Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("groen");
+                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
+                            Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
+                            ConsoleCommands.Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("blauw");
+                            UserInput = Console.ReadLine();
+                            UserInputMethod(UserInput);
+                        }
+                        else
+                        {
+                            ConsoleCommands.Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("groen");
+                            Console.WriteLine("Het ingevoerde wachtwoord is incorrect, het programma wordt nu voor u afgesloten. ");
+                            ConsoleCommands.Textkleur("wit");
+                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("blauw"); RestartOption();
+                            UserInput = Console.ReadLine();
+                        }
                     }
-
-
-
-
-
-
-
-                   
-
-
+                }
+            }
+             if (ReturnValue == false)
+            {
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("groen");
+                Console.WriteLine("We hebben geen account kunnen vinden met deze naam: " + Naam);
+                ConsoleCommands.Textkleur("blauw");
+                RestartOption(); // Dit sluit het programma af na twee verkeerde password inputs.
+                ConsoleCommands.Textkleur("blauw");
+                UserInput = Console.ReadLine();
+                UserInputMethod(UserInput);
+                UserInput = Console.ReadLine();
+                UserInputMethod(UserInput);
                 }
 
 
-            }
-        }
-    
- 
 
-        
+
+
+
+
+
+
+
+            
+
+
+        }
+
+        public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
+        {
+            List<Gebruiker> _data = new List<Gebruiker>();
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers_Gebruiker = JsonConvert.DeserializeObject<List<Gebruiker>>(AccountUsers);
+            AccountUsers_Gebruiker.Add(Object);
+            AccountUsers = JsonConvert.SerializeObject(AccountUsers_Gebruiker);
+            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
+        }
+
+
+
+
+
+
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -971,6 +984,7 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("Selecteer '2' om te zoeken op een specifieke film.");
                 Console.WriteLine("Selecteer '3' om uw reservering te bekijken.");
                 Console.WriteLine("Selecteer '4' om in te loggen als Bioscoop Medewerker.");
+                Console.WriteLine("Selecteer '5' om een account te maken.");
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("blauw");
@@ -1106,18 +1120,107 @@ Reservatie code: " + GeneratedCode
                 {
                     bool adminConsoleChosen = true;
                 Klant.AdminConsole(adminConsoleChosen);
-                
-
-
-
-
-
-
-
-
-
-            }
-
+                }
+                else if (Start_options == "5")
+                {
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("rood");
+                Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("groen");
+                Console.WriteLine("Voer uw gewenste gebruikersnaam in: ");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("blauw");
+                string KlantNaamInput = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("rood");
+                Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("groen");
+                Console.WriteLine("Voer uw email adres in: ");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("blauw");
+                string KlantEmailInput = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("rood");
+                Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("groen");
+                Console.WriteLine("Voer uw wachtwoord in: ");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("blauw");
+                string KlantPassInput = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("rood");
+                Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("groen");
+                Console.WriteLine("Voer uw wachtwoord nogmaals in: ");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("blauw");
+                string KlantPassReInput = Console.ReadLine();
+                if (KlantPassInput == KlantPassReInput)
+                {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
+                    Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                    ConsoleCommands.Textkleur("rood");
+                    Console.WriteLine("    ***** C O M P L E T E *****  ");
+                    Gebruiker KlantObject = new Gebruiker(KlantNaamInput, KlantEmailInput, KlantPassInput);
+                    ConsoleCommands.Textkleur("groen");
+                    Console.WriteLine("Uw gegevens: \n" + KlantNaamInput + "\n" + KlantEmailInput);
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("blauw");
+                    KlantObject.AccountCreate(KlantObject);
+                }
+                else
+                {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
+                    Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                    ConsoleCommands.Textkleur("groen");
+                    Console.WriteLine("Dat is incorrect! Probeer het nogmaals: ");
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("blauw");
+                    KlantPassReInput = Console.ReadLine();
+                    if (KlantPassInput == KlantPassReInput)
+                    {
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("rood");
+                        Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                        ConsoleCommands.Textkleur("rood");
+                        Console.WriteLine("    ***** C O M P L E T E *****  ");
+                        Gebruiker KlantObject = new Gebruiker(KlantNaamInput, KlantEmailInput, KlantPassInput);
+                        ConsoleCommands.Textkleur("groen");
+                        Console.WriteLine("Uw gegevens: \n" + KlantNaamInput + "\n" + KlantEmailInput);
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("blauw");
+                        KlantObject.AccountCreate(KlantObject);
+                    }
+                    else
+                    {
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("rood");
+                        Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                        ConsoleCommands.Textkleur("groen");
+                        Console.WriteLine("Dat is incorrect! De console wordt nu afgesloten. ");
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        CommandLine.RestartOption();
+                    }
+                }
+            }   
 
 
 
