@@ -750,7 +750,7 @@ Reservatie code: " + GeneratedCode
         public string FilmTitle { get; set; }
         public int FilmRoom { get; set; }
         public string[] FilmTimes { get; set; }
-        public Dictionary<string,List<string>> FilmDataTimes { get; set; }
+        public Dictionary<string,List<string>> FilmDays { get; set; }
 
         public Film(string[] FilmGenres = null, string FilmTitle = null, int FilmRoom = 0, string[] FilmTimes = null, Dictionary<string,List<string>> DictofData = null)
         {
@@ -758,7 +758,7 @@ Reservatie code: " + GeneratedCode
             this.FilmTitle = FilmTitle;
             this.FilmRoom = FilmRoom;
             this.FilmTimes = FilmTimes;
-            this.FilmDataTimes = DictofData; 
+            this.FilmDays = DictofData; 
         }
         public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
