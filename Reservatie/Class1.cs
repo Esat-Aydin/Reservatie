@@ -1221,11 +1221,13 @@ Reservatie code: " + GeneratedCode
 
                             string Chosen_date = " ";
                             ConsoleCommands.Textkleur("groen");
-                            Console.WriteLine("Voer uw gewenste dag in(nummer)\nMaandag(1)\nDinsdag(2)");
+
+
+                            Console.WriteLine("Voer uw gewenste dag in (Bijvoorbeeld: Maandag)");
                             Chosen_date = Console.ReadLine();
-                            if (Chosen_date.Length != 10)
+                            if (Chosen_date.Length > 10 | Chosen_date.Length < 5)
                             {
-                                Console.WriteLine("Ongeldige datum. Gebruik dit patroon\n dd/mm/jjjj \n om uw datum in te voeren.");
+                                Console.WriteLine("Ongeldige datum.");
                             }
                             else { Klant.ReserveerCodeMail(); }
 
