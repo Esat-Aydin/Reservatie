@@ -716,7 +716,7 @@ Reservatie code: " + GeneratedCode
         }
 
 
-        public void UserInputMethod(string UserInput)
+        new public void UserInputMethod(string UserInput)
         {
             string TitleofFilm = null;
             ConsoleCommands.Textkleur("wit");
