@@ -429,7 +429,6 @@ namespace Cinema
                 ListofAccountsisAdmin.Add(AccountUsers_Gebruiker[i]["isAdmin"].ToString());
                 ListofAccountsEmails.Add(AccountUsers_Gebruiker[i]["Email"].ToString());
                 string StoredName = ListofAccountsNames[i];
-                Console.WriteLine(ListofAccountsNames[i]);
 
                 if (StoredName == Naam)
                 {
