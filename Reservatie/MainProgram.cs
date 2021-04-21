@@ -1588,15 +1588,18 @@ Reservatie code: " + GeneratedCode
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Black;
             var Start_options = Console.ReadLine();
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
             bool isErrorPrinted = false;
             while(Start_options != "1" || Start_options != "2" || Start_options != "3" || Start_options != "4" || Start_options != "4") {
                 if (isErrorPrinted == false)
                 {
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
-                    Console.WriteLine("ERROR: Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.");
+                    ConsoleCommands.Textkleur("rood");
+                    Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
+                    Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+                    Console.ForegroundColor = ConsoleColor.Black;
                     isErrorPrinted = true;
                 }
+                Console.ForegroundColor = ConsoleColor.Black;
                 Start_options = Console.ReadLine();
                 Klant.UserInputMethod(Start_options);
             }
