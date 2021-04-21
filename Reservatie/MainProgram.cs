@@ -1576,33 +1576,32 @@ Reservatie code: " + GeneratedCode
  | |    | | '_ \ / _ \ '_ ` _ \ / _` |  _  // _ \/ __|/ _ \ '__\ \ / / _` | __| |/ _ \| '_ \ 
  | |____| | | | |  __/ | | | | | (_| | | \ \  __/\__ \  __/ |   \ V / (_| | |_| | (_) | | | |
   \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
-
-
-            //ConsoleCommands.Textkleur("blauw");
             Console.ForegroundColor = ConsoleColor.Gray;
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("\n---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
             Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!");
             Console.WriteLine("---------------------------------------------------------------------------------------------\n");
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoeken op genre\n\n");
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoek een film\n\n");
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering bekijken\n\n");
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Inloggen als bioscoop medewerker\n\n");
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Account registreren\n");
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("---------------------------------------------------------------------------------------------");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoeken op genre\n\n");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoek een film\n\n");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering bekijken\n\n");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Inloggen als bioscoop medewerker\n\n");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Account registreren\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Black;
             var Start_options = Console.ReadLine();
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+            bool isErrorPrinted = false;
+            while(Start_options != "1" || Start_options != "2" || Start_options != "3" || Start_options != "4" || Start_options != "4") {
+                if (isErrorPrinted == false)
+                {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
+                    Console.WriteLine("ERROR: Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.");
+                    isErrorPrinted = true;
+                }
+                Start_options = Console.ReadLine();
+                Klant.UserInputMethod(Start_options);
+            }
             Klant.UserInputMethod(Start_options);
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
         }
     }
 }
