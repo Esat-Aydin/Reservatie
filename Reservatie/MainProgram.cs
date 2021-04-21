@@ -1566,32 +1566,43 @@ Reservatie code: " + GeneratedCode
 
             // Startpagina applicatie
 
-            ConsoleCommands.Textkleur("groen");
-            Console.WriteLine(@"
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Clear();
+            Console.Write(@"
    _____ _                            _____                                _   _             
   / ____(_)                          |  __ \                              | | (_)            
  | |     _ _ __   ___ _ __ ___   __ _| |__) |___  ___  ___ _ ____   ____ _| |_ _  ___  _ __  
  | |    | | '_ \ / _ \ '_ ` _ \ / _` |  _  // _ \/ __|/ _ \ '__\ \ / / _` | __| |/ _ \| '_ \ 
  | |____| | | | |  __/ | | | | | (_| | | \ \  __/\__ \  __/ |   \ V / (_| | |_| | (_) | | | |
-  \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|
-                                                                                             
-                                                                                             
-Welkom op de startpagina van de bioscoop.
-");
-            Console.WriteLine("Selecteer '1' om te zoeken op genre.");
-            Console.WriteLine("Selecteer '2' om te zoeken op een specifieke film.");
-            Console.WriteLine("Selecteer '3' om uw reservering te bekijken.");
-            Console.WriteLine("Selecteer '4' om in te loggen als Bioscoop Medewerker.");
-            Console.WriteLine("Selecteer '5' om een account te maken.");
+  \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
+
+
+            //ConsoleCommands.Textkleur("blauw");
+            Console.ForegroundColor = ConsoleColor.Gray;
             ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
-            ConsoleCommands.Textkleur("blauw");
+            Console.WriteLine("\n---------------------------------------------------------------------------------------------");
+            Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!");
+            Console.WriteLine("---------------------------------------------------------------------------------------------\n");
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoeken op genre\n\n");
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoek een film\n\n");
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering bekijken\n\n");
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Inloggen als bioscoop medewerker\n\n");
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Account registreren\n");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("---------------------------------------------------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.Black;
             var Start_options = Console.ReadLine();
             ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------------------------------------");
             Klant.UserInputMethod(Start_options);
             ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------------------------------------");
         }
     }
 }
