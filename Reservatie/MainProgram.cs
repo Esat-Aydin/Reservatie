@@ -11,7 +11,7 @@ using System.Net;
 
 namespace Cinema
 {
-    public class Gebruiker : ConsoleCommands
+    public class Gebruiker
     {
         public string Naam { get; set; }
         public string Email { get; set; }
@@ -66,6 +66,12 @@ namespace Cinema
             {
                 ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("Om het admin-wachtwoord opnieuw in te stellen, type: !password");
+
+                //ConsoleCommands.Textkleur("wit");
+                //Console.WriteLine("-----------------------------------------------------------------");
+                //ConsoleCommands.Textkleur("groen");
+                //Console.WriteLine("Om een nieuwe admin-account te maken type: !createaccount");
+
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("groen");
@@ -360,7 +366,7 @@ namespace Cinema
                                 DictOf["Zondag"].Add(FilmTimesArray[0]); DictOf["Zondag"].Add(FilmTimesArray[1]); DictOf["Zondag"].Add(FilmTimesArray[2]);
                             }
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
-                            // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
+                            // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm; --
                             Film FilmObject = new Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
                             FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("-----------------------------------------------------------------"); ConsoleCommands.Textkleur("groen");
@@ -394,10 +400,14 @@ namespace Cinema
 
 
             }
+           // else if(this.isAdmin == true && (UserInput == "!newfilm"))
+            //{
+
+            //}
             UserInput = Console.ReadLine();
             UserInputMethod(UserInput);
         }
-        public void AdminConsole(bool adminConsoleChosen)
+        public void AdminConsole()
         {
 
             {
@@ -414,8 +424,9 @@ namespace Cinema
         }
         public void AccountCheck(string Naam)
         {
-            bool ReturnValue = false;
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            ConsoleCommands CommandLine = new ConsoleCommands();
+            bool AdminAccount = false;
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
             List<string> ListofAccountsNames = new List<string>();
             List<string> ListofAccountsPasswords = new List<string>();
@@ -432,7 +443,7 @@ namespace Cinema
 
                 if (StoredName == Naam)
                 {
-                    ReturnValue = true;
+                    AdminAccount = true;
                     ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("-----------------------------------------------------------------");
                     ConsoleCommands.Textkleur("groen");
@@ -452,9 +463,9 @@ namespace Cinema
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
-                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
-                            UserInput = Console.ReadLine();
-                            adminObject.UserInputMethod(UserInput);
+                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, AdminAccount); // Admin object hier aanmaken nadat het wachtwoord matcht EN de isAdmin boolean true is IN DE JSON FILE!
+                            CommandLine.UserInput = Console.ReadLine();
+                            adminObject.UserInputMethod(CommandLine.UserInput);
                         }
                     }
 
@@ -467,20 +478,20 @@ namespace Cinema
                         ConsoleCommands.Textkleur("wit");
                         Console.WriteLine("-----------------------------------------------------------------");
                         ConsoleCommands.Textkleur("blauw");
-                        UserInput = Console.ReadLine();
+                        CommandLine.UserInput = Console.ReadLine();
 
-                        if (UserInput == ListofAccountsPasswords[i] && ListofAccountsisAdmin[i] == "True")
+                        if (CommandLine.UserInput == ListofAccountsPasswords[i] && ListofAccountsisAdmin[i] == "True")
                         {
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("groen");
-                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
+                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, AdminAccount);
                             Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
-                            UserInput = Console.ReadLine();
-                            adminObject.UserInputMethod(UserInput);
+                            CommandLine.UserInput = Console.ReadLine();
+                            adminObject.UserInputMethod(CommandLine.UserInput);
                         }
                         else
                         {
@@ -490,25 +501,25 @@ namespace Cinema
                             Console.WriteLine("Het ingevoerde wachtwoord is incorrect, het programma wordt nu voor u afgesloten. ");
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
-                            ConsoleCommands.Textkleur("blauw"); RestartOption();
-                            UserInput = Console.ReadLine();
+                            ConsoleCommands.Textkleur("blauw"); CommandLine.RestartOption();
+                            CommandLine.UserInput = Console.ReadLine();
                         }
                     }
                 }
             }
-            if (ReturnValue == false)
+            if (AdminAccount == false)
             {
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("groen");
-                Console.WriteLine("We hebben geen account kunnen vinden met deze naam: " + Naam);
+                Console.WriteLine("We hebben geen admin account kunnen vinden met deze naam: " + Naam);
                 ConsoleCommands.Textkleur("blauw");
-                RestartOption(); // Dit sluit het programma af na twee verkeerde password inputs.
+                CommandLine.RestartOption(); // Dit sluit het programma af na twee verkeerde password inputs.
                 ConsoleCommands.Textkleur("blauw");
-                UserInput = Console.ReadLine();
-                UserInputMethod(UserInput);
-                UserInput = Console.ReadLine();
-                UserInputMethod(UserInput);
+                CommandLine.UserInput = Console.ReadLine();
+                UserInputMethod(CommandLine.UserInput);
+                CommandLine.UserInput = Console.ReadLine();
+                UserInputMethod(CommandLine.UserInput);
             }
 
 
@@ -524,22 +535,83 @@ namespace Cinema
 
 
         }
+        public void ShowSimplePercentage()
+        {
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            ConsoleCommands.Textkleur("rood");
+            for (int i = 0; i <= 100; i++)
+            {
+                Console.Write($"\rProgress: {i}%   ");
+                Thread.Sleep(25);
 
+            }
+            Console.WriteLine("");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+
+        }
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
             List<Gebruiker> _data = new List<Gebruiker>();
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var AccountUsers_Gebruiker = JsonConvert.DeserializeObject<List<Gebruiker>>(AccountUsers);
             AccountUsers_Gebruiker.Add(Object);
             AccountUsers = JsonConvert.SerializeObject(AccountUsers_Gebruiker);
-            File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
+            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
         }
+        public void ZoekOptie(string Gezochte_Film, dynamic DynamicMyFilmsData)
+        {
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("groen");
+            Console.WriteLine("Voor welke van de onderstaande dagen zou u " + Gezochte_Film + " willen reserveren?");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-----------------------------------------------------------------\n");
+            ConsoleCommands.Textkleur("rood");
+            List<string> Legelist = new List<string>();
+            List<string> DagenvdWeek = new List<string>();
+            List<string> Show_Tijden = new List<string>();
+            DagenvdWeek.Add("Maandag");
+            DagenvdWeek.Add("Dinsdag");
+            DagenvdWeek.Add("Woensdag");
+            DagenvdWeek.Add("Donderdag");
+            DagenvdWeek.Add("Vrijdag");
+            DagenvdWeek.Add("Zaterdag");
+            DagenvdWeek.Add("Zondag");
+            int Count = 0;
+            //int Genre_zoeken = (string)DynamicFilmData[i]["FilmGenres"][j];
+            for (int i = 0; i < DynamicMyFilmsData.Count; i++)
+            {
+                //Genre_zoeken = DynamicMyFilmsData[i]["FilmDays"];
+                for (int j = 0; j < DagenvdWeek.Count; j++)
+                {
+                    if (DynamicMyFilmsData[i]["FilmTitle"] == Gezochte_Film)
+                    {
+                        if (DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count > 0)
+                        {
+                            for (int x = 0; x < DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count; x++)
+                            {
+                                Show_Tijden.Add(DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]][x].ToString());
+
+                                if (j == 0)
+                                {
+
+                                    Console.WriteLine("Toets [" + (Count) + "] voor Maandag: " + Show_Tijden[x]);
+                                }
+
+                            }
 
 
+                        }
+                    }
 
 
+                }
 
+            }
 
+        }
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -557,32 +629,47 @@ namespace Cinema
         public void ReserveerCodeMail() // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             // informatie voor eventueel mailen reservatie code.
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            ConsoleCommands.Textkleur("rood");
             Console.Write("Naam: ");
+            ConsoleCommands.Textkleur("blauw");
             string Naam_klant = Console.ReadLine();
+            ConsoleCommands.Textkleur("rood");
             Console.Write("Email adress: ");
+            ConsoleCommands.Textkleur("blauw");
             string Naam_email = Console.ReadLine();
             // Eventuele betaal methode?
             this.Naam = Naam_klant;
             this.Email = Naam_email;
 
-
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("groen");
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
+            ShowSimplePercentage();
             string GeneratedCode = this.ReserveringsCodeGenerator();
             // Random generator voor het maken van de reservatie code.
 
 
-
+            ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Reserverings code: " + GeneratedCode);
             Console.WriteLine("Zou u een bevestiging in uw mail willen ontvangen?");
-            Console.WriteLine("Toets (1)'JA' als u een mail-bevestinging wilt ontvangen of toets (2)'NEE' als u geen mail-bevestiging .");
+            Console.WriteLine("Toets [JA] als u een mail-bevestinging wilt ontvangen of toets [NEE] als u geen mail-bevestiging .");
             // Email bevestiging.
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("blauw");
             string Mail_Bevestiging = Console.ReadLine();
-
-            if (Mail_Bevestiging == "JA" || Mail_Bevestiging == "1")
+                
+            if (Mail_Bevestiging == "JA")
             {
 
                 try
@@ -614,28 +701,37 @@ Reservatie code: " + GeneratedCode
                         // verzenden email
                         client.Send(message);
                         client.Disconnect(true);
-
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-------------------------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("groen");
                         Console.WriteLine("De bevestiging is verstuurd per Email.");
                     };
                 }
                 catch
                 {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-------------------------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("groen");
                     Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
                 }
             }
-            else if (Mail_Bevestiging == "NEE" || Mail_Bevestiging == "2")
+            else if (Mail_Bevestiging == "NEE")
             {
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
             }
             else
             {
-                Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
+                ReserveerCodeMail();
             }
+            ConsoleCommands CommandLine = new ConsoleCommands();
             Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
-            RestartOption();
+            CommandLine.RestartOption();
             // Data Reservering toevoegen.
             List<JsonData> _data = new List<JsonData>();
-            var DataUser = File.ReadAllText(@"https://stud.hosted.hr.nl/1010746/Samplelog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+            var DataUser = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
             var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                       ?? new List<JsonData>();
 
@@ -651,7 +747,7 @@ Reservatie code: " + GeneratedCode
             });
 
             DataUser = JsonConvert.SerializeObject(JsonData);
-            File.WriteAllText(@"C:\Users\woute\SampleLog.json", DataUser);
+            File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
 
         }
         public static void Reservering_check(dynamic dynamicUserData, int i)
@@ -668,15 +764,16 @@ Reservatie code: " + GeneratedCode
         }
         public static void Snacks(dynamic DynamicData)
         {
+            
             ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
-            Textkleur("wit");
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-----------------------------------------------------------------");
-            Textkleur("groen");
+            ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Dranken:");
-            Textkleur("wit");
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Textkleur("groen");
+            ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Toets [1] voor: " + DynamicData.dranken[0].Name + "  Prijs: " + DynamicData.dranken[0].Price);
             Console.WriteLine("Toets [2] voor: " + DynamicData.dranken[1].Name + "  Prijs: " + DynamicData.dranken[1].Price);
             Console.WriteLine("Toets [3] voor: " + DynamicData.dranken[2].Name + "  Prijs: " + DynamicData.dranken[2].Price);
@@ -689,13 +786,13 @@ Reservatie code: " + GeneratedCode
             Console.WriteLine("Toets [10] voor: " + DynamicData.dranken[9].Name + "  Prijs: " + DynamicData.dranken[9].Price);
             Console.WriteLine("Toets [11] voor: " + DynamicData.dranken[10].Name + "  Prijs: " + DynamicData.dranken[10].Price);
             Console.WriteLine("Toets [12] voor: " + DynamicData.dranken[11].Name + "  Prijs: " + DynamicData.dranken[11].Price);
-            Textkleur("wit");
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Textkleur("groen");
+            ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Snacks:");
-            Textkleur("wit");
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Textkleur("groen");
+            ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Toets [13] voor: " + DynamicData.snacks[0].Name + "  Prijs: " + DynamicData.snacks[0].Price);
             Console.WriteLine("Toets [14] voor: " + DynamicData.snacks[1].Name + "  Prijs: " + DynamicData.snacks[1].Price);
             Console.WriteLine("Toets [15] voor: " + DynamicData.snacks[2].Name + "  Prijs: " + DynamicData.snacks[2].Price);
@@ -703,9 +800,9 @@ Reservatie code: " + GeneratedCode
             Console.WriteLine("Toets [17] voor: " + DynamicData.snacks[4].Name + "  Prijs: " + DynamicData.snacks[4].Price);
             Console.WriteLine("Toets [18] voor: " + DynamicData.snacks[5].Name + "  Prijs: " + DynamicData.snacks[5].Price);
             Console.WriteLine("Toets [19] voor: " + DynamicData.snacks[6].Name + "  Prijs: " + DynamicData.snacks[6].Price);
-            Textkleur("wit");
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Textkleur("groen");
+            ConsoleCommands.Textkleur("groen");
 
 
         }
@@ -735,7 +832,7 @@ Reservatie code: " + GeneratedCode
             {
                 Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
                 //Json file met alle snacks.
-                string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json"); // Path moet nog veranderd worden
+                string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
                 dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
                 Snacks(DynamicData);
 
@@ -763,11 +860,11 @@ Reservatie code: " + GeneratedCode
         {
 
             List<Film> _data = new List<Film>();
-            var FilmDataJson = File.ReadAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
             FilmObjectJson.Add(FilmObject);
             FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-            File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
+            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
         public void Film_check(dynamic DynamicFilmData, int i)
         {
@@ -805,12 +902,6 @@ Reservatie code: " + GeneratedCode
         }
 
 
-
-    }
-    public class DataTijd
-    {
-        public string Data;
-        public string Tijd;
 
     }
     public class ConsoleCommands
@@ -856,8 +947,6 @@ Reservatie code: " + GeneratedCode
         }
         public void Genre(string Genre_select)
         {
-
-
             if (Genre_select == "1")
             {
                 Genre_search = "Action";
@@ -1114,7 +1203,6 @@ Reservatie code: " + GeneratedCode
 
 
     }
-
     public class Program
     {
         static void Main(string[] args)
@@ -1138,9 +1226,9 @@ Reservatie code: " + GeneratedCode
             ConsoleCommands CommandLine = new ConsoleCommands();
 
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString("https://stud.hosted.hr.nl/1010746/Samplelog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -1180,16 +1268,18 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("We hebben deze film(s) gevonden onder de genre: ");
-                for (int i = 0; i < DynamicFilmData["Films"].Count; i++)
+                for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
 
-                    for (int j = 0; j < DynamicFilmData["Films"][i]["genre"].Count; j++)
+                    for (int j = 0; j < DynamicFilmData[i]["FilmGenres"].Count; j++)
                     {
-                        string Genre_zoeken = (string)DynamicFilmData["Films"][i]["genre"][j];
+                        string Genre_zoeken = (string)DynamicFilmData[i]["FilmGenres"][j];
+
                         if (CommandLine.Genre_search == Genre_zoeken)
                         {
-                            //Genre_check(DynamicFilmData, i);
-                            Show_films.Add(DynamicFilmData["Films"][i]["film"].ToString());
+
+                            Show_films.Add(DynamicFilmData[i]["FilmTitle"].ToString());
+
 
                         }
                     }
@@ -1234,7 +1324,7 @@ Reservatie code: " + GeneratedCode
                             Console.WriteLine("Ongeldige datum.");
                         }
                         else { Klant.ReserveerCodeMail(); }
-
+                
                     }
                 }
 
@@ -1247,20 +1337,20 @@ Reservatie code: " + GeneratedCode
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("blauw");
-                var Film_search = Console.ReadLine();
+                string Film_search = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
                 for (int i = 0; i < 5; i++)
                 {
-                    string Film_zoeken = (string)DynamicFilmData["Films"][i]["film"];
+                    string Film_zoeken = (string)DynamicFilmData[i]["FilmTitle"];
                     if (Film_search == Film_zoeken)
                     {
                         ConsoleCommands.Textkleur("groen");
-                        Console.WriteLine("U heeft gezocht de volgende film:");
+                        Console.WriteLine("U heeft gezocht naar de volgende film:");
                         FilmObject.Film_check(DynamicFilmData, i);
                     }
                 }
-
+                Klant.ZoekOptie(Film_search, DynamicFilmData);
             }
             else if (Start_options == "3")
             {
@@ -1291,8 +1381,7 @@ Reservatie code: " + GeneratedCode
             }
             else if (Start_options == "4")
             {
-                bool adminConsoleChosen = true;
-                Klant.AdminConsole(adminConsoleChosen);
+                Klant.AdminConsole();
             }
             else if (Start_options == "5")
             {
@@ -1300,6 +1389,8 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("rood");
                 Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("Voer uw gewenste gebruikersnaam in: ");
                 ConsoleCommands.Textkleur("wit");
@@ -1310,6 +1401,8 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("rood");
                 Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("Voer uw email adres in: ");
                 ConsoleCommands.Textkleur("wit");
@@ -1320,6 +1413,8 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("rood");
                 Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("Voer uw wachtwoord in: ");
                 ConsoleCommands.Textkleur("wit");
@@ -1330,6 +1425,8 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("rood");
                 Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("Voer uw wachtwoord nogmaals in: ");
                 ConsoleCommands.Textkleur("wit");
@@ -1344,9 +1441,11 @@ Reservatie code: " + GeneratedCode
                     Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
                     ConsoleCommands.Textkleur("rood");
                     Console.WriteLine("         ***** C O M P L E T E *****  ");
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
                     Gebruiker KlantObject = new Gebruiker(KlantNaamInput, KlantEmailInput, KlantPassInput);
                     ConsoleCommands.Textkleur("groen");
-                    Console.WriteLine("Uw gegevens: \n" + KlantNaamInput + "\n" + KlantEmailInput);
+                    Console.WriteLine("Uw gegevens: \n\n" + KlantNaamInput + "\n" + KlantEmailInput);
                     ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("-----------------------------------------------------------------");
                     ConsoleCommands.Textkleur("blauw");
@@ -1358,6 +1457,8 @@ Reservatie code: " + GeneratedCode
                     Console.WriteLine("-----------------------------------------------------------------");
                     ConsoleCommands.Textkleur("rood");
                     Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("-----------------------------------------------------------------");
                     ConsoleCommands.Textkleur("groen");
                     Console.WriteLine("Dat is incorrect! Probeer het nogmaals: ");
                     ConsoleCommands.Textkleur("wit");
@@ -1372,9 +1473,11 @@ Reservatie code: " + GeneratedCode
                         Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
                         ConsoleCommands.Textkleur("rood");
                         Console.WriteLine("    ***** C O M P L E T E *****  ");
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
                         Gebruiker KlantObject = new Gebruiker(KlantNaamInput, KlantEmailInput, KlantPassInput);
                         ConsoleCommands.Textkleur("groen");
-                        Console.WriteLine("Uw gegevens: \n" + KlantNaamInput + "\n" + KlantEmailInput);
+                        Console.WriteLine("Uw gegevens: \n\n" + KlantNaamInput + "\n" + KlantEmailInput);
                         ConsoleCommands.Textkleur("wit");
                         Console.WriteLine("-----------------------------------------------------------------");
                         ConsoleCommands.Textkleur("blauw");
@@ -1386,6 +1489,8 @@ Reservatie code: " + GeneratedCode
                         Console.WriteLine("-----------------------------------------------------------------");
                         ConsoleCommands.Textkleur("rood");
                         Console.WriteLine("***** A C C O U N T       C R E A T I O N *****");
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
                         ConsoleCommands.Textkleur("groen");
                         Console.WriteLine("Dat is incorrect! De console wordt nu afgesloten. ");
                         ConsoleCommands.Textkleur("wit");
