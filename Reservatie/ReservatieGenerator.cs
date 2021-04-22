@@ -16,14 +16,20 @@ namespace Cinema
     {
         public string Naam { get; set; }
         public string Email { get; set; }
+        public string Film { get; set; }
+        public string Film_Time { get; set; }
+        public string Film_Day { get; set;  }
         public string Password { get; set; }
         public bool isAdmin { get; set; }
 
 
-        public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = false)
+        public Gebruiker(string Naam = null, string Email = null,string Film = null, string Film_Time = null, string Film_Day = null, string Password = null, bool isAdmin = false)
         {
             this.Naam = Naam;
             this.Email = Email;
+            this.Film = Film;
+            this.Film_Time = Film_Time;
+            this.Film_Day = Film_Day;
             // Password word gebruikt als de user of (A): een nieuw account maakt of (B): een bestaand account heeft en in wilt loggen
             this.Password = Password;
             // isAdmin word gebruikt als de user admin rechten heeft 
@@ -482,7 +488,7 @@ namespace Cinema
                         {
                             Console.WriteLine("Ongeldige datum.");
                         }
-                        else { Klant.ReserveerCodeMail(); }
+                        //else { Klant.ReserveerCodeMail(); }
 
                     }
                 }
@@ -745,7 +751,7 @@ namespace Cinema
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("blauw");
-                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
+                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i],Film = null, Film_Time = null, Film_Day = null, input_password, ReturnValue);
                             CommandLine.UserInput = Console.ReadLine();
                             adminObject.UserInputMethod(CommandLine.UserInput);
                         }
@@ -767,7 +773,7 @@ namespace Cinema
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
                             ConsoleCommands.Textkleur("groen");
-                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
+                            Gebruiker adminObject = new Gebruiker(Naam, ListofAccountsEmails[i],Film = null, Film_Time = null, Film_Day = null, input_password, ReturnValue);
                             Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("-----------------------------------------------------------------");
@@ -865,60 +871,56 @@ namespace Cinema
             DagenvdWeek.Add("Zondag");
             int Count = 1;
             var table = new ConsoleTable("Dagen van de week", "Draaitijd");
-            
-            
+
+
             //int Genre_zoeken = (string)DynamicFilmData[i]["FilmGenres"][j];
             for (int i = 0; i < DynamicMyFilmsData.Count; i++)
             {
                 //Genre_zoeken = DynamicMyFilmsData[i]["FilmDays"];
                 for (int j = 0; j < DagenvdWeek.Count; j++)
                 {
-                    
+
                     if (DynamicMyFilmsData[i]["FilmTitle"] == Gezochte_Film)
                     {
 
-                        
+
                         if (DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count > 0)
                         {
-                       
+
                             for (int x = 0; x < DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count; x++)
                             {
-                                
+
                                 Show_Tijden.Add(DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]][x].ToString());
 
-                                
+
                                 //Console.WriteLine("Toets [" + (Count) + "] voor "+ (DagenvdWeek[j]) +":" + Show_Tijden[x]);
-                                
+
                                 
                             }
-                            string Times = Show_Tijden[0]+ ", "+ Show_Tijden[1] + ", " + Show_Tijden[2];
-                            Count++;
+                            string Times = Show_Tijden[0] + ", " + Show_Tijden[1] + ", " + Show_Tijden[2];
                             table.AddRow(("Toets [" + (Count) + "] voor " + DagenvdWeek[j]), Times);
-
+                            Count++;
                         }
                         else if (DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count <= 0)
                         {
                             for (int x = 0; x <= DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count; x++)
                             {
-                                table.AddRow("Toets [" + (Count) + "] voor " + (DagenvdWeek[j]) + ": ", "Deze film draait niet op "+DagenvdWeek[j]+".");
-
+                                table.AddRow("Toets [" + (Count) + "] voor " + (DagenvdWeek[j]) + ": ", "Deze film draait niet op " + DagenvdWeek[j] + ".");
                                 Count++;
+
 
                             }
                         }
                     }
-
+                    
                 }
 
             }
+            ConsoleCommands.Textkleur("wit");
             table.Write(Format.Alternative);
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-----------------------------------------------------------------");
             Console.WriteLine("Voor welke van de bovenstaande dagen zou u willen reserveren?");
-            DagKeuze();
-        }
-        public static void DagKeuze()
-        {
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-----------------------------------------------------------------");
             string DagenKeuze = Console.ReadLine();
@@ -926,32 +928,262 @@ namespace Cinema
             Console.WriteLine("-----------------------------------------------------------------");
             if (DagenKeuze == "1")
             {
-                //Maandag
+
+                if (table.Rows[0][1].ToString() == "Deze film draait niet op Maandag.")
+                {
+                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                }
+                else
+                {
+                    Console.WriteLine("U heeft gekozen voor Maandag, voor welk tijdslot zou u willen reserveren?");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    string tijdslot = Console.ReadLine();
+                    if(tijdslot == "1")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
+                    }
+                    if(tijdslot == "2")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                    if (tijdslot == "3")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
+                    }
+                }
             }
-            if (DagenKeuze == "1")
+            else if (DagenKeuze == "2")
             {
-                //Maandag
+                if (table.Rows[1][1].ToString() == "Deze film draait niet op Dinsdag.")
+                {
+                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                }
+                else
+                {
+                    Console.WriteLine("U heeft gekozen voor Dinsdag, voor welk tijdslot zou u willen reserveren?");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    string tijdslot = Console.ReadLine();
+                    if (tijdslot == "1")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
+                    }
+                    if (tijdslot == "2")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                    if (tijdslot == "3")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
+                    }
+                }
             }
-            if (DagenKeuze == "1")
+            else if (DagenKeuze == "3")
             {
-                //Maandag
+                if (table.Rows[2][1].ToString() == "Deze film draait niet op Woensdag.")
+                {
+                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                }
+                else
+                {
+                    Console.WriteLine("U heeft gekozen voor Woensdag, voor welk tijdslot zou u willen reserveren?");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    string tijdslot = Console.ReadLine();
+                    if (tijdslot == "1")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
+                    }
+                    if (tijdslot == "2")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                    if (tijdslot == "3")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
+                    }
+                }
             }
-            if (DagenKeuze == "1")
+            else if (DagenKeuze == "4")
             {
-                //Maandag
+                if (table.Rows[3][1].ToString() == "Deze film draait niet op Donderdag.")
+                {
+                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                }
+                else
+                {
+                    Console.WriteLine("U heeft gekozen voor Donderdag, voor welk tijdslot zou u willen reserveren?");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    string tijdslot = Console.ReadLine();
+                    if (tijdslot == "1")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
+                    }
+                    if (tijdslot == "2")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                    if (tijdslot == "3")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
+                    }
+                }
             }
-            if (DagenKeuze == "1")
+            else if (DagenKeuze == "5")
             {
-                //Maandag
+                if (table.Rows[4][1].ToString() == "Deze film draait niet op Vrijdag.")
+                {
+                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                }
+                else
+                {
+                    Console.WriteLine("U heeft gekozen voor Vrijdag, voor welk tijdslot zou u willen reserveren?");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    string tijdslot = Console.ReadLine();
+                    if (tijdslot == "1")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
+                    }
+                    if (tijdslot == "2")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                    if (tijdslot == "3")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
+                    }
+                }
             }
-            if (DagenKeuze == "1")
+            else if (DagenKeuze == "6")
             {
-                //Maandag
+                if (table.Rows[5][1].ToString() == "Deze film draait niet op Zaterdag.")
+                {
+                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                }
+                else
+                {
+                    Console.WriteLine("U heeft gekozen voor Zaterdag, voor welk tijdslot zou u willen reserveren?");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    string tijdslot = Console.ReadLine();
+                    if (tijdslot == "1")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
+
+                    }
+                    if (tijdslot == "2")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                    if (tijdslot == "3")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
+                    }
+                }
             }
-            if (DagenKeuze == "1")
+            else if (DagenKeuze == "7")
             {
-                //Maandag
+                if (table.Rows[6][1].ToString() == "Deze film draait niet op Zondag.")
+                {
+                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                }
+                else
+                {
+                    Console.WriteLine("U heeft gekozen voor Zondag, voor welk tijdslot zou u willen reserveren?");
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
+                    Console.WriteLine("-----------------------------------------------------------------");
+                    string tijdslot = Console.ReadLine();
+                    if (tijdslot == "1")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
+                    }
+                    if (tijdslot == "2")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                    if (tijdslot == "3")
+                    {
+                        Console.WriteLine("-----------------------------------------------------------------");
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
+                    }
+                }
             }
+
+                
+
+
         }
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
@@ -967,7 +1199,7 @@ namespace Cinema
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail() // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
+        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden) // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             // informatie voor eventueel mailen reservatie code.
             ConsoleCommands.Textkleur("wit");
@@ -987,7 +1219,8 @@ namespace Cinema
             // Eventuele betaal methode?
             this.Naam = Naam_klant;
             this.Email = Naam_email;
-
+            this.Film = Gezochte_Film;
+            this.Film_Time = Show_Tijden;
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-------------------------------------------------------------------------------");
             ConsoleCommands.Textkleur("groen");
@@ -1068,11 +1301,11 @@ Reservatie code: " + GeneratedCode
             }
             else
             {
-                ReserveerCodeMail();
+                ReserveerCodeMail(Gezochte_Film, Show_Tijden);
             }
             Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
             ConsoleCommands CommandLine = new ConsoleCommands();
-            this.SnacksOption();
+            
             
             // Data Reservering toevoegen.
             List<JsonData> _data = new List<JsonData>();
@@ -1085,7 +1318,9 @@ Reservatie code: " + GeneratedCode
                 Reservatie_code = GeneratedCode,
                 Naam = this.Naam,
                 Email = this.Email,
-                //Film =
+                Film = this.Film,
+                FilmTime = this.Film_Time
+
                 //Zaal =
                 //Stoel_num =
 
@@ -1093,7 +1328,8 @@ Reservatie code: " + GeneratedCode
 
             DataUser = JsonConvert.SerializeObject(JsonData);
             File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
-            
+            this.SnacksOption();
+
         }
         public static void Reservering_check(dynamic dynamicUserData, int i)
         {
@@ -1699,6 +1935,7 @@ Reservatie code: " + GeneratedCode
         public string Email { get; set; }
         public string Reservatie_code { get; set; }
         public string Film { get; set; }
+        public string FilmTime { get; set; }
         public string Zaal { get; set; }
         public string Stoel_num { get; set; }
 
