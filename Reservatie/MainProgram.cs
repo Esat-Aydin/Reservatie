@@ -100,7 +100,7 @@ namespace Cinema
             if (this.isAdmin == true && (UserInput == "!newfilm"))
             {
                 Console.Clear();
-                ConsoleCommands.Textkleur("groen");
+                ConsoleCommands.Textkleur("rood");
                 Console.WriteLine(@"  
   ______ _____ _      __  __      _______ ____  ________      ______  ______ _____ ______ _   _ 
  |  ____|_   _| |    |  \/  |    |__   __/ __ \|  ____\ \    / / __ \|  ____/ ____|  ____| \ | |
@@ -112,7 +112,7 @@ namespace Cinema
                                                                                                 ");
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
-                ConsoleCommands.Textkleur("groen");
+                ConsoleCommands.Textkleur("zwart");
                 Console.WriteLine("Hoeveel genre's heeft de nieuwe film? Er is een maximum van drie genre's!");
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
@@ -728,7 +728,7 @@ Voer hier uw reserverings code in:");
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             bool ReturnValue = false;
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString("AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
             List<string> ListofAccountsNames = new List<string>();
             List<string> ListofAccountsPasswords = new List<string>();
@@ -857,12 +857,12 @@ Voer hier uw reserverings code in:");
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
             List<Gebruiker> _data = new List<Gebruiker>();
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString("AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var AccountUsers_Gebruiker = JsonConvert.DeserializeObject<List<Gebruiker>>(AccountUsers);
             AccountUsers_Gebruiker.Add(Object);
 
             AccountUsers = JsonConvert.SerializeObject(AccountUsers_Gebruiker);
-            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
+            File.WriteAllText("AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
         }
         public void ZoekOptie(string Gezochte_Film, dynamic DynamicMyFilmsData)
         {
@@ -1036,7 +1036,7 @@ Reservatie code: " + GeneratedCode
 
             // Data Reservering toevoegen.
             List<JsonData> _data = new List<JsonData>();
-            var DataUser = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+            var DataUser = File.ReadAllText("SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
             var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                       ?? new List<JsonData>();
 
@@ -1052,7 +1052,7 @@ Reservatie code: " + GeneratedCode
             });
 
             DataUser = JsonConvert.SerializeObject(JsonData);
-            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+            File.WriteAllText("SampleLog.json", DataUser);
 
         }
         public static void Reservering_check(dynamic dynamicUserData, int i)
@@ -1145,7 +1145,7 @@ Reservatie code: " + GeneratedCode
             {
                 Console.WriteLine("Hieronder vindt u de lijst met de verkrijgbare snacks en dranken.");
                 //Json file met alle snacks.
-                string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
+                string myJsonString = new WebClient().DownloadString("snacksdrinks.json"); // Path moet nog veranderd worden
                 dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
@@ -1185,11 +1185,11 @@ Reservatie code: " + GeneratedCode
         {
 
             List<Film> _data = new List<Film>();
-            var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var FilmDataJson = File.ReadAllText("Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
             FilmObjectJson.Add(FilmObject);
             FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
+            File.WriteAllText("Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
         public void Film_check(dynamic DynamicFilmData, int i)
         {
@@ -1255,6 +1255,14 @@ Reservatie code: " + GeneratedCode
             else if (kleur == "rood")
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else if (kleur == "zwart")
+            {
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
+            else if (kleur == "donkerrood") 
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
             }
         }
         public void RestartOption()
