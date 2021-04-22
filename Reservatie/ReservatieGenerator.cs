@@ -839,7 +839,7 @@ namespace Cinema
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-------------------------------------------------------------------------------\n");
 
-        }
+        }// Laad ding bij het reserveren
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
             List<Gebruiker> _data = new List<Gebruiker>();
@@ -1222,7 +1222,7 @@ namespace Cinema
                 
 
 
-        }
+        }// Hier wordt gekeken of de input van de User overeenkomt met een film uit de database/ ook wordt hier wordt de lijst met gekozen films getoond.
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -1381,7 +1381,7 @@ Reservatie code: " + GeneratedCode
             CommandLine.RestartOption();
 
 
-        }
+        }// Deze method toont de gevonden gevens van de reservatie code.
         public static void Snacks()
         {
             string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
@@ -1394,7 +1394,7 @@ Reservatie code: " + GeneratedCode
            
             
 
-        }
+        }// opent nodige Json data voor Winkelmandje
         public void SnacksOption() // Om deze te callen: Gebruiker.SnacksOption();
         {
 
@@ -1629,7 +1629,7 @@ Reservatie code: " + GeneratedCode
                 //Eventuele check out methode
             }
             
-        }
+        }// Hier worden alle Snacks en Dranken laten zien en toegevoed aan het Mandje van de klant.
     }
     public class Film // Object van deze class wordt toegevoegd aan de Json file die dan aan de gebruiker kan worden getoond (voor het toevoegen/verwijderen/bewerken van films)
     {
@@ -1724,7 +1724,7 @@ Reservatie code: " + GeneratedCode
                 Console.ForegroundColor = ConsoleColor.Black;
             }
         }
-        public void RestartOption()
+        public void RestartOption()// Deze methode restart het programma
         {
             
             Textkleur("wit");
@@ -1760,7 +1760,7 @@ Reservatie code: " + GeneratedCode
             }
             else if (Genre_select == "4")
             {
-                Genre_search = "Romantiek";
+                Genre_search = "Romantic";
             }
             else if (Genre_select == "5")
             {
