@@ -923,6 +923,7 @@ namespace Cinema
             Console.WriteLine("Voor welke van de bovenstaande dagen zou u willen reserveren?");
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("rood");
             string DagenKeuze = Console.ReadLine();
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-----------------------------------------------------------------");
@@ -931,6 +932,7 @@ namespace Cinema
 
                 if (table.Rows[0][1].ToString() == "Deze film draait niet op Maandag.")
                 {
+                    ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
@@ -938,27 +940,33 @@ namespace Cinema
                 }
                 else
                 {
+                    ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("U heeft gekozen voor Maandag, voor welk tijdslot zou u willen reserveren?");
                     Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
-                    if(tijdslot == "1")
+                    ConsoleCommands.Textkleur("wit");
+                    if (tijdslot == "1")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if(tijdslot == "2")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
                     }
                 }
@@ -978,23 +986,28 @@ namespace Cinema
                     Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
                     }
                 }
@@ -1014,23 +1027,28 @@ namespace Cinema
                     Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
                     }
                 }
@@ -1050,23 +1068,28 @@ namespace Cinema
                     Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
                     }
                 }
@@ -1086,23 +1109,28 @@ namespace Cinema
                     Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
                     }
                 }
@@ -1122,24 +1150,29 @@ namespace Cinema
                     Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
 
                     }
                     if (tijdslot == "2")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
                     }
                 }
@@ -1159,23 +1192,28 @@ namespace Cinema
                     Console.WriteLine("-----------------------------------------------------------------");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
                         Console.WriteLine("-----------------------------------------------------------------");
-                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2]);
+                        Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
+                        SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                 }
@@ -1328,7 +1366,7 @@ Reservatie code: " + GeneratedCode
 
             DataUser = JsonConvert.SerializeObject(JsonData);
             File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
-            this.SnacksOption();
+            CommandLine.RestartOption();
 
         }
         public static void Reservering_check(dynamic dynamicUserData, int i)
@@ -1373,9 +1411,12 @@ Reservatie code: " + GeneratedCode
             ConsoleCommands.Textkleur("blauw");
             string Online_snacks = Console.ReadLine();
             string Online_snacks_secondchange = null;
+            string WrongInputSnacks = null;
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-----------------------------------------------------------------");
             ConsoleCommands.Textkleur("groen");
+            
+            
             if (Online_snacks == "NEE")
             {
                 Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
@@ -1384,16 +1425,19 @@ Reservatie code: " + GeneratedCode
                 Console.WriteLine("-----------------------------------------------------------------");
                 ConsoleCommands.Textkleur("blauw");
                 Online_snacks_secondchange = Console.ReadLine();
-                Console.Clear();
-                Snacks();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+
+
+
 
             }
-            else if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
+            if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
             {
- 
+
 
                 Snacks();
-
+                    
 
 
             }
@@ -1401,9 +1445,22 @@ Reservatie code: " + GeneratedCode
             {
                 Console.WriteLine("U heeft de verkeerde input gegeven.");
                 Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");
-                Snacks();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("blauw");
+                WrongInputSnacks = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("-----------------------------------------------------------------");
+                if (WrongInputSnacks == "JA")
+                {
+                    
+                }
+                if (WrongInputSnacks == "NEE")
+                {
+                    Snacks();
+                }
             }
-
+            
          
         }
         public static void WinkelMandje(dynamic DynamicData, List<Object> Mandje)
@@ -1412,6 +1469,7 @@ Reservatie code: " + GeneratedCode
 
             //Json file met alle snacks.
             Console.WriteLine("Toets [1] om de lijst met snacks te bekijken\nToets [2] om de lijst met dranken te bekijken.");
+            Console.WriteLine("-----------------------------------------------------------------");
             ConsoleCommands.Textkleur("blauw");
             string SnackorDrinks = Console.ReadLine();
             ConsoleCommands.Textkleur("wit");
@@ -1651,11 +1709,11 @@ Reservatie code: " + GeneratedCode
         {
             if (kleur == "groen")
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else if (kleur == "blauw")
             {
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Black;
             }
             else if (kleur == "wit")
             {
@@ -1663,7 +1721,7 @@ Reservatie code: " + GeneratedCode
             }
             else if (kleur == "rood")
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Black;
             }
         }
         public void RestartOption()
@@ -1673,8 +1731,10 @@ Reservatie code: " + GeneratedCode
             Console.WriteLine("-----------------------------------------------------------------");
             Textkleur("groen");
             Console.WriteLine("Toets 'R' om het progamma opnieuw op te starten.");
+            Console.WriteLine("-----------------------------------------------------------------");
             Textkleur("blauw");
             string restart = Console.ReadLine();
+
             if (restart.ToUpper() == "R")
             {
                 Console.Clear();
@@ -1936,6 +1996,7 @@ Reservatie code: " + GeneratedCode
         public string Reservatie_code { get; set; }
         public string Film { get; set; }
         public string FilmTime { get; set; }
+        public string Mandje { get; set; }
         public string Zaal { get; set; }
         public string Stoel_num { get; set; }
 
