@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using Spectre.Console;
 
 namespace Cinema
 {
@@ -38,9 +39,9 @@ namespace Cinema
             Gebruiker Klant = new Gebruiker();
             ConsoleCommands CommandLine = new ConsoleCommands();
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString("Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString("snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString("SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -1555,9 +1556,9 @@ Reservatie code: " + GeneratedCode
             ConsoleCommands CommandLine = new ConsoleCommands();
 
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString("Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString("snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString("SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -1578,7 +1579,7 @@ Reservatie code: " + GeneratedCode
   \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
             Console.ForegroundColor = ConsoleColor.Gray;
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
-            Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!");
+            Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!\t\t\t\t    |");
             Console.WriteLine("---------------------------------------------------------------------------------------------\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoeken op genre\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoek een film\n\n");
@@ -1589,20 +1590,23 @@ Reservatie code: " + GeneratedCode
             Console.ForegroundColor = ConsoleColor.Black;
             var Start_options = Console.ReadLine();
             bool isErrorPrinted = false;
-            while(Start_options != "1" || Start_options != "2" || Start_options != "3" || Start_options != "4" || Start_options != "4") {
-                if (isErrorPrinted == false)
+
+                while (Start_options != "1" && Start_options != "2" && Start_options != "3" && Start_options != "4" && Start_options != "5")
                 {
-                    ConsoleCommands.Textkleur("rood");
-                    Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
-                    Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+                    if (isErrorPrinted == false)
+                    {
+                        ConsoleCommands.Textkleur("rood");
+                        Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
+                        Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        isErrorPrinted = true;
+                    }
                     Console.ForegroundColor = ConsoleColor.Black;
-                    isErrorPrinted = true;
+                    Start_options = Console.ReadLine();
+                    Klant.UserInputMethod(Start_options);
                 }
-                Console.ForegroundColor = ConsoleColor.Black;
-                Start_options = Console.ReadLine();
-                Klant.UserInputMethod(Start_options);
-            }
+            
             Klant.UserInputMethod(Start_options);
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
         }
