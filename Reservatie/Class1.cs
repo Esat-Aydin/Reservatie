@@ -1033,6 +1033,7 @@ Reservatie code: " + GeneratedCode
                 var Start_options = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("-----------------------------------------------------------------");
+                
 
                 if (Start_options == "1")
                 {
