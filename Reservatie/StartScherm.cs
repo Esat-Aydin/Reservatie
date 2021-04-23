@@ -41,6 +41,7 @@ namespace StartScherm
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Clear();
+
             Console.Write(@"
    _____ _                            _____                                _   _             
   / ____(_)                          |  __ \                              | | (_)            
@@ -52,14 +53,17 @@ namespace StartScherm
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
             Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!\t\t\t\t    |");
             Console.WriteLine("---------------------------------------------------------------------------------------------\n");
+
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoeken op genre\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Zoek een film\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering bekijken\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Inloggen als bioscoop medewerker\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Account registreren\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Lijst met alle films bekijken.\n");
+
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Black;
+
             var Start_options = Console.ReadLine();
             bool isErrorPrinted = false;
 
@@ -74,6 +78,7 @@ namespace StartScherm
                     Console.ForegroundColor = ConsoleColor.Black;
                     isErrorPrinted = true;
                 }
+
                 Console.ForegroundColor = ConsoleColor.Black;
                 Start_options = Console.ReadLine();
                 Klant.UserInputMethod(Start_options);
