@@ -181,7 +181,7 @@ namespace Gebruiker
                     string film_showw = i.ToString();
                     if (Chosen_film == (film_showw))
                     {
-                        Console.Clear();
+                        Scherm.Screens.CinemaBanner();
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("wit");
 
@@ -209,8 +209,8 @@ namespace Gebruiker
             
             else if (UserInput == "3")
             {
-                Console.Clear();
-                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "zaal"); //Preset Table
+                Scherm.Screens.CinemaBanner();
+                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
                 dynamic genres = DynamicFilmData[0]["FilmGenres"];
                 List<string> All_Films = new List<string>();
                 var zaal = DynamicFilmData[0]["FilmRoom"];
@@ -305,8 +305,7 @@ namespace Gebruiker
                 Console.WriteLine("\t\t\t FILM TOEVOEGEN");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.WriteLine("Hoeveel genre's heeft de nieuwe film? Er is een maximum van drie genre's!");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var StringArrayGenreLength_Input = Console.ReadLine();
                 try

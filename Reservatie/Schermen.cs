@@ -137,10 +137,7 @@ namespace Scherm
         public static void VisitorScreen()
         {
             // Objects
-            Film.Film FilmObject = new Film.Film();
-            Medewerker admin = new Medewerker();
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
-            ConsoleCommands CommandLine = new ConsoleCommands();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
             CinemaBanner();
@@ -153,6 +150,7 @@ namespace Scherm
             Console.ForegroundColor = ConsoleColor.Black;
 
             var Start_options = Console.ReadLine();
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             bool isErrorPrinted = false;
 
             while (Start_options != "1" && Start_options != "2")
@@ -175,7 +173,7 @@ namespace Scherm
             {
                 ReserveringOpties();
             }
-            else
+            else if (Start_options == "2")
             {
                 Klant.ReserveringBeheren();
             }
