@@ -97,8 +97,8 @@ namespace Scherm
             CinemaBanner();
             Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!\t\t\t\t    ");
             Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om verder te gaan als bezoeker\t\t");
-            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om verder te gaan als bioscoop medewerker\n");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om verder te gaan als "); ConsoleCommands.Textkleur("rood"); Console.Write("bezoeker\t\t"); ConsoleCommands.Textkleur("wit");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om verder te gaan als "); ConsoleCommands.Textkleur("rood"); Console.Write("bioscoop medewerker\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
 
