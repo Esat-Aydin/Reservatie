@@ -60,7 +60,7 @@ namespace Cinema
                 Environment.Exit(1);
             }
         }
-        public void Genre(string Genre_select)
+        public string Genre(string Genre_select)
         {
 
 
@@ -92,6 +92,7 @@ namespace Cinema
             {
                 Genre_search = "Familie";
             }
+            return Genre_search;
         }
     }
     public class JsonData

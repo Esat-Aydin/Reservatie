@@ -44,17 +44,7 @@ namespace Scherm
             //Startpagina
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Clear();
-
-            Console.Write(@"
-   _____ _                            _____                                _   _             
-  / ____(_)                          |  __ \                              | | (_)            
- | |     _ _ __   ___ _ __ ___   __ _| |__) |___  ___  ___ _ ____   ____ _| |_ _  ___  _ __  
- | |    | | '_ \ / _ \ '_ ` _ \ / _` |  _  // _ \/ __|/ _ \ '__\ \ / / _` | __| |/ _ \| '_ \ 
- | |____| | | | |  __/ | | | | | (_| | | \ \  __/\__ \  __/ |   \ V / (_| | |_| | (_) | | | |
-  \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
+            CinemaBanner();
             Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!\t\t\t\t    |");
             Console.WriteLine("---------------------------------------------------------------------------------------------\n");
 
@@ -104,17 +94,7 @@ namespace Scherm
             ConsoleCommands CommandLine = new ConsoleCommands();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Clear();
-
-            Console.Write(@"
-   _____ _                            _____                                _   _             
-  / ____(_)                          |  __ \                              | | (_)            
- | |     _ _ __   ___ _ __ ___   __ _| |__) |___  ___  ___ _ ____   ____ _| |_ _  ___  _ __  
- | |    | | '_ \ / _ \ '_ ` _ \ / _` |  _  // _ \/ __|/ _ \ '__\ \ / / _` | __| |/ _ \| '_ \ 
- | |____| | | | |  __/ | | | | | (_| | | \ \  __/\__ \  __/ |   \ V / (_| | |_| | (_) | | | |
-  \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
+            CinemaBanner();
             Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!\t\t\t\t    |");
             Console.WriteLine("---------------------------------------------------------------------------------------------\n");
 
@@ -164,18 +144,8 @@ namespace Scherm
             ConsoleCommands CommandLine = new ConsoleCommands();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Clear();
-
-            Console.Write(@"
-   _____ _                            _____                                _   _             
-  / ____(_)                          |  __ \                              | | (_)            
- | |     _ _ __   ___ _ __ ___   __ _| |__) |___  ___  ___ _ ____   ____ _| |_ _  ___  _ __  
- | |    | | '_ \ / _ \ '_ ` _ \ / _` |  _  // _ \/ __|/ _ \ '__\ \ / / _` | __| |/ _ \| '_ \ 
- | |____| | | | |  __/ | | | | | (_| | | \ \  __/\__ \  __/ |   \ V / (_| | |_| | (_) | | | |
-  \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
-            Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    |");
+            CinemaBanner();
+            Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    ");
             Console.WriteLine("---------------------------------------------------------------------------------------------\n");
 
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken\t\t");
@@ -223,17 +193,7 @@ namespace Scherm
             ConsoleCommands CommandLine = new ConsoleCommands();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Clear();
-
-            Console.Write(@"
-   _____ _                            _____                                _   _             
-  / ____(_)                          |  __ \                              | | (_)            
- | |     _ _ __   ___ _ __ ___   __ _| |__) |___  ___  ___ _ ____   ____ _| |_ _  ___  _ __  
- | |    | | '_ \ / _ \ '_ ` _ \ / _` |  _  // _ \/ __|/ _ \ '__\ \ / / _` | __| |/ _ \| '_ \ 
- | |____| | | | |  __/ | | | | | (_| | | \ \  __/\__ \  __/ |   \ V / (_| | |_| | (_) | | | |
-  \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
+            CinemaBanner();
             Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    ");
             Console.WriteLine("---------------------------------------------------------------------------------------------\n");
 

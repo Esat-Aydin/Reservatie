@@ -116,12 +116,19 @@ namespace Gebruiker
             }
             else if (UserInput == "2")
             {
-                Console.Clear();
+                Scherm.Screens.CinemaBanner();
                 List<string> Show_films = new List<string>();
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("Op welke genre wilt u zoeken: ");
+                Console.WriteLine("\t\t\t\tKies een genre uit\t\t\t\t");
+                Console.WriteLine("---------------------------------------------------------------------------------------------");
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("Toets [1] voor Action.\nToets [2] voor Comedy.\nToets [3] voor Thriller.\nToets [4] voor Romantiek.\nToets [5] voor Drama.\nToets [6] voor Sci-Fi.\nToets [7] voor Familie films. ");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Comedy\n");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Thriller\n");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Romantiek\n");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drama\n");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Sci-Fi\n");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("---------------------------------------------------------------------------------------------");
                 ConsoleCommands.Textkleur("zwart");
@@ -129,10 +136,14 @@ namespace Gebruiker
                 Console.Clear();
                 ConsoleCommands.Textkleur("wit");
                 CommandLine.Genre(Genre_select);
+                string SearchedGenre = CommandLine.Genre(Genre_select);
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("---------------------------------------------------------------------------------------------");
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("We hebben deze film(s) gevonden onder de genre: ");
+                Scherm.Screens.CinemaBanner();
+                ConsoleCommands.Textkleur("wit");
+                Console.Write("\t\t\tWe hebben deze films gevonden onder de genre "); ConsoleCommands.Textkleur("rood"); Console.Write(SearchedGenre); ConsoleCommands.Textkleur("wit"); Console.Write(":\n");
+                Console.WriteLine("---------------------------------------------------------------------------------------------");
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
 
