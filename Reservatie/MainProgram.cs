@@ -12,7 +12,7 @@ using ConsoleTables;
 using Gebruiker;
 using Film;
 using MedewerkerClass;
-using StartScherm;
+using Scherm;
 
 namespace Cinema
 {
@@ -29,7 +29,7 @@ namespace Cinema
         {
             if (kleur == "groen")
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Black;
             }
             else if (kleur == "zwart")
             {
@@ -41,7 +41,7 @@ namespace Cinema
             }
             else if (kleur == "rood")
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
             }
         }
         public void RestartOption()
@@ -105,14 +105,40 @@ namespace Cinema
         public string Stoel_num { get; set; }
 
 
+        public static dynamic JsonSerializer(string Object)
+        {
 
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+
+            // Omzetten
+            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
+            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
+            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
+            
+            if(Object == "Films")
+            {
+                return DynamicFilmData;
+            }
+            else if(Object == "Snacks")
+            {
+                return DynamicData;
+            }
+            else
+            {
+                return DynamicUserData;
+            }
+        }
 
     }
+
+
     public class Program
     {
         static void Main(string[] args)
         {
-            StartScherm.StartScherm.Main();
+            Scherm.Screens.AdminOrUser();
         }
     }
 }
