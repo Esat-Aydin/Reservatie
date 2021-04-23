@@ -30,7 +30,7 @@ namespace Scherm
  | |____| | | | |  __/ | | | | | (_| | | \ \  __/\__ \  __/ |   \ V / (_| | |_| | (_) | | | |
   \_____|_|_| |_|\___|_| |_| |_|\__,_|_|  \_\___||___/\___|_|    \_/ \__,_|\__|_|\___/|_| |_|");
             Console.ForegroundColor = ConsoleColor.Gray;
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("\n_____________________________________________________________________________________________\n");
         }
         public static void MainScreen() {
 
@@ -95,12 +95,11 @@ namespace Scherm
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
             CinemaBanner();
-            Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!\t\t\t\t    |");
-            Console.WriteLine("---------------------------------------------------------------------------------------------\n");
-
+            Console.WriteLine("\t\t\t\tWelkom bij CinemaReservation!\t\t\t\t    ");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om verder te gaan als bezoeker\t\t");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om verder te gaan als bioscoop medewerker\n");
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
 
             var Start_options = Console.ReadLine();
@@ -113,7 +112,7 @@ namespace Scherm
                     ConsoleCommands.Textkleur("rood");
                     Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
                     Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.ForegroundColor = ConsoleColor.Black;
                     isErrorPrinted = true;
                 }
@@ -132,7 +131,7 @@ namespace Scherm
                 Klant.AdminConsole(AdminConsoleChosen);
             }
 
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
 
         public static void VisitorScreen()
@@ -145,12 +144,12 @@ namespace Scherm
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
             CinemaBanner();
-            Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    ");
-            Console.WriteLine("---------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    \n");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
 
-            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken\t\t");
+            Console.Write("\t\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken\t\t");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering beheren\n");
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
 
             var Start_options = Console.ReadLine();
@@ -163,7 +162,7 @@ namespace Scherm
                     ConsoleCommands.Textkleur("rood");
                     Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
                     Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.ForegroundColor = ConsoleColor.Black;
                     isErrorPrinted = true;
                 }
@@ -181,7 +180,7 @@ namespace Scherm
                 Klant.ReserveringBeheren();
             }
 
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
 
         public static void ReserveringOpties()
@@ -194,13 +193,13 @@ namespace Scherm
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.DarkGray;
             CinemaBanner();
-            Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    ");
-            Console.WriteLine("---------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    \n");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
 
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film zoeken\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Films zoeken op Genre \n\n");
-            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle films bekijken \n\n");
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle films bekijken \n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
 
             var Start_options = Console.ReadLine();
@@ -213,7 +212,7 @@ namespace Scherm
                     ConsoleCommands.Textkleur("rood");
                     Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
                     Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.ForegroundColor = ConsoleColor.Black;
                     isErrorPrinted = true;
                 }
@@ -226,7 +225,7 @@ namespace Scherm
 
 
 
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
     }
 }

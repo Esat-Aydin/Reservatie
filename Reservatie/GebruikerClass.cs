@@ -45,9 +45,11 @@ namespace Gebruiker
                 dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
                 dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
                 dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-                Console.Clear();
+                Scherm.Screens.CinemaBanner();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write("Voer hier uw reserverings code in:");
+                Console.Write("\t\t\tVoer hier uw reserverings code in:\n");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Reservatie_code = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit");
@@ -60,7 +62,10 @@ namespace Gebruiker
                     string Res_code = (string)DynamicUserData[i]["Reservatie_code"];
                     if (Res_code == Reservatie_code)
                     {
-                        Console.WriteLine("Uw reservering: ");
+                        Scherm.Screens.CinemaBanner();
+                        Console.WriteLine("\t\tUw reservering: ");
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("-----------------------------------------------------------------");
                         Gebruiker.Reservering_check(DynamicUserData, i);
                         //SnacksOption();
                         break;
@@ -90,13 +95,11 @@ namespace Gebruiker
             if (UserInput == "1")
             {
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("Naar welke film bent u opzoek: ");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                Console.WriteLine("\t\t\tNaar welke film bent u opzoek: ");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string Film_search = Console.ReadLine();
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
                     string Film_zoeken = (string)DynamicFilmData[i]["FilmTitle"];
@@ -105,8 +108,7 @@ namespace Gebruiker
                         Scherm.Screens.CinemaBanner();
                         ConsoleCommands.Textkleur("wit");
                         Console.WriteLine("U heeft gezocht naar de volgende film:");
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("---------------------------------------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("rood");
 
                         FilmObject.Film_check(DynamicFilmData, i);
@@ -120,7 +122,7 @@ namespace Gebruiker
                 List<string> Show_films = new List<string>();
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("\t\t\t\tKies een genre uit\t\t\t\t");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Comedy\n");
@@ -129,21 +131,19 @@ namespace Gebruiker
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drama\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Sci-Fi\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
                 Console.Clear();
                 ConsoleCommands.Textkleur("wit");
                 CommandLine.Genre(Genre_select);
                 string SearchedGenre = CommandLine.Genre(Genre_select);
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Scherm.Screens.CinemaBanner();
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("\t\t\tWe hebben deze films gevonden onder de genre "); ConsoleCommands.Textkleur("rood"); Console.Write(SearchedGenre); ConsoleCommands.Textkleur("wit"); Console.Write(":\n");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
 
@@ -171,8 +171,7 @@ namespace Gebruiker
 
 
                 Console.WriteLine("\nVoor welke van de bovenstaande films zou u willen reserveren?");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string Chosen_film = Console.ReadLine();
 
@@ -183,8 +182,7 @@ namespace Gebruiker
                     if (Chosen_film == (film_showw))
                     {
                         Console.Clear();
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("---------------------------------------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("wit");
 
                         FilmObject.Films(Chosen_film, Show_films);
@@ -193,7 +191,7 @@ namespace Gebruiker
                         string Chosen_date = " ";
                         ConsoleCommands.Textkleur("wit");
                         Console.WriteLine("Voer uw gewenste dag in (Bijvoorbeeld: Maandag): ");
-                        Console.WriteLine("---------------------------------------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("groen");
                         Chosen_date = Console.ReadLine();
                         if (Chosen_date.Length > 10 | Chosen_date.Length < 5)
