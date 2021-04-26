@@ -390,12 +390,10 @@ namespace MedewerkerClass
 
             {
                 Console.Clear();
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("Voer uw admin gebruikersnaam in:");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string input_name = Console.ReadLine();
                 string adminInputName = input_name;
@@ -426,24 +424,20 @@ namespace MedewerkerClass
                 if (StoredName == Naam)
                 {
                     ReturnValue = true;
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("Welkom, " + Naam + ". Voer nu het ingestelde admin wachtwoord in: ");
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("zwart");
                     string input_password = Console.ReadLine();
                     if (input_password == ListofAccountsPasswords[i])
                     {
                         if (ListofAccountsisAdmin[i] == "True")
                         {
-                            ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
-                            ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("zwart");
                             Gebruiker.Gebruiker adminObject = new Gebruiker.Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
                             CommandLine.UserInput = Console.ReadLine();
@@ -453,36 +447,28 @@ namespace MedewerkerClass
 
                     else
                     {
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("-----------------------------------------------------------------");
-                        ConsoleCommands.Textkleur("wit");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("Het ingevoerde wachtwoord is incorrect, probeer het nogmaals: ");
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("zwart");
                         CommandLine.UserInput = Console.ReadLine();
 
                         if (CommandLine.UserInput == ListofAccountsPasswords[i] && ListofAccountsisAdmin[i] == "True")
                         {
-                            ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("wit");
                             Gebruiker.Gebruiker adminObject = new Gebruiker.Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
                             Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
-                            ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("zwart");
                             CommandLine.UserInput = Console.ReadLine();
                             adminObject.UserInputMethod(CommandLine.UserInput);
                         }
                         else
                         {
-                            ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("-----------------------------------------------------------------");
-                            ConsoleCommands.Textkleur("wit");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             Console.WriteLine("Het ingevoerde wachtwoord is incorrect, het programma wordt nu voor u afgesloten. ");
-                            ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("-----------------------------------------------------------------");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("zwart");
                             CommandLine.RestartOption();
                             CommandLine.UserInput = Console.ReadLine();
@@ -492,9 +478,7 @@ namespace MedewerkerClass
             }
             if (ReturnValue == false)
             {
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
-                ConsoleCommands.Textkleur("wit");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.WriteLine("We hebben geen account kunnen vinden met deze naam: " + Naam);
                 ConsoleCommands.Textkleur("zwart");
                 CommandLine.RestartOption(); // Dit sluit het programma af na twee verkeerde password inputs.

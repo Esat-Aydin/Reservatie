@@ -43,8 +43,7 @@ namespace Reservation
             Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             var Reservatie_code = Console.ReadLine();
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
 
             ConsoleCommands.Textkleur("wit");
@@ -55,8 +54,7 @@ namespace Reservation
                 {
                     Scherm.Screens.CinemaBanner();
                     Console.WriteLine("\t\tUw reservering: ");
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Reservering_check(DynamicUserData, i);
                     //SnacksOption();
                     break;
@@ -73,8 +71,7 @@ namespace Reservation
         }
         public void ReservationCodePercentage()
         {
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("rood");
             for (int i = 0; i <= 100; i++)
             {
@@ -83,8 +80,7 @@ namespace Reservation
 
             }
             Console.WriteLine("");
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
         }
         public void ReserveringMaken(string UserInput)
@@ -241,8 +237,7 @@ namespace Reservation
                     }
                 }
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 int choice = Int32.Parse(Console.ReadLine());
                 ConsoleCommands.Textkleur("wit");
@@ -268,12 +263,10 @@ namespace Reservation
         {
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("rood");
             Console.Write("Naam: ");
             ConsoleCommands.Textkleur("blauw");
@@ -287,8 +280,7 @@ namespace Reservation
             Klant.Email = Naam_email;
             Klant.Film = Gezochte_Film;
             Klant.Film_Time = Show_Tijden;
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("groen");
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
@@ -307,8 +299,7 @@ namespace Reservation
             Console.WriteLine("Zou u een bevestiging in uw mail willen ontvangen?");
             Console.WriteLine("Toets [JA] als u een mail-bevestinging wilt ontvangen of toets [NEE] als u geen mail-bevestiging .");
             // Email bevestiging.
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-------------------------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("blauw");
             string Mail_Bevestiging = Console.ReadLine();
 
@@ -344,24 +335,21 @@ Reservatie code: " + GeneratedCode
                         // verzenden email
                         client.Send(message);
                         client.Disconnect(true);
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("-------------------------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("groen");
                         Console.WriteLine("De bevestiging is verstuurd per Email.");
                     };
                 }
                 catch
                 {
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("-------------------------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("groen");
                     Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
                 }
             }
             else if (Mail_Bevestiging == "NEE")
             {
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-------------------------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("groen");
                 Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
             }
@@ -400,12 +388,14 @@ Reservatie code: " + GeneratedCode
         public static void Reservering_check(dynamic dynamicUserData, int i)
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.WriteLine("Naam: " + dynamicUserData[i]["Naam"]);
             Console.WriteLine("Email: " + dynamicUserData[i]["Email"]);
             Console.WriteLine("Reservatie code: " + dynamicUserData[i]["Reservatie_code"]);
             Console.WriteLine("Film: " + dynamicUserData[i]["Film"]);
             Console.WriteLine("Zaal: " + dynamicUserData[i]["Zaal"]);
             Console.WriteLine("Stoel nummer: " + dynamicUserData[i]["Stoel_num"]);
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             CommandLine.RestartOption();
 
 

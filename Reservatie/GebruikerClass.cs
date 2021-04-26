@@ -409,12 +409,10 @@ namespace Gebruiker
         }
         public void ZoekOptie(string Gezochte_Film, dynamic DynamicMyFilmsData)
         {
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("groen");
             Console.WriteLine("Voor welke van de onderstaande dagen zou u " + Gezochte_Film + " willen reserveren?");
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("rood");
             List<string> Legelist = new List<string>();
             List<string> DagenvdWeek = new List<string>();
@@ -475,15 +473,12 @@ namespace Gebruiker
             }
             ConsoleCommands.Textkleur("wit");
             table.Write(Format.Alternative);
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.WriteLine("Voor welke van de bovenstaande dagen zou u willen reserveren?");
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("rood");
             string DagenKeuze = Console.ReadLine();
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             if (DagenKeuze == "1")
             {
 
@@ -499,29 +494,29 @@ namespace Gebruiker
                 {
                     ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("U heeft gekozen voor Maandag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
@@ -540,29 +535,29 @@ namespace Gebruiker
                 else
                 {
                     Console.WriteLine("U heeft gekozen voor Dinsdag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
@@ -581,29 +576,29 @@ namespace Gebruiker
                 else
                 {
                     Console.WriteLine("U heeft gekozen voor Woensdag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
@@ -622,29 +617,29 @@ namespace Gebruiker
                 else
                 {
                     Console.WriteLine("U heeft gekozen voor Donderdag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
@@ -663,29 +658,29 @@ namespace Gebruiker
                 else
                 {
                     Console.WriteLine("U heeft gekozen voor Vrijdag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
@@ -704,15 +699,15 @@ namespace Gebruiker
                 else
                 {
                     Console.WriteLine("U heeft gekozen voor Zaterdag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
@@ -720,14 +715,14 @@ namespace Gebruiker
                     }
                     if (tijdslot == "2")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
@@ -746,29 +741,29 @@ namespace Gebruiker
                 else
                 {
                     Console.WriteLine("U heeft gekozen voor Zondag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
-                    Console.WriteLine("-----------------------------------------------------------------");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("rood");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0]);
                     }
                     if (tijdslot == "2")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
                     }
                     if (tijdslot == "3")
                     {
-                        Console.WriteLine("-----------------------------------------------------------------");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1]);
@@ -782,11 +777,9 @@ namespace Gebruiker
         }
         public static void DagKeuze()
         {
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             string DagenKeuze = Console.ReadLine();
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             if (DagenKeuze == "1")
             {
                 //Maandag
@@ -835,26 +828,22 @@ namespace Gebruiker
 
 
             //Eventuele snacks tijdens het reserveren
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
             Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
             Console.WriteLine("Toets 'JA' als u online snacks wilt bestellen, toets 'NEE' als u dit niet wilt.");
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Online_snacks = Console.ReadLine();
             string Online_snacks_secondchange = null;
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
             if (Online_snacks == "NEE")
             {
                 Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
                 Console.WriteLine("Weet u het zeker? Toets [JA] om door te gaan en [NEE] om het overzicht te bekijken met de snacks.");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 Online_snacks_secondchange = Console.ReadLine();
                 Console.Clear();
