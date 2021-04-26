@@ -65,11 +65,27 @@ namespace Reservation
 
 
         }
+        public void ReservationCodePercentage()
+        {
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+            ConsoleCommands.Textkleur("rood");
+            for (int i = 0; i <= 100; i++)
+            {
+                Console.Write($"\rProgress: {i}%   ");
+                Thread.Sleep(25);
+
+            }
+            Console.WriteLine("");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("-------------------------------------------------------------------------------\n");
+
+        }
         public void ReserveringMaken(string UserInput)
         {
             Film.Film FilmObject = new();
             MedewerkerClass.Medewerker admin = new();
-            Gebruiker Klant = new();
+            Gebruiker.Gebruiker Klant = new();
             ConsoleCommands CommandLine = new();
             // Inladen Json Module 
             dynamic DynamicData = JsonData.JsonSerializer("Snacks");
@@ -260,8 +276,9 @@ namespace Reservation
             ConsoleCommands.Textkleur("zwart");
             string Naam_email = Console.ReadLine();
             // Eventuele betaal methode?
-            this.Naam = Naam_klant;
-            this.Email = Naam_email;
+            Gebruiker.Gebruiker Klant = new();
+            Klant.Naam = Naam_klant;
+            Klant.Email = Naam_email;
 
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("-------------------------------------------------------------------------------");
@@ -270,7 +287,7 @@ namespace Reservation
             Console.WriteLine("Bedankt voor het reserveren!");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
             Thread.Sleep(1000);
-            ShowSimplePercentage();
+            ReservationCodePercentage();
             string GeneratedCode = this.ReserveringsCodeGenerator();
             // Random generator voor het maken van de reservatie code.
 
@@ -297,13 +314,13 @@ namespace Reservation
                     // Email verzender
                     message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
                     // Email geadresseerde
-                    message.To.Add(new MailboxAddress(this.Naam, this.Email));
+                    message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
                     // Email onderwerp
                     message.Subject = "Bevestiging online reservatie.";
                     // Email text
                     message.Body = new TextPart("plain")
                     {
-                        Text = @"Hallo " + this.Naam + @",
+                        Text = @"Hallo " + Klant.Naam + @",
 Bedankt voor het reserveren via onze bioscoop.
 Hieronder vindt u de reservatie code.
 Reservatie code: " + GeneratedCode
@@ -347,7 +364,7 @@ Reservatie code: " + GeneratedCode
             }
             Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
             ConsoleCommands CommandLine = new ConsoleCommands();
-            this.SnacksOption();
+            Klant.SnacksOption();
 
             // Data Reservering toevoegen.
             List<JsonData> _data = new List<JsonData>();
@@ -358,8 +375,8 @@ Reservatie code: " + GeneratedCode
             JsonData.Add(new JsonData()
             {
                 Reservatie_code = GeneratedCode,
-                Naam = this.Naam,
-                Email = this.Email,
+                Naam = Klant.Naam,
+                Email = Klant.Email,
                 //Film =
                 //Zaal =
                 //Stoel_num =

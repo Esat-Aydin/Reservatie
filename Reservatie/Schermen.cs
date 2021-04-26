@@ -85,7 +85,7 @@ namespace Scherm
 
 
         }
-        public static void AdminOrUser()
+        public static void AdminOrUserScreen()
         {
             // Objects
             Film.Film FilmObject = new Film.Film();
@@ -171,7 +171,7 @@ namespace Scherm
             }
             if (Start_options == "1")
             {
-                ReserveringOpties();
+                ReserveringScreen();
             }
             else if (Start_options == "2")
             {
@@ -181,7 +181,7 @@ namespace Scherm
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
 
-        public static void ReserveringOpties()
+        public static void ReserveringScreen()
         {
             // Objects
             Film.Film FilmObject = new Film.Film();

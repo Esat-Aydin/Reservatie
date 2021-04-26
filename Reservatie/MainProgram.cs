@@ -139,7 +139,7 @@ namespace Cinema
     {
         static void Main(string[] args)
         {
-            Scherm.Screens.AdminOrUser();
+            Scherm.Screens.AdminOrUserScreen();
         }
     }
 }
