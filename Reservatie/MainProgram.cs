@@ -102,6 +102,8 @@ namespace Cinema
         public string Email { get; set; }
         public string Reservatie_code { get; set; }
         public string Film { get; set; }
+        public string Film_Day { get; set; }
+        public string FilmTime { get; set; }
         public string Zaal { get; set; }
         public string Stoel_num { get; set; }
 

@@ -19,6 +19,7 @@ namespace Film
         public string[] FilmGenres { get; set; }
         public string FilmTitle { get; set; }
         public int FilmRoom { get; set; }
+
         public string[] FilmTimes { get; set; }
         public Dictionary<string, List<string>> FilmDays { get; set; }
 
