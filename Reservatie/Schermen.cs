@@ -128,7 +128,7 @@ namespace Scherm
             else
             {
                 bool AdminConsoleChosen = true;
-                Klant.AdminConsole(AdminConsoleChosen);
+                admin.AdminConsole(AdminConsoleChosen);
             }
 
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");

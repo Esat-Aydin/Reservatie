@@ -28,7 +28,7 @@ namespace MedewerkerClass
         }
 
 
-        public void UserInputMethod(string UserInput)
+        new public void UserInputMethod(string UserInput)
         {
 
             Film.Film FilmObject = new Film.Film();
