@@ -1,4 +1,4 @@
-﻿namespace EASendMail
+namespace EASendMail
 {
     internal class SmtpMail
     {
