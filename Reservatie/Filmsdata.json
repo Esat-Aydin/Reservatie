@@ -1,17 +1,131 @@
 [
   {
-    "FilmGenres": [ "Action", "Comedy", "Horror" ],
+    "FilmGenres": [ "Action", "", "" ],
     "FilmTitle": "John Wick",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
-    "FilmDays": {
-      "Maandag": [],
-      "Dinsdag": [],
-      "Woensdag": [],
-      "Donderdag": [],
-      "Vrijdag": [ "16:00", "19:00", "23:30" ],
-      "Zaterdag": [ "16:00", "19:00", "23:30" ],
-      "Zondag": [ "16:00", "19:00", "23:30" ]
-    }
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+	"FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":[]}
+	
+  },
+  {
+    "FilmGenres": [ "Comedy", "Action", "" ],
+    "FilmTitle": "Norbit",
+    "FilmRoom": 2,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays1":{
+ 	"Maandag":["17:25", "20:00", "22:10" ],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:30", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":["19:00", "20:00", "22:00"],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "17:30", "23:30"],"Zondag":[]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Thriller", "", "" ],
+    "FilmTitle": "The Joker",
+    "FilmRoom": 3,
+    "FilmTimes": [ "17:00", "22:00", "00:00" ],
+    "FilmDays1":{
+ 	"Maandag":["17:00", "22:00", "00:00"],"Dinsdag":["17:00", "22:00", "00:00"],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["17:00", "22:00", "00:00"]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Romantic", "", "" ],
+    "FilmTitle": "Fifty Shades of Grey",
+    "FilmRoom": 2,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":[]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Family", "", "" ],
+    "FilmTitle": "Home Alone",
+    "FilmRoom": 1,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":[]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Drama", "Action", "Thriller" ],
+    "FilmTitle": "Inception",
+    "FilmRoom": 3,
+    "FilmTimes": [ "01:00", "20:00", "22:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":[],"Zondag":[]}
+  }
+,
+  {
+    "FilmGenres": [ "Sci-Fi", "Action", "Thriller" ],
+    "FilmTitle": "Venom",
+    "FilmRoom": 3,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":[]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Sci-Fi", "Drama", "" ],
+    "FilmTitle": "Interstellar",
+    "FilmRoom": 1,
+    "FilmTimes": [ "15:00", "18:00", "23:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":[]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Comedy", "Drama", "" ],
+    "FilmTitle": "The wolf of wall street",
+    "FilmRoom": 3,
+    "FilmTimes": [ "19:00", "21:00", "23:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":[]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Action", "Drama", "" ],
+    "FilmTitle": "Django Unchained",
+    "FilmRoom": 2,
+    "FilmTimes": [ "18:00", "20:00", "22:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":["20:00", "22:00", "23:45"],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":[],"Zondag":[]}
+
+  }
+,
+  {
+    "FilmGenres": [ "Drama", "", "" ],
+    "FilmTitle": "Godfather",
+    "FilmRoom": 3,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays1":{
+ 	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":["16:00", "19:00", "23:30"]},
+    "FilmDays2":{
+	"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00", "19:00", "23:30"],"Zaterdag":["16:00", "19:00", "23:30"],"Zondag":[]}
+
   }
 ]

@@ -28,9 +28,9 @@ namespace Reservation
         {
 
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -121,93 +121,8 @@ namespace Reservation
             }
             else if (UserInput == "2")
             {
-                Scherm.Screens.CinemaBanner();
-                List<string> Show_films = new List<string>();
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\t\t\tKies een genre uit\t\t\t\t");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit");
-                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
-                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Comedy\n");
-                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Thriller\n");
-                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Romantiek\n");
-                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drama\n");
-                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Sci-Fi\n");
-                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                var Genre_select = Console.ReadLine();
-                Console.Clear();
-                ConsoleCommands.Textkleur("wit");
-                CommandLine.Genre(Genre_select);
-                string SearchedGenre = CommandLine.Genre(Genre_select);
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit");
-                Scherm.Screens.CinemaBanner();
-                ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\tWe hebben deze films gevonden onder de genre "); ConsoleCommands.Textkleur("rood"); Console.Write(SearchedGenre); ConsoleCommands.Textkleur("wit"); Console.Write(":\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                for (int i = 0; i < DynamicFilmData.Count; i++)
-                {
-
-                    for (int j = 0; j < DynamicFilmData[i]["FilmGenres"].Count; j++)
-                    {
-                        string Genre_zoeken = (string)DynamicFilmData[i]["FilmGenres"][j];
-
-                        if (CommandLine.Genre_search == Genre_zoeken)
-                        {
-
-                            Show_films.Add(DynamicFilmData[i]["FilmTitle"].ToString());
-
-
-                        }
-                    }
-
-                }
-                int count = 1;
-                for (int y = 0; y < Show_films.Count; y++)
-                {
-
-                    Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write((count)); ConsoleCommands.Textkleur("wit"); Console.Write("] voor: " + Show_films[y] + "\n");
-                    count++;
-                }
-
-
-                Console.WriteLine("\nVoor welke van de bovenstaande films zou u willen reserveren?");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                string Chosen_film = Console.ReadLine();
-
-
-                for (int i = 0; i < Show_films.Count + 1; i++)
-                {
-                    string film_showw = i.ToString();
-                    if (Chosen_film == (film_showw))
-                    {
-                        Scherm.Screens.CinemaBanner();
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        ConsoleCommands.Textkleur("wit");
-
-                        FilmObject.Films(Chosen_film, Show_films);
-                        ConsoleCommands.Textkleur("wit");
-                        Console.Write("\nU heeft gekozen voor: "); ConsoleCommands.Textkleur("rood"); Console.Write(Chosen_film + "\n\n");
-                        string Chosen_date = " ";
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("Voer uw gewenste dag in (Bijvoorbeeld: Maandag): ");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        ConsoleCommands.Textkleur("groen");
-                        Chosen_date = Console.ReadLine();
-                        if (Chosen_date.Length > 10 | Chosen_date.Length < 5)
-                        {
-                            Console.WriteLine("Ongeldige datum.");
-                        }
-                        //else { ReserveerCodeMail(); }
-
-                    }
-                }
-
-
-
+                Gebruiker.Gebruiker Klant1 = new();
+                Klant1.DagKeuze();
             }
 
             else if (UserInput == "3")
