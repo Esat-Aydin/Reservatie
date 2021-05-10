@@ -45,7 +45,7 @@ namespace Cinema
             List<string> DagenvdWeek = new List<string>();
             List<string> Show_Tijden = new List<string>();
             List<string> Show_films = new List<string>();
-            var table = new ConsoleTable("Dagen van de week", "Draaitijd");
+            var table = new ConsoleTable("Dagen van de week", "Draaitiaaaaaaaaajd");
             ConsoleCommands CommandLine = new ConsoleCommands();
             DagenvdWeek.Add("Maandag");
             DagenvdWeek.Add("Dinsdag");
@@ -129,7 +129,7 @@ namespace Cinema
 
                     if (k == chosen_film_int - 1)
                     {
-                        Console.WriteLine("first if statement");
+                        Console.WriteLine("first ifaaaaaaaaaaaaaa statement");
 
 
                         if (DynamicMyFilmsData[k]["FilmDays"][DagenvdWeek[j]].Count > 0)
@@ -2244,142 +2244,7 @@ Reservatie code: " + GeneratedCode
 
 
 
-            void GenreOptie()
-            {
-                var MyFilmsData = new WebClient().DownloadString("Filmsdata.json");
-                dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
 
-                List<string> Legelist = new List<string>();
-                List<string> DagenvdWeek = new List<string>();
-                List<string> Show_Tijden = new List<string>();
-                List<string> Show_films = new List<string>();
-                var table = new ConsoleTable("Dagen van de week", "Draaitijd");
-                DagenvdWeek.Add("Maandag");
-                DagenvdWeek.Add("Dinsdag");
-                DagenvdWeek.Add("Woensdag");
-                DagenvdWeek.Add("Donderdag");
-                DagenvdWeek.Add("Vrijdag");
-                DagenvdWeek.Add("Zaterdag");
-                DagenvdWeek.Add("Zondag");
-                ConsoleCommands.Textkleur("groen");
-                Console.WriteLine("Op welke genre wilt u zoeken: ");
-                ConsoleCommands.Textkleur("groen");
-                Console.WriteLine("Toets [1] voor Action.\nToets [2] voor Comedy.\nToets [3] voor Thriller.\nToets [4] voor Romantiek.\nToets [5] voor Drama.\nToets [6] voor Sci-Fi.\nToets [7] voor Familie films. ");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
-                ConsoleCommands.Textkleur("blauw");
-                var Genre_select = Console.ReadLine();
-                ConsoleCommands.Textkleur("groen");
-                CommandLine.Genre(Genre_select);
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
-                ConsoleCommands.Textkleur("groen");
-                Console.WriteLine("We hebben deze film(s) gevonden onder de genre: ");
-                for (int i = 0; i < DynamicFilmData.Count; i++)
-                {
-
-                    for (int j = 0; j < DynamicFilmData[i]["FilmGenres"].Count; j++)
-                    {
-                        string Genre_zoeken = (string)DynamicFilmData[i]["FilmGenres"][j];
-
-                        if (CommandLine.Genre_search == Genre_zoeken)
-                        {
-
-                            Show_films.Add(DynamicFilmData[i]["FilmTitle"].ToString());
-
-
-                        }
-                    }
-
-                }
-                int count = 1;
-                for (int y = 0; y < Show_films.Count; y++)
-                {
-
-                    Console.WriteLine("Toets [" + (count) + "] voor: " + Show_films[y]);
-                    count++;
-                }
-
-
-                Console.WriteLine("Voor welke van de bovenstaande films zou u willen reserveren?");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
-                ConsoleCommands.Textkleur("blauw");
-                string Chosen_film = Console.ReadLine();
-                int chosen_film_int = Int32.Parse(Chosen_film);
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("U heeft gekozen voor voor: " + Show_films[chosen_film_int]);
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("-----------------------------------------------------------------");
-                ConsoleCommands.Textkleur("groen");
-                MyFilmsData = new WebClient().DownloadString("Filmsdata.json");
-
-                DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-
-
-                ConsoleCommands.Textkleur("groen");
-
-
-
-                int Count = 1;
-
-                MyFilmsData = new WebClient().DownloadString("Filmsdata.json");
-
-                dynamic DynamicMyFilmsData = JsonConvert.DeserializeObject(MyFilmsData);
-                for (int k = 0; k < DynamicMyFilmsData.Count; k++)
-                {
-
-
-                    for (int j = 0; j < DagenvdWeek.Count; j++)
-                    {
-
-
-                        if (k == chosen_film_int - 1)
-                        {
-                            Console.WriteLine("first if statement");
-
-
-                            if (DynamicMyFilmsData[k]["FilmDays"][DagenvdWeek[j]].Count > 0)
-                            {
-
-
-                                Console.WriteLine("for 1");
-                                for (int x = 0; x < DynamicMyFilmsData[k]["FilmDays"][DagenvdWeek[j]].Count; x++)
-                                {
-
-                                    Show_Tijden.Add(DynamicMyFilmsData[k]["FilmDays"][DagenvdWeek[j]][x].ToString());
-
-
-
-                                }
-                                string Times = Show_Tijden[0] + ", " + Show_Tijden[1] + ", " + Show_Tijden[2];
-                                //Count++;
-                                table.AddRow(("Toets [" + (Count++) + "] voor " + DagenvdWeek[j]), Times);
-                                //Count++;
-
-                            }
-                            else if (DynamicMyFilmsData[k]["FilmDays"][DagenvdWeek[j]].Count <= 0)
-                            {
-                                Console.WriteLine("for 2");
-                                for (int x = 0; x <= DynamicMyFilmsData[k]["FilmDays"][DagenvdWeek[j]].Count; x++)
-                                {
-
-                                    table.AddRow("Toets [" + (Count++) + "] voor " + (DagenvdWeek[j]) + ": ", "Deze film draait niet op " + DagenvdWeek[j] + ".");
-
-                                    //Count++;
-
-                                }
-
-                            }
-
-
-                        }
-
-
-
-                    }
-                }
-            }
 
         }
     }
