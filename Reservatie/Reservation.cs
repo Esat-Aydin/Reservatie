@@ -244,7 +244,8 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
 
-                var stoelen = new StoelKeuze("John wick","10-5-2021","11:00" );
+                //var stoelen = new StoelKeuze(All_Films[choice-1],"10-5-2021","11:00");
+                var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
                 stoelen.Chair();
             }
 

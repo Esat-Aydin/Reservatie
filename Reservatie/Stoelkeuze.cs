@@ -68,10 +68,10 @@ namespace Chair
 
         public void Chair()
         {
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\SampleLog.json");
+            string myRoomData = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\seats (2).json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
@@ -88,7 +88,7 @@ namespace Chair
             }
             for (int i = 0; i < DynamicUserData.Count; i++)
             {
-                if (DynamicUserData[i]["Film"] == this.FilmNaam && DynamicUserData[i]["Date"] == this.Datum)
+                if (DynamicUserData[i]["Film"] == this.FilmNaam && DynamicUserData[i]["Datum"] == this.Datum)
                 {
                     for (int j = 0; j < DynamicUserData[i]["Stoel_num"].Count; j++)
                     {
@@ -127,16 +127,38 @@ namespace Chair
                     }
                 }
             }
-            // Table needs to be somewhat dynamic
-            console(room, Alphabet, DynamicRoomData, AllData);
+            
             Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
+            ConsoleCommands.Textkleur("zwart");
             int stoelen = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Type nu elke stoel en gevolgd door ENTER.");
+            // Table needs to be somewhat dynamic
+            ConsoleCommands.Textkleur("wit");
+            console(room, Alphabet, DynamicRoomData, AllData);
+            Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
+            ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
+            /* reserveren van stoelen
+             * kijken of een gegeven stoel niet al gereserveerd is.
+             *  - loopen door alle gereserveerde stoelen
+             *  - deze informatie vergelijken met de input
+             * kijken of een gegeven stoel het juiste formaat heeft 1A of A1
+             *  - controlleren of er 1 numeric
+             *  - controlleren of de andere dan in het alphabet zit/charater to int!!!!!!!!!
+             */
             for (int i = 0; i < stoelen; i++)
             {
                 newChairs.Add(Console.ReadLine());
+                for(int j = 0; j < chairs.Count; j++)
+                {
+                    if (chairs[j] == newChairs[i])
+                    {
+                        Console.WriteLine("Deze stoelen zijn al gereservereerd");
+                        newChairs[i] = null;
+                        i--;
+                    }
+                }
             }
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("U heeft de volgende stoelen gekozen. Type 'JA' als dit klopt.");
             for (int i = 0; i < stoelen; i++)
             {

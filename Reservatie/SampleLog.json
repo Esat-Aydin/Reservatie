@@ -3,9 +3,11 @@
     "Naam": "Joost",
     "Email": "JoostvDb@msn.nl",
     "Reservatie_code": "128HDZC0K4OLUSHJ",
-    "Film": null,
+    "Film": "John Wick",
     "Zaal": "1",
-    "Stoel_num": null
+    "Stoel_num": [ "1A", "2A" ],
+    "Datum": "10-5-2021",
+    "Tijd": "11:00"
   },
   {
     "Naam": "Jan",
