@@ -25,7 +25,10 @@ namespace ShoppingCart
 
             ConsoleCommands CommandLine = new ConsoleCommands();
             //Json file met alle snacks.
-            Console.WriteLine("Toets [1] om de lijst met snacks te bekijken\nToets [2] om de lijst met dranken te bekijken.");
+            Scherm.Screens.CinemaBanner();
+            ConsoleCommands.Textkleur("wit");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] om een lijst van snacks te zien"); Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om een lijst van dranken te zien\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string SnackorDrinks = Console.ReadLine();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
