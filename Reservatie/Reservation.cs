@@ -121,8 +121,23 @@ namespace Reservation
             }
             else if (UserInput == "2")
             {
-                Gebruiker.Gebruiker Klant1 = new();
-                Klant1.DagKeuze();
+                //var MyFilmsData = new WebClient().DownloadString("Filmsdata.json");
+                ////dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
+                //ConsoleCommands.Textkleur("groen");
+                //Console.WriteLine("Op welke genre wilt u zoeken: ");
+                //ConsoleCommands.Textkleur("groen");
+                //Console.WriteLine("Toets [1] voor Action.\nToets [2] voor Comedy.\nToets [3] voor Thriller.\nToets [4] voor Romantiek.\nToets [5] voor Drama.\nToets [6] voor Sci-Fi.\nToets [7] voor Familie films. ");
+                //ConsoleCommands.Textkleur("wit");
+                //Console.WriteLine("-----------------------------------------------------------------");
+                //ConsoleCommands.Textkleur("blauw");
+                //var Genre_select = Console.ReadLine();
+                //ConsoleCommands.Textkleur("groen");
+                //CommandLine.Genre(Genre_select);
+                //ConsoleCommands.Textkleur("wit");
+                //Console.WriteLine("-----------------------------------------------------------------");
+                //ConsoleCommands.Textkleur("groen");
+                //Console.WriteLine("We hebben deze film(s) gevonden onder de genre: ");
+                Klant.DagKeuze();//(Genre_select, DynamicFilmData);
             }
 
             else if (UserInput == "3")
