@@ -488,7 +488,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    //ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
                 }
                 else
                 {
@@ -601,6 +601,7 @@ namespace Gebruiker
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
                         SnacksOption();
+
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2]);
                     }
                 }

@@ -1,7 +1,7 @@
 [
   {
     "FilmGenres": [ "Action", "", "" ],
-    "FilmTitle": "John Wick",
+    "FilmTitle": "John wick",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
     "FilmDays": {
@@ -31,7 +31,7 @@
   },
   {
     "FilmGenres": [ "Thriller", "", "" ],
-    "FilmTitle": "The Joker",
+    "FilmTitle": "The joker",
     "FilmRoom": 3,
     "FilmTimes": [ "17:00", "22:00", "00:00" ],
     "FilmDays": {
@@ -46,14 +46,14 @@
   },
   {
     "FilmGenres": [ "Romantic", "", "" ],
-    "FilmTitle": "Fifty Shades of Grey",
+    "FilmTitle": "Fifty shades of grey",
     "FilmRoom": 2,
     "FilmTimes": [ "15:00", "19:00", "22:00" ],
     "FilmDays":{"Maandag":["15:00", "19:00", "22:00"],"Dinsdag":["15:00", "19:00", "22:00"],"Woensdag":[],"Donderdag":[],"Vrijdag":[],"Zaterdag":[],"Zondag":[]}
   },
   {
     "FilmGenres": [ "Family", "", "" ],
-    "FilmTitle": "Home Alone",
+    "FilmTitle": "Home alone",
     "FilmRoom": 1,
     "FilmTimes": [ "15:00", "19:00", "22:00" ],
     "FilmDays":{"Maandag":[],"Dinsdag":[ "15:00", "19:00", "22:00" ],"Woensdag":[ "15:00", "19:00", "22:00" ],"Donderdag":[ "15:00", "19:00", "22:00" ],"Vrijdag":[],"Zaterdag":[],"Zondag":[]}
@@ -88,7 +88,7 @@
   },
   {
     "FilmGenres": [ "Action", "Drama", "" ],
-    "FilmTitle": "Django Unchained",
+    "FilmTitle": "Django unchained",
     "FilmRoom": 2,
     "FilmTimes": [ "18:00", "20:00", "22:00" ],
     "FilmDays":{"Maandag":[],"Dinsdag":[ "18:00", "20:00", "22:00" ],"Woensdag":[ "18:00", "20:00", "22:00" ],"Donderdag":[],"Vrijdag":[],"Zaterdag":[],"Zondag":[]}
