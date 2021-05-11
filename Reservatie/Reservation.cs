@@ -291,19 +291,19 @@ namespace Reservation
             // Random generator voor het maken van de reservatie code.
 
 
-            ConsoleCommands.Textkleur("groen");
+            ConsoleCommands.Textkleur("wit");
             Console.Write("Reserverings code: ");
             ConsoleCommands.Textkleur("rood");
             Console.WriteLine(GeneratedCode);
-            ConsoleCommands.Textkleur("groen");
-            Console.WriteLine("Zou u een bevestiging in uw mail willen ontvangen?");
-            Console.WriteLine("Toets [JA] als u een mail-bevestinging wilt ontvangen of toets [NEE] als u geen mail-bevestiging .");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("Zou u een bevestiging in uw mail willen ontvangen?\n");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit");Console.Write("] als u een mail-bevestinging wilt ontvangen"); Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart");Console.Write("2");ConsoleCommands.Textkleur("wit");Console.Write("] als u geen bevestiging wilt ontvangen\n");
             // Email bevestiging.
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("blauw");
             string Mail_Bevestiging = Console.ReadLine();
 
-            if (Mail_Bevestiging == "JA")
+            if (Mail_Bevestiging == "1")
             {
 
                 try
@@ -347,7 +347,7 @@ Reservatie code: " + GeneratedCode
                     Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
                 }
             }
-            else if (Mail_Bevestiging == "NEE")
+            else if (Mail_Bevestiging == "2")
             {
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("groen");
