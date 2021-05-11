@@ -14,6 +14,7 @@ using Film;
 using Scherm;
 using Reservation;
 using Gebruiker;
+using Chair;
 
 namespace Reservation
 {
@@ -243,7 +244,10 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
 
+                var stoelen = new StoelKeuze("John wick","10-5-2021","11:00" );
+                stoelen.Chair();
             }
+
         }
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
