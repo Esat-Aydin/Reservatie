@@ -833,17 +833,18 @@ namespace Gebruiker
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
             Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
-            Console.WriteLine("Toets 'JA' als u online snacks wilt bestellen, toets 'NEE' als u dit niet wilt.");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] als u nu snacks wilt bestellen"); Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] als u nu geen snacks wilt bestellen\n");
+
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Online_snacks = Console.ReadLine();
             string Online_snacks_secondchange = null;
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
-            if (Online_snacks == "NEE")
+            if (Online_snacks == "2")
             {
                 Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
-                Console.WriteLine("Weet u het zeker? Toets [JA] om door te gaan en [NEE] om het overzicht te bekijken met de snacks.");
+                Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] om door te gaan"); Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om alsnog snacks te bestellen\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 Online_snacks_secondchange = Console.ReadLine();
@@ -851,7 +852,7 @@ namespace Gebruiker
                 Snacks();
 
             }
-            else if (Online_snacks == "JA" || Online_snacks_secondchange == "NEE")
+            else if (Online_snacks == "1" || Online_snacks_secondchange == "2")
             {
 
 
@@ -860,7 +861,7 @@ namespace Gebruiker
 
 
             }
-            else if (Online_snacks != "NEE" && Online_snacks != "JA")
+            else if (Online_snacks != "2" && Online_snacks != "1")
             {
                 Console.WriteLine("U heeft de verkeerde input gegeven.");
                 Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");

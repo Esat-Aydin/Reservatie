@@ -75,5 +75,75 @@
     "FilmRoom": 3,
     "FilmTimes": [ "15:00", "19:00", "22:00" ]
     "FilmDays":{"Maandag":["15:00", "19:00", "22:00"],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":[],"Zaterdag":["15:00", "19:00", "22:00"],"Zondag":["15:00", "19:00", "22:00"]}
+    "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "16:00", "19:00", "23:30" ],
+      "Zaterdag": [ "16:00", "19:00", "23:30" ],
+      "Zondag": [ "16:00", "19:00", "23:30" ]
+    }
+  },
+  {
+    "FilmGenres": [ "Action", "Comedy", "Horror" ],
+    "FilmTitle": "John Wick 2",
+    "FilmRoom": 1,
+    "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "16:00", "19:00", "23:30" ],
+      "Zaterdag": [ "16:00", "19:00", "23:30" ],
+      "Zondag": [ "16:00", "19:00", "23:30" ]
+    }
+  },
+    {
+      "FilmGenres": [ "Action", "Comedy" ],
+      "FilmTitle": "Bad Boys For Life",
+      "FilmRoom": 1,
+      "FilmTimes": [ "16:00", "19:00", "23:30" ],
+      "FilmDays": {
+        "Maandag": [],
+        "Dinsdag": [],
+        "Woensdag": [],
+        "Donderdag": [],
+        "Vrijdag": [ "16:00", "19:00", "23:30" ],
+        "Zaterdag": [ "16:00", "19:00", "23:30" ],
+        "Zondag": [ "16:00", "19:00", "23:30" ]
+      }
+    },
+  {
+    "FilmGenres": [ "Thriller", "Horror" ],
+    "FilmTitle": "The Exorcism",
+    "FilmRoom": 1,
+    "FilmTimes": [ "18:00", "20:30", "23:30" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "18:00", "20:00", "23:30" ],
+      "Zaterdag": [ "18:30", "20:40", "23:30" ],
+      "Zondag": [ "18:00", "20:30", "23:30" ]
+    }
+  },
+  {
+    "FilmGenres": [ "Comedy" ],
+    "FilmTitle": "Coming 2 America",
+    "FilmRoom": 1,
+    "FilmTimes": [ "18:00", "20:30", "23:30" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "18:00", "20:00", "23:30" ],
+      "Zaterdag": [ "18:30", "20:40", "23:30" ],
+      "Zondag": [ "18:00", "20:30", "23:30" ]
+    }
   }
 ]
