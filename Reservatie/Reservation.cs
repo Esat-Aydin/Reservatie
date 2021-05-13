@@ -338,7 +338,7 @@ namespace Reservation
             Scherm.Screens.CinemaBanner();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("groen");
-            Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en emailadres van u nodig.");
+            Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en Email adres nodig.");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("rood");
             Console.Write("Naam: ");
@@ -371,114 +371,20 @@ namespace Reservation
             Console.WriteLine(GeneratedCode);
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine($"\nEr is een bevestigingsmail verzonden naar {Klant.Email}\n");
-            try
-            {
-                var message = new MimeMessage();
-                // Email verzender
-                message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
-                // Email geadresseerde
-                message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
-                // Email onderwerp
-                message.Subject = $"Bevestiging Bioscoop Reservering {Klant.Film}";
-                // Email text
-                message.Body = new TextPart("plain")
-                {
-                    Text = @"Hallo " + Klant.Naam + @",
-Bedankt voor het reserveren via onze bioscoop.
-Hieronder vindt u de reserverings code.
-
-Reserverings code: " + GeneratedCode +
-"Film " + Klant.Film +
-"Tijd " + Klant.Film_Time + 
-"\n " + 
-"\nWe hopen u snel te zien in de bioscoop!" +
-"\n\n" +
-"Met vriendelijke groet,\n" +
-"CinemaReservation"
-
-                };
-
-
-                using (var client = new SmtpClient())
-                {
-                    client.Connect("smtp.gmail.com", 587, false);
-
-                    // authenticate smtp server
-                    client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
-                    // verzenden email
-                    client.Send(message);
-                    client.Disconnect(true);
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                };
-            }
-            catch
-            {
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
-            }
+            Mail_Sender(Klant, GeneratedCode);
 
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
             ConsoleCommands CommandLine = new ConsoleCommands();
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] om de mail opnieuw te verzenden\n[");
-            ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om af te sluiten\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om de mail opnieuw te verzenden\n[");
+            ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om af te sluiten\n");
             // Email bevestiging.
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Mail_Bevestiging = Console.ReadLine();
             if (Mail_Bevestiging == "1")
             {
-                try
-                {
-                    var message = new MimeMessage();
-                    // Email verzender
-                    message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
-                    // Email geadresseerde
-                    message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
-                    // Email onderwerp
-                    message.Subject = $"Bevestiging Bioscoop Reservering {Klant.Film}";
-                    // Email text
-                    message.Body = new TextPart("plain")
-                    {
-                        Text = @$"Hallo   {Klant.Naam},
-\nBedankt voor het reserveren via onze bioscoop.\n
-Hieronder vindt u de reserverings code.
-
-Reserverings code: {GeneratedCode}
-
-Film: {Klant.Film}
-
-Tijd: {Klant.Film_Time}
-
-" + 
-
-@"\n
-We hopen u snel te zien in de bioscoop!" +
-    "\nMet vriendelijke groet," +
-    "CinemaReservation"
-
-                    };
-
-
-                    using (var client = new SmtpClient())
-                    {
-                        client.Connect("smtp.gmail.com", 587, false);
-
-                        // authenticate smtp server
-                        client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
-                        // verzenden email
-                        client.Send(message);
-                        client.Disconnect(true);
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    };
-                }
-                catch
-                {
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
-                }
+                Mail_Sender(Klant, GeneratedCode);
             }
             else
             {
@@ -509,6 +415,60 @@ We hopen u snel te zien in de bioscoop!" +
             File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
             CommandLine.RestartOption();
 
+        }
+        public void Mail_Sender(Gebruiker.Gebruiker Klant, string GeneratedCode)
+        {
+            try
+            {
+                var message = new MimeMessage();
+                // Email verzender
+                message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
+                // Email geadresseerde
+                message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
+                // Email onderwerp
+                message.Subject = $"Bevestiging Bioscoop Reservering {Klant.Film}";
+                // Email text
+                message.Body = new TextPart("plain")
+                {
+                    Text = @$"Hallo {Klant.Naam},
+
+Bedankt voor het reserveren via onze bioscoop.
+
+Hieronder vindt u de reserverings code.
+
+Reserverings code: {GeneratedCode}
+Film: {Klant.Film}
+Tijd: {Klant.Film_Time}
+
+" +
+
+@"
+We hopen u snel te zien in de bioscoop!
+" +
+    "\nMet vriendelijke groet,\n\n" +
+    "CinemaReservation"
+
+                };
+
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+
+                    // authenticate smtp server
+                    client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
+                    // verzenden email
+                    client.Send(message);
+                    client.Disconnect(true);
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                };
+            }
+            catch
+            {
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
+            }
         }
         public static void Reservering_check(dynamic dynamicUserData, int i)
         {
