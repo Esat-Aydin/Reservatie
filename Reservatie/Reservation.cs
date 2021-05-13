@@ -381,16 +381,16 @@ namespace Reservation
                 {
                     Text = @"Hallo " + Klant.Naam + @",
 Bedankt voor het reserveren via onze bioscoop.
-Hieronder vindt u de reserverings code.
+Hieronder vindt u de reserverings code."+
 
-Reserverings code: " + GeneratedCode +
-"Film " + Klant.Film +
-"Tijd " + Klant.Film_Time + 
+"\n\nReserverings code: " + GeneratedCode +
+"\nFilm " + Klant.Film +
+"\nTijd " + Klant.Film_Time + 
 "\n " + 
 "\nWe hopen u snel te zien in de bioscoop!" +
 "\n\n" +
-"Met vriendelijke groet,\n" +
-"CinemaReservation"
+"Met vriendelijke groet," +
+"\nCinemaReservation"
 
                 };
 
