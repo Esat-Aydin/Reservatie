@@ -427,5 +427,18 @@ Reserverings code: " + GeneratedCode +
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
         }
+        public string DateConverter(string InputDate)
+        {
+            var TestDateTime = new DateTime(2021, 08, 16, 10, 2, 0, DateTimeKind.Local); // 2021, 08, 16 moeten verandert worden in de user input
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+            var UnixDateTime = (TestDateTime.ToUniversalTime() - epoch).TotalSeconds; // hier wordt het geconvert naar Unix!
+            var timeSpan = TimeSpan.FromSeconds(UnixDateTime);
+            var localDateTime = epoch.Add(timeSpan).ToLocalTime(); // Weer terug geconvert naar DateTime
+
+            string UserChosenDay = localDateTime.ToString("ddd"); // dit convert het naar de dag van de week (dus: Mon/Tues/Wed/Thu/Fri/Sat/Sun)
+            return UserChosenDay;
+            
+        }
     }
 }
