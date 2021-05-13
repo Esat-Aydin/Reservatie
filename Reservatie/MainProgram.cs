@@ -47,10 +47,9 @@ namespace Cinema
         public void RestartOption()
         {
 
-            Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
-            Textkleur("wit");
-            Console.WriteLine("Toets 'R' om het progamma opnieuw op te starten.");
+            Textkleur("wit");Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.Write("Toets ["); Textkleur("zwart"); Console.Write("R"); Textkleur("wit"); Console.Write("] om het progamma opnieuw op te starten.\n");
+            Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Textkleur("zwart");
             string restart = Console.ReadLine();
             if (restart.ToUpper() == "R")

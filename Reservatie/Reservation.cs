@@ -250,6 +250,32 @@ namespace Reservation
                 Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
 
             }
+            else if (UserInput == "4")
+            {
+                Scherm.Screens.CinemaBanner();
+                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
+                List<string> ListofFilms = new List<string>();
+                dynamic Dagen = DynamicFilmData[0]["FilmDays"];
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("\t\t\tVoer hier de datum in (DD/MM/YYYY): ");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+                string FilmDateSearch = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                string ConvertedDate = DateConverter(FilmDateSearch);
+                if (ConvertedDate == "zo")
+                {
+                    for (int i = 0; i < DynamicFilmData.Count; i++)
+                    {
+                        if (DynamicFilmData[i]["FilmDays"]["Zondag"].Count > 0) {
+                            
+                                ListofFilms.Add(DynamicFilmData[i]["FilmTitle"].ToString());
+                            
+                        }
+                    }
+                    Console.WriteLine(ListofFilms.Count);
+                }
+            }
         }
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
@@ -403,17 +429,14 @@ Reserverings code: " + GeneratedCode +
         public static void Reservering_check(dynamic dynamicUserData, int i)
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.WriteLine("Naam: " + dynamicUserData[i]["Naam"]);
-            Console.WriteLine("Email: " + dynamicUserData[i]["Email"]);
-            Console.WriteLine("Reservatie code: " + dynamicUserData[i]["Reservatie_code"]);
-            Console.WriteLine("Film: " + dynamicUserData[i]["Film"]);
-            Console.WriteLine("Zaal: " + dynamicUserData[i]["Zaal"]);
-            Console.WriteLine("Stoel nummer: " + dynamicUserData[i]["Stoel_num"]);
+            Console.Write("Naam: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Naam"] + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Email Adres: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Email"] + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Film"] + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Zaal"] + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Stoel: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Stoel_num"] + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Reservering Code: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Reservatie_code"] + "\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             CommandLine.RestartOption();
-
-
         }
         public void ReserveringStatus(Gebruiker.Gebruiker Klant, params string[] args)
         {
@@ -424,6 +447,31 @@ Reserverings code: " + GeneratedCode +
             ConsoleCommands.Textkleur("wit"); Console.Write("Email Adres: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Email + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
+        }
+        public string DateConverter(string InputDate)
+        {
+            int InputDays = 0;
+            string DaysofInput = InputDate.Substring(0, 2);
+            Int32.TryParse(DaysofInput, out InputDays);
+
+            int InputMonth = 0;
+            string MonthofInput = InputDate.Substring(3, 2);
+            Int32.TryParse(MonthofInput, out InputMonth);
+
+            int InputYear = 0;
+            string YearofInput = InputDate.Substring(6, 4);
+            Int32.TryParse(YearofInput, out InputYear);
+
+            var TestDateTime = new DateTime(InputYear, InputMonth, InputDays, 10, 2, 0, DateTimeKind.Local); // 2021, 08, 16 moeten verandert worden in de user input
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+            var UnixDateTime = (TestDateTime.ToUniversalTime() - epoch).TotalSeconds; // hier wordt het geconvert naar Unix!
+            var timeSpan = TimeSpan.FromSeconds(UnixDateTime);
+            var localDateTime = epoch.Add(timeSpan).ToLocalTime(); // Weer terug geconvert naar DateTime
+
+            string UserChosenDay = localDateTime.ToString("ddd"); // dit convert het naar de dag van de week (dus: Mon/Tues/Wed/Thu/Fri/Sat/Sun)
+            return UserChosenDay;
+
         }
     }
 }
