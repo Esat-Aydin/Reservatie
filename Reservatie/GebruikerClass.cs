@@ -783,7 +783,7 @@ namespace Gebruiker
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             if (DagenKeuze == "1")
             {
-                //Maandag
+                //Maandag.
             }
             if (DagenKeuze == "1")
             {
