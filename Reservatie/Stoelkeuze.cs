@@ -63,15 +63,29 @@ namespace Chair
             }
 
         }
+        public List<string> WhatChairs(int howMany, dynamic room)
+        {
+           
+            List<string> newChairs = new List<string>();
+            string input = "";
+            for(int i = 1; i < howMany; i++)
+            {
+                input = Console.ReadLine();
+                
+                
+                
+            }
+            return newChairs;
+        }
 
 
 
         public void Chair()
         {
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\djvan\source\repos\Reservatie1\Reservatie\seats (2).json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json");
+            string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
@@ -137,6 +151,8 @@ namespace Chair
             Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
+            var test = DynamicRoomData[1]["row_number"];
+            Console.WriteLine(test.Type);
             /* reserveren van stoelen
              * kijken of een gegeven stoel niet al gereserveerd is.
              *  - loopen door alle gereserveerde stoelen
