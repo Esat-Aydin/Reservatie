@@ -1,17 +1,1 @@
-[
-  {
-    "FilmGenres": [ "Action", "Comedy", "Horror" ],
-    "FilmTitle": "John Wick",
-    "FilmRoom": 1,
-    "FilmTimes": [ "16:00", "19:00", "23:30" ],
-    "FilmDays": {
-      "Maandag": [],
-      "Dinsdag": [],
-      "Woensdag": [],
-      "Donderdag": [],
-      "Vrijdag": [ "16:00", "19:00", "23:30" ],
-      "Zaterdag": [ "16:00", "19:00", "23:30" ],
-      "Zondag": [ "16:00", "19:00", "23:30" ]
-    }
-  }
-]
+[{"FilmGenres":["Action","Comedy","Horror"],"FilmTitle":"John Wick","FilmRoom":1,"FilmTimes":["16:00","19:00","23:30"],"FilmDays":{"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["16:00","19:00","23:30"],"Zaterdag":["16:00","19:00","23:30"],"Zondag":["16:00","19:00","23:30"]}},{"FilmGenres":["Thriller"],"FilmTitle":"Scary Movie","FilmRoom":2,"FilmTimes":["20:30","22:30"],"FilmDays":{"Maandag":[],"Dinsdag":["20:30","22:30"],"Woensdag":[],"Donderdag":[],"Vrijdag":[],"Zaterdag":[],"Zondag":[]}},{"FilmGenres":["Action","Sci-Fi","Drama"],"FilmTitle":"Avengers: Endgame","FilmRoom":2,"FilmTimes":["20:30","22:30"],"FilmDays":{"Maandag":[],"Dinsdag":["20:30","22:30"],"Woensdag":[],"Donderdag":[],"Vrijdag":[],"Zaterdag":[],"Zondag":[]}},{"FilmGenres":["Horror","Thriller"],"FilmTitle":"Annabelle","FilmRoom":1,"FilmTimes":["17:00","18:30","20:00"],"FilmDays":{"Maandag":[],"Dinsdag":[],"Woensdag":[],"Donderdag":[],"Vrijdag":["17:00","18:30","20:00"],"Zaterdag":[],"Zondag":[]}}]
