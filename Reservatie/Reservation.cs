@@ -75,9 +75,20 @@ namespace Reservation
             ConsoleCommands.Textkleur("rood");
             for (int i = 0; i <= 100; i++)
             {
-                Console.Write($"\rProgress: {i}%   ");
-                Thread.Sleep(25);
-
+                ConsoleCommands.Textkleur("wit");
+                Console.Write("\rProgress: ");
+                if (i != 100)
+                {
+                    ConsoleCommands.Textkleur("rood");
+                    Console.Write($"{i}%   ");
+                    Thread.Sleep(25);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"{i}%   ");
+                    Thread.Sleep(25);
+                }
             }
             Console.WriteLine("");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -405,6 +416,16 @@ Reserverings code: " + GeneratedCode +
             CommandLine.RestartOption();
 
 
+        }
+        public void ReserveringStatus(Gebruiker.Gebruiker Klant, params string[] args)
+        {
+            Scherm.Screens.CinemaBanner();
+            Console.WriteLine($"\t\t\t\tRESERVERING\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.Write("Naam: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Naam + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Email Adres: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Email + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
         }
     }
 }
