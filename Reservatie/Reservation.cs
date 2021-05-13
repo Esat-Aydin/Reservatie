@@ -19,13 +19,6 @@ namespace Reservation
 {
     public abstract class Reserveren
     {
-
-
-        //public Gebruiker.Gebruiker GebruikerObject;
-        //public Reserveren() 
-        //{
-        //this.GebruikerObject = new Gebruiker.Gebruiker();
-        //}
         public string UppercaseFirst(string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -302,7 +295,6 @@ namespace Reservation
                     {
                             if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
                             {
-
                                     for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
                                     {
 
@@ -358,7 +350,7 @@ namespace Reservation
             ConsoleCommands.Textkleur("wit");
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
-            Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
+            Console.WriteLine("Een ogenblik geduld alstublieft uw reservering code wordt geladen.");
             Thread.Sleep(1000);
             ReservationCodePercentage();
             string GeneratedCode = this.ReserveringsCodeGenerator();
