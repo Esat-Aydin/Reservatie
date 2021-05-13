@@ -19,13 +19,27 @@ namespace Reservation
 {
     public abstract class Reserveren
     {
+
+
+        //public Gebruiker.Gebruiker GebruikerObject;
+        //public Reserveren() 
+        //{
+        //this.GebruikerObject = new Gebruiker.Gebruiker();
+        //}
+        public string UppercaseFirst(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return string.Empty;
+            return char.ToUpper(str[0]) + str.Substring(1).ToLower();
+        }
+
         public void ReserveringBeheren()
         {
 
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -107,7 +121,9 @@ namespace Reservation
                 Console.WriteLine("\t\t\tNaar welke film bent u opzoek: ");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
-                string Film_search = Console.ReadLine();
+                string Film = Console.ReadLine();
+                string Film_search = UppercaseFirst(Film);
+                int counter = 0;
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
@@ -119,11 +135,24 @@ namespace Reservation
                         Console.WriteLine("U heeft gezocht naar de volgende film:");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("rood");
-
-                        FilmObject.Film_check(DynamicFilmData, i);
+                        Klant.ZoekOptie(Film_search, DynamicFilmData);
+                    }
+                    else
+                    {
+                        counter += 1;
                     }
                 }
-                Klant.ZoekOptie(Film_search, DynamicFilmData);
+                if (counter == DynamicFilmData.Count)
+                {
+                    
+                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
+                    
+                }
+
+                
             }
             else if (UserInput == "2")
             {
