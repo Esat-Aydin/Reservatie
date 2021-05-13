@@ -409,10 +409,7 @@ namespace Gebruiker
         }
         public void ZoekOptie(string Gezochte_Film, dynamic DynamicMyFilmsData)
         {
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            ConsoleCommands.Textkleur("groen");
-            Console.WriteLine("Voor welke van de onderstaande dagen zou u " + Gezochte_Film + " willen reserveren?");
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
             ConsoleCommands.Textkleur("rood");
             List<string> Legelist = new List<string>();
             List<string> DagenvdWeek = new List<string>();
@@ -476,7 +473,7 @@ namespace Gebruiker
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.WriteLine("Voor welke van de bovenstaande dagen zou u willen reserveren?");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            ConsoleCommands.Textkleur("rood");
+            ConsoleCommands.Textkleur("zwart");
             string DagenKeuze = Console.ReadLine();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             if (DagenKeuze == "1")
@@ -497,7 +494,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
+                    ConsoleCommands.Textkleur("zwart");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
@@ -538,7 +535,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
+                    ConsoleCommands.Textkleur("zwart");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
@@ -579,7 +576,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
+                    ConsoleCommands.Textkleur("zwart");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
@@ -621,7 +618,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
+                    ConsoleCommands.Textkleur("zwart");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
@@ -662,7 +659,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
+                    ConsoleCommands.Textkleur("zwart");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
@@ -703,7 +700,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
+                    ConsoleCommands.Textkleur("zwart");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
@@ -745,7 +742,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("[1] voor " + Show_Tijden[0] + "\n[2] voor " + Show_Tijden[1] + "\n[3] voor " + Show_Tijden[2]);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
+                    ConsoleCommands.Textkleur("zwart");
                     string tijdslot = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
                     if (tijdslot == "1")
@@ -813,7 +810,7 @@ namespace Gebruiker
 
         public static void Snacks()
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             ConsoleCommands CommandLine = new ConsoleCommands();
             List<Object> Mandje = new List<Object>();
