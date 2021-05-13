@@ -14,25 +14,17 @@ using Film;
 using Scherm;
 using Reservation;
 using Gebruiker;
+using System.Text.RegularExpressions;
 
 namespace Reservation
 {
     public abstract class Reserveren
     {
 
-
-        //public Gebruiker.Gebruiker GebruikerObject;
-        //public Reserveren() 
-        //{
-        //this.GebruikerObject = new Gebruiker.Gebruiker();
-        //}
         public string UppercaseFirst(string str)
         {
-            if (string.IsNullOrEmpty(str))
-                return string.Empty;
-            return char.ToUpper(str[0]) + str.Substring(1).ToLower();
+            return Regex.Replace(str, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
         }
-
         public void ReserveringBeheren()
         {
 
@@ -135,6 +127,7 @@ namespace Reservation
                         Console.WriteLine("U heeft gezocht naar de volgende film:");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("rood");
+                        
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
                     }
                     else
@@ -142,17 +135,14 @@ namespace Reservation
                         counter += 1;
                     }
                 }
-                if (counter == DynamicFilmData.Count)
+                if (counter >= DynamicFilmData.Count)
                 {
                     
                     Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     ReserveringMaken(UserInput);
-                    
-                }
-
-                
+                } 
             }
             else if (UserInput == "2")
             {

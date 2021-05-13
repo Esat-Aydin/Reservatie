@@ -19,7 +19,6 @@ namespace Film
         public string[] FilmGenres { get; set; }
         public string FilmTitle { get; set; }
         public int FilmRoom { get; set; }
-
         public string[] FilmTimes { get; set; }
         public Dictionary<string, List<string>> FilmDays { get; set; }
 
@@ -33,7 +32,6 @@ namespace Film
         }
         public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
-
             List<Film> _data = new();
             var FilmDataJson = File.ReadAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);

@@ -407,7 +407,7 @@ namespace Gebruiker
             AccountUsers = JsonConvert.SerializeObject(AccountUsers_Gebruiker);
             File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
         }
-        public void ZoekOptie(string Gezochte_Film, dynamic DynamicMyFilmsData)
+        public void ZoekOptie(string Gezochte_Film, dynamic DynamicFilmData)
         {
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("groen");
@@ -427,25 +427,25 @@ namespace Gebruiker
             int Count = 1;
             var table = new ConsoleTable("Dagen van de week", "Draaitijd");
 
-
+            
             //int Genre_zoeken = (string)DynamicFilmData[i]["FilmGenres"][j];
-            for (int i = 0; i < DynamicMyFilmsData.Count; i++)
+            for (int i = 0; i < DynamicFilmData.Count; i++)
             {
                 //Genre_zoeken = DynamicMyFilmsData[i]["FilmDays"];
                 for (int j = 0; j < DagenvdWeek.Count; j++)
                 {
 
-                    if (DynamicMyFilmsData[i]["FilmTitle"] == Gezochte_Film)
+                    if (DynamicFilmData[i]["FilmTitle"] == Gezochte_Film)
                     {
 
 
-                        if (DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count > 0)
+                        if (DynamicFilmData[i]["FilmDays"][DagenvdWeek[j]].Count > 0)
                         {
 
-                            for (int x = 0; x < DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count; x++)
+                            for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DagenvdWeek[j]].Count; x++)
                             {
 
-                                Show_Tijden.Add(DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]][x].ToString());
+                                Show_Tijden.Add(DynamicFilmData[i]["FilmDays"][DagenvdWeek[j]][x].ToString());
 
 
                                 //Console.WriteLine("Toets [" + (Count) + "] voor "+ (DagenvdWeek[j]) +":" + Show_Tijden[x]);
@@ -456,9 +456,9 @@ namespace Gebruiker
                             table.AddRow(("Toets [" + (Count) + "] voor " + DagenvdWeek[j]), Times);
                             Count++;
                         }
-                        else if (DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count <= 0)
+                        else if (DynamicFilmData[i]["FilmDays"][DagenvdWeek[j]].Count <= 0)
                         {
-                            for (int x = 0; x <= DynamicMyFilmsData[i]["FilmDays"][DagenvdWeek[j]].Count; x++)
+                            for (int x = 0; x <= DynamicFilmData[i]["FilmDays"][DagenvdWeek[j]].Count; x++)
                             {
                                 table.AddRow("Toets [" + (Count) + "] voor " + (DagenvdWeek[j]) + ": ", "Deze film draait niet op " + DagenvdWeek[j] + ".");
                                 Count++;
@@ -488,7 +488,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
                 {
@@ -530,7 +530,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
                 {
@@ -571,7 +571,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
                 {
@@ -613,7 +613,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
                 {
@@ -654,7 +654,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
                 {
@@ -695,7 +695,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
                 {
@@ -737,7 +737,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicMyFilmsData);
+                    ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
                 {
