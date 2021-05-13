@@ -203,7 +203,7 @@ namespace Scherm
             var Start_options = Console.ReadLine();
             bool isErrorPrinted = false;
 
-            while (Start_options != "1" && Start_options != "2" && Start_options != "3")
+            while (Start_options != "1" && Start_options != "2" && Start_options != "3" && Start_options != "4")
             {
                 if (isErrorPrinted == false)
                 {
