@@ -123,11 +123,13 @@ namespace Reservation
                     if (Film_search == Film_zoeken)
                     {
                         Scherm.Screens.CinemaBanner();
+
                         ConsoleCommands.Textkleur("wit");
                         Console.WriteLine("U heeft gezocht naar de volgende film:");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("rood");
                         
+
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
                     }
                     else
@@ -272,7 +274,16 @@ namespace Reservation
             else if (UserInput == "4")
             {
                 Scherm.Screens.CinemaBanner();
-                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
+                List<string> DagenvdWeek = new List<string>();
+                List<string> Show_Tijden = new List<string>();
+                DagenvdWeek.Add("Maandag");
+                DagenvdWeek.Add("Dinsdag");
+                DagenvdWeek.Add("Woensdag");
+                DagenvdWeek.Add("Donderdag");
+                DagenvdWeek.Add("Vrijdag");
+                DagenvdWeek.Add("Zaterdag");
+                DagenvdWeek.Add("Zondag");
+                int Count = 1;
                 List<string> ListofFilms = new List<string>();
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
                 ConsoleCommands.Textkleur("wit");
@@ -282,19 +293,25 @@ namespace Reservation
                 string FilmDateSearch = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 string ConvertedDate = DateConverter(FilmDateSearch);
-                if (ConvertedDate == "zo")
-                {
-                    for (int i = 0; i < DynamicFilmData.Count; i++)
+                var table = new ConsoleTable("Film", DayReturner(ConvertedDate) + ", "+ FilmDateSearch);
+                for (int i = 0; i < DynamicFilmData.Count; i++)
                     {
-                        if (DynamicFilmData[i]["FilmDays"]["Zondag"].Count > 0) {
-                            
-                                ListofFilms.Add(DynamicFilmData[i]["FilmTitle"].ToString());
-                            
-                        }
+                            if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
+                            {
+
+                                    for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
+                                    {
+
+                                        Show_Tijden.Add(DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)][x].ToString());
+                                    }
+
+                                string Times = Show_Tijden[0] + ", " + Show_Tijden[1] + ", " + Show_Tijden[2];
+                                table.AddRow(("Toets [" + (Count) + "] voor " + DynamicFilmData[i]["FilmTitle"]), Times);
+                                    Count++;
+                                }
                     }
-                    Console.WriteLine(ListofFilms.Count);
+                    table.Write(Format.Alternative);
                 }
-            }
         }
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
@@ -345,20 +362,69 @@ namespace Reservation
 
 
             ConsoleCommands.Textkleur("wit");
-            Console.Write("Reserverings code: ");
+            Console.Write("Reserverings Code: ");
             ConsoleCommands.Textkleur("rood");
             Console.WriteLine(GeneratedCode);
-            ConsoleCommands.Textkleur("groen");
-            Console.WriteLine("Zou u een bevestiging in uw mail willen ontvangen?");
-            Console.WriteLine("Toets [JA] als u een mail-bevestinging wilt ontvangen of toets [NEE] als u geen mail-bevestiging .");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine($"\nEr is een bevestigingsmail verzonden naar {Klant.Email}\n");
+            try
+            {
+                var message = new MimeMessage();
+                // Email verzender
+                message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
+                // Email geadresseerde
+                message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
+                // Email onderwerp
+                message.Subject = $"Bevestiging Bioscoop Reservering {Klant.Film}";
+                // Email text
+                message.Body = new TextPart("plain")
+                {
+                    Text = @"Hallo " + Klant.Naam + @",
+Bedankt voor het reserveren via onze bioscoop.
+Hieronder vindt u de reserverings code.
+
+Reserverings code: " + GeneratedCode +
+"Film " + Klant.Film +
+"Tijd " + Klant.Film_Time + 
+"\n " + 
+"\nWe hopen u snel te zien in de bioscoop!" +
+"\n\n" +
+"Met vriendelijke groet,\n" +
+"CinemaReservation"
+
+                };
+
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+
+                    // authenticate smtp server
+                    client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
+                    // verzenden email
+                    client.Send(message);
+                    client.Disconnect(true);
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                };
+            }
+            catch
+            {
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
+            }
+
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
+            ConsoleCommands CommandLine = new ConsoleCommands();
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] om de mail opnieuw te verzenden\n[");
+            ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om af te sluiten\n");
             // Email bevestiging.
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Mail_Bevestiging = Console.ReadLine();
-
             if (Mail_Bevestiging == "1")
             {
-
                 try
                 {
                     var message = new MimeMessage();
@@ -367,20 +433,26 @@ namespace Reservation
                     // Email geadresseerde
                     message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
                     // Email onderwerp
-                    message.Subject = "Bevestiging online reservatie.";
+                    message.Subject = $"Bevestiging Bioscoop Reservering {Klant.Film}";
                     // Email text
                     message.Body = new TextPart("plain")
                     {
-                        Text = @"Hallo " + Klant.Naam + @",
-Bedankt voor het reserveren via onze bioscoop.
+                        Text = @$"Hallo   {Klant.Naam},
+\nBedankt voor het reserveren via onze bioscoop.\n
 Hieronder vindt u de reserverings code.
 
-Reserverings code: " + GeneratedCode + 
-" " +
-"\nWe hopen u snel te zien in de bioscoop!" +
-"\n\n" +
-"Met vriendelijke groet,\n" +
-"CinemaReservation" 
+Reserverings code: {GeneratedCode}
+
+Film: {Klant.Film}
+
+Tijd: {Klant.Film_Time}
+
+" + 
+
+@"\n
+We hopen u snel te zien in de bioscoop!" +
+    "\nMet vriendelijke groet," +
+    "CinemaReservation"
 
                     };
 
@@ -395,8 +467,6 @@ Reserverings code: " + GeneratedCode +
                         client.Send(message);
                         client.Disconnect(true);
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        ConsoleCommands.Textkleur("groen");
-                        Console.WriteLine("De bevestiging is verstuurd per Email.");
                     };
                 }
                 catch
@@ -406,19 +476,10 @@ Reserverings code: " + GeneratedCode +
                     Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
                 }
             }
-            else if (Mail_Bevestiging == "2")
-            {
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("U heeft gekozen om geen bevestiging in de mail te ontvangen.");
-            }
             else
             {
-                ReserveerCodeMail(Gezochte_Film, Show_Tijden);
+                CommandLine.RestartOption();
             }
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
-            ConsoleCommands CommandLine = new ConsoleCommands();
 
 
             // Data Reservering toevoegen.
@@ -491,6 +552,37 @@ Reserverings code: " + GeneratedCode +
             string UserChosenDay = localDateTime.ToString("ddd"); // dit convert het naar de dag van de week (dus: Mon/Tues/Wed/Thu/Fri/Sat/Sun)
             return UserChosenDay;
 
+        }
+        public string DayReturner(string InputDay)
+        {
+            if (InputDay == "zo")
+            {
+                return "Zondag";
+            }
+            else if (InputDay == "ma")
+            {
+                return "Maandag";
+            }
+            else if (InputDay == "di")
+            {
+                return "Dinsdag";
+            }
+            else if (InputDay == "wo")
+            {
+                return "Woensdag";
+            }
+            else if (InputDay == "do")
+            {
+                return "Donderdag";
+            }
+            else if (InputDay == "vr")
+            {
+                return "Vrijdag";
+            }
+            else
+            {
+                return "Zaterdag";
+            }
         }
     }
 }
