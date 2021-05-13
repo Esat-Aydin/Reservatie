@@ -302,6 +302,7 @@ namespace Reservation
             Klant.Email = Naam_email;
             Klant.Film = Gezochte_Film;
             Klant.Film_Time = Show_Tijden;
+            ReserveringStatus(Klant);
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
             // Einde reserveren.
