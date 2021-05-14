@@ -111,10 +111,14 @@ namespace Reservation
             if (UserInput == "1")
             {
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\t\tNaar welke film bent u opzoek: ");
+                Console.Write("\t\t\tNaar welke film bent u opzoek: \n\n\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string Film = Console.ReadLine();
+                if (Film == "1")
+                {
+                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
                 string Film_search = UppercaseFirst(Film);
                 int counter = 0;
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -148,7 +152,7 @@ namespace Reservation
                 Scherm.Screens.CinemaBanner();
                 List<string> Show_films = new List<string>();
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\t\t\tKies een genre uit\t\t\t\t");
+                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
@@ -161,6 +165,10 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
+                if (Genre_select == "0")
+                {
+                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
                 Console.Clear();
                 ConsoleCommands.Textkleur("wit");
                 CommandLine.Genre(Genre_select);
