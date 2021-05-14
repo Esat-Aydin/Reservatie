@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Globalization;
 
 namespace Reservation
 {
@@ -23,9 +24,9 @@ namespace Reservation
         {
 
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -272,23 +273,19 @@ namespace Reservation
                 {
                     if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
                     {
-
-                        if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
+                        for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
                         {
-                            for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
+
+
+                            for (int y = 0; y < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; y++)
                             {
 
-
-                                for (int y = 0; y < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; y++)
-                                {
-
-                                    Show_Tijden.Add(DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)][y].ToString());
-                                }
-                                ListofFilms.Add(DynamicFilmData[i]["FilmTitle"].ToString());
-                                string Times = Show_Tijden[0] + ", " + Show_Tijden[1] + ", " + Show_Tijden[2];
-                                table.AddRow(("Toets [" + (Count) + "] voor " + DynamicFilmData[i]["FilmTitle"]), Times);
-                                Count++;
+                                Show_Tijden.Add(DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)][y].ToString());
                             }
+                            ListofFilms.Add(DynamicFilmData[i]["FilmTitle"].ToString());
+                            string Times = Show_Tijden[0] + ", " + Show_Tijden[1] + ", " + Show_Tijden[2];
+                            table.AddRow(("Toets [" + (Count) + "] voor " + DynamicFilmData[i]["FilmTitle"]), Times);
+                            Count++;
                         }
                         table.Write(Format.Alternative);
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -430,7 +427,7 @@ namespace Reservation
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
                 List<JsonData> _data = new List<JsonData>();
-                var DataUser = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+                var DataUser = File.ReadAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
                 var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                           ?? new List<JsonData>();
 
@@ -449,7 +446,7 @@ namespace Reservation
                 });
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
-                File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+                File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
@@ -474,7 +471,8 @@ namespace Reservation
             Klant.Film_Day = FilmDatum;
             ReserveringStatus(Klant);
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            ConsoleCommands.Textkleur("wit");
+            Klant.SnacksOption(Klant);
+
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reservering code wordt geladen.");
@@ -650,6 +648,44 @@ We hopen u snel te zien in de bioscoop!
             {
                 return "Zaterdag";
             }
+        }
+        public static void Betaling(Gebruiker.Gebruiker Klant = null,decimal totaal = 0, List<string> Mandje = null)
+        {
+            
+            dynamic DynamicFilmData = JsonData.JsonSerializer("Films");
+            string Filmprice = DynamicFilmData[0]["FilmPrice"];
+            ConsoleCommands.Textkleur("wit");
+            
+            if (Klant != null && Mandje == null)
+            {
+                Scherm.Screens.CinemaBanner();
+                Console.WriteLine($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
+            }
+            if (Mandje != null)
+            {
+                Scherm.Screens.CinemaBanner();
+                ConsoleCommands.Textkleur("wit");
+                Console.Write($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
+                Console.WriteLine("\nSnacks: ");
+                for (int i = 0; i < Mandje.Count; i += 2)
+                {
+                    Console.Write(Mandje[i] + '\n');
+                }
+            }
+
+            totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
+            Console.WriteLine($"\nDe totaal prijs is {totaal}");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("zwart");
+            Console.ReadLine();
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
+            Thread.Sleep(3000);
+            
+
+
         }
 
     }

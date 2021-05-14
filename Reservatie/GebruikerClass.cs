@@ -512,21 +512,21 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0], ConvertedToDate);
                     }
                     if (tijdslot == "2")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                     if (tijdslot == "3")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2], ConvertedToDate);
                     }
                 }
@@ -556,21 +556,21 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0], ConvertedToDate);
                     }
                     if (tijdslot == "2")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                     if (tijdslot == "3")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2], ConvertedToDate);
                     }
                 }
@@ -601,21 +601,21 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0], ConvertedToDate);
                     }
                     if (tijdslot == "2")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                     if (tijdslot == "3")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
 
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2], ConvertedToDate);
                     }
@@ -646,21 +646,21 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0], ConvertedToDate);
                     }
                     if (tijdslot == "2")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                     if (tijdslot == "3")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2], ConvertedToDate);
                     }
                 }
@@ -690,21 +690,21 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0], ConvertedToDate);
                     }
                     if (tijdslot == "2")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                     if (tijdslot == "3")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2], ConvertedToDate);
                     }
                 }
@@ -734,7 +734,7 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0], ConvertedToDate);
 
                     }
@@ -742,14 +742,14 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                     if (tijdslot == "3")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[2], ConvertedToDate);
                     }
                 }
@@ -781,21 +781,21 @@ namespace Gebruiker
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[0] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[0], ConvertedToDate);
                     }
                     if (tijdslot == "2")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[1] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                     if (tijdslot == "3")
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("U heeft gekozen voor " + Show_Tijden[2] + " uur.");
-                        SnacksOption();
+                        Thread.Sleep(2000);
                         ReserveerCodeMail(Gezochte_Film, Show_Tijden[1], ConvertedToDate);
                     }
                 }
@@ -805,97 +805,45 @@ namespace Gebruiker
 
 
         }
-        public static void DagKeuze()
-        {
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            string DagenKeuze = Console.ReadLine();
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            if (DagenKeuze == "1")
-            {
-                //Maandag.
-            }
-            if (DagenKeuze == "1")
-            {
-                //Maandag
-            }
-            if (DagenKeuze == "1")
-            {
-                //Maandag
-            }
-            if (DagenKeuze == "1")
-            {
-                //Maandag
-            }
-            if (DagenKeuze == "1")
-            {
-                //Maandag
-            }
-            if (DagenKeuze == "1")
-            {
-                //Maandag
-            }
-            if (DagenKeuze == "1")
-            {
-                //Maandag
-            }
-        }
 
-        public static void Snacks()
+        public static void Snacks(Gebruiker Klant)
         {
             string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             ConsoleCommands CommandLine = new ConsoleCommands();
-            List<Object> Mandje = new List<Object>();
+            List<string> Mandje = new List<string>();
 
 
-            ShoppingCart.Cart.WinkelMandje(DynamicData, Mandje);
+            Cart.WinkelMandje(DynamicData, Mandje, Klant);
 
 
 
         }
-        public void SnacksOption() // Om deze te callen: Gebruiker.SnacksOption();
+        public void SnacksOption(Gebruiker Klant = null) // Om deze te callen: Gebruiker.SnacksOption();
         {
 
-
+            
             //Eventuele snacks tijdens het reserveren
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            ConsoleCommands.Textkleur("wit");
+
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?");
             Console.WriteLine("Door online de snacks te reserveren krijgt u 15% korting op het gehele bedrag.");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] als u nu snacks wilt bestellen"); Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] als u nu geen snacks wilt bestellen\n");
-
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Online_snacks = Console.ReadLine();
-            string Online_snacks_secondchange = null;
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
-            if (Online_snacks == "2")
+            if (Online_snacks == "1")
             {
-                Console.WriteLine("U heeft er voor gekozen om geen snacks te bestellen.");
-                Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] om door te gaan"); Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om alsnog snacks te bestellen\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                Online_snacks_secondchange = Console.ReadLine();
-                Console.Clear();
-                
-
+                Snacks(Klant);
             }
-            else if (Online_snacks == "2" && Online_snacks_secondchange == "2")
+            else if (Online_snacks == "2")
             {
-
-
-                Snacks();
-
-
-
+                Betaling(Klant);
             }
-            else if (Online_snacks != "2" && Online_snacks != "1")
-            {
-                Console.WriteLine("U heeft de verkeerde input gegeven.");
-                Console.WriteLine("Toets 'JA' om door te gaan en 'NEE' om het overzicht met snacks te bekijken.");
-                Snacks();
-            }
+
+
 
 
         }
