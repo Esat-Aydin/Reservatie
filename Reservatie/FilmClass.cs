@@ -48,27 +48,27 @@ namespace Film
         {
             if (Chosen_film == "1")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[0]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[0] + "\n") ;
             }
             else if (Chosen_film == "2")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[1]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[1] + "\n");
             }
             else if (Chosen_film == "3")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[2]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[2] + "\n");
             }
             else if (Chosen_film == "4")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[3]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[3] + "\n");
             }
             else if (Chosen_film == "5")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[4]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[4] + "\n");
             }
             else if (Chosen_film == "6")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[5]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[5] + "\n");
             }
 
         }

@@ -19,15 +19,11 @@ namespace MedewerkerClass
     {
         public string Name { get; set; }
         public string Admin_Password { get; set; }
-
         public Medewerker(string name = null, string AdminPass = null)
         {
             this.Name = name;
             this.Admin_Password = AdminPass;
-
         }
-
-
         new public void UserInputMethod(string UserInput)
         {
 
