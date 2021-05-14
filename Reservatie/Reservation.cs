@@ -23,9 +23,9 @@ namespace Reservation
         {
 
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -48,7 +48,7 @@ namespace Reservation
                 if (Res_code == Reservatie_code)
                 {
                     Scherm.Screens.CinemaBanner();
-                    Console.WriteLine("\t\tUw reservering: ");
+                    Console.WriteLine("\t\t\t\tReservering: ");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Reservering_check(DynamicUserData, i);
                     //SnacksOption();
@@ -104,10 +104,14 @@ namespace Reservation
             if (UserInput == "1")
             {
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\t\tNaar welke film bent u opzoek: ");
+                Console.Write("\t\t\tNaar welke film bent u opzoek: \n\n\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string Film = Console.ReadLine();
+                if (Film == "1")
+                {
+                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
                 string Film_search = UppercaseFirst(Film);
                 int counter = 0;
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -147,7 +151,7 @@ namespace Reservation
                 Dictionary<string, string[]> Show_tijden = new Dictionary<string, string[]>();
 
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\t\t\tKies een genre uit\t\t\t\t");
+                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
@@ -160,6 +164,10 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
+                if (Genre_select == "0")
+                {
+                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
                 Console.Clear();
                 ConsoleCommands.Textkleur("wit");
                 CommandLine.Genre(Genre_select);
@@ -265,6 +273,12 @@ namespace Reservation
                     if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
                     {
 
+                            if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
+                            {
+                                    for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
+                                    {
+
+
                         for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
                         {
 
@@ -287,6 +301,7 @@ namespace Reservation
                     Console.WriteLine($"U heeft gekozen voor {ListofFilms[0]}.\nVoor welke van de onderstaande tijden zou u willen reserveren?");
                     Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("1"); Console.Write($"] voor: {ListofFilms[0]}.");
+
 
 
 
@@ -388,9 +403,12 @@ namespace Reservation
                         DatumChecker(Chosen_film, Show_films, Show_tijden);
                     }
 
+                table.Write(Format.Alternative);
+
                 }
             }
         }
+
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -405,8 +423,32 @@ namespace Reservation
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden) // Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
+        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string FilmDatum = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
+            static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
+            {
+                List<JsonData> _data = new List<JsonData>();
+                var DataUser = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+                var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
+                          ?? new List<JsonData>();
+
+                JsonData.Add(new JsonData()
+                {
+                    Reservatie_code = GeneratedCode,
+                    Naam = Klant.Naam,
+                    Email = Klant.Email,
+                    Film = Klant.Film,
+                    FilmTime = Klant.Film_Time,
+                    FilmDate = Klant.Film_Day
+
+                    //Zaal =
+                    //Stoel_num =
+
+                });
+
+                DataUser = JsonConvert.SerializeObject(JsonData);
+                File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+            }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
             Scherm.Screens.CinemaBanner();
@@ -427,12 +469,13 @@ namespace Reservation
             Klant.Email = Naam_email;
             Klant.Film = Gezochte_Film;
             Klant.Film_Time = Show_Tijden;
+            Klant.Film_Day = FilmDatum;
             ReserveringStatus(Klant);
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
-            Console.WriteLine("Een ogenblik geduld alstublieft uw reservatie code wordt geladen.");
+            Console.WriteLine("Een ogenblik geduld alstublieft uw reservering code wordt geladen.");
             Thread.Sleep(1000);
             ReservationCodePercentage();
             string GeneratedCode = this.ReserveringsCodeGenerator();
@@ -444,7 +487,8 @@ namespace Reservation
             ConsoleCommands.Textkleur("rood");
             Console.WriteLine(GeneratedCode);
             ConsoleCommands.Textkleur("wit");
-            Console.WriteLine($"\nEr is een bevestigingsmail verzonden naar {Klant.Email}\n");
+            Console.Write("\nEr is een bevestigingsmail verzonden naar: "); ConsoleCommands.Textkleur("rood"); Console.Write($"{Klant.Email}\n");
+            ReservationToJSon(Klant, GeneratedCode);
             Mail_Sender(Klant, GeneratedCode);
 
             ConsoleCommands.Textkleur("wit");
@@ -459,34 +503,13 @@ namespace Reservation
             if (Mail_Bevestiging == "1")
             {
                 Mail_Sender(Klant, GeneratedCode);
+                // Data Reservering toevoegen.
+              
             }
             else
             {
                 CommandLine.RestartOption();
             }
-
-
-            // Data Reservering toevoegen.
-            List<JsonData> _data = new List<JsonData>();
-            var DataUser = File.ReadAllText(@"C:\Users\abdel\Source\Repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
-            var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
-                      ?? new List<JsonData>();
-
-            JsonData.Add(new JsonData()
-            {
-                Reservatie_code = GeneratedCode,
-                Naam = Klant.Naam,
-                Email = Klant.Email,
-                Film = Klant.Film,
-                FilmTime = Klant.Film_Time
-
-                //Zaal =
-                //Stoel_num =
-
-            });
-
-            DataUser = JsonConvert.SerializeObject(JsonData);
-            File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
             CommandLine.RestartOption();
 
         }
@@ -512,6 +535,7 @@ Hieronder vindt u de reserverings code.
 
 Reserverings code: {GeneratedCode}
 Film: {Klant.Film}
+Datum: {Klant.Film_Day}
 Tijd: {Klant.Film_Time}
 
 " +
@@ -550,6 +574,8 @@ We hopen u snel te zien in de bioscoop!
             Console.Write("Naam: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Naam"] + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Email Adres: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Email"] + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Film"] + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["FilmDate"] + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["FilmTime"] + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Zaal"] + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Stoel: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Stoel_num"] + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Reservering Code: "); ConsoleCommands.Textkleur("rood"); Console.Write(dynamicUserData[i]["Reservatie_code"] + "\n");
@@ -564,6 +590,7 @@ We hopen u snel te zien in de bioscoop!
             Console.Write("Naam: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Naam + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Email Adres: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Email + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
         }
         public string DateConverter(string InputDate)
