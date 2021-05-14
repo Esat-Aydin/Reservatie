@@ -116,7 +116,6 @@ namespace Scherm
                     Console.ForegroundColor = ConsoleColor.Black;
                     isErrorPrinted = true;
                 }
-
                 Console.ForegroundColor = ConsoleColor.Black;
                 Start_options = Console.ReadLine();
 
@@ -130,7 +129,6 @@ namespace Scherm
                 bool AdminConsoleChosen = true;
                 admin.AdminConsole(AdminConsoleChosen);
             }
-
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
 
@@ -143,16 +141,13 @@ namespace Scherm
             CinemaBanner();
             Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    \n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
-
             Console.Write("\t\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken\t\t");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering beheren\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
-
             var Start_options = Console.ReadLine();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             bool isErrorPrinted = false;
-
             while (Start_options != "1" && Start_options != "2")
             {
                 if (isErrorPrinted == false)
@@ -167,7 +162,6 @@ namespace Scherm
 
                 Console.ForegroundColor = ConsoleColor.Black;
                 Start_options = Console.ReadLine();
-
             }
             if (Start_options == "1")
             {
@@ -193,17 +187,14 @@ namespace Scherm
             CinemaBanner();
             Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    \n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
-
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film zoeken op Titel\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Films zoeken op Genre \n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle films bekijken \n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Films zoeken op Datum \n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
-
             var Start_options = Console.ReadLine();
             bool isErrorPrinted = false;
-
             while (Start_options != "1" && Start_options != "2" && Start_options != "3" && Start_options != "4")
             {
                 if (isErrorPrinted == false)
@@ -215,15 +206,11 @@ namespace Scherm
                     Console.ForegroundColor = ConsoleColor.Black;
                     isErrorPrinted = true;
                 }
-
                 Console.ForegroundColor = ConsoleColor.Black;
                 Start_options = Console.ReadLine();
 
             }
                 Klant.ReserveringMaken(Start_options);
-
-
-
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
     }
