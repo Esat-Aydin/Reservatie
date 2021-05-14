@@ -7,6 +7,7 @@ using MimeKit;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Net;
 using ConsoleTables;
 using Cinema;
@@ -21,9 +22,7 @@ namespace Reservation
     {
         public string UppercaseFirst(string str)
         {
-            if (string.IsNullOrEmpty(str))
-                return string.Empty;
-            return char.ToUpper(str[0]) + str.Substring(1).ToLower();
+            return Regex.Replace(str, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
         }
 
         public void ReserveringBeheren()
