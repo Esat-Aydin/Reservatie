@@ -4,6 +4,7 @@
     "FilmTitle": "John Wick",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmPrice" : "10.99",
     "FilmDays": {
       "Maandag": [ "16:00", "19:00", "23:30" ],
       "Dinsdag": [],
@@ -19,6 +20,7 @@
     "FilmTitle": "Norbit",
     "FilmRoom": 2,
     "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [ "15:00", "19:00", "22:00" ],
@@ -34,6 +36,7 @@
     "FilmTitle": "The Joker",
     "FilmRoom": 3,
     "FilmTimes": [ "17:00", "22:00", "00:00" ],
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [ "17:00", "22:00", "00:00" ],
       "Dinsdag": [ "17:00", "22:00", "00:00" ],
@@ -49,7 +52,7 @@
     "FilmTitle": "Fifty Shades Of Grey",
     "FilmRoom": 2,
     "FilmTimes": [ "15:00", "19:00", "22:00" ],
-
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [ "15:00", "19:00", "22:00" ],
       "Dinsdag": [ "15:00", "19:00", "22:00" ],
@@ -60,7 +63,7 @@
       "Zondag": []
     }
 
-   
+
 
   },
   {
@@ -68,7 +71,7 @@
     "FilmTitle": "Home Alone",
     "FilmRoom": 1,
     "FilmTimes": [ "15:00", "19:00", "22:00" ],
-
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [ "15:00", "19:00", "22:00" ],
@@ -86,7 +89,7 @@
     "FilmTitle": "Inception",
     "FilmRoom": 3,
     "FilmTimes": [ "01:00", "20:00", "22:00" ],
-
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [],
@@ -97,14 +100,14 @@
       "Zondag": [ "15:00", "20:00", "22:00" ]
     }
 
-  
+
   },
   {
     "FilmGenres": [ "Sci-Fi", "Action", "Thriller" ],
     "FilmTitle": "Venom",
     "FilmRoom": 3,
     "FilmTimes": [ "15:00", "19:00", "22:00" ],
-
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [],
@@ -115,7 +118,7 @@
       "Zondag": []
     }
 
-   
+
 
   },
   {
@@ -123,7 +126,7 @@
     "FilmTitle": "Interstellar",
     "FilmRoom": 1,
     "FilmTimes": [ "15:00", "18:00", "23:00" ],
-
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [ "15:00", "18:00", "23:00" ],
@@ -134,7 +137,7 @@
       "Zondag": []
     }
 
-   
+
 
   },
   {
@@ -142,7 +145,7 @@
     "FilmTitle": "The Wolf of Wall Street",
     "FilmRoom": 3,
     "FilmTimes": [ "19:00", "21:00", "23:00" ],
-
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [],
@@ -153,7 +156,7 @@
       "Zondag": []
     }
 
-    
+
 
   },
   {
@@ -161,7 +164,7 @@
     "FilmTitle": "Django Unchained",
     "FilmRoom": 2,
     "FilmTimes": [ "18:00", "20:00", "22:00" ],
-
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [ "18:00", "20:00", "22:00" ],
@@ -171,7 +174,7 @@
       "Zaterdag": [],
       "Zondag": []
     }
-    
+
 
   },
   {
@@ -179,6 +182,7 @@
     "FilmTitle": "Godfather",
     "FilmRoom": 3,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [],
@@ -194,6 +198,7 @@
     "FilmTitle": "John Wick 2",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [],
@@ -209,6 +214,7 @@
     "FilmTitle": "Bad Boys For Life",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [],
@@ -224,6 +230,7 @@
     "FilmTitle": "The Exorcism",
     "FilmRoom": 1,
     "FilmTimes": [ "18:00", "20:30", "23:30" ],
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [],
       "Dinsdag": [],

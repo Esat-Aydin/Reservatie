@@ -101,7 +101,6 @@ namespace Scherm
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om verder te gaan als "); ConsoleCommands.Textkleur("rood"); Console.Write("bioscoop medewerker\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
-
             var Start_options = Console.ReadLine();
             bool isErrorPrinted = false;
 
