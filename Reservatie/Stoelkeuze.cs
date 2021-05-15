@@ -63,18 +63,46 @@ namespace Chair
             }
 
         }
-        public List<string> WhatChairs(int howMany, dynamic room)
+        public string[] WhatChairs(int howMany, dynamic roomdata, List<string> AlreadyTaken, dynamic room)
         {
-           
-            List<string> newChairs = new List<string>();
+            var DynLetters = roomdata[Convert.ToInt32("" + room)]["row_number"];
+            var DynNumbers = roomdata[Convert.ToInt32("" + room)]["seat_number"];
+            int[] Numbers = new int[DynNumbers.Count];
+            string[] Letters = new string[DynLetters.Count];
+            for(int n = 0; n < Numbers.Length; n++)
+            {
+                Numbers[n] = DynNumbers[n];
+            }
+            for (int l = 0; l < Letters.Length; l++)
+            {
+                Letters[l] = DynLetters[l];
+            }
+            string[] newChairs = new string[howMany];
             string input = "";
-            for(int i = 1; i < howMany; i++)
+            for(int i = 0; i < howMany; i++)
             {
                 input = Console.ReadLine();
-                
-                
-                
+                if (AlreadyTaken.Contains(input))
+                {
+                    Console.WriteLine("Deze stoelen zijn al gereservereerd");
+                    i--;
+                }
+                else if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32(""+ input[1])) && input.Length == 2)
+                {
+                    newChairs[i] = input;
+                }
+                else if(Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0])) && input.Length == 2)
+                {
+                    newChairs[i] = input;
+                }
+                else
+                {
+                    Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    i--;
+                }
+
             }
+            Console.WriteLine(newChairs.Length);
             return newChairs;
         }
 
@@ -151,8 +179,6 @@ namespace Chair
             Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
-            var test = DynamicRoomData[1]["row_number"];
-            Console.WriteLine(test.Type);
             /* reserveren van stoelen
              * kijken of een gegeven stoel niet al gereserveerd is.
              *  - loopen door alle gereserveerde stoelen
@@ -161,25 +187,9 @@ namespace Chair
              *  - controlleren of er 1 numeric
              *  - controlleren of de andere dan in het alphabet zit/charater to int!!!!!!!!!
              */
-            for (int i = 0; i < stoelen; i++)
-            {
-                newChairs.Add(Console.ReadLine());
-                for(int j = 0; j < chairs.Count; j++)
-                {
-                    if (chairs[j] == newChairs[i])
-                    {
-                        Console.WriteLine("Deze stoelen zijn al gereservereerd");
-                        newChairs[i] = null;
-                        i--;
-                    }
-                }
-            }
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("U heeft de volgende stoelen gekozen. Type 'JA' als dit klopt.");
-            for (int i = 0; i < stoelen; i++)
-            {
-                Console.WriteLine($"[{i + 1}] {newChairs[i]}");
-            }
+            var Chosen = WhatChairs(stoelen, DynamicRoomData, chairs, room);
+            
+            
 
             /*for (int i = 0; i < DynamicRoomData[Int32.Parse((room - 1).ToString())]["row_number"].Count - 1; i++)
             {
