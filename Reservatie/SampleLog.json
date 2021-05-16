@@ -5,7 +5,7 @@
     "Reservatie_code": "128HDZC0K4OLUSHJ",
     "Film": "John Wick",
     "Zaal": "1",
-    "Stoel_num": [ "1A", "2A" ],
+    "Stoel_num": [ "1A", "2A", "10A" ],
     "Datum": "10-5-2021",
     "Tijd": "11:00"
   },

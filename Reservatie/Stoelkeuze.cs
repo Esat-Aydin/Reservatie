@@ -63,7 +63,7 @@ namespace Chair
             }
 
         }
-        public string[] WhatChairs(int howMany, dynamic roomdata, List<string> AlreadyTaken, dynamic room)
+        public string[] WhatChairs(int howMany, dynamic roomdata, List<string> AlreadyTaken, dynamic room, string[][] AllData, string[]Alphabet, dynamic DynamicRoomData)
         {
             var DynLetters = roomdata[Convert.ToInt32("" + room)]["row_number"];
             var DynNumbers = roomdata[Convert.ToInt32("" + room)]["seat_number"];
@@ -79,21 +79,66 @@ namespace Chair
             }
             string[] newChairs = new string[howMany];
             string input = "";
+            string differentinput = "";
             for(int i = 0; i < howMany; i++)
             {
                 input = Console.ReadLine();
+                input = input.ToUpper();
                 if (AlreadyTaken.Contains(input))
                 {
                     Console.WriteLine("Deze stoelen zijn al gereservereerd");
                     i--;
                 }
-                else if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32(""+ input[1])) && input.Length == 2)
+                else if (newChairs.Contains(input))
                 {
-                    newChairs[i] = input;
+                    Console.WriteLine("U heeft deze stoel al gekozen.");
+                    i--;
                 }
-                else if(Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0])) && input.Length == 2)
+                else if (input.Length == 3)
+                {
+                    if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1] + input[2]))){
+                        differentinput = "" + input[1] + input[2] + input[0];
+                        newChairs[i] = differentinput;
+                        Console.WriteLine(newChairs[i]);
+                        var newData = changeAllData(AllData, differentinput, Alphabet);
+                        console(room, Alphabet, DynamicRoomData, newData);
+                        Console.WriteLine("Type nu de volgende stoel in.");
+                    }
+                    else if(Letters.Contains("" + input[2]) && Numbers.Contains(Convert.ToInt32("" + input[0] + input[1])))
+                    {
+                        newChairs[i] = input;
+                        Console.WriteLine(newChairs[i]);
+                        var newData = changeAllData(AllData, input, Alphabet);
+                        console(room, Alphabet, DynamicRoomData, newData);
+                        Console.WriteLine("Type nu de volgende stoel in.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                        i--;
+                    }
+                }
+                else if (Letters.Contains("" + input[0]) && Letters.Contains("" + input[1]) && input.Length ==2)
+                {
+                    Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    i--;
+                }
+                else if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1])) && input.Length == 2)
+                {
+                    differentinput = "" + input[1] + input[0];
+                    newChairs[i] = differentinput;
+                    Console.WriteLine(newChairs[i]);
+                    var newData = changeAllData(AllData, differentinput, Alphabet);
+                    console(room, Alphabet, DynamicRoomData, newData);
+                    Console.WriteLine("Type nu de volgende stoel in.");
+                }
+                else if (Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0])) && input.Length == 2)
                 {
                     newChairs[i] = input;
+                    Console.WriteLine(newChairs[i]);
+                    var newData = changeAllData(AllData, input, Alphabet);
+                    console(room, Alphabet, DynamicRoomData, newData);
+                    Console.WriteLine("Type nu de volgende stoel in.");
                 }
                 else
                 {
@@ -105,8 +150,24 @@ namespace Chair
             Console.WriteLine(newChairs.Length);
             return newChairs;
         }
-
-
+        public string[][] changeAllData(string[][] AllData, string input, string[] Alphabet)
+        {
+            int numberPos;
+            int letterPos;
+            if (input.Length == 2)
+            {
+                numberPos = Convert.ToInt32("" + input[0]) - 1;
+                letterPos = Array.IndexOf(Alphabet, input[1]) + 1;
+            }
+            else
+            {
+                numberPos = Convert.ToInt32("" + input[0] + input[1]) - 1;
+                letterPos = Array.IndexOf(Alphabet, input[2]) + 1;
+            }
+            AllData[letterPos][numberPos] = "-";
+            return AllData;
+        }
+            
 
         public void Chair()
         {
@@ -147,6 +208,22 @@ namespace Chair
                 AllData[d] = new string[DynamicRoomData[Int32.Parse((room - 1).ToString())]["seat_number"].Count];
             }
             string[] Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+            for(int i = 0; i< chairs.Count; i++)
+            {
+                if(chairs[i].Length == 2)
+                {
+                    int numberPos = Convert.ToInt32("" + chairs[i][0]) - 1;
+                    int letterPos = Array.IndexOf(Alphabet, chairs[i][1]) + 1;
+                    AllData[letterPos][numberPos] = "X";
+                }
+                else if (chairs[i].Length == 3)
+                {
+                    int numberPos = Convert.ToInt32("" + chairs[i][0]+chairs[i][1]) - 1;
+                    int letterPos = Array.IndexOf(Alphabet, chairs[i][2]) + 1;
+                    AllData[letterPos][numberPos] = "X";
+                }
+            } 
+            /*
             int checkallchairs = 0;
             for (int r = 0; r < AllData.Length; r++)
             {
@@ -154,9 +231,19 @@ namespace Chair
                 {
                     if (!(chairs.Count == 0))
                     {
-                        if (chairs[checkallchairs][0].ToString() == $"{s + 1}" && chairs[checkallchairs][1].ToString() == Alphabet[r])
+                        if (chairs[checkallchairs].Length == 2)
                         {
-                            AllData[r][s] = "X";
+                            if (chairs[checkallchairs][0].ToString() == $"{s + 1}" && chairs[checkallchairs][1].ToString() == Alphabet[r])
+                            {
+                                AllData[r][s] = "X";
+                                if (!(checkallchairs >= chairs.Count - 1))
+                                {
+                                    checkallchairs++;
+                                }
+                            }
+                        }
+                        else if (chairs[checkallchairs].Length == 3)
+                        {
                             if (!(checkallchairs >= chairs.Count - 1))
                             {
                                 checkallchairs++;
@@ -169,7 +256,7 @@ namespace Chair
                     }
                 }
             }
-            
+            */
             Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
             ConsoleCommands.Textkleur("zwart");
             int stoelen = Int32.Parse(Console.ReadLine());
@@ -187,7 +274,7 @@ namespace Chair
              *  - controlleren of er 1 numeric
              *  - controlleren of de andere dan in het alphabet zit/charater to int!!!!!!!!!
              */
-            var Chosen = WhatChairs(stoelen, DynamicRoomData, chairs, room);
+            var Chosen = WhatChairs(stoelen, DynamicRoomData, chairs, room, AllData, Alphabet, DynamicRoomData);
             
             
 
