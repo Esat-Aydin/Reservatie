@@ -26,8 +26,6 @@ namespace Gebruiker
         public string Film_Day { get; set; }
         public string Password { get; set; }
         public bool isAdmin { get; set; }
-
-
         public Gebruiker(string Naam = null, string Email = null, string Password = null, bool isAdmin = false)
         {
             this.Naam = Naam;
@@ -38,8 +36,6 @@ namespace Gebruiker
             this.isAdmin = isAdmin;
 
         }
-
-
         public void UserInputMethod(string UserInput)
         {
             Film.Film FilmObject = new Film.Film();
@@ -396,7 +392,6 @@ namespace Gebruiker
             UserInput = Console.ReadLine();
             UserInputMethod(UserInput);
         }
-
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
             List<Gebruiker> _data = new List<Gebruiker>();
@@ -934,7 +929,6 @@ namespace Gebruiker
 
 
         }
-
         public static string DagKeuze(string DagenKeuze)
         {
 
@@ -967,8 +961,6 @@ namespace Gebruiker
                 return "Zondag";
             }
         }
-
-
         public static void Snacks(Gebruiker Klant)
         {
             string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden

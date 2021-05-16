@@ -4,7 +4,7 @@
     "FilmTitle": "John Wick",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
-    "FilmPrice" : "10.99",
+    "FilmPrice": "10.99",
     "FilmDays": {
       "Maandag": [ "16:00", "19:00", "23:30" ],
       "Dinsdag": [],
@@ -12,7 +12,7 @@
       "Donderdag": [],
       "Vrijdag": [ "16:00", "19:00", "23:30" ],
       "Zaterdag": [ "16:00", "19:00", "23:30" ],
-      "Zondag": [ "16:00", "19:00"]
+      "Zondag": [ "16:00", "19:00" ]
     }
   },
   {

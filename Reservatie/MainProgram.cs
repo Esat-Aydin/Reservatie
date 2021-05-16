@@ -91,6 +91,10 @@ namespace Cinema
             {
                 Genre_search = "Familie";
             }
+            else if(Genre_select == "8")
+            {
+                Genre_search = "Horror";
+            }
             return Genre_search;
         }
     }
@@ -112,9 +116,10 @@ namespace Cinema
         public static dynamic JsonSerializer(string Object)
         {
 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
