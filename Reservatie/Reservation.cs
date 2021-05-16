@@ -360,9 +360,10 @@ namespace Reservation
                             string Film_keuze = Console.ReadLine();
                             if (Int32.TryParse(Film_keuze, out IntFilmKeuze))
                             {
-                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Scherm.Screens.CinemaBanner();
                                 Console.Write($"\nU heeft gekozen voor");  ConsoleCommands.Textkleur("rood");
-                                Console.Write($" { ListofFilms[IntFilmKeuze - 1]}"); ConsoleCommands.Textkleur("wit");Console.Write(".\n\nVoor welke van de onderstaande tijden zou u willen reserveren?\n");
+                                Console.Write($" { ListofFilms[IntFilmKeuze - 1]}"); ConsoleCommands.Textkleur("wit");Console.Write($". Uw gekozen datum: "); ConsoleCommands.Textkleur("rood");
+                                Console.Write($"{ DayReturner(ConvertedDate)}, {FilmDateSearch}\n\n"); ConsoleCommands.Textkleur("wit"); Console.Write($"Voor welke van de onderstaande tijden zou u willen reserveren?\n");
                                 Console.WriteLine("_____________________________________________________________________________________________\n");
                                 if (DictofListofString[ListofFilms[IntFilmKeuze - 1]].Count == 1)
                                 {
