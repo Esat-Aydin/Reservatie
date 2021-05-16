@@ -47,10 +47,9 @@ namespace Cinema
         public void RestartOption()
         {
 
-            Textkleur("wit");
-            Console.WriteLine("-----------------------------------------------------------------");
-            Textkleur("wit");
-            Console.WriteLine("Toets 'R' om het progamma opnieuw op te starten.");
+            Textkleur("wit");Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.Write("Toets ["); Textkleur("zwart"); Console.Write("R"); Textkleur("wit"); Console.Write("] om het progamma opnieuw op te starten.\n");
+            Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Textkleur("zwart");
             string restart = Console.ReadLine();
             if (restart.ToUpper() == "R")
@@ -92,6 +91,10 @@ namespace Cinema
             {
                 Genre_search = "Familie";
             }
+            else if(Genre_select == "8")
+            {
+                Genre_search = "Horror";
+            }
             return Genre_search;
         }
     }
@@ -102,6 +105,8 @@ namespace Cinema
         public string Email { get; set; }
         public string Reservatie_code { get; set; }
         public string Film { get; set; }
+        public string FilmPrice { get; set; }
+        public string FilmDate { get; set; }
         public string Film_Day { get; set; }
         public string FilmTime { get; set; }
         public string Zaal { get; set; }
@@ -111,9 +116,10 @@ namespace Cinema
         public static dynamic JsonSerializer(string Object)
         {
 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\SampleLog.json");
+
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -141,6 +147,7 @@ namespace Cinema
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(120, 40);
             Scherm.Screens.AdminOrUserScreen();
         }
     }

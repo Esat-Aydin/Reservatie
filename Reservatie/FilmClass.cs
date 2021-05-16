@@ -19,7 +19,6 @@ namespace Film
         public string[] FilmGenres { get; set; }
         public string FilmTitle { get; set; }
         public int FilmRoom { get; set; }
-
         public string[] FilmTimes { get; set; }
         public Dictionary<string, List<string>> FilmDays { get; set; }
 
@@ -33,13 +32,12 @@ namespace Film
         }
         public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
-
             List<Film> _data = new();
-            var FilmDataJson = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var FilmDataJson = File.ReadAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
             FilmObjectJson.Add(FilmObject);
             FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
+            File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
         public void Film_check(dynamic DynamicFilmData, int i)
         {
@@ -50,27 +48,27 @@ namespace Film
         {
             if (Chosen_film == "1")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[0]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[0] + "\n") ;
             }
             else if (Chosen_film == "2")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[1]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[1] + "\n");
             }
             else if (Chosen_film == "3")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[2]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[2] + "\n");
             }
             else if (Chosen_film == "4")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[3]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[3] + "\n");
             }
             else if (Chosen_film == "5")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[4]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[4] + "\n");
             }
             else if (Chosen_film == "6")
             {
-                Console.WriteLine("U heeft gekozen voor de film: " + Show_films[5]);
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[5] + "\n");
             }
 
         }
