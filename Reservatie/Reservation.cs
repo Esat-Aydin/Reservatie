@@ -284,15 +284,6 @@ namespace Reservation
                 DagenvdWeek.Add("Zaterdag");
                 DagenvdWeek.Add("Zondag");
                 int Count = 1;
-                ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\tNaar welke film bent u opzoek: \n\n\t\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                string Film = Console.ReadLine();
-                if (Film == "0")
-                {
-                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
-                }
                 List<string> ListofFilms = new List<string>();
                 string Times = null;
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
@@ -741,7 +732,7 @@ namespace Reservation
                 // Email geadresseerde
                 message.To.Add(new MailboxAddress(Klant.Naam, Klant.Email));
                 // Email onderwerp
-                message.Subject = $"Bevestiging Bioscoop Reservering {Klant.Film}";
+                message.Subject = $"Annuleer bevestiging Bioscoop Reservering {Klant.Film}";
                 // Email text
                 message.Body = new TextPart("plain")
                 {
@@ -814,6 +805,50 @@ We hopen u snel te zien in de bioscoop!
                 DynamicUserData.Remove(DynamicUserData[Index]);
                 dynamic UserData = JsonConvert.SerializeObject(DynamicUserData);
                 File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", UserData);
+                Console.WriteLine("Uw reservering is geannuleerd, we hopen u snel weer te zien in onze bioscoop");
+                try
+                {
+                    var message = new MimeMessage();
+                    // Email verzender
+                    message.From.Add(new MailboxAddress("ProjectB", "ProjectB1J@gmail.com"));
+                    // Email geadresseerde
+                    message.To.Add(new MailboxAddress(DynamicUserData[Index]["Naam"], DynamicUserData[Index]["Email"]));
+                    // Email onderwerp
+                    message.Subject = $"Bevestiging Bioscoop Reservering {DynamicUserData[Index]["Film"]}";
+                    // Email text
+                    message.Body = new TextPart("plain")
+                    {
+                        Text = @$"Hallo {DynamicUserData[Index]["Naam"]},
+
+Uw reservering met de reservatie code: {DynamicUserData[Index]["Reservatie_code"]} is geannuleerd.
+
+Het betaalde bedrag wordt binnen 5 werkdagen terug gestort op uw rekening.
+" +
+ 
+
+        "\nMet vriendelijke groet,\n\n" +
+        "CinemaReservation"
+
+                    };
+
+
+                    using (var client = new SmtpClient())
+                    {
+                        client.Connect("smtp.gmail.com", 587, false);
+
+                        // authenticate smtp server
+                        client.Authenticate("ProjectB1J@gmail.com", "Hogeschoolrotterdam");
+                        // verzenden email
+                        client.Send(message);
+                        client.Disconnect(true);
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    };
+                }
+                catch
+                {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
+                }
             }
             if(Optie == "2")
             {
