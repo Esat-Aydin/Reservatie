@@ -221,39 +221,35 @@ namespace Reservation
                 ConsoleCommands.Textkleur("zwart");
                 string Chosen_film = Console.ReadLine();
                 DatumChecker(Chosen_film, Show_films, Show_tijden);
-
-
-
-
-
-
             }
 
             else if (UserInput == "3")
             {
                 Scherm.Screens.CinemaBanner();
-                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
+                var table = new ConsoleTable("Film Naam", "Film genres", "Zaal"); //Preset Table
                 dynamic genres = DynamicFilmData[0]["FilmGenres"];
                 List<string> All_Films = new List<string>();
-                var zaal = DynamicFilmData[0]["FilmRoom"];
+                int zaal = 0;
+                int Count = 1;
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
+             
                     All_Films.Add(DynamicFilmData[i]["FilmTitle"].ToString()); //Lijst aangemaakt met alle films
                     All_Films.Sort(); //Lijst met films gesorteerd
+                    
                 }
                 ConsoleCommands.Textkleur("wit");
+                
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
-
-                    for (int j = 0; j < DynamicFilmData.Count; j++)
-                    {
-                        if (All_Films[i] == DynamicFilmData[j]["FilmTitle"].ToString())
+                    if (All_Films[i] == DynamicFilmData[i]["FilmTitle"].ToString())
                         {
-                            genres = DynamicFilmData[j]["FilmGenres"]; //Juiste genres zoeken bij de films
-                            zaal = DynamicFilmData[j]["FilmRoom"]; //Juiste zaal zoeken bij de films
-                            table.AddRow($"Toets [{i + 1}] voor {All_Films[i]}", genres[0], genres[1], genres[2], zaal); //Tabel invullen met juiste data
+                            genres = DynamicFilmData[i]["FilmGenres"].ToString(); //Juiste genres zoeken bij de films
+                            zaal = DynamicFilmData[i]["FilmRoom"]; //Juiste zaal zoeken bij de films
+                            table.AddRow($"Toets [{Count}] voor {All_Films[i]}", (genres[0],genres[1],genres[2]), zaal); //Tabel invullen met juiste data
+                            Count++;
                         }
-                    }
+                    
                 }
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -348,8 +344,6 @@ namespace Reservation
                         
                     }
                 }
-            
-        
         public void DatumChecker(string Chosen_film, List<string> Show_films, Dictionary<string, string[]> Show_tijden)
         {
             Gebruiker.Gebruiker gebruiker = new Gebruiker.Gebruiker();
@@ -707,7 +701,6 @@ We hopen u snel te zien in de bioscoop!
                 return "Zaterdag";
             }
         }
-
         public static void Betaling(Gebruiker.Gebruiker Klant = null,decimal totaal = 0, List<string> Mandje = null)
         {
             
