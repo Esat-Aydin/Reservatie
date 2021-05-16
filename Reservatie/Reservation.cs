@@ -383,6 +383,51 @@ namespace Reservation
                                 }
 
                                 CorrectInput = true;
+                                int intTijdKeuze = 0;
+                                bool CorrectInput2 = false;
+                                while(CorrectInput2 == false)
+                                {
+                                    Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                                    string Tijd_keuze = Console.ReadLine();
+                                    if (Int32.TryParse(Tijd_keuze, out intTijdKeuze))
+                                    {
+                                        if (intTijdKeuze > 3)
+                                        {
+                                            Console.WriteLine($"Dat is geen geldige input! Gebruik een van de zwart gekleurde nummers als input.");
+                                        }
+                                        else
+                                        {
+                                            if (intTijdKeuze == 1) 
+                                            {
+                                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                                Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]); ConsoleCommands.Textkleur("wit");
+                                                Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
+                                                Thread.Sleep(1500);
+                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][0], FilmDateSearch);
+                                            }
+                                            else if (intTijdKeuze == 2)
+                                            {
+                                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                                Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]); ConsoleCommands.Textkleur("wit");
+                                                Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
+                                                Thread.Sleep(1500);
+                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][1], FilmDateSearch);
+                                            }
+                                            else if (intTijdKeuze == 3)
+                                            {
+                                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                                Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]); ConsoleCommands.Textkleur("wit");
+                                                Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
+                                                Thread.Sleep(1500);
+                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][2], FilmDateSearch);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"Dat is geen geldige input! Gebruik een van de zwart gekleurde nummers als input.");
+                                    }
+                                }
                             }
                             else
                             {
@@ -592,7 +637,7 @@ namespace Reservation
             // informatie voor eventueel mailen reservatie code.
             Scherm.Screens.CinemaBanner();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            ConsoleCommands.Textkleur("groen");
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en Email adres nodig.");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("rood");
