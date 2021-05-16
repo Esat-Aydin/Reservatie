@@ -245,11 +245,11 @@ namespace Reservation
                 Console.Write("\t\t\tHieronder vind u een lijst met alle films: \n\n\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
-                string Film = Console.ReadLine();
-                if (Film == "0")
+                /*string Film = Console.ReadLine();
+                /*if (Film == "0")
                 {
                     Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
-                }
+                }*/
                 var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
                 dynamic genres = DynamicFilmData[0]["FilmGenres"];
                 List<string> All_Films = new List<string>();
@@ -260,7 +260,7 @@ namespace Reservation
                     All_Films.Sort(); //Lijst met films gesorteerd
                 }
                 ConsoleCommands.Textkleur("wit");
-                for (int i = 0; i < DynamicFilmData.Count; i++)
+                for (int i = 0; i < All_Films.Count; i++)
                 {
 
                     for (int j = 0; j < DynamicFilmData.Count; j++)

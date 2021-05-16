@@ -92,7 +92,7 @@ namespace MedewerkerClass
                 try
                 {
                     int StringArrayGenreLength = Int32.Parse(StringArrayGenreLength_Input);
-                    string[] FilmGenresArray = new string[StringArrayGenreLength];
+                    string[] FilmGenresArray = new string[3];
                     Scherm.Screens.CinemaBanner();
                     Console.WriteLine("\t\t\t FILM TOEVOEGEN");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -402,7 +402,7 @@ namespace MedewerkerClass
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             bool ReturnValue = false;
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
             List<string> ListofAccountsNames = new List<string>();
             List<string> ListofAccountsPasswords = new List<string>();
