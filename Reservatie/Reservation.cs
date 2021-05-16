@@ -304,6 +304,7 @@ namespace Reservation
                     }
                 }
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                bool filmsShown = false;
                 while (true)
                 {
                     if (DateInFutureCheck(TestDateTime) == true)
@@ -343,7 +344,11 @@ namespace Reservation
                             }
 
                         }
-                        table.Write(Format.Alternative);
+                        while (filmsShown == false)
+                        {
+                            table.Write(Format.Alternative);
+                            filmsShown = true;
+                        }
 
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("zwart");
@@ -355,12 +360,27 @@ namespace Reservation
                             string Film_keuze = Console.ReadLine();
                             if (Int32.TryParse(Film_keuze, out IntFilmKeuze))
                             {
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine($"U heeft gekozen voor {ListofFilms[IntFilmKeuze - 1]}.\nVoor welke van de onderstaande tijden zou u willen reserveren?");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.Write($"\nU heeft gekozen voor");  ConsoleCommands.Textkleur("rood");
+                                Console.Write($" { ListofFilms[IntFilmKeuze - 1]}"); ConsoleCommands.Textkleur("wit");Console.Write(".\n\nVoor welke van de onderstaande tijden zou u willen reserveren?\n");
                                 Console.WriteLine("_____________________________________________________________________________________________\n");
-                                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("1"); Console.Write($"] voor: {Show_Tijden[0]}.\n");
-                                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("2"); Console.Write($"] voor: {Show_Tijden[1]}.\n");
-                                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("3"); Console.Write($"] voor: {Show_Tijden[2]}.\n");
+                                if (DictofListofString[ListofFilms[IntFilmKeuze - 1]].Count == 1)
+                                {
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("1"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]}.\n");
+
+                                }
+                                else if (DictofListofString[ListofFilms[IntFilmKeuze - 1]].Count == 2)
+                                {
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]}.\n");
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]}.\n");
+                                }
+                                else if (DictofListofString[ListofFilms[IntFilmKeuze - 1]].Count == 3)
+                                {
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]}.\n");
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]}.\n");
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]}.\n");
+                                }
+
                                 CorrectInput = true;
                             }
                             else
