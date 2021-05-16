@@ -1,4 +1,4 @@
-﻿using Cinema;
+using Cinema;
 using ConsoleTables;
 using MailKit.Net.Smtp;
 using MimeKit;
@@ -8,9 +8,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
 using System.Net;
+using ConsoleTables;
+using Cinema;
+using Film;
+using Scherm;
+using Reservation;
+using Gebruiker;
+using Chair;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Globalization;
+
 
 namespace Reservation
 {
@@ -272,7 +280,11 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
 
+                //var stoelen = new StoelKeuze(All_Films[choice-1],"10-5-2021","11:00");
+                var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
+                stoelen.Chair();
             }
+
             else if (UserInput == "4")
             {
                 Scherm.Screens.CinemaBanner();
