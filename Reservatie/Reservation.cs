@@ -25,9 +25,9 @@ namespace Reservation
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -463,7 +463,7 @@ namespace Reservation
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
                 List<JsonData> _data = new List<JsonData>();
-                var DataUser = File.ReadAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+                var DataUser = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
                 var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                           ?? new List<JsonData>();
 
@@ -482,7 +482,7 @@ namespace Reservation
                 });
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
-                File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+                File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
@@ -631,7 +631,7 @@ We hopen u snel te zien in de bioscoop!
             {
                 DynamicUserData.Remove(DynamicUserData[Index]);
                 dynamic UserData = JsonConvert.SerializeObject(DynamicUserData);
-                File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", UserData);
+                File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", UserData);
             }
             if(Optie == "2")
             {
@@ -718,22 +718,28 @@ We hopen u snel te zien in de bioscoop!
             if (Klant != null && Mandje == null)
             {
                 Scherm.Screens.CinemaBanner();
-                Console.WriteLine($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
+                Console.Write($"\nU heeft de volgende items geselecteerd:\n\nFilm: "); ConsoleCommands.Textkleur("rood");
+                Console.Write(Klant.Film); ConsoleCommands.Textkleur("wit");
             }
             if (Mandje != null)
             {
                 Scherm.Screens.CinemaBanner();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
+                Console.Write($"\nU heeft de volgende items geselecteerd:\n\nFilm: "); ConsoleCommands.Textkleur("rood");
+                Console.Write(Klant.Film); ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("\nSnacks: ");
                 for (int i = 0; i < Mandje.Count; i += 2)
                 {
-                    Console.Write(Mandje[i] + '\n');
+                    ConsoleCommands.Textkleur("rood");
+                    Console.Write(Mandje[i] + '\n'); ConsoleCommands.Textkleur("wit");
                 }
             }
 
             totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
-            Console.WriteLine($"\nDe totaal prijs is {totaal}");
+            Console.Write($"\nU heeft de volgende items geselecteerd:\n\nFilm: "); ConsoleCommands.Textkleur("rood");
+            Console.Write(Klant.Film); ConsoleCommands.Textkleur("wit");
+            Console.Write($"\n\nDe totaal prijs is: "); ConsoleCommands.Textkleur("rood");
+            Console.Write(totaal + "\n"); ConsoleCommands.Textkleur("wit");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
             Console.WriteLine("_____________________________________________________________________________________________\n");

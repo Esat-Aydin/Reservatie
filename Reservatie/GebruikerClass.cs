@@ -971,7 +971,7 @@ namespace Gebruiker
 
         public static void Snacks(Gebruiker Klant)
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             ConsoleCommands CommandLine = new ConsoleCommands();
             List<string> Mandje = new List<string>();
