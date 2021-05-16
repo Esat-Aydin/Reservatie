@@ -221,35 +221,39 @@ namespace Reservation
                 ConsoleCommands.Textkleur("zwart");
                 string Chosen_film = Console.ReadLine();
                 DatumChecker(Chosen_film, Show_films, Show_tijden);
+
+
+
+
+
+
             }
 
             else if (UserInput == "3")
             {
                 Scherm.Screens.CinemaBanner();
-                var table = new ConsoleTable("Film Naam", "Film genres", "Zaal"); //Preset Table
+                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
                 dynamic genres = DynamicFilmData[0]["FilmGenres"];
                 List<string> All_Films = new List<string>();
-                int zaal = 0;
-                int Count = 1;
+                var zaal = DynamicFilmData[0]["FilmRoom"];
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
-             
                     All_Films.Add(DynamicFilmData[i]["FilmTitle"].ToString()); //Lijst aangemaakt met alle films
                     All_Films.Sort(); //Lijst met films gesorteerd
-                    
                 }
                 ConsoleCommands.Textkleur("wit");
-                
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
-                    if (All_Films[i] == DynamicFilmData[i]["FilmTitle"].ToString())
+
+                    for (int j = 0; j < DynamicFilmData.Count; j++)
+                    {
+                        if (All_Films[i] == DynamicFilmData[j]["FilmTitle"].ToString())
                         {
-                            genres = DynamicFilmData[i]["FilmGenres"].ToString(); //Juiste genres zoeken bij de films
-                            zaal = DynamicFilmData[i]["FilmRoom"]; //Juiste zaal zoeken bij de films
-                            table.AddRow($"Toets [{Count}] voor {All_Films[i]}", (genres[0],genres[1],genres[2]), zaal); //Tabel invullen met juiste data
-                            Count++;
+                            genres = DynamicFilmData[j]["FilmGenres"]; //Juiste genres zoeken bij de films
+                            zaal = DynamicFilmData[j]["FilmRoom"]; //Juiste zaal zoeken bij de films
+                            table.AddRow($"Toets [{i + 1}] voor {All_Films[i]}", genres[0], genres[1], genres[2], zaal); //Tabel invullen met juiste data
                         }
-                    
+                    }
                 }
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -272,7 +276,7 @@ namespace Reservation
                 DagenvdWeek.Add("Zaterdag");
                 DagenvdWeek.Add("Zondag");
                 int Count = 1;
-
+                
                 List<string> ListofFilms = new List<string>();
                 string Times = null;
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
@@ -282,68 +286,223 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string FilmDateSearch = Console.ReadLine();
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                string ConvertedDate = DateConverter(FilmDateSearch);
-                var table = new ConsoleTable("Film", DayReturner(ConvertedDate) + ", " + FilmDateSearch);
-                for (int i = 0; i < DynamicFilmData.Count; i++)
+                bool InputisDate = false;
+                DateTime TestDateTime = new();
+                while (InputisDate == false)
                 {
-                    DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()] = new List<string>();
-                    if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
+                    if (IsDateUserInputInteger(FilmDateSearch) == true && (FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/')))
                     {
-
-
-                        for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
-                        {
-
-                            Show_Tijden.Add(DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)][x].ToString());
-                            DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()].Add(DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)][x].ToString());
-                        }
-                        if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count == 1)
-                        {
-                            Times = DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][0];
-                        }
-                        else if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count == 2)
-                        {
-                            Times = DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][0] + ", " + DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][1];
-                        }
-                        else if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count == 3)
-                        {
-                            Times = DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][0] + ", " + DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][1] + ", " + DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][2];
-                        }
-                            table.AddRow(("Toets [" + (Count) + "] voor " + DynamicFilmData[i]["FilmTitle"]), Times);
-                            ListofFilms.Add(DynamicFilmData[i]["FilmTitle"].ToString());
-
-                            Count++;
-                        }
-                    
+                        TestDateTime = DateTimeReturner(FilmDateSearch);
+                        InputisDate = true;
+                    }
+                    else
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Dat is geen geldige input! Probeer het opnieuw met de format DD/MM/YYYY - Voorbeeld: 16/05/2021");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart"); FilmDateSearch = Console.ReadLine();
+                    }
                 }
-                table.Write(Format.Alternative);
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                bool filmsShown = false;
+                while (true)
+                {
+                    if (DateInFutureCheck(TestDateTime) == true)
+                    {
+                        string ConvertedDate = DateConverter(FilmDateSearch, TestDateTime);
+
+                        var table = new ConsoleTable("Film", DayReturner(ConvertedDate) + ", " + FilmDateSearch);
+                        for (int i = 0; i < DynamicFilmData.Count; i++)
+                        {
+                            DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()] = new List<string>();
+                            if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count > 0)
+                            {
+
+
+                                for (int x = 0; x < DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
+                                {
+
+                                    Show_Tijden.Add(DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)][x].ToString());
+                                    DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()].Add(DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)][x].ToString());
+                                }
+                                if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count == 1)
+                                {
+                                    Times = DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][0];
+                                }
+                                else if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count == 2)
+                                {
+                                    Times = DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][0] + ", " + DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][1];
+                                }
+                                else if (DynamicFilmData[i]["FilmDays"][DayReturner(ConvertedDate)].Count == 3)
+                                {
+                                    Times = DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][0] + ", " + DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][1] + ", " + DictofListofString[DynamicFilmData[i]["FilmTitle"].ToString()][2];
+                                }
+                                table.AddRow(("Toets [" + (Count) + "] voor " + DynamicFilmData[i]["FilmTitle"]), Times);
+                                ListofFilms.Add(DynamicFilmData[i]["FilmTitle"].ToString());
+
+                                Count++;
+                            }
+
+                        }
+                        while (filmsShown == false)
+                        {
+                            table.Write(Format.Alternative);
+                            filmsShown = true;
+                        }
+
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("zwart");
                         int IntFilmKeuze = 0;
-                        
+
                         bool CorrectInput = false;
                         while (CorrectInput == false)
                         {
                             string Film_keuze = Console.ReadLine();
                             if (Int32.TryParse(Film_keuze, out IntFilmKeuze))
                             {
-                                ConsoleCommands.Textkleur("wit");
-                                Console.WriteLine($"U heeft gekozen voor {ListofFilms[IntFilmKeuze - 1]}.\nVoor welke van de onderstaande tijden zou u willen reserveren?");
+                                Scherm.Screens.CinemaBanner();
+                                Console.Write($"\nU heeft gekozen voor");  ConsoleCommands.Textkleur("rood");
+                                Console.Write($" { ListofFilms[IntFilmKeuze - 1]}"); ConsoleCommands.Textkleur("wit");Console.Write($". Uw gekozen datum: "); ConsoleCommands.Textkleur("rood");
+                                Console.Write($"{ DayReturner(ConvertedDate)}, {FilmDateSearch}\n\n"); ConsoleCommands.Textkleur("wit"); Console.Write($"Voor welke van de onderstaande tijden zou u willen reserveren?\n");
                                 Console.WriteLine("_____________________________________________________________________________________________\n");
-                                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("1"); Console.Write($"] voor: {Show_Tijden[0]}.\n");
-                                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("2"); Console.Write($"] voor: {Show_Tijden[1]}.\n");
-                                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("3"); Console.Write($"] voor: {Show_Tijden[2]}.\n");
+                                if (DictofListofString[ListofFilms[IntFilmKeuze - 1]].Count == 1)
+                                {
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); ConsoleCommands.Textkleur("wit"); Console.Write("1"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]}.\n");
+
+                                }
+                                else if (DictofListofString[ListofFilms[IntFilmKeuze - 1]].Count == 2)
+                                {
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]}.\n");
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]}.\n");
+                                }
+                                else if (DictofListofString[ListofFilms[IntFilmKeuze - 1]].Count == 3)
+                                {
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]}.\n");
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]}.\n");
+                                    ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart");  Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor: {DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]}.\n");
+                                }
+
                                 CorrectInput = true;
+                                int intTijdKeuze = 0;
+                                bool CorrectInput2 = false;
+                                while(CorrectInput2 == false)
+                                {
+                                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                                    string Tijd_keuze = Console.ReadLine();
+                                    if (Int32.TryParse(Tijd_keuze, out intTijdKeuze))
+                                    {
+                                        if (intTijdKeuze > 3 || intTijdKeuze <= 0)
+                                        {
+                                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                            Console.WriteLine($"Dat is geen geldige input! Gebruik een van de zwart gekleurde nummers als input.");
+                                        }
+                                        else
+                                        {
+                                            if (intTijdKeuze == 1) 
+                                            {
+                                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                                Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]); ConsoleCommands.Textkleur("wit");
+                                                Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
+                                                Thread.Sleep(1500);
+                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][0], FilmDateSearch);
+                                            }
+                                            else if (intTijdKeuze == 2)
+                                            {
+                                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                                Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]); ConsoleCommands.Textkleur("wit");
+                                                Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
+                                                Thread.Sleep(1500);
+                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][1], FilmDateSearch);
+                                            }
+                                            else if (intTijdKeuze == 3)
+                                            {
+                                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                                Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]); ConsoleCommands.Textkleur("wit");
+                                                Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
+                                                Thread.Sleep(1500);
+                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][2], FilmDateSearch);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                        Console.WriteLine($"Dat is geen geldige input! Gebruik een van de zwart gekleurde nummers als input.");
+                                    }
+                                }
                             }
                             else
                             {
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine($"Dat is geen geldige input!");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
                             }
                         }
-                        
+
+                    }
+                    else
+                    {
+                        bool ErrorFixed = false;
+                        while (ErrorFixed == false)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("De ingevoerde datum is niet in de toekomst! Voer een toekomstige datum (vanaf vandaag) in.");
+                            Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            FilmDateSearch = Console.ReadLine();
+                            if (DateInFutureCheck(DateTimeReturner(FilmDateSearch)) == true)
+                            {
+                                TestDateTime = DateTimeReturner(FilmDateSearch);
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ErrorFixed = true;
+                            }
+                            else
+                            {
+                                
+                                ErrorFixed = false;
+                            }
+
+                        }
                     }
                 }
+            }
+        }
+        bool IsDateUserInputInteger(string UserInput)
+        {
+            try
+            {
+                int x = 0;
+
+                var SlicedDays = UserInput.Substring(0, 2);
+                var SlicedMonths = UserInput.Substring(4, 2);
+                var SlicedYears = UserInput.Substring(6, 2);
+                Int32.TryParse(SlicedDays, out x);
+                Int32.TryParse(SlicedMonths, out x);
+                Int32.TryParse(SlicedYears, out x);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        DateTime DateTimeReturner(string FilmDateSearch)
+        {
+            int InputDays = 0;
+            string DaysofInput = FilmDateSearch.Substring(0, 2);
+            Int32.TryParse(DaysofInput, out InputDays);
+
+            int InputMonth = 0;
+            string MonthofInput = FilmDateSearch.Substring(3, 2);
+            Int32.TryParse(MonthofInput, out InputMonth);
+
+            int InputYear = 0;
+            string YearofInput = FilmDateSearch.Substring(6, 4);
+            Int32.TryParse(YearofInput, out InputYear);
+            var TestDateTime = new DateTime(InputYear, InputMonth, InputDays, 10, 2, 0, DateTimeKind.Local);
+            return TestDateTime;
+        }
         public void DatumChecker(string Chosen_film, List<string> Show_films, Dictionary<string, string[]> Show_tijden)
         {
             Gebruiker.Gebruiker gebruiker = new Gebruiker.Gebruiker();
@@ -374,6 +533,7 @@ namespace Reservation
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("zwart");
                     string Chosen_date = Console.ReadLine();
+                    var UserDateTime = DateTimeReturner(Chosen_date);
                     if (Chosen_date.Length != 10)
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -383,7 +543,7 @@ namespace Reservation
                         DatumChecker(Chosen_film, Show_films, Show_tijden);
                     }
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConvertedDate = DateConverter(Chosen_date);
+                    ConvertedDate = DateConverter(Chosen_date, UserDateTime);
                     Dagvdweek = DayReturner(ConvertedDate);
                     if (DynamicFilmData[i - 1]["FilmDays"][Dagvdweek].Count > 0)
                     {
@@ -482,7 +642,7 @@ namespace Reservation
             // informatie voor eventueel mailen reservatie code.
             Scherm.Screens.CinemaBanner();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            ConsoleCommands.Textkleur("groen");
+            ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Om te kunnen reserveren hebben wij uw naam en Email adres nodig.");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("rood");
@@ -518,8 +678,9 @@ namespace Reservation
             Console.WriteLine(GeneratedCode);
             ConsoleCommands.Textkleur("wit");
             Console.Write("\nEr is een bevestigingsmail verzonden naar: "); ConsoleCommands.Textkleur("rood"); Console.Write($"{Klant.Email}\n");
-            ReservationToJSon(Klant, GeneratedCode);
+            
             Mail_Sender(Klant, GeneratedCode);
+            ReservationToJSon(Klant, GeneratedCode);
 
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
@@ -645,29 +806,33 @@ We hopen u snel te zien in de bioscoop!
             ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
         }
-        public string DateConverter(string InputDate)
+        public bool DateInFutureCheck(DateTime UserInput)
         {
-            int InputDays = 0;
-            string DaysofInput = InputDate.Substring(0, 2);
-            Int32.TryParse(DaysofInput, out InputDays);
+            DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
+            var UnixNow = (UserInput - Epoch).TotalSeconds;
+            if (unixTimestamp > UnixNow)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public string DateConverter(string InputDate, DateTime TestDateTime)
+        {
+            
 
-            int InputMonth = 0;
-            string MonthofInput = InputDate.Substring(3, 2);
-            Int32.TryParse(MonthofInput, out InputMonth);
 
-            int InputYear = 0;
-            string YearofInput = InputDate.Substring(6, 4);
-            Int32.TryParse(YearofInput, out InputYear);
+                var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-            var TestDateTime = new DateTime(InputYear, InputMonth, InputDays, 10, 2, 0, DateTimeKind.Local); // 2021, 08, 16 moeten verandert worden in de user input
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                var UnixDateTime = (TestDateTime.ToUniversalTime() - epoch).TotalSeconds; // hier wordt het geconvert naar Unix!
+                var timeSpan = TimeSpan.FromSeconds(UnixDateTime);
+                var localDateTime = epoch.Add(timeSpan).ToLocalTime(); // Weer terug geconvert naar DateTime
 
-            var UnixDateTime = (TestDateTime.ToUniversalTime() - epoch).TotalSeconds; // hier wordt het geconvert naar Unix!
-            var timeSpan = TimeSpan.FromSeconds(UnixDateTime);
-            var localDateTime = epoch.Add(timeSpan).ToLocalTime(); // Weer terug geconvert naar DateTime
-
-            string UserChosenDay = localDateTime.ToString("ddd"); // dit convert het naar de dag van de week (dus: Mon/Tues/Wed/Thu/Fri/Sat/Sun)
-            return UserChosenDay;
+                string UserChosenDay = localDateTime.ToString("ddd"); // dit convert het naar de dag van de week (dus: Mon/Tues/Wed/Thu/Fri/Sat/Sun)
+                return UserChosenDay;
 
         }
         public string DayReturner(string InputDay)
@@ -701,6 +866,7 @@ We hopen u snel te zien in de bioscoop!
                 return "Zaterdag";
             }
         }
+
         public static void Betaling(Gebruiker.Gebruiker Klant = null,decimal totaal = 0, List<string> Mandje = null)
         {
             
