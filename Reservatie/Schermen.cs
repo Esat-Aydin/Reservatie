@@ -130,7 +130,6 @@ namespace Scherm
             }
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
-
         public static void VisitorScreen()
         {
             // Objects
@@ -140,20 +139,15 @@ namespace Scherm
             CinemaBanner();
             Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    \n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
-
-
-            Console.Write("\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken\t");
-            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering beheren");
-            Console.Write("\t  ["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\t\t\n\n");
-
+            Console.Write("\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan");
+            Console.Write("\t    ["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken");
+            Console.Write("\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering beheren\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
             var Start_options = Console.ReadLine();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             bool isErrorPrinted = false;
-
-
-            while (Start_options != "1" && Start_options != "2" && Start_options != "3")
+            while (Start_options != "1" && Start_options != "2" && Start_options != "0")
 
             {
                 if (isErrorPrinted == false)
@@ -177,14 +171,13 @@ namespace Scherm
             {
                 Klant.ReserveringBeheren();
             }
-            else if (Start_options == "3")
+            else if (Start_options == "0")
             {
                 ReturnToPreviousScreen("VisitorScreen");
             }
 
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
-
         public static void ReserveringScreen()
         {
             // Objects
