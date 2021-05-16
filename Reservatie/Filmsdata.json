@@ -1,7 +1,172 @@
 [
   {
-    "FilmGenres": [ "Action", "Comedy", "Horror" ],
+    "FilmGenres": [ "Action", "", "" ],
     "FilmTitle": "John Wick",
+    "FilmRoom": 1,
+    "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmDays": {
+      "Maandag": [ "16:00", "19:00", "23:30" ],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "16:00", "19:00", "23:30" ],
+      "Zaterdag": [ "16:00", "19:00", "23:30" ],
+      "Zondag": [ "16:00", "19:00" ]
+    }
+  },
+  {
+    "FilmGenres": [ "Comedy", "Action", "" ],
+    "FilmTitle": "Norbit",
+    "FilmRoom": 2,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [ "15:00", "19:00", "22:00" ],
+      "Woensdag": [],
+      "Donderdag": [ "15:00", "19:00", "22:00" ],
+      "Vrijdag": [ "15:00", "19:00", "22:00" ],
+      "Zaterdag": [],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Thriller", "", "" ],
+    "FilmTitle": "The Joker",
+    "FilmRoom": 3,
+    "FilmTimes": [ "17:00", "22:00", "00:00" ],
+    "FilmDays": {
+      "Maandag": [ "17:00", "22:00", "00:00" ],
+      "Dinsdag": [ "17:00", "22:00", "00:00" ],
+      "Woensdag": [ "17:00", "22:00", "00:00" ],
+      "Donderdag": [],
+      "Vrijdag": [],
+      "Zaterdag": [],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Romantic", "", "" ],
+    "FilmTitle": "Fifty Shades Of Grey",
+    "FilmRoom": 2,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays": {
+      "Maandag": [ "15:00", "19:00", "22:00" ],
+      "Dinsdag": [ "15:00", "19:00", "22:00" ],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [],
+      "Zaterdag": [],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Family", "", "" ],
+    "FilmTitle": "Home Alone",
+    "FilmRoom": 1,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [ "15:00", "19:00", "22:00" ],
+      "Woensdag": [ "15:00", "19:00", "22:00" ],
+      "Donderdag": [ "15:00", "19:00", "22:00" ],
+      "Vrijdag": [],
+      "Zaterdag": [],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Drama", "Action", "Thriller" ],
+    "FilmTitle": "Inception",
+    "FilmRoom": 3,
+    "FilmTimes": [ "01:00", "20:00", "22:00" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [ "15:00", "20:00", "22:00" ],
+      "Vrijdag": [ "15:00", "20:00", "22:00" ],
+      "Zaterdag": [ "15:00", "20:00", "22:00" ],
+      "Zondag": [ "15:00", "20:00", "22:00" ]
+    }
+  },
+  {
+    "FilmGenres": [ "Sci-Fi", "Action", "Thriller" ],
+    "FilmTitle": "Venom",
+    "FilmRoom": 3,
+    "FilmTimes": [ "15:00", "19:00", "22:00" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [ "15:00", "19:00", "22:00" ],
+      "Donderdag": [ "15:00", "19:00", "22:00" ],
+      "Vrijdag": [],
+      "Zaterdag": [],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Sci-Fi", "Drama", "" ],
+    "FilmTitle": "Interstellar",
+    "FilmRoom": 1,
+    "FilmTimes": [ "15:00", "18:00", "23:00" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [ "15:00", "18:00", "23:00" ],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [],
+      "Zaterdag": [ "15:00", "18:00", "23:00" ],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Comedy", "Drama", "" ],
+    "FilmTitle": "The Wolf of Wall Street",
+    "FilmRoom": 3,
+    "FilmTimes": [ "19:00", "21:00", "23:00" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [ "19:00", "21:00", "23:00" ],
+      "Vrijdag": [ "19:00", "21:00", "23:00" ],
+      "Zaterdag": [],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Action", "Drama", "" ],
+    "FilmTitle": "Django Unchained",
+    "FilmRoom": 2,
+    "FilmTimes": [ "18:00", "20:00", "22:00" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [ "18:00", "20:00", "22:00" ],
+      "Woensdag": [ "18:00", "20:00", "22:00" ],
+      "Donderdag": [],
+      "Vrijdag": [],
+      "Zaterdag": [],
+      "Zondag": []
+    }
+  },
+  {
+    "FilmGenres": [ "Drama", "", "" ],
+    "FilmTitle": "Godfather",
+    "FilmRoom": 3,
+    "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "14:00", "19:00", "23:30" ],
+      "Zaterdag": [ "11:00", "19:00", "23:30" ],
+      "Zondag": [ "11:00", "13:00", "21:30" ]
+    }
+  },
+  {
+    "FilmGenres": [ "Action", "Comedy", "Horror" ],
+    "FilmTitle": "John Wick 2",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
     "FilmDays": {
@@ -12,6 +177,36 @@
       "Vrijdag": [ "16:00", "19:00", "23:30" ],
       "Zaterdag": [ "16:00", "19:00", "23:30" ],
       "Zondag": [ "16:00", "19:00", "23:30" ]
+    }
+  },
+  {
+    "FilmGenres": [ "Action", "Comedy" ],
+    "FilmTitle": "Bad Boys For Life",
+    "FilmRoom": 1,
+    "FilmTimes": [ "16:00", "19:00", "23:30" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "16:00", "19:00", "23:30" ],
+      "Zaterdag": [ "16:00", "19:00", "23:30" ],
+      "Zondag": [ "16:00", "19:00", "23:30" ]
+    }
+  },
+  {
+    "FilmGenres": [ "Thriller", "Horror" ],
+    "FilmTitle": "The Exorcism",
+    "FilmRoom": 1,
+    "FilmTimes": [ "18:00", "20:30", "23:30" ],
+    "FilmDays": {
+      "Maandag": [],
+      "Dinsdag": [],
+      "Woensdag": [],
+      "Donderdag": [],
+      "Vrijdag": [ "18:00", "20:00", "23:30" ],
+      "Zaterdag": [ "18:30", "20:40", "23:30" ],
+      "Zondag": []
     }
   }
 ]
