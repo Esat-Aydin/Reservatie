@@ -387,12 +387,13 @@ namespace Reservation
                                 bool CorrectInput2 = false;
                                 while(CorrectInput2 == false)
                                 {
-                                    Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                                     string Tijd_keuze = Console.ReadLine();
                                     if (Int32.TryParse(Tijd_keuze, out intTijdKeuze))
                                     {
-                                        if (intTijdKeuze > 3)
+                                        if (intTijdKeuze > 3 || intTijdKeuze <= 0)
                                         {
+                                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                             Console.WriteLine($"Dat is geen geldige input! Gebruik een van de zwart gekleurde nummers als input.");
                                         }
                                         else
@@ -425,13 +426,17 @@ namespace Reservation
                                     }
                                     else
                                     {
+                                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                         Console.WriteLine($"Dat is geen geldige input! Gebruik een van de zwart gekleurde nummers als input.");
                                     }
                                 }
                             }
                             else
                             {
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine($"Dat is geen geldige input!");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
                             }
                         }
 
@@ -673,8 +678,9 @@ namespace Reservation
             Console.WriteLine(GeneratedCode);
             ConsoleCommands.Textkleur("wit");
             Console.Write("\nEr is een bevestigingsmail verzonden naar: "); ConsoleCommands.Textkleur("rood"); Console.Write($"{Klant.Email}\n");
-            ReservationToJSon(Klant, GeneratedCode);
+            
             Mail_Sender(Klant, GeneratedCode);
+            ReservationToJSon(Klant, GeneratedCode);
 
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
