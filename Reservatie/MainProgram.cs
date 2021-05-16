@@ -91,6 +91,10 @@ namespace Cinema
             {
                 Genre_search = "Familie";
             }
+            else if(Genre_select == "8")
+            {
+                Genre_search = "Horror";
+            }
             return Genre_search;
         }
     }

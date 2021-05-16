@@ -123,11 +123,11 @@ namespace Reservation
             if (UserInput == "1")
             {
                 ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\tNaar welke film bent u opzoek: \n\n\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                Console.Write("\t\t\tNaar welke film bent u opzoek: \n\n\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string Film = Console.ReadLine();
-                if (Film == "1")
+                if (Film == "0")
                 {
                     Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
                 }
@@ -180,6 +180,7 @@ namespace Reservation
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drama\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Sci-Fi\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
+                Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Horror\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
@@ -232,6 +233,15 @@ namespace Reservation
             else if (UserInput == "3")
             {
                 Scherm.Screens.CinemaBanner();
+                ConsoleCommands.Textkleur("wit");
+                Console.Write("\t\t\tHieronder vind u een lijst met alle films: \n\n\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+                string Film = Console.ReadLine();
+                if (Film == "0")
+                {
+                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
                 var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
                 dynamic genres = DynamicFilmData[0]["FilmGenres"];
                 List<string> All_Films = new List<string>();
@@ -276,7 +286,15 @@ namespace Reservation
                 DagenvdWeek.Add("Zaterdag");
                 DagenvdWeek.Add("Zondag");
                 int Count = 1;
-                
+                ConsoleCommands.Textkleur("wit");
+                Console.Write("\t\t\tNaar welke film bent u opzoek: \n\n\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+                string Film = Console.ReadLine();
+                if (Film == "0")
+                {
+                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
                 List<string> ListofFilms = new List<string>();
                 string Times = null;
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
@@ -458,7 +476,6 @@ namespace Reservation
                             }
                             else
                             {
-                                
                                 ErrorFixed = false;
                             }
 
@@ -486,7 +503,6 @@ namespace Reservation
                 return false;
             }
         }
-
         DateTime DateTimeReturner(string FilmDateSearch)
         {
             int InputDays = 0;
@@ -533,13 +549,27 @@ namespace Reservation
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("zwart");
                     string Chosen_date = Console.ReadLine();
-                    var UserDateTime = DateTimeReturner(Chosen_date);
-                    if (Chosen_date.Length != 10)
+
+                    
+                    if (Chosen_date.Length != 10 || IsDateUserInputInteger(Chosen_date)== false)
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine($"Dit is niet het goede format {Chosen_date}.\nProbeer het opnieuw met dit format: (DD/MM/YYYY)");
                         Thread.Sleep(3000);
                         Console.Clear();
+                        DatumChecker(Chosen_film, Show_films, Show_tijden);
+                    }
+                    var UserDateTime = DateTimeReturner(Chosen_date);
+                    if (DateInFutureCheck(UserDateTime) == true)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("De ingevoerde datum is niet in de toekomst! Voer een toekomstige datum (vanaf vandaag) in.");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Thread.Sleep(2000);
                         DatumChecker(Chosen_film, Show_films, Show_tijden);
                     }
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -597,7 +627,6 @@ namespace Reservation
                 }
             }
         }
-
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -866,7 +895,6 @@ We hopen u snel te zien in de bioscoop!
                 return "Zaterdag";
             }
         }
-
         public static void Betaling(Gebruiker.Gebruiker Klant = null,decimal totaal = 0, List<string> Mandje = null)
         {
             
