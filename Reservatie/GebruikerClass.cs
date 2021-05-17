@@ -599,8 +599,8 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][0] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+          
+                      
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], GekozenTijd);
                     }
                     if (tijdslot == "2")
@@ -609,8 +609,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][1] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+ 
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], GekozenTijd);
 
                     }
@@ -620,8 +619,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][2] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], GekozenTijd);
                     }
                 }
@@ -667,8 +665,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][0] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], GekozenTijd);
                     }
                     if (tijdslot == "2")
@@ -677,8 +674,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][1] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+                
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], GekozenTijd);
 
                     }
@@ -688,8 +684,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][2] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+              
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], GekozenTijd);
 
                     }
@@ -737,8 +732,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][0] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][0], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+           
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][0], GekozenTijd);
 
                     }
@@ -748,8 +742,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][1] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][1], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+              
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][1], GekozenTijd);
 
                     }
@@ -759,8 +752,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][2] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][2], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][2], GekozenTijd);
                     }
                 }
@@ -807,8 +799,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][0] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][0], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+               
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][0], GekozenTijd);
 
                     }
@@ -818,8 +809,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][1] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][1], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+         
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][1], GekozenTijd);
 
                     }
@@ -829,8 +819,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][2] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][2], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+         
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][2], GekozenTijd);
 
                     }
@@ -878,8 +867,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][0] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][0], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+     
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][0], GekozenTijd);
 
                     }
@@ -889,8 +877,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][1] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][1], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+             
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][1], GekozenTijd);
 
                     }
@@ -900,8 +887,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][2] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][2], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+         
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][2], GekozenTijd);
 
                     }
@@ -950,8 +936,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][0] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][0], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+             
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][0], GekozenTijd);
 
 
@@ -962,8 +947,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][1] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][1], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+               
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][1], GekozenTijd);
 
                     }
@@ -973,8 +957,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][2] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][2], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+      
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][2], GekozenTijd);
 
                     }
@@ -1024,8 +1007,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][0] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+              
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], GekozenTijd);
 
                     }
@@ -1035,8 +1017,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][1] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+            
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], GekozenTijd);
 
                     }
@@ -1046,8 +1027,7 @@ namespace Gebruiker
 
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][2] + " uur.");
                         var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][2], ArrayofDates);
-                        Gebruiker Klant = new(); Klant.Film = Gezochte_Film;
-                        SnacksOption(Klant);
+             
                         ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], GekozenTijd);
 
                     }
