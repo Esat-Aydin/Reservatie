@@ -39,6 +39,7 @@ namespace Gebruiker
         public void UserInputMethod(string UserInput)
         {
             Film.Film FilmObject = new Film.Film();
+            SnackClass.Snacks Snacks1 = new SnackClass.Snacks();
             MedewerkerClass.Medewerker admin = new MedewerkerClass.Medewerker();
             Gebruiker Klant = new Gebruiker();
             ConsoleCommands CommandLine = new ConsoleCommands();
@@ -90,6 +91,60 @@ namespace Gebruiker
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("Om reserveringen per zaal te zien, type: !zaalreserveringen");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.WriteLine("Om snacks te configuren, type: !snacks");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            }
+            if (this.isAdmin == true && (UserInput == "!snacks"))
+            {
+                Console.WriteLine("Toets[1] als u een snack wilt toevoegen");
+                Console.WriteLine("Toets[2] als u een drank wilt toevoegen");
+                Console.WriteLine("Toets[3] als u een snack wilt verwijderen");
+                Console.WriteLine("Toets[4] als u een drank wilt verwijderen");
+                string user_input1 = Console.ReadLine();
+                if (user_input1 == "1")
+                {
+                    Console.WriteLine("Hoe heet de snack die u wilt toevoegen?");
+                    string user_input_name = Console.ReadLine();
+                    Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                    string user_input_price = Console.ReadLine();
+                    var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
+                    Snacks1.SnacksAdd(SnackObject, user_input_name);
+                }
+                else if (user_input1 == "2")
+                {
+                    Console.WriteLine("Hoe heet de drank die u wilt toevoegen?");
+                    string user_input_name = Console.ReadLine();
+                    Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                    string user_input_price = Console.ReadLine();
+                    SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
+                    Snacks1.DrankenAdd(SnackObject, user_input_name);
+                }
+                else if (user_input1 == "3")
+                {
+                    Console.WriteLine("Hoe heet de snack die u wilt verwijderen?");
+                    string user_input_name = Console.ReadLine();
+                    if (Snacks1.SnacksCheck(user_input_name))
+                    {
+                        Snacks1.SnacksRemove(user_input_name);
+                    }
+
+                }
+                else if (user_input1 == "4")
+                {
+                    Console.WriteLine("Hoe heet de drank die u wilt verwijderen?");
+                    string user_input_name = Console.ReadLine();
+                    //SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
+                    if (Snacks1.DrankenCheck(user_input_name) == true)
+                    {
+                        Snacks1.DrankenRemove(user_input_name);
+                    }
+                    //Snacks1.DrankenRemove(user_input_name);
+                    Console.WriteLine("dadada");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number has been enterd, nothing has been selected");
+                }
             }
             if (this.isAdmin == true && (UserInput == "!newfilm"))
             {
