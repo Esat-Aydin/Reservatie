@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
 using System.Net;
-using ConsoleTables;
-using Cinema;
 using Film;
 using Scherm;
 using Reservation;
