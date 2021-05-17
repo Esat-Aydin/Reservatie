@@ -1111,7 +1111,7 @@ namespace Gebruiker
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?\n");
             Console.Write("Door online de snacks te reserveren krijgt u "); ConsoleCommands.Textkleur("rood"); Console.Write("15%");ConsoleCommands.Textkleur("wit");Console.Write(" korting op het gehele bedrag.\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Als u nu snacks wilt bestellen"); Console.Write("\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Als u nu geen snacks wilt bestellen\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks bestellen"); Console.Write("\n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering afronden\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Online_snacks = Console.ReadLine();
