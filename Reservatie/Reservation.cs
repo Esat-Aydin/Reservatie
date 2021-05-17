@@ -576,8 +576,6 @@ namespace Reservation
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConvertedDate = DateConverter(Chosen_date, UserDateTime);
                     Dagvdweek = DayReturner(ConvertedDate);
-                    Console.WriteLine(Dagvdweek);
-                    Console.WriteLine(ConvertedDate);
                     if (DynamicFilmData[i - 1]["FilmDays"][Dagvdweek].Count > 0)
                     {
                         for (int x = 0; x < DynamicFilmData[i - 1]["FilmDays"][DayReturner(ConvertedDate)].Count; x++)
