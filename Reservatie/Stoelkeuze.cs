@@ -32,11 +32,11 @@ namespace Chair
             this.FilmNaam = Naam;
             this.Datum = datum;
             this.Tijd = tijd;
-            string MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
+            string MyFilmsData = new WebClient().DownloadString(@"C:\Users\djvan\Source\Repos\Reservatie1\Reservatie\Filmsdata.json");
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\djvan\Source\Repos\Reservatie1\Reservatie\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
+            string myRoomData = new WebClient().DownloadString(@"C:\Users\djvan\Source\Repos\Reservatie1\Reservatie\seats (2).json");
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         }
@@ -75,7 +75,7 @@ namespace Chair
 
         }
 
-        public string[] RecommendationChairs(string input, int howMany, string[] newChairs, string[][] allData, dynamic room)
+        public Tuple<string[], int, string[][]> RecommendationChairs(string input, int howMany, string[] newChairs, string[][] allData, dynamic room)
         {
             string[][] newData = allData;
             for(int i = 0; i < howMany; i++)
@@ -84,14 +84,39 @@ namespace Chair
             }
             for(int i = 0; i < howMany; i++)
             {
-                newData = changeAllData(newData, newChairs[i]);
-                console(room, newData);
-                Console.WriteLine("Test2");
+                newData = changeAllData(newData, newChairs[i],"-");
             }
-            return newChairs;
+            console(room, newData);
+            string newinput;
+            Console.WriteLine("Toets [1] om de aangeraden stoelen te kiezen.");
+            Console.WriteLine("Toets [2] om zelf stoelen te kiezen");
+            Console.WriteLine("Toets [3] om opnieuw uw stoel uit te kiezen");
+            while (true)
+            {
+                newinput = Console.ReadLine();
+                if (newinput == "1")
+                {
+                    return Tuple.Create(newChairs, howMany, newData);
+                }
+                else if (newinput == "2")
+                {
+                    newData = changeAllData(allData, newChairs[0],"-");
+                    return Tuple.Create(newChairs, 0, newData);
+                }
+                else if (newinput == "3")
+                {
+                    return Tuple.Create(newChairs,-1,allData);
+                }
+                else
+                {
+                    Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                }
+            }
+            
         }
         public string[] WhatChairs(int howMany, List<string> AlreadyTaken, dynamic room, string[][] AllData)
         {
+            string[][] ding = AllData;
             var DynLetters = this.DynamicRoomData[Convert.ToInt32("" + room)]["row_number"];
             var DynNumbers = this.DynamicRoomData[Convert.ToInt32("" + room)]["seat_number"];
             int[] Numbers = new int[DynNumbers.Count];
@@ -138,7 +163,7 @@ namespace Chair
                         differentinput = "" + input[1] + input[0];
                         newChairs[i] = differentinput;
                         Console.WriteLine(newChairs[i]);
-                        var newData = changeAllData(AllData, differentinput);
+                        var newData = changeAllData(AllData, differentinput,"-");
                         console(room, newData);
                         Console.WriteLine("Type nu de volgende stoel in.");
                     }
@@ -147,12 +172,37 @@ namespace Chair
                         Console.WriteLine(newChairs[i]);
                         if (i == 0)
                         {
-                            RecommendationChairs(input, howMany, newChairs, AllData, room);
+                            var newTuple = RecommendationChairs(input, howMany, newChairs, AllData, room);
+                            if(newTuple.Item2 == howMany)
+                            {
+                                return newTuple.Item1;
+                            }
+                            else if(newTuple.Item2 == 0)
+                            {
+                                newChairs = newTuple.Item1;
+                                i = newTuple.Item2;
+                            }
+                            else
+                            {
+                                newChairs = newTuple.Item1;
+                                for (int a = 0; a < howMany; a++)
+                                {
+                                    if (newTuple.Item1[a] != "")
+                                    {
+                                        AllData = changeAllData(AllData, newTuple.Item1[a], "");
+                                    }
+                                    newChairs[a] = "";
+                                }
+                                i = newTuple.Item2;
+                            }
+                            console(room, AllData);
+                            Console.WriteLine("aaaa");
+                            Console.WriteLine(ding[0][3]);
                         }
-                        var newData = changeAllData(AllData, input);
-                        console(room, newData);
+                        //var newData = changeAllData(AllData, input);
+                        //console(room, newData);
                         Console.WriteLine("Type nu de volgende stoel in.");
-                        Console.WriteLine("Testing");
+                        
                     }
                     else
                     {
@@ -166,7 +216,7 @@ namespace Chair
                         differentinput = "" + input[1] + input[2] + input[0];
                         newChairs[i] = differentinput;
                         Console.WriteLine(newChairs[i]);
-                        var newData = changeAllData(AllData, differentinput);
+                        var newData = changeAllData(AllData, differentinput, "-");
                         console(room, newData);
                         Console.WriteLine("Type nu de volgende stoel in.");
                     }
@@ -174,7 +224,7 @@ namespace Chair
                     {
                         newChairs[i] = input;
                         Console.WriteLine(newChairs[i]);
-                        var newData = changeAllData(AllData, input);
+                        var newData = changeAllData(AllData, input, "-");
                         console(room, newData);
                         Console.WriteLine("Type nu de volgende stoel in.");
                     }
@@ -194,7 +244,7 @@ namespace Chair
             Console.WriteLine(newChairs.Length);
             return newChairs;
         }
-        public string[][] changeAllData(string[][] AllData, string input)
+        public string[][] changeAllData(string[][] AllData, string input,string what)
         {
             int numberPos;
             int letterPos;
@@ -208,7 +258,7 @@ namespace Chair
                 numberPos = Convert.ToInt32("" + input[0] + input[1]) - 1;
                 letterPos = Array.IndexOf(this.Alphabet, input[2]) + 1;
             }
-            AllData[letterPos][numberPos] = "-";
+            AllData[letterPos][numberPos] = what;
             return AllData;
         }
             
@@ -316,6 +366,10 @@ namespace Chair
              *  - controlleren of de andere dan in het alphabet zit/charater to int!!!!!!!!!
              */
             var Chosen = WhatChairs(stoelen, chairs, room, AllData);
+            for(int i = 0; i < Chosen.Length; i++)
+            {
+                Console.WriteLine(Chosen[i]);
+            }
             
             
 
