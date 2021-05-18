@@ -12,6 +12,7 @@ using ConsoleTables;
 using Film;
 using Gebruiker;
 using Cinema;
+using SnackClass;
 
 namespace MedewerkerClass
 {
@@ -24,9 +25,11 @@ namespace MedewerkerClass
             this.Name = name;
             this.Admin_Password = AdminPass;
         }
+
         new public void UserInputMethod(string UserInput)
         {
-
+            //SnackClass.Snacks SnackObject = new SnackClass.Snacks("Cola", "1");
+            //SnackObject.SnacksCheck(this.Name);
             Film.Film FilmObject = new Film.Film();
             MedewerkerClass.Medewerker admin = new MedewerkerClass.Medewerker();
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
@@ -79,8 +82,56 @@ namespace MedewerkerClass
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("Om reserveringen per zaal te zien, type: !zaalreserveringen");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.WriteLine("Om reserveringen per zaal te zien, type: !zaalreserveringen");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.WriteLine("Om snacks te configuren, type: !snacks");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             }
-            if (this.isAdmin == true && (UserInput == "!newfilm"))
+            if (this.isAdmin == true && (UserInput == "!snacks"))
+            {
+                SnackClass.Snacks SnackObject = new SnackClass.Snacks("", "");
+                Console.WriteLine("Toets[1] als u een snack wilt toevoegen");
+                Console.WriteLine("Toets[2] als u een drank wilt toevoegen");
+                Console.WriteLine("Toets[3] als u een snack wilt verwijderen");
+                Console.WriteLine("Toets[4] als u een drank wilt verwijderen");
+                string user_input1 = Console.ReadLine();
+                if (user_input1 == "1")
+                {
+                    Console.WriteLine("Hoe heet de snack die u wilt toevoegen?");
+                    string user_input_name = Console.ReadLine();
+                    Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                    string user_input_price = Console.ReadLine();
+                    SnackObject.SnacksAdd(SnackObject, user_input_name);
+                }
+                if (user_input1 == "2")
+                {
+                    Console.WriteLine("Hoe heet de drank die u wilt toevoegen?");
+                    string user_input_name = Console.ReadLine();
+                    Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                    string user_input_price = Console.ReadLine();
+                    SnackObject.DrankenAdd(SnackObject, user_input_name);
+                }
+                if (user_input1 == "3")
+                {
+                    Console.WriteLine("Hoe heet de snack die u wilt verwijderen?");
+                    string user_input_name = Console.ReadLine();
+                    SnackObject.SnacksCheck(user_input_name);
+                    SnackObject.SnacksRemove(user_input_name);
+                }
+                if (user_input1 == "4")
+                {
+                    Console.WriteLine("Hoe heet de drank die u wilt verwijderen?");
+                    string user_input_name = Console.ReadLine();
+                    SnackObject.DrankenCheck(user_input_name);
+                    SnackObject.DrankenRemove(user_input_name);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number has been enterd, nothing has been selected");
+                }
+
+            }
+                if (this.isAdmin == true && (UserInput == "!newfilm"))
             {
                 Scherm.Screens.CinemaBanner();
                 Console.WriteLine("\t\t\t FILM TOEVOEGEN");
@@ -402,7 +453,9 @@ namespace MedewerkerClass
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             bool ReturnValue = false;
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
             List<string> ListofAccountsNames = new List<string>();
             List<string> ListofAccountsPasswords = new List<string>();
