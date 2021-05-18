@@ -453,7 +453,6 @@ namespace MedewerkerClass
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             bool ReturnValue = false;
-
             var AccountUsers = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
 
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
@@ -469,7 +468,6 @@ namespace MedewerkerClass
                 ListofAccountsisAdmin.Add(AccountUsers_Gebruiker[i]["isAdmin"].ToString());
                 ListofAccountsEmails.Add(AccountUsers_Gebruiker[i]["Email"].ToString());
                 string StoredName = ListofAccountsNames[i];
-
                 if (StoredName == Naam)
                 {
                     ReturnValue = true;
