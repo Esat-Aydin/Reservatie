@@ -34,7 +34,6 @@ namespace Gebruiker
             this.Password = Password;
             // isAdmin word gebruikt als de user admin rechten heeft 
             this.isAdmin = isAdmin;
-
         }
         public void UserInputMethod(string UserInput)
         {
