@@ -88,7 +88,6 @@ namespace Chair
                 console(room, newData);
                 Console.WriteLine("Test2");
             }
-
             return newChairs;
         }
         public string[] WhatChairs(int howMany, List<string> AlreadyTaken, dynamic room, string[][] AllData)
