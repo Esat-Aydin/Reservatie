@@ -43,18 +43,18 @@ namespace SnackClass
         public void AddSnack(Snacks SnackObject, bool isSnack)
         {
             List<Snacks> _data = new();
-            var SnackDataJson = File.ReadAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+            var SnackDataJson = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
             var SnackObjectJson = JsonConvert.DeserializeObject<SnackType>(SnackDataJson);
             if (isSnack)
                 SnackObjectJson.Snacks.Add(SnackObject);
             else
                 SnackObjectJson.Drinks.Add(SnackObject);
             SnackDataJson = JsonConvert.SerializeObject(SnackObjectJson);
-            File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json", SnackDataJson); 
+            File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json", SnackDataJson); 
         }
         public bool SnacksCheck(string SnackName)
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["snacks"].Count; i++)
@@ -74,19 +74,25 @@ namespace SnackClass
         {
             if (SnacksCheck(SnackName) == false)
             {
-                Console.WriteLine($"Wilt u {SnackName} toevoegen [1]JA of [2]NEE");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("\nWeet u zeker dat u "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" wilt toevoegen? \n\n");
+                ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Ja\n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(2);
+                ConsoleCommands.Textkleur("wit"); Console.Write("] Nee\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 string user_input = Console.ReadLine();
                 if (user_input == "1")
                 {
                     AddSnack(SnackObject, true);
-                    Console.WriteLine($"Snack {SnackName} is succesvol toegevoegd");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.Write("\nSnack "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol toegevoegd.\n\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 }
             }
         }
 
         public void SnacksRemove(string SnackName)
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["snacks"].Count; i++)
@@ -97,8 +103,10 @@ namespace SnackClass
                     Index = i;
                     DynamicData["snacks"].Remove(DynamicData["snacks"][Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json", UserData);
-                    Console.WriteLine($"De {SnackName} is succesvol verwijderd");
+                    File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json", UserData);
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.Write("\nSnack "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
                 }
 
@@ -108,7 +116,7 @@ namespace SnackClass
 
         public bool DrankenCheck(string SnackName)
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["dranken"].Count; i++)
@@ -128,19 +136,25 @@ namespace SnackClass
         {
             if (SnacksCheck(SnackName) == false)
             {
-                Console.WriteLine($"Wilt u {SnackName} toevoegen [1]JA of [2]NEE");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("\nWilt u "); ConsoleCommands.Textkleur("rood");Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" toevoegen \n\n[");
+                ConsoleCommands.Textkleur("zwart");Console.Write(1);ConsoleCommands.Textkleur("wit");Console.Write("] JA\n\n[");ConsoleCommands.Textkleur("zwart");Console.Write(2);
+                ConsoleCommands.Textkleur("wit");Console.Write("]NEE\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 string user_input = Console.ReadLine();
                 if (user_input == "1")
                 {
                     AddSnack(SnackObject, false);
-                    Console.WriteLine($"Snack {SnackName} is succesvol toegevoegd");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.Write("\nDrank "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol toegevoegd.\n\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 }
             }
         }
 
         public void DrankenRemove(string SnackName)
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["dranken"].Count; i++)
@@ -151,8 +165,10 @@ namespace SnackClass
                     Index = i;
                     DynamicData["dranken"].Remove(DynamicData["dranken"][Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json", UserData);
-                    Console.WriteLine($"De {SnackName} is verwijderd");
+                    File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json", UserData);
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.Write("\nDrank "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
                 }
 
