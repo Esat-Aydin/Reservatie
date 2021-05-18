@@ -38,6 +38,19 @@ namespace Gebruiker
         }
         public void UserInputMethod(string UserInput)
         {
+            void AdminCommands()
+            {
+                Scherm.Screens.CinemaBanner();
+                Console.WriteLine("\t\t\t ADMIN CONSOLE");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] PW edit [PLACEHOLDER]\n\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film toevoegen\n\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            }
             Film.Film FilmObject = new Film.Film();
             SnackClass.Snacks Snacks1 = new SnackClass.Snacks();
             MedewerkerClass.Medewerker admin = new MedewerkerClass.Medewerker();
@@ -50,6 +63,10 @@ namespace Gebruiker
             string TitleofFilm = null;
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
+            if (UserInput == "0")
+            {
+                Scherm.Screens.AdminOrUserScreen();
+            }
             if (this.isAdmin == true && (UserInput == "1"))
             {
                 Scherm.Screens.CinemaBanner();
@@ -77,16 +94,7 @@ namespace Gebruiker
             }
             if (this.isAdmin == true && (UserInput.ToLower() == "help"))
             {
-                Scherm.Screens.CinemaBanner();
-                Console.WriteLine("\t\t\t ADMIN CONSOLE");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] PW edit [PLACEHOLDER]\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film toevoegen\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
+                AdminCommands();
             }
             if (this.isAdmin == true && (UserInput == "5"))
             {
@@ -111,6 +119,8 @@ namespace Gebruiker
                     string user_input_price = Console.ReadLine();
                     var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.SnacksAdd(SnackObject, user_input_name);
+                    Thread.Sleep(3000);
+                    AdminCommands();
                 }
                 else if (user_input1 == "2")
                 {
@@ -127,6 +137,8 @@ namespace Gebruiker
                     string user_input_price = Console.ReadLine();
                     SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.DrankenAdd(SnackObject, user_input_name);
+                    Thread.Sleep(3000);
+                    AdminCommands();
                 }
                 else if (user_input1 == "3")
                 {
@@ -139,6 +151,8 @@ namespace Gebruiker
                     if (Snacks1.SnacksCheck(user_input_name))
                     {
                         Snacks1.SnacksRemove(user_input_name);
+                        Thread.Sleep(3000);
+                        AdminCommands();
                     }
 
                 }
@@ -152,6 +166,8 @@ namespace Gebruiker
                     if (Snacks1.DrankenCheck(user_input_name) == true)
                     {
                         Snacks1.DrankenRemove(user_input_name);
+                        Thread.Sleep(3000);
+                        AdminCommands();
                     }
                 }
                 else
