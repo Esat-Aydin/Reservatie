@@ -309,7 +309,7 @@ namespace Reservation
                 DateTime TestDateTime = new();
                 while (InputisDate == false)
                 {
-                    if (IsDateUserInputInteger(FilmDateSearch) == true && (FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/')))
+                    if (IsDateUserInputInteger(FilmDateSearch) == true && ((FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/'))|| (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-'))))
                     {
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
