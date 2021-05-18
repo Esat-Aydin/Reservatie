@@ -109,6 +109,7 @@ namespace Gebruiker
                     string user_input_price = Console.ReadLine();
                     var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.SnacksAdd(SnackObject, user_input_name);
+                    Console.WriteLine(Snacks1);
                 }
                 else if (user_input1 == "2")
                 {
@@ -123,6 +124,7 @@ namespace Gebruiker
                 {
                     Console.WriteLine("Hoe heet de snack die u wilt verwijderen?");
                     string user_input_name = Console.ReadLine();
+                    Snacks1.SnacksCheck(user_input_name);
                     if (Snacks1.SnacksCheck(user_input_name))
                     {
                         Snacks1.SnacksRemove(user_input_name);
@@ -133,12 +135,10 @@ namespace Gebruiker
                 {
                     Console.WriteLine("Hoe heet de drank die u wilt verwijderen?");
                     string user_input_name = Console.ReadLine();
-                    //SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     if (Snacks1.DrankenCheck(user_input_name) == true)
                     {
                         Snacks1.DrankenRemove(user_input_name);
                     }
-                    //Snacks1.DrankenRemove(user_input_name);
                     Console.WriteLine("dadada");
                 }
                 else

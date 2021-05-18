@@ -21,7 +21,15 @@ using System.Globalization;
 
 namespace SnackClass
 {
-    public class Snacks: Cinema.JsonData
+    public class SnackType
+    {
+        [JsonProperty("dranken")]
+        public List<Snacks> Drinks { get; set; }
+        [JsonProperty("snacks")]
+        public List<Snacks> Snacks { get; set; }
+    }
+
+    public class Snacks
     {
         public string Name;
         public string Price;
@@ -32,12 +40,15 @@ namespace SnackClass
             this.Price = Price;
         }
 
-        public void AddSnack(Snacks SnackObject)
+        public void AddSnack(Snacks SnackObject, bool isSnack)
         {
             List<Snacks> _data = new();
             var SnackDataJson = File.ReadAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
-            var SnackObjectJson = JsonConvert.DeserializeObject<List<Snacks>>(SnackDataJson);
-            SnackObjectJson.Add(SnackObject);
+            var SnackObjectJson = JsonConvert.DeserializeObject<SnackType>(SnackDataJson);
+            if (isSnack)
+                SnackObjectJson.Snacks.Add(SnackObject);
+            else
+                SnackObjectJson.Drinks.Add(SnackObject);
             SnackDataJson = JsonConvert.SerializeObject(SnackObjectJson);
             File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json", SnackDataJson); 
         }
@@ -46,18 +57,15 @@ namespace SnackClass
             string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
-            for (int i = 0; i < DynamicData.Count; i++)
+            for (int i = 0; i < DynamicData["snacks"].Count; i++)
             {
-                string Snack_code = (string)DynamicData[1][i]["Name"];
+
+                string Snack_code = (string)DynamicData["snacks"][i]["Name"];
                 if (Snack_code == SnackName)
                 {
                     Index = i;
                     return true;
                    
-                }
-                else
-                {
-                    return false;
                 }
             }
             return false;
@@ -70,7 +78,7 @@ namespace SnackClass
                 string user_input = Console.ReadLine();
                 if (user_input == "1")
                 {
-                    AddSnack(SnackObject);
+                    AddSnack(SnackObject, true);
                     Console.WriteLine($"Snack {SnackName} is succesvol toegevoegd");
                 }
             }
@@ -81,15 +89,15 @@ namespace SnackClass
             string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
-            for (int i = 0; i < DynamicData.Count; i++)
+            for (int i = 0; i < DynamicData["snacks"].Count; i++)
             {
-                string Snack_code = (string)DynamicData[1][i]["Name"];
+                string Snack_code = (string)DynamicData["snacks"][i]["Name"];
                 if (Snack_code == SnackName)
                 {
                     Index = i;
-                    DynamicData.Remove(DynamicData[Index]);
+                    DynamicData["snacks"].Remove(DynamicData["snacks"][Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\SampleLog.json", UserData);
+                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json", UserData);
                     Console.WriteLine($"De {SnackName} is succesvol verwijderd");
 
                 }
@@ -103,19 +111,16 @@ namespace SnackClass
             string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
-            for (int i = 0; i < DynamicData.Count; i++)
+            for (int i = 0; i < DynamicData["dranken"].Count; i++)
             {
-                string Snack_code = (string)DynamicData[0][i]["Name"];
+                string Snack_code = (string)DynamicData["dranken"][i]["Name"];
                 if (Snack_code == SnackName)
                 {
                     Index = i;
                     return true;
 
                 }
-                else
-                {
-                    return false;
-                }
+
             }
             return false;
         }
@@ -127,7 +132,7 @@ namespace SnackClass
                 string user_input = Console.ReadLine();
                 if (user_input == "1")
                 {
-                    AddSnack(SnackObject);
+                    AddSnack(SnackObject, false);
                     Console.WriteLine($"Snack {SnackName} is succesvol toegevoegd");
                 }
             }
@@ -138,15 +143,15 @@ namespace SnackClass
             string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
-            for (int i = 0; i < DynamicData.Count; i++)
+            for (int i = 0; i < DynamicData["dranken"].Count; i++)
             {
-                string Snack_code = (string)DynamicData[0][i]["Name"];
+                string Snack_code = (string)DynamicData["dranken"][i]["Name"];
                 if (Snack_code == SnackName)
                 {
                     Index = i;
-                    DynamicData.Remove(DynamicData[Index]);
+                    DynamicData["dranken"].Remove(DynamicData["dranken"][Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\SampleLog.json", UserData);
+                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json", UserData);
                     Console.WriteLine($"De {SnackName} is verwijderd");
 
                 }
