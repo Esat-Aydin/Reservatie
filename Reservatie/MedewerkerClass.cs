@@ -436,7 +436,7 @@ namespace MedewerkerClass
         {
 
             {
-                Console.Clear();
+                Scherm.Screens.CinemaBanner();
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("Voer uw admin gebruikersnaam in:");
@@ -473,6 +473,7 @@ namespace MedewerkerClass
                 if (StoredName == Naam)
                 {
                     ReturnValue = true;
+                    Scherm.Screens.CinemaBanner();
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("Welkom, " + Naam + ". Voer nu het ingestelde admin wachtwoord in: ");
@@ -485,7 +486,7 @@ namespace MedewerkerClass
                         {
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
+                            Console.WriteLine("U bent succesvol ingelogd als medewerker! Type help voor een lijst aan commands.");
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("zwart");
                             Gebruiker.Gebruiker adminObject = new Gebruiker.Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);
