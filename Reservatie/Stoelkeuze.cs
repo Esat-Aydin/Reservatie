@@ -32,11 +32,11 @@ namespace Chair
             this.FilmNaam = Naam;
             this.Datum = datum;
             this.Tijd = tijd;
-            string MyFilmsData = new WebClient().DownloadString(@"C:\Users\djvan\Source\Repos\Reservatie1\Reservatie\Filmsdata.json");
+            string MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            string myUserData = new WebClient().DownloadString(@"C:\Users\djvan\Source\Repos\Reservatie1\Reservatie\SampleLog.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\djvan\Source\Repos\Reservatie1\Reservatie\seats (2).json");
+            string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         }
@@ -51,6 +51,7 @@ namespace Chair
                 }
                 Scherm.Screens.CinemaBanner();
                 table.Write(Format.Alternative);
+                Console.WriteLine("");
             }
             else if (room == 2)
             {
@@ -78,7 +79,11 @@ namespace Chair
         public Tuple<string[], int, string[][]> RecommendationChairs(string input, int howMany, string[] newChairs, string[][] allData, dynamic room)
         {
             string[][] newData = allData;
-            for(int i = 0; i < howMany; i++)
+            if(Convert.ToInt32("" + input[0])==0)
+            {
+
+            }
+            for (int i = 0; i < howMany; i++)
             {
                 newChairs[i] = "" + (Convert.ToInt32("" + input[0]) + i) + input[1];
             }
@@ -281,9 +286,10 @@ namespace Chair
                     room = this.DynamicFilmData[i]["FilmRoom"];
                 }
             }
+            
             for (int i = 0; i < this.DynamicUserData.Count; i++)
             {
-                if (this.DynamicUserData[i]["Film"] == this.FilmNaam && this.DynamicUserData[i]["Datum"] == this.Datum)
+                if (this.DynamicUserData[i]["Film"] == this.FilmNaam && this.DynamicUserData[i]["FilmDate"] == this.Datum)
                 {
                     for (int j = 0; j < this.DynamicUserData[i]["Stoel_num"].Count; j++)
                     {
@@ -301,19 +307,8 @@ namespace Chair
             }
             for(int i = 0; i< chairs.Count; i++)
             {
-                if(chairs[i].Length == 2)
-                {
-                    int numberPos = Convert.ToInt32("" + chairs[i][0]) - 1;
-                    int letterPos = Array.IndexOf(this.Alphabet, chairs[i][1]) + 1;
-                    AllData[letterPos][numberPos] = "X";
-                }
-                else if (chairs[i].Length == 3)
-                {
-                    int numberPos = Convert.ToInt32("" + chairs[i][0]+chairs[i][1]) - 1;
-                    int letterPos = Array.IndexOf(this.Alphabet, chairs[i][2]) + 1;
-                    AllData[letterPos][numberPos] = "X";
-                }
-            } 
+                changeAllData(AllData, chairs[i], "X");
+            }
             /*
             int checkallchairs = 0;
             for (int r = 0; r < AllData.Length; r++)
