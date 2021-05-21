@@ -179,7 +179,7 @@ namespace ShoppingCart
             if (Meerbestellen == "2")
             {
                 Console.Clear();
-                Gebruiker.Gebruiker.Betaling(Klant,totaal, Mandje);
+                Klant.Betaling(Klant,totaal, Mandje);
             }
 
         }
