@@ -26,7 +26,7 @@ namespace MedewerkerClass
             this.Admin_Password = AdminPass;
         }
 
-        new public void UserInputMethod(string UserInput)
+/*        new public void UserInputMethod(string UserInput)
         {
             //SnackClass.Snacks SnackObject = new SnackClass.Snacks("Cola", "1");
             //SnackObject.SnacksCheck(this.Name);
@@ -131,7 +131,7 @@ namespace MedewerkerClass
                 }
 
             }
-                if (this.isAdmin == true && (UserInput == "!newfilm"))
+            if (this.isAdmin == true && (UserInput == "!newfilm"))
             {
                 Scherm.Screens.CinemaBanner();
                 Console.WriteLine("\t\t\t FILM TOEVOEGEN");
@@ -428,10 +428,13 @@ namespace MedewerkerClass
 
 
             }
-
+            if (this.isAdmin == true && (UserInput == "!reserveringen"))
+            {
+                Scherm.Screens.CinemaBanner();
+            }
             UserInput = Console.ReadLine();
             UserInputMethod(UserInput);
-        }
+        }*/
         public void AdminConsole(bool adminConsoleChosen)
         {
 
@@ -454,7 +457,7 @@ namespace MedewerkerClass
             ConsoleCommands CommandLine = new ConsoleCommands();
             bool ReturnValue = false;
 
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
 
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
             List<string> ListofAccountsNames = new List<string>();

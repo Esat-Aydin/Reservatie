@@ -472,9 +472,78 @@ namespace Gebruiker
 
 
             }
+            if (this.isAdmin == true && (UserInput == "3"))
+            {
+                Scherm.Screens.CinemaBanner();
+                Console.WriteLine("\t\t\t RESERVERINGEN BEKIJKEN");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                var Reserveringen = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+                dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
 
+                Console.WriteLine("Hieronder vind u de lijst van alle reserveringen.");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum");
+                for (int i = 0; i < AlleReserveringen.Count; i++)
+                {
+                    table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"],AlleReserveringen[i]["Film"],AlleReserveringen[i]["FilmDate"]);
+                }
+                table.Write(Format.Alternative);
+                Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                if (input == "1")
+                {
+                    AnnulerenAdmin(AlleReserveringen);
+                }
+            }
             UserInput = Console.ReadLine();
             UserInputMethod(UserInput);
+        }
+        public void AnnulerenAdmin(dynamic AlleReserveringen)
+        {
+            
+            Console.WriteLine("Voer de reserverings code hieronder in");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("zwart"); string res_code = Console.ReadLine();
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.WriteLine("Weet u zeker dat u uw reservering wilt annuleren?");
+            Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
+            Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] Progamma afsluiten.\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("zwart"); string Optie = Console.ReadLine();
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            if (Optie == "1")
+            {
+                for (int i = 0; i < AlleReserveringen.Count; i++)
+                {
+                    if (res_code == AlleReserveringen[i]["Reservatie_code"].ToString())
+                    {
+                        AlleReserveringen.Remove(AlleReserveringen[i]);
+                        dynamic UserData = JsonConvert.SerializeObject(AlleReserveringen);
+                        File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", UserData);
+                        Console.WriteLine("De reservering is succesvol geannuleerd. De applicatie word automatisch afgesloten.");
+                        Thread.Sleep(3000);
+                        Console.Clear();
+                        Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                        Environment.Exit(1);
+                    }
+                }
+            }
+            if (Optie == "2")
+            {
+                Console.Clear();
+                Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                Environment.Exit(1);
+            }
+
+
+
+
+
+
+
+
         }
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
@@ -561,84 +630,6 @@ namespace Gebruiker
             ConsoleCommands.Textkleur("zwart");
             string DagenKeuze = Console.ReadLine();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            static DayOfWeek DayOfWeekConverter(string DayName)
-            {
-                if (DayName == "Maandag")
-                {
-                    return DayOfWeek.Monday;
-                }
-                else if (DayName == "Dinsdag")
-                {
-                    return DayOfWeek.Tuesday;
-                }
-                else if (DayName == "Woensdag")
-                {
-                    return DayOfWeek.Wednesday;
-                }
-                else if (DayName == "Donderdag")
-                {
-                    return DayOfWeek.Thursday;
-                }
-                else if (DayName == "Vrijdag")
-                {
-                    return DayOfWeek.Friday;
-                }
-                else if (DayName == "Zaterdag")
-                {
-                    return DayOfWeek.Saturday;
-                }
-                else
-                {
-                    return DayOfWeek.Sunday;
-                }
-            }
-            static DateTime GetNextWeekday(DayOfWeek day)
-            {
-                DateTime result = DateTime.Now;
-                while (result.DayOfWeek != day)
-                    result = result.AddDays(1);
-                return result;
-            }
-            static DateTime GetTwoWeeksFromNow(DayOfWeek day)
-            {
-                DateTime result = DateTime.Now.AddDays(7);
-                while (result.DayOfWeek != day)
-                    result = result.AddDays(1);
-                return  result;
-            }
-            static string DateChoice(string Film, string FilmTime, string[] Dates)
-            {
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {Dates[0]}\n\n");
-                ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {Dates[1]}\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                string UserInput = Console.ReadLine();
-                while (UserInput != "1" && UserInput != "2")
-                {
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Dat is geen correcte input, gebruik een van de zwartgekleurde nummers als input.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    UserInput = Console.ReadLine();
-                }
-                if (UserInput == "1")
-                {
-                    Scherm.Screens.CinemaBanner();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("wit"); Console.Write("U heeft gekozen voor: "); ConsoleCommands.Textkleur("rood"); Console.Write(Film); ConsoleCommands.Textkleur("wit"); Console.Write(" Datum: ");
-                    ConsoleCommands.Textkleur("rood"); Console.Write(Dates[0]); ConsoleCommands.Textkleur("wit"); Console.Write(" Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(FilmTime + "\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    return Dates[0];
-                }
-                else
-                {
-                    Scherm.Screens.CinemaBanner();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("wit"); Console.Write("U heeft gekozen voor: "); ConsoleCommands.Textkleur("rood"); Console.Write(Film); ConsoleCommands.Textkleur("wit"); Console.Write(" Datum: ");
-                    ConsoleCommands.Textkleur("rood"); Console.Write(Dates[1]); ConsoleCommands.Textkleur("wit"); Console.Write(" Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(FilmTime + "\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    return Dates[1];
-                }
-            }
             if (DagenKeuze == "1")
             {
                 if (table.Rows[0][1].ToString() == "Deze film draait niet op Maandag.")
@@ -1197,7 +1188,7 @@ namespace Gebruiker
         }
         public static void Snacks(Gebruiker Klant)
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json"); // Path moet nog veranderd worden
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             ConsoleCommands CommandLine = new ConsoleCommands();
             List<string> Mandje = new List<string>();
@@ -1235,6 +1226,83 @@ namespace Gebruiker
 
 
         }
-
+        public static DayOfWeek DayOfWeekConverter(string DayName)
+        {
+            if (DayName == "Maandag")
+            {
+                return DayOfWeek.Monday;
+            }
+            else if (DayName == "Dinsdag")
+            {
+                return DayOfWeek.Tuesday;
+            }
+            else if (DayName == "Woensdag")
+            {
+                return DayOfWeek.Wednesday;
+            }
+            else if (DayName == "Donderdag")
+            {
+                return DayOfWeek.Thursday;
+            }
+            else if (DayName == "Vrijdag")
+            {
+                return DayOfWeek.Friday;
+            }
+            else if (DayName == "Zaterdag")
+            {
+                return DayOfWeek.Saturday;
+            }
+            else
+            {
+                return DayOfWeek.Sunday;
+            }
+        }
+        public static DateTime GetNextWeekday(DayOfWeek day)
+        {
+            DateTime result = DateTime.Now;
+            while (result.DayOfWeek != day)
+                result = result.AddDays(1);
+            return result;
+        }
+        public static DateTime GetTwoWeeksFromNow(DayOfWeek day)
+        {
+            DateTime result = DateTime.Now.AddDays(7);
+            while (result.DayOfWeek != day)
+                result = result.AddDays(1);
+            return result;
+        }
+        public static string DateChoice(string Film, string FilmTime, string[] Dates)
+        {
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {Dates[0]}\n\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {Dates[1]}\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+            string UserInput = Console.ReadLine();
+            while (UserInput != "1" && UserInput != "2")
+            {
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.WriteLine("Dat is geen correcte input, gebruik een van de zwartgekleurde nummers als input.");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                UserInput = Console.ReadLine();
+            }
+            if (UserInput == "1")
+            {
+                Scherm.Screens.CinemaBanner();
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("wit"); Console.Write("U heeft gekozen voor: "); ConsoleCommands.Textkleur("rood"); Console.Write(Film); ConsoleCommands.Textkleur("wit"); Console.Write(" Datum: ");
+                ConsoleCommands.Textkleur("rood"); Console.Write(Dates[0]); ConsoleCommands.Textkleur("wit"); Console.Write(" Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(FilmTime + "\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                return Dates[0];
+            }
+            else
+            {
+                Scherm.Screens.CinemaBanner();
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("wit"); Console.Write("U heeft gekozen voor: "); ConsoleCommands.Textkleur("rood"); Console.Write(Film); ConsoleCommands.Textkleur("wit"); Console.Write(" Datum: ");
+                ConsoleCommands.Textkleur("rood"); Console.Write(Dates[1]); ConsoleCommands.Textkleur("wit"); Console.Write(" Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(FilmTime + "\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                return Dates[1];
+            }
+        }
     }
 }
