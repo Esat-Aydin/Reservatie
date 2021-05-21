@@ -110,7 +110,7 @@ namespace Cinema
         public string Film_Day { get; set; }
         public string FilmTime { get; set; }
         public string Zaal { get; set; }
-        public string Stoel_num { get; set; }
+        public string[] Stoel_num { get; set; }
 
 
         public static dynamic JsonSerializer(string Object)
@@ -118,9 +118,9 @@ namespace Cinema
 
 
 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\source\repos\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\Dylan\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\source\repos\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);

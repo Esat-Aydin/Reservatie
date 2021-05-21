@@ -17,7 +17,7 @@ using Gebruiker;
 
 namespace Chair
 {
-    public class StoelKeuze
+    public class StoelKeuze : Reserveren
     {
         public string FilmNaam;
         public string Datum;
@@ -26,6 +26,7 @@ namespace Chair
         public dynamic DynamicFilmData;
         public dynamic DynamicUserData;
         public string[] Alphabet;
+        public string[][] AllData;
 
         public StoelKeuze(string Naam, string datum = null, string tijd = null)
         {
@@ -75,22 +76,47 @@ namespace Chair
             }
 
         }
-
-        public Tuple<string[], int, string[][]> RecommendationChairs(string input, int howMany, string[] newChairs, string[][] allData, dynamic room)
+        public string[][] FuckThis(string[][] old)
         {
-            string[][] newData = allData;
-            if(Convert.ToInt32("" + input[0])==0)
+            string[][] newdata = new string[old.Length][];
+            for(int p = 0; p < newdata.Length; p++)
             {
+                newdata[p] = new string[old[p].Length];
+            }
+            for(int j = 0; j < newdata.Length; j++)
+            {
+                for(int p = 0; p < newdata[j].Length; p++)
+                {
+                    newdata[j][p] = old[j][p];
+                }
+            }
+            return newdata;
+        }
 
-            }
-            for (int i = 0; i < howMany; i++)
+        public Tuple<string[], int, string[][]> RecommendationChairs(string input, int howMany, string[] newChairs, dynamic room)
+        {
+            string[][] newData = FuckThis(this.AllData);
+
+            if(input.Length == 2)
             {
-                newChairs[i] = "" + (Convert.ToInt32("" + input[0]) + i) + input[1];
+                for (int i = 0; i < howMany; i++)
+                {
+                    newChairs[i] = "" + (Convert.ToInt32("" + input[0]) + i) + input[1];
+                }
             }
-            for(int i = 0; i < howMany; i++)
+            else
+            {
+                for (int i = 0; i < howMany; i++)
+                {
+                    newChairs[i] = "" + (Convert.ToInt32("" + input[0] + input[1]) + i) + input[2];
+                }
+            }
+
+            for (int i = 0; i < howMany; i++)
             {
                 newData = changeAllData(newData, newChairs[i],"-");
             }
+
             console(room, newData);
             string newinput;
             Console.WriteLine("Toets [1] om de aangeraden stoelen te kiezen.");
@@ -105,12 +131,17 @@ namespace Chair
                 }
                 else if (newinput == "2")
                 {
-                    newData = changeAllData(allData, newChairs[0],"-");
-                    return Tuple.Create(newChairs, 0, newData);
+                    string [][] aData = FuckThis(this.AllData);
+                    aData = changeAllData(aData, newChairs[0],"-");
+                    return Tuple.Create(newChairs, 0, aData);
                 }
                 else if (newinput == "3")
                 {
-                    return Tuple.Create(newChairs,-1,allData);
+                    for(int q = 0; q < newChairs.Length; q++)
+                    {
+                        newChairs[q] = "";
+                    }
+                    return Tuple.Create(newChairs,-1,this.AllData);
                 }
                 else
                 {
@@ -119,11 +150,11 @@ namespace Chair
             }
             
         }
-        public string[] WhatChairs(int howMany, List<string> AlreadyTaken, dynamic room, string[][] AllData)
+        public string[] WhatChairs(int howMany, List<string> AlreadyTaken, dynamic room)
         {
             string[][] ding = AllData;
-            var DynLetters = this.DynamicRoomData[Convert.ToInt32("" + room)]["row_number"];
-            var DynNumbers = this.DynamicRoomData[Convert.ToInt32("" + room)]["seat_number"];
+            var DynNumbers = this.DynamicRoomData[(Convert.ToInt32("" + room)) - 1]["seat_number"];
+            var DynLetters = this.DynamicRoomData[(Convert.ToInt32("" + room)) - 1]["row_number"];
             int[] Numbers = new int[DynNumbers.Count];
             string[] Letters = new string[DynLetters.Count];
             for(int n = 0; n < Numbers.Length; n++)
@@ -148,7 +179,7 @@ namespace Chair
                 }
                 else if (newChairs.Contains(input))
                 {
-                    Console.WriteLine("U heeft deze stoel al gekozen.");
+                    Console.WriteLine($"U heeft stoel {newChairs[i]} al gekozen.");
                     i--;
                 }
                 else if (input.Length == 1)
@@ -168,7 +199,7 @@ namespace Chair
                         differentinput = "" + input[1] + input[0];
                         newChairs[i] = differentinput;
                         Console.WriteLine(newChairs[i]);
-                        var newData = changeAllData(AllData, differentinput,"-");
+                        var newData = changeAllData(this.AllData, differentinput,"-");
                         console(room, newData);
                         Console.WriteLine("Type nu de volgende stoel in.");
                     }
@@ -177,7 +208,7 @@ namespace Chair
                         Console.WriteLine(newChairs[i]);
                         if (i == 0)
                         {
-                            var newTuple = RecommendationChairs(input, howMany, newChairs, AllData, room);
+                            var newTuple = RecommendationChairs(input, howMany, newChairs, room);
                             if(newTuple.Item2 == howMany)
                             {
                                 return newTuple.Item1;
@@ -185,24 +216,22 @@ namespace Chair
                             else if(newTuple.Item2 == 0)
                             {
                                 newChairs = newTuple.Item1;
+                                for(int t = 1; t < newChairs.Length; t++)
+                                {
+                                    newChairs[t] = "";
+                                }
                                 i = newTuple.Item2;
+                                ding = newTuple.Item3;
                             }
                             else
                             {
-                                newChairs = newTuple.Item1;
-                                for (int a = 0; a < howMany; a++)
-                                {
-                                    if (newTuple.Item1[a] != "")
-                                    {
-                                        AllData = changeAllData(AllData, newTuple.Item1[a], "");
-                                    }
-                                    newChairs[a] = "";
-                                }
                                 i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                ding = FuckThis(this.AllData);
                             }
-                            console(room, AllData);
+                            console(room, ding);
                             Console.WriteLine("aaaa");
-                            Console.WriteLine(ding[0][3]);
+                            Console.WriteLine(ding[0][4]);
                         }
                         //var newData = changeAllData(AllData, input);
                         //console(room, newData);
@@ -220,7 +249,6 @@ namespace Chair
                     if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1] + input[2]))){
                         differentinput = "" + input[1] + input[2] + input[0];
                         newChairs[i] = differentinput;
-                        Console.WriteLine(newChairs[i]);
                         var newData = changeAllData(AllData, differentinput, "-");
                         console(room, newData);
                         Console.WriteLine("Type nu de volgende stoel in.");
@@ -228,9 +256,32 @@ namespace Chair
                     else if(Letters.Contains("" + input[2]) && Numbers.Contains(Convert.ToInt32("" + input[0] + input[1])))
                     {
                         newChairs[i] = input;
-                        Console.WriteLine(newChairs[i]);
-                        var newData = changeAllData(AllData, input, "-");
-                        console(room, newData);
+                        if (i == 0)
+                        {
+                            var newTuple = RecommendationChairs(input, howMany, newChairs, room);
+                            if (newTuple.Item2 == howMany)
+                            {
+                                return newTuple.Item1;
+                            }
+                            else if (newTuple.Item2 == 0)
+                            {
+                                newChairs = newTuple.Item1;
+                                for (int t = 1; t < newChairs.Length; t++)
+                                {
+                                    newChairs[t] = "";
+                                }
+                                i = newTuple.Item2;
+                                ding = newTuple.Item3;
+                            }
+                            else
+                            {
+                                i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                ding = FuckThis(this.AllData);
+                            }
+                            console(room, ding);
+                        }
+                        //var newData = changeAllData(AllData, input, "-");
                         Console.WriteLine("Type nu de volgende stoel in.");
                     }
                     else
@@ -249,22 +300,22 @@ namespace Chair
             Console.WriteLine(newChairs.Length);
             return newChairs;
         }
-        public string[][] changeAllData(string[][] AllData, string input,string what)
+        public string[][] changeAllData(string[][] NewData, string input,string what)
         {
             int numberPos;
             int letterPos;
             if (input.Length == 2)
             {
                 numberPos = Convert.ToInt32("" + input[0]) - 1;
-                letterPos = Array.IndexOf(this.Alphabet, input[1]) + 1;
+                letterPos = Array.IndexOf(this.Alphabet, "" + input[1]);
             }
             else
             {
                 numberPos = Convert.ToInt32("" + input[0] + input[1]) - 1;
-                letterPos = Array.IndexOf(this.Alphabet, input[2]) + 1;
+                letterPos = Array.IndexOf(this.Alphabet, "" + input[2]);
             }
-            AllData[letterPos][numberPos] = what;
-            return AllData;
+            NewData[letterPos][numberPos] = what;
+            return NewData;
         }
             
 
@@ -307,8 +358,9 @@ namespace Chair
             }
             for(int i = 0; i< chairs.Count; i++)
             {
-                changeAllData(AllData, chairs[i], "X");
+                AllData = changeAllData(AllData, chairs[i], "X");
             }
+            this.AllData = AllData;
             /*
             int checkallchairs = 0;
             for (int r = 0; r < AllData.Length; r++)
@@ -360,13 +412,10 @@ namespace Chair
              *  - controlleren of er 1 numeric
              *  - controlleren of de andere dan in het alphabet zit/charater to int!!!!!!!!!
              */
-            var Chosen = WhatChairs(stoelen, chairs, room, AllData);
-            for(int i = 0; i < Chosen.Length; i++)
-            {
-                Console.WriteLine(Chosen[i]);
-            }
-            
-            
+            var Chosen = WhatChairs(stoelen, chairs, room);
+            room = ("" + room);
+            ReserveerCodeMail(this.FilmNaam, this.Tijd, Chosen, room, this.Datum);
+
 
             /*for (int i = 0; i < DynamicRoomData[Int32.Parse((room - 1).ToString())]["row_number"].Count - 1; i++)
             {

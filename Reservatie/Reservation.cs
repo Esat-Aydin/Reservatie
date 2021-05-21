@@ -427,7 +427,7 @@ namespace Reservation
                                                 Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]); ConsoleCommands.Textkleur("wit");
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
-                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][0], FilmDateSearch);
+                                                //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][0], FilmDateSearch);
                                             }
                                             else if (intTijdKeuze == 2)
                                             {
@@ -435,7 +435,7 @@ namespace Reservation
                                                 Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]); ConsoleCommands.Textkleur("wit");
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
-                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][1], FilmDateSearch);
+                                                //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][1], FilmDateSearch);
                                             }
                                             else if (intTijdKeuze == 3)
                                             {
@@ -443,7 +443,7 @@ namespace Reservation
                                                 Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]); ConsoleCommands.Textkleur("wit");
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
-                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][2], FilmDateSearch);
+                                                //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][2], FilmDateSearch);
                                             }
                                         }
                                     }
@@ -585,21 +585,21 @@ namespace Reservation
                                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine("U heeft gekozen voor " + DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][0] + " uur.");
                                 
-                                ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][0].ToString(), Chosen_date.ToString());
+                                //ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][0].ToString(), Chosen_date.ToString());
                             }
                             if (Chosen_timeslot == "2")
                             {
                                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine("U heeft gekozen voor " + DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][1] + " uur.");
                       
-                                ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][1].ToString(), Chosen_date.ToString());
+                                //ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][1].ToString(), Chosen_date.ToString());
                             }
                             if (Chosen_timeslot == "3")
                             {
                                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine("U heeft gekozen voor " + DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][2] + " uur.");
                      
-                                ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][2].ToString(), Chosen_date.ToString());
+                                //ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][2].ToString(), Chosen_date.ToString());
                             }
                             else if (Chosen_timeslot != "1" || Chosen_timeslot != "2" || Chosen_timeslot != "3")
                             {
@@ -645,12 +645,12 @@ namespace Reservation
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string FilmDatum = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
+        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string[] Stoelen, string zaal, string FilmDatum = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
                 List<JsonData> _data = new List<JsonData>();
-                var DataUser = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+                var DataUser = File.ReadAllText(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
                 var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                           ?? new List<JsonData>();
 
@@ -661,15 +661,14 @@ namespace Reservation
                     Email = Klant.Email,
                     Film = Klant.Film,
                     FilmTime = Klant.Film_Time,
-                    FilmDate = Klant.Film_Day
-
-                    //Zaal =
-                    //Stoel_num =
+                    FilmDate = Klant.Film_Day,
+                    Stoel_num = Klant.Stoel_num,
+                    Zaal = Klant.Zaal
 
                 });
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
-                File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+                File.WriteAllText(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json", DataUser);
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
@@ -692,6 +691,8 @@ namespace Reservation
             Klant.Film = Gezochte_Film;
             Klant.Film_Time = Show_Tijden;
             Klant.Film_Day = FilmDatum;
+            Klant.Stoel_num = Stoelen;
+            Klant.Zaal = zaal;
             ReserveringStatus(Klant);
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Klant.SnacksOption(Klant);

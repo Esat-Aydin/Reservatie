@@ -1,7 +1,6 @@
 [
   {
     "Naam": "a",
-    
     "Email": "b",
     "Reservatie_code": "N0YL1NNELK3X9LE8",
     "Film": "John Wick",
@@ -9,8 +8,8 @@
     "FilmDate": "30-5-2021",
     "Film_Day": null,
     "FilmTime": "19:00",
-    "Zaal": 1,
-    "Stoel_num": ["1A", "2A"]
+    "Zaal": "1",
+    "Stoel_num": [ "1A", "2A" ]
   },
   {
     "Naam": "a",
@@ -18,11 +17,11 @@
     "Reservatie_code": "40MP124G12NQW343",
     "Film": "John Wick",
     "FilmPrice": null,
-    "FilmDate": "17/05/2021",
+    "FilmDate": "30-5-2021",
     "Film_Day": null,
-    "FilmTime": "16:00",
-    "Zaal": null,
-    "Stoel_num": null
+    "FilmTime": "19:00",
+    "Zaal": "1",
+    "Stoel_num": [ "3D", "4D" ]
   },
   {
     "Naam": "w",
@@ -71,5 +70,29 @@
     "FilmTime": "19:00",
     "Zaal": null,
     "Stoel_num": null
+  },
+  {
+    "Naam": "Dylan",
+    "Email": "djvanderkuijl@gmail.com",
+    "Reservatie_code": "Y0WVL5256HCKSSX3",
+    "Film": "John Wick 2",
+    "FilmPrice": null,
+    "FilmDate": "30-5-2021",
+    "Film_Day": null,
+    "FilmTime": "19:00",
+    "Zaal": null,
+    "Stoel_num": [ "1A", "2A", "3A", "4A" ]
+  },
+  {
+    "Naam": "Dylan",
+    "Email": "aa",
+    "Reservatie_code": "BX5Q2N3MK7LQ3EF5",
+    "Film": "John Wick 2",
+    "FilmPrice": null,
+    "FilmDate": "30-5-2021",
+    "Film_Day": null,
+    "FilmTime": "19:00",
+    "Zaal": "1",
+    "Stoel_num": [ "1B", "2B", "3B", "4B" ]
   }
 ]
