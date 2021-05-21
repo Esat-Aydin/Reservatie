@@ -12,7 +12,6 @@ using ConsoleTables;
 using Cinema;
 using Film;
 using Scherm;
-using Reservation;
 using Gebruiker;
 using Chair;
 using System.Text.RegularExpressions;
@@ -32,9 +31,9 @@ namespace Reservation
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -309,7 +308,7 @@ namespace Reservation
                 DateTime TestDateTime = new();
                 while (InputisDate == false)
                 {
-                    if (IsDateUserInputInteger(FilmDateSearch) == true && (FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/')))
+                    if (IsDateUserInputInteger(FilmDateSearch) == true && ((FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/'))|| (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-'))))
                     {
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
@@ -317,7 +316,7 @@ namespace Reservation
                     else
                     {
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Dat is geen geldige input! Probeer het opnieuw met de format DD/MM/YYYY - Voorbeeld: 16/05/2021");
+                        Console.WriteLine("Dat is geen geldige input! Probeer het opnieuw met de format DD/MM/YYYY - Voorbeeld: 16/05/2021 of 16-05-2021");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("zwart"); FilmDateSearch = Console.ReadLine();
                     }
@@ -646,7 +645,7 @@ namespace Reservation
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
                 List<JsonData> _data = new List<JsonData>();
-                var DataUser = File.ReadAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+                var DataUser = File.ReadAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
                 var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                           ?? new List<JsonData>();
 
@@ -665,7 +664,7 @@ namespace Reservation
                 });
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
-                File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+                File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
@@ -828,25 +827,25 @@ We hopen u snel te zien in de bioscoop!
                     // Email geadresseerde
                     message.To.Add(new MailboxAddress(Username, Email));
                     // Email onderwerp
-                    message.Subject = $"Bevestiging Bioscoop Reservering {Film}";
+                    message.Subject = $"Annulering Bioscoop Reservering {Film}";
                     // Email text
                     message.Body = new TextPart("plain")
                     {
                         Text = @$"Hallo {Username},
 
-Bedankt voor het reserveren via onze bioscoop.
+U heeft uw reservering voor de film {Film} geannuleerd.
 
-Hieronder vindt u de reserverings code.
+Hieronder vindt u de reservering die u heeft geannuleerd:
 
-Reserverings code: {Rescode}
-Film: {Film}
-Datum: {datum}
-Tijd: {FilmTime}
+-   Reserverings code: {Rescode}
+-   Film: {Film}
+-   Datum: {datum}
+-   Tijd: {FilmTime}
 
 " +
 
     @"
-We hopen u snel te zien in de bioscoop!
+We hopen u voldoende te hebben geïnformeerd.
 " +
         "\nMet vriendelijke groet,\n\n" +
         "CinemaReservation"
@@ -955,7 +954,19 @@ We hopen u snel te zien in de bioscoop!
                 return "Zaterdag";
             }
         }
-        public static void Betaling(Gebruiker.Gebruiker Klant = null, decimal totaal = 0, List<string> Mandje = null)
+        public void BetalingStatusFilm(Gebruiker.Gebruiker Klant, params string[] args)
+        {
+            Scherm.Screens.CinemaBanner();
+            Console.WriteLine($"\t\t\t\tAfrekenen\n\n");
+            Console.Write("\t\tU heeft de volgende film geselecteerd: \n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.Write("Naam: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Naam + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Email Adres: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Email + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
+        }
+        public void Betaling(Gebruiker.Gebruiker Klant = null, decimal totaal = 0, List<string> Mandje = null)
         {
             
             dynamic DynamicFilmData = JsonData.JsonSerializer("Films");
@@ -964,23 +975,24 @@ We hopen u snel te zien in de bioscoop!
             
             if (Klant != null && Mandje == null)
             {
-                Scherm.Screens.CinemaBanner();
-                Console.WriteLine($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
+                this.BetalingStatusFilm(Klant);
             }
             if (Mandje != null)
             {
-                Scherm.Screens.CinemaBanner();
-                ConsoleCommands.Textkleur("wit");
-                Console.Write($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
-                Console.WriteLine("\nSnacks: ");
+                this.BetalingStatusFilm(Klant);
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.WriteLine("U heeft de volgende snacks geselecteerd: ");
+                ConsoleCommands.Textkleur("rood");
                 for (int i = 0; i < Mandje.Count; i += 2)
                 {
-                    Console.Write(Mandje[i] + '\n');
+                    Console.Write($"\n[{i+1}] {Mandje[i]}\n");
                 }
+                ConsoleCommands.Textkleur("wit");
             }
 
             totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
-            Console.WriteLine($"\nDe totaal prijs is {totaal}");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); Console.Write($" {totaal} Euro\n"); ConsoleCommands.Textkleur("wit");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
