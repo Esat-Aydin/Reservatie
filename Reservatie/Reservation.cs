@@ -12,7 +12,6 @@ using ConsoleTables;
 using Cinema;
 using Film;
 using Scherm;
-using Reservation;
 using Gebruiker;
 using Chair;
 using System.Text.RegularExpressions;
@@ -665,7 +664,7 @@ namespace Reservation
                 });
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
-                File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+                File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
@@ -828,25 +827,25 @@ We hopen u snel te zien in de bioscoop!
                     // Email geadresseerde
                     message.To.Add(new MailboxAddress(Username, Email));
                     // Email onderwerp
-                    message.Subject = $"Bevestiging Bioscoop Reservering {Film}";
+                    message.Subject = $"Annulering Bioscoop Reservering {Film}";
                     // Email text
                     message.Body = new TextPart("plain")
                     {
                         Text = @$"Hallo {Username},
 
-Bedankt voor het reserveren via onze bioscoop.
+U heeft uw reservering voor de film {Film} geannuleerd.
 
-Hieronder vindt u de reserverings code.
+Hieronder vindt u de reservering die u heeft geannuleerd:
 
-Reserverings code: {Rescode}
-Film: {Film}
-Datum: {datum}
-Tijd: {FilmTime}
+-   Reserverings code: {Rescode}
+-   Film: {Film}
+-   Datum: {datum}
+-   Tijd: {FilmTime}
 
 " +
 
     @"
-We hopen u snel te zien in de bioscoop!
+We hopen u voldoende te hebben geïnformeerd.
 " +
         "\nMet vriendelijke groet,\n\n" +
         "CinemaReservation"
@@ -965,22 +964,24 @@ We hopen u snel te zien in de bioscoop!
             if (Klant != null && Mandje == null)
             {
                 Scherm.Screens.CinemaBanner();
-                Console.WriteLine($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
+                Console.Write($"U heeft de volgende items geselecteerd:\nFilm:"); ConsoleCommands.Textkleur("rood"); Console.Write($" {Klant.Film} "); ConsoleCommands.Textkleur("wit");
             }
             if (Mandje != null)
             {
                 Scherm.Screens.CinemaBanner();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write($"U heeft de volgende items geselecteerd:\nFilm: {Klant.Film} ");
+                Console.Write($"U heeft de volgende items geselecteerd:\nFilm:");ConsoleCommands.Textkleur("rood");Console.Write($" {Klant.Film} "); ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("\nSnacks: ");
+                ConsoleCommands.Textkleur("rood");
                 for (int i = 0; i < Mandje.Count; i += 2)
                 {
                     Console.Write(Mandje[i] + '\n');
                 }
+                ConsoleCommands.Textkleur("wit");
             }
 
             totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
-            Console.WriteLine($"\nDe totaal prijs is {totaal}");
+            Console.Write($"\n\nDe totaal prijs is: "); ConsoleCommands.Textkleur("rood"); Console.Write($" {totaal} Euro\n"); ConsoleCommands.Textkleur("wit");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
