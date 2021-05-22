@@ -271,17 +271,37 @@ namespace Reservation
                         }
                     }
                 }
+                table.AddRow("Toets [0] om terug te gaan", null, null, null, null);
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
-                int choice = Int32.Parse(Console.ReadLine());
-                if (choice.ToString() == "0")
+                int choice;
+                bool loop = true;
+                while (loop)
                 {
-                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                    try
+                    {
+                        choice = Int32.Parse(Console.ReadLine());
+                        if (choice.ToString() == "0")
+                        {
+                            Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                        }
+                        else if (choice >= 1 && choice <= All_Films.Count)
+                        {
+                            ConsoleCommands.Textkleur("wit");
+                            Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
+                            Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    }
                 }
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
-                Klant.ZoekOptie(All_Films[choice-1], DynamicFilmData);
                 //var stoelen = new StoelKeuze(All_Films[choice-1],"10-5-2021","11:00");
                 //var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
                 // stoelen.Chair();
