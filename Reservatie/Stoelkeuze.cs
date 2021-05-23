@@ -76,7 +76,7 @@ namespace Chair
             }
 
         }
-        public string[][] FuckThis(string[][] old)
+        public string[][]  NewAllData(string[][] old)
         {
             string[][] newdata = new string[old.Length][];
             for(int p = 0; p < newdata.Length; p++)
@@ -95,7 +95,7 @@ namespace Chair
 
         public Tuple<string[], int, string[][]> RecommendationChairs(string input, int howMany, string[] newChairs, dynamic room)
         {
-            string[][] newData = FuckThis(this.AllData);
+            string[][] newData = NewAllData(this.AllData);
 
             if(input.Length == 2)
             {
@@ -131,7 +131,7 @@ namespace Chair
                 }
                 else if (newinput == "2")
                 {
-                    string [][] aData = FuckThis(this.AllData);
+                    string [][] aData = NewAllData(this.AllData);
                     aData = changeAllData(aData, newChairs[0],"-");
                     return Tuple.Create(newChairs, 0, aData);
                 }
@@ -146,6 +146,7 @@ namespace Chair
                 else
                 {
                     Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    Console.WriteLine("Hier");
                 }
             }
             
@@ -185,6 +186,7 @@ namespace Chair
                 else if (input.Length == 1)
                 {
                     Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    Console.WriteLine("Te kort");
                     i--;
                 }
                 else if (input.Length == 2)
@@ -192,6 +194,7 @@ namespace Chair
                     if((Letters.Contains("" + input[0]))&& (Letters.Contains("" + input[2])))
                     {
                         Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                        Console.WriteLine("Twee letters");
                         i--;
                     }
                     else if (Letters.Contains("" + input[0]) && Letters.Contains("" + input[1]))
@@ -227,7 +230,7 @@ namespace Chair
                             {
                                 i = newTuple.Item2;
                                 newChairs = newTuple.Item1;
-                                ding = FuckThis(this.AllData);
+                                ding = NewAllData(this.AllData);
                             }
                             console(room, ding);
                             Console.WriteLine("aaaa");
@@ -241,6 +244,7 @@ namespace Chair
                     else
                     {
                         Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                        Console.WriteLine("Twee ander dingen");
                         i--;
                     }
                 }
@@ -277,7 +281,7 @@ namespace Chair
                             {
                                 i = newTuple.Item2;
                                 newChairs = newTuple.Item1;
-                                ding = FuckThis(this.AllData);
+                                ding = NewAllData(this.AllData);
                             }
                             console(room, ding);
                         }
@@ -287,12 +291,14 @@ namespace Chair
                     else
                     {
                         Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                        Console.WriteLine("3 andere ding");
                         i--;
                     }
                 }
                 else
                 {
                     Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    Console.WriteLine("Iets compleet anders");
                     i--;
                 }
 
@@ -404,6 +410,7 @@ namespace Chair
             Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
+            Console.WriteLine("Test");
             /* reserveren van stoelen
              * kijken of een gegeven stoel niet al gereserveerd is.
              *  - loopen door alle gereserveerde stoelen

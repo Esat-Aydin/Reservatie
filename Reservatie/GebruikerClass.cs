@@ -558,12 +558,13 @@ namespace Gebruiker
             }
             ConsoleCommands.Textkleur("wit");
             table.Write(Format.Alternative);
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            /*ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.WriteLine("Voor welke van de bovenstaande dagen zou u willen reserveren?");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string DagenKeuze = Console.ReadLine();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            */
             static DayOfWeek DayOfWeekConverter(string DayName)
             {
                 if (DayName == "Maandag")
@@ -642,546 +643,561 @@ namespace Gebruiker
                     return Dates[1];
                 }
             }
-            if (DagenKeuze == "1")
+            bool test = true;
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.WriteLine("Voor welke van de bovenstaande dagen zou u willen reserveren?");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("zwart");
+            string DagenKeuze;
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            while (test)
             {
-                if (table.Rows[0][1].ToString() == "Deze film draait niet op Maandag.")
+                DagenKeuze = Console.ReadLine();
+                if (DagenKeuze == "1")
                 {
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicFilmData);
+                    if (table.Rows[0][1].ToString() == "Deze film draait niet op Maandag.")
+                    {
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        //ZoekOptie(Gezochte_Film, DynamicFilmData);
+                    }
+                    else
+                    {
+                        string ConvertedToDate = GetNextWeekday(DayOfWeek.Monday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Monday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
+                        string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("U heeft gekozen voor Maandag, voor welk tijdslot zou u willen reserveren?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        if (DictofTimes[Gezochte_Film]["Maandag"].Count == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][0]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Maandag"].Count == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][1]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Maandag"].Count == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][1]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][2]}\n");
+                        }
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        string tijdslot = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+                        if (tijdslot == "1")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][0] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], ArrayofDates);
+
+                            var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], GekozenTijd);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], GekozenTijd);
+                        }
+                        if (tijdslot == "2")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][1] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], ArrayofDates);
+
+                            var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], GekozenTijd);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "3")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][2] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], GekozenTijd);
+
+                        }
+                    }
                 }
-                else
+                else if (DagenKeuze == "2")
                 {
-                    string ConvertedToDate = GetNextWeekday(DayOfWeek.Monday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Monday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
-                    string[] ArrayofDates = {ConvertedToDate, ConvertedDate};
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("U heeft gekozen voor Maandag, voor welk tijdslot zou u willen reserveren?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (DictofTimes[Gezochte_Film]["Maandag"].Count == 1)
+                    if (table.Rows[1][1].ToString() == "Deze film draait niet op Dinsdag.")
                     {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][0]}\n");
+                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        //ZoekOptie(Gezochte_Film, DynamicFilmData);
                     }
-                    else if (DictofTimes[Gezochte_Film]["Maandag"].Count == 2)
+                    else
                     {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][1]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Maandag"].Count == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][1]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Maandag"][2]}\n");
-                    }                   
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    string tijdslot = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-                    if (tijdslot == "1")
-                    {
+                        string ConvertedToDate = GetNextWeekday(DayOfWeek.Tuesday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Tuesday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
+                        string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
+                        Console.WriteLine("U heeft gekozen voor Dinsdag, voor welk tijdslot zou u willen reserveren?");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][0] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], ArrayofDates);
-
-                        var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], GekozenTijd);
-
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], GekozenTijd);
-                    }
-                    if (tijdslot == "2")
-                    {
+                        if (DictofTimes[Gezochte_Film]["Dinsdag"].Count == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][0]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Dinsdag"].Count == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][1]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Dinsdag"].Count == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][1]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][2]}\n");
+                        }
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        string tijdslot = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+                        if (tijdslot == "1")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][1] + " uur.");
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][0] + " uur.");
 
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], ArrayofDates);
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], ArrayofDates);
+                            var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], GekozenTijd);
 
-                        var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], GekozenTijd);
+                            stoelen.Chair();
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], GekozenTijd);
 
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], GekozenTijd);
+                        }
+                        if (tijdslot == "2")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][1] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], ArrayofDates);
+
+                            var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], GekozenTijd);
+
+                            stoelen.Chair();
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], GekozenTijd);
 
 
+                        }
+                        if (tijdslot == "3")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][2] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], ArrayofDates);
+                            var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], GekozenTijd);
+
+                            stoelen.Chair();
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], GekozenTijd);
+
+
+                        }
                     }
-                    if (tijdslot == "3")
+                }
+                else if (DagenKeuze == "3")
+                {
+                    if (table.Rows[2][1].ToString() == "Deze film draait niet op Woensdag.")
                     {
+                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        test = false;
+                        //ZoekOptie(Gezochte_Film, DynamicFilmData);
+                    }
+                    else
+                    {
+                        string ConvertedToDate = GetNextWeekday(DayOfWeek.Wednesday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Wednesday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
+                        string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
+                        Console.WriteLine("U heeft gekozen voor Woensdag, voor welk tijdslot zou u willen reserveren?");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        if (DictofTimes[Gezochte_Film]["Woensdag"].Count == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][0]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Woensdag"].Count == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][1]}\n");
 
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][2] + " uur.");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Woensdag"].Count == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][1]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][2]}\n");
+                        }
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        string tijdslot = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+                        if (tijdslot == "1")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], ArrayofDates);
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][0] + " uur.");
 
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], GekozenTijd);
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][0], ArrayofDates);
 
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][0], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "2")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][1] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][1], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][1], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "3")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][2] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][2], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][2], GekozenTijd);
+
+                        }
+                    }
+                }
+                else if (DagenKeuze == "4")
+                {
+                    if (table.Rows[3][1].ToString() == "Deze film draait niet op Donderdag.")
+                    {
+                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        test = false;
+                        //ZoekOptie(Gezochte_Film, DynamicFilmData);
+                    }
+                    else
+                    {
+                        string ConvertedToDate = GetNextWeekday(DayOfWeek.Thursday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Thursday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
+                        string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
+                        Console.WriteLine("U heeft gekozen voor Donderdag, voor welk tijdslot zou u willen reserveren?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        if (DictofTimes[Gezochte_Film]["Donderdag"].Count == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][0]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Donderdag"].Count == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][1]}\n");
+
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Donderdag"].Count == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][1]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][2]}\n");
+                        }
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        string tijdslot = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+                        if (tijdslot == "1")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][0] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][0], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][0], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "2")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][1] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][1], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][1], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "3")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][2] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][2], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][2], GekozenTijd);
+
+
+                        }
+                    }
+                }
+                else if (DagenKeuze == "5")
+                {
+                    if (table.Rows[4][1].ToString() == "Deze film draait niet op Vrijdag.")
+                    {
+                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        test = false;
+                        //ZoekOptie(Gezochte_Film, DynamicFilmData);
+                    }
+                    else
+                    {
+                        string ConvertedToDate = GetNextWeekday(DayOfWeek.Friday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Friday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
+                        string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
+                        Console.WriteLine("U heeft gekozen voor Vrijdag, voor welk tijdslot zou u willen reserveren?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        if (DictofTimes[Gezochte_Film]["Vrijdag"].Count == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][0]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Vrijdag"].Count == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][1]}\n");
+
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Vrijdag"].Count == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][1]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][2]}\n");
+                        }
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        string tijdslot = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+                        if (tijdslot == "1")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][0] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][0], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][0], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "2")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][1] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][1], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][1], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "3")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][2] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][2], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][2], GekozenTijd);
+
+
+                        }
+                    }
+                }
+                else if (DagenKeuze == "6")
+                {
+                    if (table.Rows[5][1].ToString() == "Deze film draait niet op Zaterdag.")
+                    {
+                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        test = false;
+                        //ZoekOptie(Gezochte_Film, DynamicFilmData);
+                    }
+                    else
+                    {
+                        string ConvertedToDate = GetNextWeekday(DayOfWeek.Saturday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Saturday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
+                        string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
+                        Console.WriteLine("U heeft gekozen voor Zaterdag, voor welk tijdslot zou u willen reserveren?");
+                        Console.WriteLine(DictofTimes[Gezochte_Film].Count);
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        if (DictofTimes[Gezochte_Film]["Zaterdag"].Count == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][0]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Zaterdag"].Count == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][1]}\n");
+
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Zaterdag"].Count == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][1]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][2]}\n");
+                        }
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        string tijdslot = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+                        if (tijdslot == "1")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][0] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][0], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][0], GekozenTijd);
+
+
+
+                        }
+                        if (tijdslot == "2")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][1] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][1], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][1], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "3")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][2] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][2], ArrayofDates);
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][2], GekozenTijd);
+
+
+                        }
+                    }
+                }
+                else if (DagenKeuze == "7")
+                {
+                    if (table.Rows[6][1].ToString() == "Deze film draait niet op Zondag.")
+                    {
+                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Thread.Sleep(1500);
+                        Console.Clear();
+                        test = false;
+                        //ZoekOptie(Gezochte_Film, DynamicFilmData);
+                    }
+                    else
+                    {
+                        string ConvertedToDate = GetNextWeekday(DayOfWeek.Sunday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Sunday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
+                        string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
+                        ConvertedToDate = ConvertedToDate.Substring(0, 9);
+                        Console.WriteLine(ConvertedToDate);
+                        Console.WriteLine("U heeft gekozen voor Zondag, voor welk tijdslot zou u willen reserveren?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        if (DictofTimes[Gezochte_Film]["Zondag"].Count == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][0]}\n");
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Zondag"].Count == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][1]}\n");
+
+                        }
+                        else if (DictofTimes[Gezochte_Film]["Zondag"].Count == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][0]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][1]}\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][2]}\n");
+                        }
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        string tijdslot = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+                        if (tijdslot == "1")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][0] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], ArrayofDates);
+
+                            var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], GekozenTijd);
+                            stoelen.Chair();
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "2")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][1] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], ArrayofDates);
+
+                            var stoelen = new StoelKeuze(Gezochte_Film, GekozenTijd, DictofTimes[Gezochte_Film]["Zondag"][1]);
+                            stoelen.Chair();
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], GekozenTijd);
+
+
+                        }
+                        if (tijdslot == "3")
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][2] + " uur.");
+
+                            var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][2], ArrayofDates);
+
+                            var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][2], GekozenTijd);
+
+                            stoelen.Chair();
+
+                            //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], GekozenTijd);
+
+
+                        }
                     }
                 }
             }
-            else if (DagenKeuze == "2")
-            {
-                if (table.Rows[1][1].ToString() == "Deze film draait niet op Dinsdag.")
-                {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicFilmData);
-                }
-                else
-                {
-                    string ConvertedToDate = GetNextWeekday(DayOfWeek.Tuesday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Tuesday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
-                    string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
-                    Console.WriteLine("U heeft gekozen voor Dinsdag, voor welk tijdslot zou u willen reserveren?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (DictofTimes[Gezochte_Film]["Dinsdag"].Count == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][0]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Dinsdag"].Count == 2)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][1]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Dinsdag"].Count == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][1]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Dinsdag"][2]}\n");
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    string tijdslot = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-                    if (tijdslot == "1")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][0] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], ArrayofDates);
-                        var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], GekozenTijd);
-
-                        stoelen.Chair();
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], GekozenTijd);
-
-                    }
-                    if (tijdslot == "2")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][1] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], ArrayofDates);
-
-                        var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], GekozenTijd);
-
-                        stoelen.Chair();
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "3")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][2] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], ArrayofDates);
-                        var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], GekozenTijd);
-
-                        stoelen.Chair();
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], GekozenTijd);
-
-
-                    }
-                }
-            }
-            else if (DagenKeuze == "3")
-            {
-                if (table.Rows[2][1].ToString() == "Deze film draait niet op Woensdag.")
-                {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicFilmData);
-                }
-                else
-                {
-                    string ConvertedToDate = GetNextWeekday(DayOfWeek.Wednesday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Wednesday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
-                    string[] ArrayofDates = { ConvertedToDate, ConvertedDate }; 
-                    Console.WriteLine("U heeft gekozen voor Woensdag, voor welk tijdslot zou u willen reserveren?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (DictofTimes[Gezochte_Film]["Woensdag"].Count == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][0]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Woensdag"].Count == 2)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][1]}\n");
-
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Woensdag"].Count == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][1]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][2]}\n");
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    string tijdslot = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-                    if (tijdslot == "1")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][0] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][0], ArrayofDates);
-           
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][0], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "2")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][1] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][1], ArrayofDates);
-              
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][1], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "3")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][2] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][2], ArrayofDates);
-
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][2], GekozenTijd);
-
-                    }
-                }
-            }
-            else if (DagenKeuze == "4")
-            {
-                if (table.Rows[3][1].ToString() == "Deze film draait niet op Donderdag.")
-                {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicFilmData);
-                }
-                else
-                {
-                    string ConvertedToDate = GetNextWeekday(DayOfWeek.Thursday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Thursday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
-                    string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
-                    Console.WriteLine("U heeft gekozen voor Donderdag, voor welk tijdslot zou u willen reserveren?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (DictofTimes[Gezochte_Film]["Donderdag"].Count == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][0]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Donderdag"].Count == 2)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][1]}\n");
-
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Donderdag"].Count == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][1]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Donderdag"][2]}\n");
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    string tijdslot = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-                    if (tijdslot == "1")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][0] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][0], ArrayofDates);
-               
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][0], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "2")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][1] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][1], ArrayofDates);
-         
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][1], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "3")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][2] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][2], ArrayofDates);
-         
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][2], GekozenTijd);
-
-
-                    }
-                }
-            }
-            else if (DagenKeuze == "5")
-            {
-                if (table.Rows[4][1].ToString() == "Deze film draait niet op Vrijdag.")
-                {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicFilmData);
-                }
-                else
-                {
-                    string ConvertedToDate = GetNextWeekday(DayOfWeek.Friday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Friday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
-                    string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
-                    Console.WriteLine("U heeft gekozen voor Vrijdag, voor welk tijdslot zou u willen reserveren?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (DictofTimes[Gezochte_Film]["Vrijdag"].Count == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][0]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Vrijdag"].Count == 2)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][1]}\n");
-
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Vrijdag"].Count == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][1]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Vrijdag"][2]}\n");
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    string tijdslot = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-                    if (tijdslot == "1")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][0] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][0], ArrayofDates);
-     
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][0], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "2")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][1] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][1], ArrayofDates);
-             
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][1], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "3")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][2] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][2], ArrayofDates);
-         
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][2], GekozenTijd);
-
-
-                    }
-                }
-            }
-            else if (DagenKeuze == "6")
-            {
-                if (table.Rows[5][1].ToString() == "Deze film draait niet op Zaterdag.")
-                {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicFilmData);
-                }
-                else
-                {
-                    string ConvertedToDate = GetNextWeekday(DayOfWeek.Saturday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Saturday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
-                    string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
-                    Console.WriteLine("U heeft gekozen voor Zaterdag, voor welk tijdslot zou u willen reserveren?");
-                    Console.WriteLine(DictofTimes[Gezochte_Film].Count);
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (DictofTimes[Gezochte_Film]["Zaterdag"].Count == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][0]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Zaterdag"].Count == 2)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][1]}\n");
-
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Zaterdag"].Count == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][1]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zaterdag"][2]}\n");
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    string tijdslot = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-                    if (tijdslot == "1")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][0] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][0], ArrayofDates);
-             
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][0], GekozenTijd);
-
-
-
-                    }
-                    if (tijdslot == "2")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][1] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][1], ArrayofDates);
-               
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][1], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "3")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][2] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][2], ArrayofDates);
-      
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][2], GekozenTijd);
-
-
-                    }
-                }
-            }
-            else if (DagenKeuze == "7")
-            {
-                if (table.Rows[6][1].ToString() == "Deze film draait niet op Zondag.")
-                {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ZoekOptie(Gezochte_Film, DynamicFilmData);
-                }
-                else
-                {
-                    string ConvertedToDate = GetNextWeekday(DayOfWeek.Sunday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Sunday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
-                    string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
-                    ConvertedToDate = ConvertedToDate.Substring(0, 9);
-                    Console.WriteLine(ConvertedToDate);
-                    Console.WriteLine("U heeft gekozen voor Zondag, voor welk tijdslot zou u willen reserveren?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (DictofTimes[Gezochte_Film]["Zondag"].Count == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][0]}\n");
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Zondag"].Count == 2)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][1]}\n");
-
-                    }
-                    else if (DictofTimes[Gezochte_Film]["Zondag"].Count == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][0]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][1]}\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(3); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Zondag"][2]}\n");
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    string tijdslot = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-                    if (tijdslot == "1")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][0] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], ArrayofDates);
-
-                        var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], GekozenTijd);
-                        stoelen.Chair();
-
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][0], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "2")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][1] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], ArrayofDates);
-
-                        var stoelen = new StoelKeuze(Gezochte_Film, GekozenTijd, DictofTimes[Gezochte_Film]["Zondag"][1]);
-                        stoelen.Chair();
-
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], GekozenTijd);
-
-
-                    }
-                    if (tijdslot == "3")
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zondag"][2] + " uur.");
-
-                        var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][2], ArrayofDates);
-
-                        var stoelen = new StoelKeuze(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][2], GekozenTijd);
-
-                        stoelen.Chair();
-
-                        //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zondag"][1], GekozenTijd);
-
-
-                    }
-                }
-            }
-
 
 
 
