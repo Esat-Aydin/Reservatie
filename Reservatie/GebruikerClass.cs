@@ -39,6 +39,7 @@ namespace Gebruiker
         public void UserInputMethod(string UserInput)
         {
             Film.Film FilmObject = new Film.Film();
+            //Film.Film FilmObject = new Film.Film();
             SnackClass.Snacks Snacks1 = new SnackClass.Snacks();
             MedewerkerClass.Medewerker admin = new MedewerkerClass.Medewerker();
             Gebruiker Klant = new Gebruiker();
@@ -93,6 +94,10 @@ namespace Gebruiker
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.WriteLine("Om snacks te configuren, type: !snacks");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.WriteLine("Om snacks te configuren, type: !removefilm");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+
             }
             if (this.isAdmin == true && (UserInput == "!snacks"))
             {
@@ -139,13 +144,32 @@ namespace Gebruiker
                     {
                         Snacks1.DrankenRemove(user_input_name);
                     }
-                    Console.WriteLine("dadada");
                 }
                 else
                 {
                     Console.WriteLine("Invalid number has been enterd, nothing has been selected");
                 }
             }
+            if (this.isAdmin == true && (UserInput == "!removefilm"))
+            {
+                Console.WriteLine("Hoe heet de film die u wilt verwijderen?");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                string delete_movie = Console.ReadLine();
+                if (FilmObject.Film_check2(delete_movie) == true)
+                {
+                    FilmObject.RemoveFilm(delete_movie);
+                }
+                else
+                {
+                    Console.WriteLine("Film niet kunnen vinden");
+                    Console.WriteLine("Probeer alstublieft opnieuw");
+                    //dit moet opniuew gecalled worden
+                }
+                //string delete_movie_lower = delete_movie.ToLower();
+            }
+
+
             if (this.isAdmin == true && (UserInput == "!newfilm"))
             {
                 Scherm.Screens.CinemaBanner();
