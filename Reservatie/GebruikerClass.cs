@@ -660,6 +660,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
+                    Scherm.Screens.CinemaBanner();
                     ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
@@ -733,6 +734,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
+                    Scherm.Screens.CinemaBanner();
                     ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
@@ -805,6 +807,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
+                    Scherm.Screens.CinemaBanner();
                     ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
@@ -878,6 +881,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
+                    Scherm.Screens.CinemaBanner();
                     ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
@@ -952,6 +956,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
+                    Scherm.Screens.CinemaBanner();
                     ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
@@ -1026,6 +1031,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
+                    Scherm.Screens.CinemaBanner();
                     ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
@@ -1102,6 +1108,7 @@ namespace Gebruiker
                     Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
+                    Scherm.Screens.CinemaBanner();
                     ZoekOptie(Gezochte_Film, DynamicFilmData);
                 }
                 else
