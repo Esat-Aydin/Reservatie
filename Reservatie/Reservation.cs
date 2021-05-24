@@ -182,7 +182,7 @@ namespace Reservation
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     for (int i = 1; i < Autofill.Count + 1; i++)
                     {
-                        if (Filmkeuze == i.ToString())
+                        if (Filmkeuze == i.ToString())1
                         {
                             Scherm.Screens.CinemaBanner();
                             ConsoleCommands.Textkleur("wit");
