@@ -53,7 +53,8 @@ namespace Chair
                 }
                 Scherm.Screens.CinemaBanner();
                 table.Write(Format.Alternative);
-                Console.WriteLine("");
+                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             else if (room == 2)
             {
@@ -64,6 +65,8 @@ namespace Chair
                 }
                 Scherm.Screens.CinemaBanner();
                 table.Write(Format.Alternative);
+                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             else
             {
@@ -74,6 +77,8 @@ namespace Chair
                 }
                 Scherm.Screens.CinemaBanner();
                 table.Write(Format.Alternative);
+                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
             }
 
         }
@@ -137,6 +142,7 @@ namespace Chair
             Console.WriteLine("Toets [3] om opnieuw uw stoel uit te kiezen");
             while (true)
             {
+                ConsoleCommands.Textkleur("zwart");
                 newinput = Console.ReadLine();
                 if (newinput == "1")
                 {
@@ -163,7 +169,7 @@ namespace Chair
             }
             
         }
-        public string[] WhatChairs(int howMany, List<string> AlreadyTaken, dynamic room)
+        public string[] WhatChairs(int howMany, dynamic room)
         {
             string[][] ding = AllData;
             var DynNumbers = this.DynamicRoomData[(Convert.ToInt32("" + room)) - 1]["seat_number"];
@@ -183,16 +189,29 @@ namespace Chair
             string differentinput = "";
             for(int i = 0; i < howMany; i++)
             {
+                ConsoleCommands.Textkleur("zwart");
                 input = Console.ReadLine();
                 input = input.ToUpper();
-                if (AlreadyTaken.Contains(input))
+                if(i != 0)
+                {
+                    Console.WriteLine("Type nu de volgende stoel in");
+                }
+                if(input.Length == 2)
+                {
+                    differentinput = "" + input[1] + input[0];
+                }
+                else if(input.Length == 3)
+                {
+                    differentinput = "" + input[1] + input[2] + input[0];
+                }
+                if (this.chairsTaken.Contains(input)||this.chairsTaken.Contains(differentinput))
                 {
                     Console.WriteLine("Deze stoelen zijn al gereservereerd");
                     i--;
                 }
-                else if (newChairs.Contains(input))
+                else if (newChairs.Contains(differentinput)||newChairs.Contains(input))
                 {
-                    Console.WriteLine($"U heeft stoel {newChairs[i]} al gekozen.");
+                    Console.WriteLine($"U heeft stoel al gekozen.");
                     i--;
                 }
                 else if (input.Length == 1)
@@ -211,10 +230,31 @@ namespace Chair
                     {
                         differentinput = "" + input[1] + input[0];
                         newChairs[i] = differentinput;
-                        Console.WriteLine(newChairs[i]);
-                        var newData = changeAllData(this.AllData, differentinput,"-");
-                        console(room, newData);
-                        Console.WriteLine("Type nu de volgende stoel in.");
+                        if (i == 0)
+                        {
+                            var newTuple = RecommendationChairs(differentinput, howMany, newChairs, room);
+                            if (newTuple.Item2 == howMany)
+                            {
+                                return newTuple.Item1;
+                            }
+                            else if (newTuple.Item2 == 0)
+                            {
+                                newChairs = newTuple.Item1;
+                                for (int t = 1; t < newChairs.Length; t++)
+                                {
+                                    newChairs[t] = "";
+                                }
+                                i = newTuple.Item2;
+                                ding = newTuple.Item3;
+                            }
+                            else
+                            {
+                                i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                ding = NewAllData(this.AllData);
+                            }
+                            console(room, ding);
+                        }
                     }
                     else if (Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0]))){
                         newChairs[i] = input;
@@ -243,13 +283,9 @@ namespace Chair
                                 ding = NewAllData(this.AllData);
                             }
                             console(room, ding);
-                            Console.WriteLine("aaaa");
-                            Console.WriteLine(ding[0][4]);
                         }
                         //var newData = changeAllData(AllData, input);
                         //console(room, newData);
-                        Console.WriteLine("Type nu de volgende stoel in.");
-                        
                     }
                     else
                     {
@@ -262,9 +298,31 @@ namespace Chair
                     if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1] + input[2]))){
                         differentinput = "" + input[1] + input[2] + input[0];
                         newChairs[i] = differentinput;
-                        var newData = changeAllData(AllData, differentinput, "-");
-                        console(room, newData);
-                        Console.WriteLine("Type nu de volgende stoel in.");
+                        if (i == 0)
+                        {
+                            var newTuple = RecommendationChairs(differentinput, howMany, newChairs, room);
+                            if (newTuple.Item2 == howMany)
+                            {
+                                return newTuple.Item1;
+                            }
+                            else if (newTuple.Item2 == 0)
+                            {
+                                newChairs = newTuple.Item1;
+                                for (int t = 1; t < newChairs.Length; t++)
+                                {
+                                    newChairs[t] = "";
+                                }
+                                i = newTuple.Item2;
+                                ding = newTuple.Item3;
+                            }
+                            else
+                            {
+                                i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                ding = NewAllData(this.AllData);
+                            }
+                            console(room, ding);
+                        }
                     }
                     else if(Letters.Contains("" + input[2]) && Numbers.Contains(Convert.ToInt32("" + input[0] + input[1])))
                     {
@@ -295,7 +353,6 @@ namespace Chair
                             console(room, ding);
                         }
                         //var newData = changeAllData(AllData, input, "-");
-                        Console.WriteLine("Type nu de volgende stoel in.");
                     }
                     else
                     {
@@ -410,16 +467,19 @@ namespace Chair
             }
             */
             Scherm.Screens.CinemaBanner();
-            Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
+            Console.WriteLine($"    U heeft gekozen voor de film: {this.FilmNaam}, op {this.Datum} om {this.Tijd} uur.");
+            Console.WriteLine("");
+            Console.WriteLine("    Hoeveel stoelen zou u willen reserveren?");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             int stoelen = Int32.Parse(Console.ReadLine());
             // Table needs to be somewhat dynamic
             ConsoleCommands.Textkleur("wit");
             console(room, AllData);
-            Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
+            Console.WriteLine("    Type nu elke stoel, gevolgd door ENTER.");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
-            Console.WriteLine("Test");
             /* reserveren van stoelen
              * kijken of een gegeven stoel niet al gereserveerd is.
              *  - loopen door alle gereserveerde stoelen
@@ -428,7 +488,7 @@ namespace Chair
              *  - controlleren of er 1 numeric
              *  - controlleren of de andere dan in het alphabet zit/charater to int!!!!!!!!!
              */
-            var Chosen = WhatChairs(stoelen, chairs, room);
+            var Chosen = WhatChairs(stoelen, room);
             room = ("" + room);
             ReserveerCodeMail(this.FilmNaam, this.Tijd, Chosen, room, this.Datum);
 
