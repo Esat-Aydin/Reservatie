@@ -169,7 +169,6 @@ namespace SnackClass
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.Write("\nDrank "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
                 }
 
             }

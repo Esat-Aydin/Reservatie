@@ -890,7 +890,9 @@ We hopen u voldoende te hebben geïnformeerd.
             dynamic DynamicFilmData = JsonData.JsonSerializer("Films");
             string Filmprice = DynamicFilmData[0]["FilmPrice"];
             ConsoleCommands.Textkleur("wit");
-            
+            decimal korting = 0;
+            string stringTotaal = "";
+            int Count = 1;
             if (Klant != null && Mandje == null)
             {
                 this.BetalingStatusFilm(Klant);
@@ -903,22 +905,42 @@ We hopen u voldoende te hebben geïnformeerd.
                 ConsoleCommands.Textkleur("rood");
                 for (int i = 0; i < Mandje.Count; i += 2)
                 {
-                    Console.Write($"\n[{i+1}] {Mandje[i]}\n");
+                    ConsoleCommands.Textkleur("wit"); Console.Write("\n["); ConsoleCommands.Textkleur("rood"); Console.Write(Count); ConsoleCommands.Textkleur("wit"); Console.Write($"] {Mandje[i]}\n");
+                    Count++;
                 }
                 ConsoleCommands.Textkleur("wit");
             }
-
-            totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); Console.Write($" {totaal} Euro\n"); ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
-            Console.WriteLine("_____________________________________________________________________________________________\n");
-            ConsoleCommands.Textkleur("zwart");
-            Console.ReadLine();
-            ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("_____________________________________________________________________________________________\n");
-            Thread.Sleep(3000);
+            if (Mandje == null)
+            {
+                totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); Console.Write($" {totaal} Euro\n"); ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+                Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
+                Thread.Sleep(3000);
+            }
+            else
+            {
+                totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
+                korting = (totaal * Convert.ToDecimal(0.15, new CultureInfo("en-US")));
+                totaal -= korting;
+                stringTotaal = String.Format("{0:0.00}", totaal);
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); Console.Write($" {stringTotaal} Euro\n"); ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+                Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
+                Thread.Sleep(3000);
+            }
             
 
 
