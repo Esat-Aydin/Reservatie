@@ -137,13 +137,16 @@ namespace Chair
 
             console(room, newData);
             string newinput;
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.WriteLine("Toets [1] om de aangeraden stoelen te kiezen.");
             Console.WriteLine("Toets [2] om zelf stoelen te kiezen");
             Console.WriteLine("Toets [3] om opnieuw uw stoel uit te kiezen");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             while (true)
             {
                 ConsoleCommands.Textkleur("zwart");
                 newinput = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
                 if (newinput == "1")
                 {
                     return Tuple.Create(newChairs, howMany, newData);
@@ -191,11 +194,8 @@ namespace Chair
             {
                 ConsoleCommands.Textkleur("zwart");
                 input = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit");
                 input = input.ToUpper();
-                if(i != 0)
-                {
-                    Console.WriteLine("Type nu de volgende stoel in");
-                }
                 if(input.Length == 2)
                 {
                     differentinput = "" + input[1] + input[0];
@@ -206,24 +206,32 @@ namespace Chair
                 }
                 if (this.chairsTaken.Contains(input)||this.chairsTaken.Contains(differentinput))
                 {
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("Deze stoelen zijn al gereservereerd");
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     i--;
                 }
                 else if (newChairs.Contains(differentinput)||newChairs.Contains(input))
                 {
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine($"U heeft stoel al gekozen.");
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     i--;
                 }
                 else if (input.Length == 1)
                 {
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("Verkeerde input, probeer '0X'");
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     i--;
                 }
                 else if (input.Length == 2)
                 {
                     if((Letters.Contains("" + input[0]))&& (Letters.Contains("" + input[1])))
                     {
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("Verkeerde input, probeer '0X'");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         i--;
                     }
                     else if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1])))
@@ -255,6 +263,14 @@ namespace Chair
                             }
                             console(room, ding);
                         }
+                        else
+                        {
+                            ding = changeAllData(ding,newChairs[i], "-");
+                            console(room, ding);
+                        }
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if (Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0]))){
                         newChairs[i] = input;
@@ -284,12 +300,22 @@ namespace Chair
                             }
                             console(room, ding);
                         }
+                        else
+                        {
+                            ding = changeAllData(ding, newChairs[i], "-");
+                            console(room, ding);
+                        }
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input);
                         //console(room, newData);
                     }
                     else
                     {
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("Verkeerde input, probeer '0X'");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         i--;
                     }
                 }
@@ -323,6 +349,14 @@ namespace Chair
                             }
                             console(room, ding);
                         }
+                        else
+                        {
+                            ding = changeAllData(ding, newChairs[i], "-");
+                            console(room, ding);
+                        }
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if(Letters.Contains("" + input[2]) && Numbers.Contains(Convert.ToInt32("" + input[0] + input[1])))
                     {
@@ -352,17 +386,29 @@ namespace Chair
                             }
                             console(room, ding);
                         }
+                        else
+                        {
+                            ding = changeAllData(ding, newChairs[i], "-");
+                            console(room, ding);
+                        }
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input, "-");
                     }
                     else
                     {
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("Verkeerde input, probeer '0X'");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
                         i--;
                     }
                 }
                 else
                 {
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("Verkeerde input, probeer '0X'");
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
                     i--;
                 }
 
@@ -499,6 +545,9 @@ namespace Chair
                 table.AddRow(Alphabet[i], AllData[i][0], AllData[i][1], AllData[i][2], AllData[i][3], AllData[i][4], AllData[i][5], AllData[i][6], AllData[i][7], AllData[i][8], AllData[i][9], AllData[i][10], AllData[i][11], AllData[i][12], AllData[i][13], AllData[i][14], AllData[i][15], AllData[i][16], AllData[i][17], AllData[i][18], AllData[i][19]);
             }*/
             //table.Write(Format.Alternative);
+
+
+
             /* Fixes/Changes/ToDoList
              * 1. Fix recommendationchair overriding already taken chairs.
              * 2. Fix input and output colours and lines.
