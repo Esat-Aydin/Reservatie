@@ -499,6 +499,11 @@ namespace Chair
                 table.AddRow(Alphabet[i], AllData[i][0], AllData[i][1], AllData[i][2], AllData[i][3], AllData[i][4], AllData[i][5], AllData[i][6], AllData[i][7], AllData[i][8], AllData[i][9], AllData[i][10], AllData[i][11], AllData[i][12], AllData[i][13], AllData[i][14], AllData[i][15], AllData[i][16], AllData[i][17], AllData[i][18], AllData[i][19]);
             }*/
             //table.Write(Format.Alternative);
+            /* Fixes/Changes/ToDoList
+             * 1. Fix recommendationchair overriding already taken chairs.
+             * 2. Fix input and output colours and lines.
+             * 3. Print out the console table everytime it takes a new input.
+            */
         }
     }
 }
