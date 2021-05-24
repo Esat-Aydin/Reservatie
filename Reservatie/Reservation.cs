@@ -120,6 +120,7 @@ namespace Reservation
             MedewerkerClass.Medewerker admin = new();
             Gebruiker.Gebruiker Klant = new();
             ConsoleCommands CommandLine = new();
+            List<string> Autofill = new();
             // Inladen Json Module 
             dynamic DynamicData = JsonData.JsonSerializer("Snacks");
             dynamic DynamicUserData = JsonData.JsonSerializer("Users");
@@ -148,12 +149,16 @@ namespace Reservation
                         Scherm.Screens.CinemaBanner();
 
                         ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("U heeft gezocht naar de volgende film:");
+                        Console.WriteLine($"U heeft gezocht naar de volgende film: {Film_zoeken}");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("rood");
 
 
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
+                    }
+                    if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
+                    {
+                        Autofill.Add(Film_zoeken);
                     }
                     else
                     {
@@ -168,6 +173,34 @@ namespace Reservation
                     Console.Clear();
                     ReserveringMaken(UserInput);
                 }
+                Console.WriteLine("Op basis van uw input hebben we deze films gevonden:\n");
+                for (int i = 1; i < Autofill.Count+1; i++)
+                {
+                    Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write(i); ConsoleCommands.Textkleur("wit"); Console.Write($"] {Autofill[i - 1]}\n");
+                }
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+                string Filmkeuze = Console.ReadLine();
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                if (Filmkeuze == "1")
+                {
+                    Scherm.Screens.CinemaBanner();
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine($"U heeft gekozen voor de volgende film: {Autofill[0]}");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("rood");
+                    Klant.ZoekOptie(Autofill[0], DynamicFilmData);
+                }
+                if(Filmkeuze== "2")
+                {
+                    Scherm.Screens.CinemaBanner();
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine($"U heeft gekozen voor de volgende film: {Autofill[1]}");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("rood");
+                    Klant.ZoekOptie(Autofill[1], DynamicFilmData);
+                }
+
             }
             else if (UserInput == "2")
             {
