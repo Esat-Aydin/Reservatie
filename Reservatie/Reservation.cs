@@ -174,7 +174,6 @@ namespace Reservation
                 Scherm.Screens.CinemaBanner();
                 List<string> Show_films = new List<string>();
                 Dictionary<string, string[]> Show_tijden = new Dictionary<string, string[]>();
-
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -216,33 +215,7 @@ namespace Reservation
                         }
                     }
                 }
-                int count = 1;
-                for (int y = 0; y < Show_films.Count; y++)
-                {
-
-                    Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write((count)); ConsoleCommands.Textkleur("wit"); Console.Write("] voor: " + Show_films[y] + "\n");
-                    count++;
-                }
-                Console.WriteLine("\nVoor welke van de bovenstaande films zou u willen reserveren?");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                string Chosen_film = Console.ReadLine();
-                bool isint = false;
-                int film_showw = 0;
-                while (!Int32.TryParse(Chosen_film, out film_showw))
-                {
-                    isint = false;
-                    while (isint == false)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Dit is geen geldige input probeer het opnieuw.");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        ConsoleCommands.Textkleur("zwart");
-                        Chosen_film = Console.ReadLine();
-                        isint = true;
-                    }
-                    DatumChecker(Chosen_film, Show_films, Show_tijden);
-                }
+                Klant.GenreOptie(Show_films, DynamicFilmData,SearchedGenre);
 
 
             }
