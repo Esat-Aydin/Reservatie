@@ -279,9 +279,9 @@ namespace Reservation
                 bool loop = true;
                 while (loop)
                 {
+                    choice = Int32.Parse(Console.ReadLine());
                     try
                     {
-                        choice = Int32.Parse(Console.ReadLine());
                         if (choice.ToString() == "0")
                         {
                             Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
@@ -291,7 +291,6 @@ namespace Reservation
                             loop = false;
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
-                            Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                         }
                         else
                         {
@@ -302,10 +301,13 @@ namespace Reservation
                     {
                         Console.WriteLine("Verkeerde input, probeer het opnieuw");
                     }
+                    Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                 }
                 //var stoelen = new StoelKeuze(All_Films[choice-1],"10-5-2021","11:00");
                 //var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
                 // stoelen.Chair();
+                //Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
+                Console.WriteLine("No");
             }
 
             else if (UserInput == "4")

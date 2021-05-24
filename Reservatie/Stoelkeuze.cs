@@ -27,6 +27,7 @@ namespace Chair
         public dynamic DynamicUserData;
         public string[] Alphabet;
         public string[][] AllData;
+        public List<string> chairsTaken;
 
         public StoelKeuze(string Naam, string datum = null, string tijd = null)
         {
@@ -102,6 +103,12 @@ namespace Chair
                 for (int i = 0; i < howMany; i++)
                 {
                     newChairs[i] = "" + (Convert.ToInt32("" + input[0]) + i) + input[1];
+                    if (this.chairsTaken.Contains(newChairs[i]))
+                    {
+                        newChairs[i] = "";
+                        return Tuple.Create(newChairs, 0, newData);
+                    }
+                    newData = changeAllData(newData, newChairs[i], "-");
                 }
             }
             else
@@ -109,13 +116,19 @@ namespace Chair
                 for (int i = 0; i < howMany; i++)
                 {
                     newChairs[i] = "" + (Convert.ToInt32("" + input[0] + input[1]) + i) + input[2];
+                    if (this.chairsTaken.Contains(newChairs[i]))
+                    {
+                        newChairs[i] = "";
+                        return Tuple.Create(newChairs, 0, newData);
+                    }
+                    newData = changeAllData(newData, newChairs[i], "-");
                 }
             }
-
+            /*
             for (int i = 0; i < howMany; i++)
             {
                 newData = changeAllData(newData, newChairs[i],"-");
-            }
+            }*/
 
             console(room, newData);
             string newinput;
@@ -146,7 +159,6 @@ namespace Chair
                 else
                 {
                     Console.WriteLine("Verkeerde input, probeer het opnieuw");
-                    Console.WriteLine("Hier");
                 }
             }
             
@@ -185,19 +197,17 @@ namespace Chair
                 }
                 else if (input.Length == 1)
                 {
-                    Console.WriteLine("Verkeerde input, probeer het opnieuw");
-                    Console.WriteLine("Te kort");
+                    Console.WriteLine("Verkeerde input, probeer '0X'");
                     i--;
                 }
                 else if (input.Length == 2)
                 {
-                    if((Letters.Contains("" + input[0]))&& (Letters.Contains("" + input[2])))
+                    if((Letters.Contains("" + input[0]))&& (Letters.Contains("" + input[1])))
                     {
-                        Console.WriteLine("Verkeerde input, probeer het opnieuw");
-                        Console.WriteLine("Twee letters");
+                        Console.WriteLine("Verkeerde input, probeer '0X'");
                         i--;
                     }
-                    else if (Letters.Contains("" + input[0]) && Letters.Contains("" + input[1]))
+                    else if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1])))
                     {
                         differentinput = "" + input[1] + input[0];
                         newChairs[i] = differentinput;
@@ -243,8 +253,7 @@ namespace Chair
                     }
                     else
                     {
-                        Console.WriteLine("Verkeerde input, probeer het opnieuw");
-                        Console.WriteLine("Twee ander dingen");
+                        Console.WriteLine("Verkeerde input, probeer '0X'");
                         i--;
                     }
                 }
@@ -290,15 +299,13 @@ namespace Chair
                     }
                     else
                     {
-                        Console.WriteLine("Verkeerde input, probeer het opnieuw");
-                        Console.WriteLine("3 andere ding");
+                        Console.WriteLine("Verkeerde input, probeer '0X'");
                         i--;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Verkeerde input, probeer het opnieuw");
-                    Console.WriteLine("Iets compleet anders");
+                    Console.WriteLine("Verkeerde input, probeer '0X'");
                     i--;
                 }
 
@@ -353,6 +360,7 @@ namespace Chair
                         chairs.Add(this.DynamicUserData[i]["Stoel_num"][j].ToString());
                     }
                     chairs.Sort();
+                    this.chairsTaken = chairs;
                     //Console.WriteLine(chairs[1][0]);
                 }
             }
@@ -401,6 +409,7 @@ namespace Chair
                 }
             }
             */
+            Scherm.Screens.CinemaBanner();
             Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
             ConsoleCommands.Textkleur("zwart");
             int stoelen = Int32.Parse(Console.ReadLine());
