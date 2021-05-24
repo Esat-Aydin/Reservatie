@@ -154,19 +154,22 @@ namespace Gebruiker
             {
                 Console.WriteLine("Hoe heet de film die u wilt verwijderen?");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
+                bool x = true;
+                while(x == true)
+                {
                 string delete_movie = Console.ReadLine();
                 if (FilmObject.Film_check2(delete_movie) == true)
                 {
                     FilmObject.RemoveFilm(delete_movie);
+                    x = false;
                 }
                 else
                 {
                     Console.WriteLine("Film niet kunnen vinden");
-                    Console.WriteLine("Probeer alstublieft opnieuw");
-                    //dit moet opniuew gecalled worden
-                }
-                //string delete_movie_lower = delete_movie.ToLower();
+                    Console.WriteLine("Probeer het alstublieft opnieuw");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    }
+                }  
             }
 
 
