@@ -149,7 +149,7 @@ namespace Reservation
                         Scherm.Screens.CinemaBanner();
 
                         ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine($"U heeft gezocht naar de volgende film: {Film_zoeken}");
+                        Console.Write($"U heeft gezocht naar de volgende film: "); ConsoleCommands.Textkleur("rood"); Console.WriteLine(Film_zoeken);
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("rood");
 
@@ -190,12 +190,11 @@ namespace Reservation
                         {
                             Scherm.Screens.CinemaBanner();
                             ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine($"U heeft gekozen voor de volgende film: {Autofill[i - 1]}");
+                            Console.Write($"U heeft gekozen voor de volgende film: "); ConsoleCommands.Textkleur("rood"); Console.WriteLine(Autofill[i - 1]);
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("rood");
                             Klant.ZoekOptie(Autofill[i - 1], DynamicFilmData);
                         }
-                        
                     }
                     Console.WriteLine("U heeft de verkeerde input gegeven, probeer het opnieuw.");
                     Thread.Sleep(2000);
@@ -241,7 +240,6 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 for (int i = 0; i < DynamicFilmData.Count; i++)
                 {
-
                     for (int j = 0; j < DynamicFilmData[i]["FilmGenres"].Count; j++)
                     {
                         string Genre_zoeken = (string)DynamicFilmData[i]["FilmGenres"][j];
@@ -251,6 +249,7 @@ namespace Reservation
                         }
                     }
                 }
+
                 Klant.GenreOptie(Show_films, DynamicFilmData,SearchedGenre);
 
 
@@ -538,48 +537,6 @@ namespace Reservation
             Int32.TryParse(YearofInput, out InputYear);
             var TestDateTime = new DateTime(InputYear, InputMonth, InputDays, 10, 2, 0, DateTimeKind.Local);
             return TestDateTime;
-        }
-        public void DatumChecker(string Chosen_film, List<string> Show_films, Dictionary<string, string[]> Show_tijden)
-        {
-/*            Gebruiker.Gebruiker gebruiker = new Gebruiker.Gebruiker();
-            List<string> DagenvdWeek = new List<string>();
-            DagenvdWeek.Add("Maandag");
-            DagenvdWeek.Add("Dinsdag");
-            DagenvdWeek.Add("Woensdag");
-            DagenvdWeek.Add("Donderdag");
-            DagenvdWeek.Add("Vrijdag");
-            DagenvdWeek.Add("Zaterdag");
-            DagenvdWeek.Add("Zondag");
-            dynamic DynamicFilmData = JsonData.JsonSerializer("Films");
-            Film.Film FilmObject = new();
-            int Count1 = 1;
-            string Dagvdweek = null;
-            string ConvertedDate = null;
-            for (int i = 0; i < Show_films.Count + 1; i++)
-            {
-
-
-                if (Chosen_film == (film_showw))
-                {
-                    Scherm.Screens.CinemaBanner();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    FilmObject.Films(Chosen_film, Show_films);
-                    ConsoleCommands.Textkleur("wit");
-                    for (int j = 0; j < DagenvdWeek.Count; j++)
-                    {
-                        var FirstWeek = Gebruiker.Gebruiker.GetNextWeekday(Gebruiker.Gebruiker.DayOfWeekConverter(DagenvdWeek[j])).ToString(); string FirstWeekDay = FirstWeek.Substring(0, 9);
-                        var SecondWeek = Gebruiker.Gebruiker.GetTwoWeeksFromNow(Gebruiker.Gebruiker.DayOfWeekConverter(DagenvdWeek[j])).ToString(); string SecondWeekDay = SecondWeek.Substring(0, 9);
-                    }
-
-
-
-
-
-
-
-
-                }
-            }*/
         }
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
