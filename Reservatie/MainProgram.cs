@@ -77,7 +77,7 @@ namespace Cinema
             }
             else if (Genre_select == "4")
             {
-                Genre_search = "Romantiek";
+                Genre_search = "Romantic";
             }
             else if (Genre_select == "5")
             {
@@ -89,7 +89,7 @@ namespace Cinema
             }
             else if (Genre_select == "7")
             {
-                Genre_search = "Familie";
+                Genre_search = "Family";
             }
             else if(Genre_select == "8")
             {

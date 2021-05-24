@@ -1221,6 +1221,10 @@ namespace Gebruiker
                     {
                         Gezochte_Film = Show_films[i - 1];
                     }
+                    if (Show_films.Count == 1)
+                    {
+                        Gezochte_Film = Show_films[0];
+                    }
                 }
             }
             var table = new ConsoleTable("Dagen van de week", "Draaitijd", "Week [1]", "Week [2]");
