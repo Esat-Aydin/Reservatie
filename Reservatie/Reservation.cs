@@ -288,6 +288,7 @@ namespace Reservation
                         }
                         else if (choice >= 1 && choice <= All_Films.Count)
                         {
+                            loop = false;
                             ConsoleCommands.Textkleur("wit");
                             Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
                             Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
