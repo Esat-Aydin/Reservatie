@@ -156,22 +156,18 @@ namespace Reservation
 
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
                     }
-                    if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
+                    try
                     {
-                        Autofill.Add(Film_zoeken);
+                        if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
+                        {
+                            Autofill.Add(Film_zoeken);
+                        }
                     }
-                    else
+                    catch
                     {
-                        counter += 1;
+                        Autofill = Autofill;
                     }
-                }
-                if (counter >= DynamicFilmData.Count)
-                {
-
-                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ReserveringMaken(UserInput);
+                    counter++;   
                 }
                 while (true)
                 {
@@ -201,6 +197,14 @@ namespace Reservation
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
 
+                }
+                if (counter >= DynamicFilmData.Count)
+                {
+
+                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
                 }
 
             }

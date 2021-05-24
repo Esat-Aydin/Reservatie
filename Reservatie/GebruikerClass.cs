@@ -486,7 +486,7 @@ namespace Gebruiker
                     Scherm.Screens.CinemaBanner();
                     Console.WriteLine("\t\t\t RESERVERINGEN BEKIJKEN");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    var Reserveringen = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+                    var Reserveringen = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
                     dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
 
                     Console.WriteLine("Hieronder vind u de lijst van alle reserveringen.");
