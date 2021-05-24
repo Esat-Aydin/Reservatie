@@ -182,23 +182,17 @@ namespace Reservation
                 ConsoleCommands.Textkleur("zwart");
                 string Filmkeuze = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                if (Filmkeuze == "1")
+                for (int i = 1; i < Autofill.Count+1; i++)
                 {
-                    Scherm.Screens.CinemaBanner();
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine($"U heeft gekozen voor de volgende film: {Autofill[0]}");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
-                    Klant.ZoekOptie(Autofill[0], DynamicFilmData);
-                }
-                if(Filmkeuze== "2")
-                {
-                    Scherm.Screens.CinemaBanner();
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine($"U heeft gekozen voor de volgende film: {Autofill[1]}");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("rood");
-                    Klant.ZoekOptie(Autofill[1], DynamicFilmData);
+                    if (Filmkeuze == i.ToString())
+                    {
+                        Scherm.Screens.CinemaBanner();
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine($"U heeft gekozen voor de volgende film: {Autofill[i-1]}");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("rood");
+                        Klant.ZoekOptie(Autofill[i-1], DynamicFilmData);
+                    }
                 }
 
             }
