@@ -140,9 +140,10 @@ namespace Scherm
             CinemaBanner();
             Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    \n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan");
-            Console.Write("\t    ["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken");
-            Console.Write("\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering beheren\n");
+            
+            Console.Write("\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering maken");
+            Console.Write("\t    ["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering beheren");
+            Console.Write("\t["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
             var Start_options = Console.ReadLine();
@@ -191,11 +192,12 @@ namespace Scherm
             CinemaBanner();
             Console.WriteLine("\t\t\t\tHoe wilt u verder gaan?\t\t\t\t    \n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan \n\n");
+            
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film zoeken op Titel\n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Films zoeken op Genre \n\n");
             Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle films bekijken \n\n");
-            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Films zoeken op Datum \n");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Films zoeken op Datum \n\n");
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan \n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.ForegroundColor = ConsoleColor.Black;
             var Start_options = Console.ReadLine();
