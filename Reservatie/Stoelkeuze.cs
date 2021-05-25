@@ -111,7 +111,8 @@ namespace Chair
                     if (this.chairsTaken.Contains(newChairs[i]))
                     {
                         newChairs[i] = "";
-                        return Tuple.Create(newChairs, 0, newData);
+                        i--;
+                        return Tuple.Create(newChairs, i, newData);
                     }
                     newData = changeAllData(newData, newChairs[i], "-");
                 }
@@ -124,7 +125,8 @@ namespace Chair
                     if (this.chairsTaken.Contains(newChairs[i]))
                     {
                         newChairs[i] = "";
-                        return Tuple.Create(newChairs, 0, newData);
+                        i--;
+                        return Tuple.Create(newChairs, i, newData);
                     }
                     newData = changeAllData(newData, newChairs[i], "-");
                 }
@@ -255,11 +257,23 @@ namespace Chair
                                 i = newTuple.Item2;
                                 ding = newTuple.Item3;
                             }
-                            else
+                            else if(newTuple.Item2 == -1)
                             {
                                 i = newTuple.Item2;
                                 newChairs = newTuple.Item1;
                                 ding = NewAllData(this.AllData);
+                            }
+                            else
+                            {
+                                i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                foreach(var A in newChairs)
+                                {
+                                    if(A != "")
+                                    {
+                                        ding = changeAllData(ding, A, "-");
+                                    }
+                                }
                             }
                             console(room, ding);
                         }
@@ -292,11 +306,23 @@ namespace Chair
                                 i = newTuple.Item2;
                                 ding = newTuple.Item3;
                             }
-                            else
+                            else if(newTuple.Item2 == -1)
                             {
                                 i = newTuple.Item2;
                                 newChairs = newTuple.Item1;
                                 ding = NewAllData(this.AllData);
+                            }
+                            else
+                            {
+                                i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                foreach (var A in newChairs)
+                                {
+                                    if (A != "")
+                                    {
+                                        ding = changeAllData(ding, A, "-");
+                                    }
+                                }
                             }
                             console(room, ding);
                         }
@@ -341,11 +367,23 @@ namespace Chair
                                 i = newTuple.Item2;
                                 ding = newTuple.Item3;
                             }
-                            else
+                            else if (newTuple.Item2 == -1)
                             {
                                 i = newTuple.Item2;
                                 newChairs = newTuple.Item1;
                                 ding = NewAllData(this.AllData);
+                            }
+                            else
+                            {
+                                i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                foreach (var A in newChairs)
+                                {
+                                    if (A != "")
+                                    {
+                                        ding = changeAllData(ding, A, "-");
+                                    }
+                                }
                             }
                             console(room, ding);
                         }
@@ -378,11 +416,23 @@ namespace Chair
                                 i = newTuple.Item2;
                                 ding = newTuple.Item3;
                             }
-                            else
+                            else if (newTuple.Item2 == -1)
                             {
                                 i = newTuple.Item2;
                                 newChairs = newTuple.Item1;
                                 ding = NewAllData(this.AllData);
+                            }
+                            else
+                            {
+                                i = newTuple.Item2;
+                                newChairs = newTuple.Item1;
+                                foreach (var A in newChairs)
+                                {
+                                    if (A != "")
+                                    {
+                                        ding = changeAllData(ding, A, "-");
+                                    }
+                                }
                             }
                             console(room, ding);
                         }
