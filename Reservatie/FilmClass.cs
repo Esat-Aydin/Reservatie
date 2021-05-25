@@ -33,11 +33,11 @@ namespace Film
         public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
             List<Film> _data = new();
-            var FilmDataJson = File.ReadAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var FilmDataJson = File.ReadAllText(@".\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
             FilmObjectJson.Add(FilmObject);
             FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-            File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
+            File.WriteAllText(@".\AccountUsers.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
         public void Film_check(dynamic DynamicFilmData, int i)
         {
@@ -47,7 +47,7 @@ namespace Film
         public bool Film_check2(string FilmName)
         {
 
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@".\Filmsdata.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             for (int i = 0; i < DynamicData.Count; i++)
             {
@@ -89,7 +89,7 @@ namespace Film
         }
         public void RemoveFilm(string FilmName)
         {
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@".\Filmsdata.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData.Count; i++)
@@ -101,7 +101,7 @@ namespace Film
                     Index = i;
                     DynamicData.Remove(DynamicData[Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json", UserData);
+                    File.WriteAllText(@".\Filmsdata.json", UserData);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n");
                     Console.Write("\nFilm "); ConsoleCommands.Textkleur("rood"); Console.Write(FilmName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n"); ConsoleCommands.Textkleur("zwart");

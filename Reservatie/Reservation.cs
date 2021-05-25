@@ -31,9 +31,9 @@ namespace Reservation
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -557,7 +557,7 @@ namespace Reservation
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
                 List<JsonData> _data = new List<JsonData>();
-                var DataUser = File.ReadAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+                var DataUser = File.ReadAllText(@".\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
                 var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                           ?? new List<JsonData>();
 
@@ -576,7 +576,7 @@ namespace Reservation
                 });
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
-                File.WriteAllText(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", DataUser);
+                File.WriteAllText(@".\SampleLog.json", DataUser);
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
@@ -600,6 +600,10 @@ namespace Reservation
             Klant.Film_Time = Show_Tijden;
             Klant.Film_Day = FilmDatum;
             ReserveringStatus(Klant);
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("Kloppen de bovenstaande gegevens?\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Klant.SnacksOption(Klant);
 
@@ -784,7 +788,7 @@ We hopen u voldoende te hebben geïnformeerd.
                 }
                 DynamicUserData.Remove(DynamicUserData[Index]);
                 dynamic UserData = JsonConvert.SerializeObject(DynamicUserData);
-                File.WriteAllText(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json", UserData);
+                File.WriteAllText(@".\SampleLog.json", UserData);
                 Console.WriteLine("Uw reservering is geannuleerd, we hopen u snel weer te zien in onze bioscoop");
             }
             if (Optie == "2")
