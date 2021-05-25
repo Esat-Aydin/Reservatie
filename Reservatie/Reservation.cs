@@ -210,8 +210,8 @@ namespace Reservation
                 List<string> Show_films = new List<string>();
                 Dictionary<string, string[]> Show_tijden = new Dictionary<string, string[]>();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n");//Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                //ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Comedy\n");
@@ -222,6 +222,7 @@ namespace Reservation
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("8"); ConsoleCommands.Textkleur("wit"); Console.Write("] Horror\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
                 if (Genre_select == "0")
