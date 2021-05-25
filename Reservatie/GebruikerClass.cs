@@ -528,6 +528,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][0] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][0], ConvertedToDate);
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Maandag"][0]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "2")
                     {
@@ -536,6 +538,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][1] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], ConvertedToDate);
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Maandag"][1]);
+                        stoelen.Chair();
 
                     }
                     if (tijdslot == "3")
@@ -545,6 +549,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Maandag"][2] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], ConvertedToDate);
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Maandag"][2]);
+                        stoelen.Chair();
                     }
                 }
             }
@@ -588,6 +594,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][0] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][0], ConvertedToDate);
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Dinsdag"][0]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "2")
                     {
@@ -596,7 +604,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][1] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][1], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Dinsdag"][1]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "3")
                     {
@@ -605,7 +614,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Dinsdag"][2] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Dinsdag"][2], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Dinsdag"][2]);
+                        stoelen.Chair();
                     }
                 }
             }
@@ -650,7 +660,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][0] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][0], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Woensdag"][0]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "2")
                     {
@@ -659,7 +670,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][1] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][1], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Woensdag"][1]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "3")
                     {
@@ -668,6 +680,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Woensdag"][2] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Woensdag"][2], ConvertedToDate);
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Woensdag"][2]);
+                        stoelen.Chair();
                     }
                 }
             }
@@ -712,7 +726,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][0] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][0], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Donderdag"][0]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "2")
                     {
@@ -721,7 +736,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][1] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][1], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Donderdag"][1]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "3")
                     {
@@ -730,7 +746,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Donderdag"][2] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Donderdag"][2], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Donderdag"][2]);
+                        stoelen.Chair();
                     }
                 }
             }
@@ -775,7 +792,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][0] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][0], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Vrijdag"][0]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "2")
                     {
@@ -784,7 +802,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][1] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][1], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Vrijdag"][1]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "3")
                     {
@@ -793,7 +812,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Vrijdag"][2] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Vrijdag"][2], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Vrijdag"][2]);
+                        stoelen.Chair();
                     }
                 }
             }
@@ -839,7 +859,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][0] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][0], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Zaterdag"][0]);
+                        stoelen.Chair();
 
                     }
                     if (tijdslot == "2")
@@ -849,7 +870,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][1] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][1], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Zaterdag"][1]);
+                        stoelen.Chair();
                     }
                     if (tijdslot == "3")
                     {
@@ -858,7 +880,8 @@ namespace Gebruiker
                         Console.WriteLine("U heeft gekozen voor " + DictofTimes[Gezochte_Film]["Zaterdag"][2] + " uur.");
                         //SnacksOption();
                         //ReserveerCodeMail(Gezochte_Film, DictofTimes[Gezochte_Film]["Zaterdag"][2], ConvertedToDate);
-
+                        var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Zaterdag"][2]);
+                        stoelen.Chair();
                     }
                 }
             }

@@ -307,7 +307,6 @@ namespace Reservation
                 //var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
                 // stoelen.Chair();
                 //Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
-                Console.WriteLine("No");
             }
 
             else if (UserInput == "4")
@@ -451,6 +450,8 @@ namespace Reservation
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
                                                 //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][0], FilmDateSearch);
+                                                var stoelen = new StoelKeuze(ListofFilms[IntFilmKeuze-1], FilmDateSearch, DictofListofString[ListofFilms[IntFilmKeuze-1]][0]);
+                                                stoelen.Chair();
                                             }
                                             else if (intTijdKeuze == 2)
                                             {
@@ -459,6 +460,8 @@ namespace Reservation
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
                                                 //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][1], FilmDateSearch);
+                                                var stoelen = new StoelKeuze(ListofFilms[IntFilmKeuze - 1], FilmDateSearch, DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]);
+                                                stoelen.Chair();
                                             }
                                             else if (intTijdKeuze == 3)
                                             {
@@ -467,6 +470,8 @@ namespace Reservation
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
                                                 //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][2], FilmDateSearch);
+                                                var stoelen = new StoelKeuze(ListofFilms[IntFilmKeuze - 1], FilmDateSearch, DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]);
+                                                stoelen.Chair();
                                             }
                                         }
                                     }
@@ -607,21 +612,24 @@ namespace Reservation
                             {
                                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine("U heeft gekozen voor " + DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][0] + " uur.");
-                                
+                                var stoelen = new StoelKeuze(DynamicFilmData[i - 1]["FilmTitle"].ToString(), Chosen_date.ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][0].ToString());
+                                stoelen.Chair();
                                 //ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][0].ToString(), Chosen_date.ToString());
                             }
                             if (Chosen_timeslot == "2")
                             {
                                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine("U heeft gekozen voor " + DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][1] + " uur.");
-                      
+                                var stoelen = new StoelKeuze(DynamicFilmData[i - 1]["FilmTitle"].ToString(), Chosen_date.ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][1].ToString());
+                                stoelen.Chair();
                                 //ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][1].ToString(), Chosen_date.ToString());
                             }
                             if (Chosen_timeslot == "3")
                             {
                                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                                 Console.WriteLine("U heeft gekozen voor " + DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][2] + " uur.");
-                     
+                                var stoelen = new StoelKeuze(DynamicFilmData[i - 1]["FilmTitle"].ToString(), Chosen_date.ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][2].ToString());
+                                stoelen.Chair();
                                 //ReserveerCodeMail(DynamicFilmData[i - 1]["FilmTitle"].ToString(), DynamicFilmData[i - 1]["FilmDays"][Dagvdweek][2].ToString(), Chosen_date.ToString());
                             }
                             else if (Chosen_timeslot != "1" || Chosen_timeslot != "2" || Chosen_timeslot != "3")

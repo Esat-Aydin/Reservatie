@@ -563,16 +563,16 @@ namespace Chair
             }
             */
             Scherm.Screens.CinemaBanner();
-            Console.WriteLine($"    U heeft gekozen voor de film: {this.FilmNaam}, op {this.Datum} om {this.Tijd} uur.");
+            Console.WriteLine($"U heeft gekozen voor de film: {this.FilmNaam}, op {this.Datum} om {this.Tijd} uur.");
             Console.WriteLine("");
-            Console.WriteLine("    Hoeveel stoelen zou u willen reserveren?");
+            Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             int stoelen = Int32.Parse(Console.ReadLine());
             // Table needs to be somewhat dynamic
             ConsoleCommands.Textkleur("wit");
             console(room, AllData);
-            Console.WriteLine("    Type nu elke stoel, gevolgd door ENTER.");
+            Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
