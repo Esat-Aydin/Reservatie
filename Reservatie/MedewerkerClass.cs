@@ -26,7 +26,7 @@ namespace MedewerkerClass
             this.Admin_Password = AdminPass;
         }
 
-        new public void UserInputMethod(string UserInput)
+/*        new public void UserInputMethod(string UserInput)
         {
             //SnackClass.Snacks SnackObject = new SnackClass.Snacks("Cola", "1");
             //SnackObject.SnacksCheck(this.Name);
@@ -131,7 +131,7 @@ namespace MedewerkerClass
                 }
 
             }
-                if (this.isAdmin == true && (UserInput == "!newfilm"))
+            if (this.isAdmin == true && (UserInput == "!newfilm"))
             {
                 Scherm.Screens.CinemaBanner();
                 Console.WriteLine("\t\t\t FILM TOEVOEGEN");
@@ -428,15 +428,18 @@ namespace MedewerkerClass
 
 
             }
-
+            if (this.isAdmin == true && (UserInput == "!reserveringen"))
+            {
+                Scherm.Screens.CinemaBanner();
+            }
             UserInput = Console.ReadLine();
             UserInputMethod(UserInput);
-        }
+        }*/
         public void AdminConsole(bool adminConsoleChosen)
         {
 
             {
-                Console.Clear();
+                Scherm.Screens.CinemaBanner();
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("Voer uw admin gebruikersnaam in:");
@@ -454,7 +457,9 @@ namespace MedewerkerClass
             ConsoleCommands CommandLine = new ConsoleCommands();
             bool ReturnValue = false;
 
+
             var AccountUsers = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+
 
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
             List<string> ListofAccountsNames = new List<string>();
@@ -473,6 +478,7 @@ namespace MedewerkerClass
                 if (StoredName == Naam)
                 {
                     ReturnValue = true;
+                    Scherm.Screens.CinemaBanner();
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("Welkom, " + Naam + ". Voer nu het ingestelde admin wachtwoord in: ");
@@ -485,7 +491,7 @@ namespace MedewerkerClass
                         {
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("U bent succesvol ingelogd als medewerker! Type !help voor een lijst aan commands.");
+                            Console.WriteLine("U bent succesvol ingelogd als medewerker! Type help voor een lijst aan commands.");
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("zwart");
                             Gebruiker.Gebruiker adminObject = new Gebruiker.Gebruiker(Naam, ListofAccountsEmails[i], input_password, ReturnValue);

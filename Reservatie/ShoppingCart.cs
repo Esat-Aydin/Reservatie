@@ -28,7 +28,7 @@ namespace ShoppingCart
             //Json file met alle snacks.
             Scherm.Screens.CinemaBanner();
             ConsoleCommands.Textkleur("wit");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks"); Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("]Dranken\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks"); Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Dranken\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string SnackorDrinks = Console.ReadLine();
@@ -179,7 +179,7 @@ namespace ShoppingCart
             if (Meerbestellen == "2")
             {
                 Console.Clear();
-                Gebruiker.Gebruiker.Betaling(Klant,totaal, Mandje);
+                Klant.Betaling(Klant,totaal, Mandje);
             }
 
         }
