@@ -617,6 +617,7 @@ namespace Reservation
             {
                 if (UserInput == "1")
                 {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Klant.SnacksOption(Klant);
                     CorrectInput = true;
                 }
@@ -647,7 +648,7 @@ namespace Reservation
                     UserInput = Console.ReadLine();
                 }
             }
-            Klant.SnacksOption(Klant);
+          
 
             // Einde reserveren.
             Console.WriteLine("Bedankt voor het reserveren!");
