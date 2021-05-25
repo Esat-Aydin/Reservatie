@@ -125,8 +125,9 @@ namespace Scherm
             }
             else
             {
-                bool AdminConsoleChosen = true;
-                admin.AdminConsole(AdminConsoleChosen);
+                Klant.AdminCommands();
+                string UserInput = Console.ReadLine();
+                Klant.UserInputMethod(UserInput);
             }
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
