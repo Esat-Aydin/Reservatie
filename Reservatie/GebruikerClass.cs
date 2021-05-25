@@ -68,7 +68,7 @@ namespace Gebruiker
             {
                 Scherm.Screens.AdminOrUserScreen();
             }
-            if (this.isAdmin == true && (UserInput == "1"))
+            if (UserInput == "1")
             {
                 Scherm.Screens.CinemaBanner();
                 Console.WriteLine("\t\t\t ADMIN CONSOLE");
@@ -93,12 +93,12 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 }
             }
-            if (this.isAdmin == true && (UserInput.ToLower() == "help"))
+            if (UserInput.ToLower() == "help")
             {
 
                 AdminCommands();
             }
-            if (this.isAdmin == true && (UserInput == "5"))
+            if (UserInput == "5")
             {
                 Scherm.Screens.CinemaBanner();
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het progamma af te sluiten.\n\n");
@@ -124,7 +124,8 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine($"Wat is de prijs van {user_input_name}?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
+                    Console.OutputEncoding = System.Text.Encoding.UTF8;
+                    System.Console.Out.Write("€");
                     string user_input_price = Console.ReadLine();
                     var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.SnacksAdd(SnackObject, user_input_name);
@@ -142,7 +143,8 @@ namespace Gebruiker
 
                     Console.WriteLine($"Wat is de prijs van {user_input_name}?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
+                    Console.OutputEncoding = System.Text.Encoding.UTF8;
+                    System.Console.Out.Write("€");
                     string user_input_price = Console.ReadLine();
                     SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.DrankenAdd(SnackObject, user_input_name);
