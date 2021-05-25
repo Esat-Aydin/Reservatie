@@ -52,6 +52,7 @@ namespace Gebruiker
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             Film.Film FilmObject = new Film.Film();
+            //Film.Film FilmObject = new Film.Film();
             SnackClass.Snacks Snacks1 = new SnackClass.Snacks();
             MedewerkerClass.Medewerker admin = new MedewerkerClass.Medewerker();
             Gebruiker Klant = new Gebruiker();
@@ -94,6 +95,7 @@ namespace Gebruiker
             }
             if (this.isAdmin == true && (UserInput.ToLower() == "help"))
             {
+
                 AdminCommands();
             }
             if (this.isAdmin == true && (UserInput == "5"))

@@ -44,11 +44,26 @@ namespace Film
 
             Console.WriteLine(DynamicFilmData[i]["FilmTitle"]);
         }
+        public bool Film_check2(string FilmName)
+        {
+
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json");
+            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
+            for (int i = 0; i < DynamicData.Count; i++)
+            {
+                string FilmTitleObject = (string)DynamicData[i]["FilmTitle"];
+                if (FilmTitleObject == FilmName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void Films(string Chosen_film, dynamic Show_films)
         {
             if (Chosen_film == "1")
             {
-                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[0] + "\n") ;
+                Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[0] + "\n");
             }
             else if (Chosen_film == "2")
             {
@@ -71,6 +86,29 @@ namespace Film
                 Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Show_films[5] + "\n");
             }
 
+        }
+        public void RemoveFilm(string FilmName)
+        {
+            string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json");
+            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
+            int Index = 0;
+            for (int i = 0; i < DynamicData.Count; i++)
+            {
+                string FilmTitleObject = (string)DynamicData[i]["FilmTitle"];
+                Console.WriteLine("dasdasd");
+                if (FilmTitleObject == FilmName)
+                {
+                    Index = i;
+                    DynamicData.Remove(DynamicData[Index]);
+                    dynamic UserData = JsonConvert.SerializeObject(DynamicData);
+                    File.WriteAllText(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\Filmsdata.json", UserData);
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n");
+                    Console.Write("\nFilm "); ConsoleCommands.Textkleur("rood"); Console.Write(FilmName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n"); ConsoleCommands.Textkleur("zwart");
+
+                }
+
+            }
         }
     }
 }
