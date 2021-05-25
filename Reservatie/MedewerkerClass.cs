@@ -458,7 +458,7 @@ namespace MedewerkerClass
             bool ReturnValue = false;
 
 
-            var AccountUsers = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            var AccountUsers = new WebClient().DownloadString(@".\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
 
 
             dynamic AccountUsers_Gebruiker = JsonConvert.DeserializeObject(AccountUsers);
