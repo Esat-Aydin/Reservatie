@@ -156,22 +156,18 @@ namespace Reservation
 
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
                     }
-                    if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
+                    try
                     {
-                        Autofill.Add(Film_zoeken);
+                        if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
+                        {
+                            Autofill.Add(Film_zoeken);
+                        }
                     }
-                    else
+                    catch
                     {
-                        counter += 1;
+                        Autofill = Autofill;
                     }
-                }
-                if (counter >= DynamicFilmData.Count)
-                {
-
-                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ReserveringMaken(UserInput);
+                    counter++;   
                 }
                 while (true)
                 {
@@ -201,6 +197,14 @@ namespace Reservation
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
 
+                }
+                if (counter >= DynamicFilmData.Count)
+                {
+
+                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
                 }
 
             }
@@ -798,7 +802,7 @@ Hieronder vindt u de reservering die u heeft geannuleerd:
 " +
 
     @"
-We hopen u voldoende te hebben geïnformeerd.
+We hopen u voldoende te hebben geÃ¯nformeerd.
 " +
         "\nMet vriendelijke groet,\n\n" +
         "CinemaReservation"
@@ -951,7 +955,7 @@ We hopen u voldoende te hebben geïnformeerd.
                 totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 Console.OutputEncoding = System.Text.Encoding.UTF8; ConsoleCommands.Textkleur("wit");
-                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"€{totaal}\n"); ConsoleCommands.Textkleur("wit");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"Â€{totaal}\n"); ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -969,7 +973,7 @@ We hopen u voldoende te hebben geïnformeerd.
                 stringTotaal = String.Format("{0:0.00}", totaal);
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.OutputEncoding = System.Text.Encoding.UTF8; ConsoleCommands.Textkleur("wit");
-                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"€{stringTotaal}\n"); ConsoleCommands.Textkleur("wit");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"Â€{stringTotaal}\n"); ConsoleCommands.Textkleur("wit");
 
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
