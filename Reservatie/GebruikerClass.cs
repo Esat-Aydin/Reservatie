@@ -1221,7 +1221,6 @@ namespace Gebruiker
             int count = 1;
             for (int y = 0; y < Show_films.Count; y++)
             {
-
                 Console.Write("\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write((count)); ConsoleCommands.Textkleur("wit"); Console.Write("] voor: " + Show_films[y] + "\n");
                 count++;
             }
@@ -1231,29 +1230,45 @@ namespace Gebruiker
             string Chosen_film = Console.ReadLine();
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             int isInt = 0;
-            if (!int.TryParse(Chosen_film, out isInt))
+            bool Break = true;
+            while (Break)
             {
-                Console.WriteLine("U heeft een verkeerde input gegeven probeer het opnieuw.");
-                Thread.Sleep(2000);
-                Console.Clear();
-                Scherm.Screens.CinemaBanner();
-                Console.Write("\t\t\tWe hebben deze films gevonden onder de genre "); ConsoleCommands.Textkleur("rood"); Console.Write(SearchedGenre); ConsoleCommands.Textkleur("wit"); Console.Write(":\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
-            }
-            else
-            {
-                for (int i = 0; i < Show_films.Count; i++)
+                if (!int.TryParse(Chosen_film, out isInt))
                 {
-                    
-                    if (Chosen_film == i.ToString())
+                    Console.WriteLine("U heeft een verkeerde input gegeven probeer het opnieuw.");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    Scherm.Screens.CinemaBanner();
+                    Console.Write("\t\t\tWe hebben deze films gevonden onder de genre "); ConsoleCommands.Textkleur("rood"); Console.Write(SearchedGenre); ConsoleCommands.Textkleur("wit"); Console.Write(":\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
+                }
+                else
+                {
+                    if(Chosen_film != "0")
                     {
-                        Gezochte_Film = Show_films[i - 1];
+                        for (int i = 0; i < Show_films.Count; i++)
+                        {
+
+                            if (Chosen_film == i.ToString())
+                            {
+                                Gezochte_Film = Show_films[i - 1];
+                                Break = false;
+                            }
+                            if (Show_films.Count == 1)
+                            {
+                                Gezochte_Film = Show_films[0];
+                                Break = false;
+                            }
+                        }
                     }
-                    if (Show_films.Count == 1)
+                    else
                     {
-                        Gezochte_Film = Show_films[0];
+                        Chosen_film = "";
                     }
+
+
                 }
             }
             var table = new ConsoleTable("Dagen van de week", "Draaitijd", "Week [1]", "Week [2]");
@@ -1846,38 +1861,6 @@ namespace Gebruiker
                 }
             }
 
-        }
-        public static string DagKeuze(string DagenKeuze)
-        {
-
-            if (DagenKeuze == "1")
-            {
-                return "Maandag";
-            }
-            if (DagenKeuze == "2")
-            {
-                return "Dinsdag";
-            }
-            if (DagenKeuze == "1")
-            {
-                return "Woensdag";
-            }
-            if (DagenKeuze == "1")
-            {
-                return "Donderdag";
-            }
-            if (DagenKeuze == "1")
-            {
-                return "Vrijdag";
-            }
-            if (DagenKeuze == "1")
-            {
-                return "Zaterdag";
-            }
-            else            
-            {
-                return "Zondag";
-            }
         }
         public static void Snacks(Gebruiker Klant)
         {
