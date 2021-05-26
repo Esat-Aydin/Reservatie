@@ -171,10 +171,10 @@ namespace Chair
 
         public void Chair()
         {
-            var MyFilmsData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\seats (2).json");
+            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
+            string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
