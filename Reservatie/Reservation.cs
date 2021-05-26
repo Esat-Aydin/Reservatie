@@ -225,9 +225,8 @@ namespace Reservation
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Sci-Fi\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("8"); ConsoleCommands.Textkleur("wit"); Console.Write("] Horror\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
                 if (Genre_select == "0")
@@ -325,12 +324,10 @@ namespace Reservation
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
                 Dictionary<string, List<string>> DictofListofString = new();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\tVoor welke datum zou u willen reserveren? (DD-MM-YYYY)\n\n\t\t\t\t["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
-
+                Console.WriteLine("\t\t\tVoer hier de datum in (DD/MM/YYYY): ");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string FilmDateSearch = Console.ReadLine();
-
                 bool InputisDate = false;
                 DateTime TestDateTime = new();
                 while (InputisDate == false)
@@ -339,10 +336,6 @@ namespace Reservation
                     {
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
-                    }
-                    if (FilmDateSearch == "0")
-                    {
-                        Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
                     }
                     else
                     {
@@ -655,10 +648,12 @@ namespace Reservation
                     UserInput = Console.ReadLine();
                 }
             }
-          
 
             // Einde reserveren.
-            Console.WriteLine("Bedankt voor het reserveren!");
+            Scherm.Screens.CinemaBanner();
+            ReserveringStatus(Klant);
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.WriteLine("Bedankt voor het reserveren!\n");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reserveringscode wordt geladen.");
             Thread.Sleep(1000);
             ReservationCodePercentage();
@@ -677,23 +672,29 @@ namespace Reservation
             ReservationToJSon(Klant, GeneratedCode);
 
             ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
+            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop."); ConsoleCommands.Textkleur("rood"); Console.Write("\nSla uw reserverings code op!\n"); ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands CommandLine = new ConsoleCommands();
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om de mail opnieuw te verzenden\n[");
-            ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om af te sluiten\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("]  Om af te sluiten\n");
             // Email bevestiging.
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Mail_Bevestiging = Console.ReadLine();
-            if (Mail_Bevestiging == "1")
+            while (true)
             {
-                Mail_Sender(Klant, GeneratedCode);
-                // Data Reservering toevoegen.
+                if (Mail_Bevestiging == "1")
+                {
+                    CommandLine.RestartOption();
+                    // Data Reservering toevoegen.
 
-            }
-            else
-            {
-                CommandLine.RestartOption();
+                }
+                else
+                {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("Dat is de verkeerde input. Probeer het opnieuw.");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");ConsoleCommands.Textkleur("zwart");
+                    Mail_Bevestiging = Console.ReadLine();
+                }
             }
             CommandLine.RestartOption();
 
@@ -749,8 +750,8 @@ We hopen u snel te zien in de bioscoop!
             catch
             {
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
+                Console.Write("Het versturen van de bevestiging is");ConsoleCommands.Textkleur("rood"); Console.Write(" niet "); ConsoleCommands.Textkleur("wit"); Console.Write("gelukt!\n");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             
         }
@@ -876,6 +877,9 @@ We hopen u voldoende te hebben geïnformeerd.
         }
         public string DateConverter(string InputDate, DateTime TestDateTime)
         {
+            
+
+
                 var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
                 var UnixDateTime = (TestDateTime.ToUniversalTime() - epoch).TotalSeconds; // hier wordt het geconvert naar Unix!
