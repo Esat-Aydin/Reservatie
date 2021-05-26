@@ -617,6 +617,7 @@ namespace Reservation
             {
                 if (UserInput == "1")
                 {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Klant.SnacksOption(Klant);
                     CorrectInput = true;
                 }
@@ -647,10 +648,12 @@ namespace Reservation
                     UserInput = Console.ReadLine();
                 }
             }
-            Klant.SnacksOption(Klant);
 
             // Einde reserveren.
-            Console.WriteLine("Bedankt voor het reserveren!");
+            Scherm.Screens.CinemaBanner();
+            ReserveringStatus(Klant);
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.WriteLine("Bedankt voor het reserveren!\n");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reserveringscode wordt geladen.");
             Thread.Sleep(1000);
             ReservationCodePercentage();
@@ -669,23 +672,29 @@ namespace Reservation
             ReservationToJSon(Klant, GeneratedCode);
 
             ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
+            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop."); ConsoleCommands.Textkleur("rood"); Console.Write("\nSla uw reserverings code op!\n"); ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands CommandLine = new ConsoleCommands();
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om de mail opnieuw te verzenden\n[");
-            ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om af te sluiten\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("]  Om af te sluiten\n");
             // Email bevestiging.
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Mail_Bevestiging = Console.ReadLine();
-            if (Mail_Bevestiging == "1")
+            while (true)
             {
-                Mail_Sender(Klant, GeneratedCode);
-                // Data Reservering toevoegen.
+                if (Mail_Bevestiging == "1")
+                {
+                    CommandLine.RestartOption();
+                    // Data Reservering toevoegen.
 
-            }
-            else
-            {
-                CommandLine.RestartOption();
+                }
+                else
+                {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("Dat is de verkeerde input. Probeer het opnieuw.");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");ConsoleCommands.Textkleur("zwart");
+                    Mail_Bevestiging = Console.ReadLine();
+                }
             }
             CommandLine.RestartOption();
 
@@ -741,8 +750,8 @@ We hopen u snel te zien in de bioscoop!
             catch
             {
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
+                Console.Write("Het versturen van de bevestiging is");ConsoleCommands.Textkleur("rood"); Console.Write(" niet "); ConsoleCommands.Textkleur("wit"); Console.Write("gelukt!\n");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             
         }
