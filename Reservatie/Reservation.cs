@@ -225,8 +225,8 @@ namespace Reservation
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Sci-Fi\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("8"); ConsoleCommands.Textkleur("wit"); Console.Write("] Horror\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
                 if (Genre_select == "0")
@@ -324,7 +324,8 @@ namespace Reservation
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
                 Dictionary<string, List<string>> DictofListofString = new();
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\t\tVoer hier de datum in (DD/MM/YYYY): ");
+                Console.WriteLine("\t\tVoer de datum in voor wanneer u zou willen reserveren (DD/MM/YYYY): ");
+                Console.Write("\n\t\t\t\t["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string FilmDateSearch = Console.ReadLine();
@@ -336,6 +337,10 @@ namespace Reservation
                     {
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
+                    }
+                    if (FilmDateSearch == "0")
+                    {
+                        Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
                     }
                     else
                     {
