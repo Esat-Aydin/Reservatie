@@ -126,6 +126,7 @@ namespace Scherm
             else
             {
                 Klant.AdminCommands();
+                ConsoleCommands.Textkleur("zwart");
                 string UserInput = Console.ReadLine();
                 Klant.UserInputMethod(UserInput);
             }
