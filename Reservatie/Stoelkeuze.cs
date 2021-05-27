@@ -487,12 +487,15 @@ namespace Chair
 
         public void Chair()
         {
-            //var MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
-            //string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json");
-            //string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
-            //dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            //dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            //dynamic DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
+
+            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
+            string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
+            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
+            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
+            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
+            dynamic DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             List<string> chairs = new List<string>();
             // From here
             var room = this.DynamicFilmData[0]["FilmRoom"];
