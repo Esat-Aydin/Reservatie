@@ -98,7 +98,7 @@ namespace Gebruiker
                     System.Console.Out.Write("€");
                     string user_input_price = Console.ReadLine();
                     var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
-                    Snacks1.SnacksAdd(SnackObject, user_input_name);
+                    Snacks1.AddObject(SnackObject, user_input_name);
                     Thread.Sleep(3000);
                     AdminCommands();
                 }
@@ -131,7 +131,7 @@ namespace Gebruiker
                     Snacks1.SnacksCheck(user_input_name);
                     if (Snacks1.SnacksCheck(user_input_name))
                     {
-                        Snacks1.SnacksRemove(user_input_name);
+                        Snacks1.RemoveObject(user_input_name);
                         Thread.Sleep(3000);
                         AdminCommands();
                     }
@@ -293,7 +293,7 @@ namespace Gebruiker
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                             // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
                             FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
-                            FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
+                            FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
@@ -356,7 +356,7 @@ namespace Gebruiker
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                             // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
                             FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
-                            FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
+                            FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
@@ -423,7 +423,7 @@ namespace Gebruiker
                             // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
                             // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
                             FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
-                            FilmObject.AddFilmtoDataBase(FilmObject); // Dit voegt het object toe aan de Json file
+                            FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
