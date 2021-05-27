@@ -110,11 +110,12 @@ namespace Cinema
         public string Film_Day { get; set; }
         public string FilmTime { get; set; }
         public string Zaal { get; set; }
-        public string Stoel_num { get; set; }
+        public string[] Stoel_num { get; set; }
 
 
         public static dynamic JsonSerializer(string Object)
         {
+
 
 
             var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");

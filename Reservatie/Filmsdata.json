@@ -226,7 +226,9 @@
     }
   },
   {
-    "FilmGenres": [ "Thriller", "Horror", "" ],
+
+    "FilmGenres": [ "Thriller", "Horror", null ],
+
     "FilmTitle": "The Exorcism",
     "FilmRoom": 1,
     "FilmTimes": [ "18:00", "20:30", "23:30" ],
