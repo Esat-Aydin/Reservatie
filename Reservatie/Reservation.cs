@@ -316,11 +316,13 @@ namespace Reservation
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
+                
                 int choice;
                 bool loop = true;
                 while (loop)
                 {
                     choice = Int32.Parse(Console.ReadLine());
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     try
                     {
                         if (choice.ToString() == "0")
@@ -331,7 +333,7 @@ namespace Reservation
                         {
                             loop = false;
                             ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
+                            Console.Write("U heeft gekozen voor de volgende film:\t"); ConsoleCommands.Textkleur("rood"); Console.WriteLine(All_Films[choice - 1]);
                         }
                         else
                         {
