@@ -344,12 +344,10 @@ namespace Reservation
                     {
                         Console.WriteLine("Verkeerde input, probeer het opnieuw");
                     }
+            
                     Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                 }
-                //var stoelen = new StoelKeuze(All_Films[choice-1],"10-5-2021","11:00");
-                //var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
-                // stoelen.Chair();
-                //Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
+
             }
 
             else if (UserInput == "4")
