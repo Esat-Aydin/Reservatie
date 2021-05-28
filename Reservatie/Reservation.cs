@@ -132,10 +132,6 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string Film = Console.ReadLine();
-                if (Film == "0")
-                {
-                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
-                }
                 string Film_search = UppercaseFirst(Film);
                 int counter = 0;
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -154,6 +150,13 @@ namespace Reservation
 
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
                     }
+                    else
+                    {
+                        if (Film_search == "0")
+                        {
+                            Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                        }
+                    }
                     try
                     {
                         if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
@@ -165,7 +168,15 @@ namespace Reservation
                     {
                         Autofill = Autofill;
                     }
-                    counter++;   
+                    counter++;
+
+                }
+                if (Autofill.Count < 1)
+                {
+                    Console.WriteLine("U heeft de verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
                 }
                 while (true)
                 {
@@ -212,7 +223,7 @@ namespace Reservation
                 List<string> Show_films = new List<string>();
                 Dictionary<string, string[]> Show_tijden = new Dictionary<string, string[]>();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n")
+                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Comedy\n");
@@ -229,6 +240,14 @@ namespace Reservation
                 if (Genre_select == "0")
                 {
                     Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
+                else if (Int32.Parse(Genre_select) > 8)
+                {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
                 }
                 Console.Clear();
                 ConsoleCommands.Textkleur("wit");
@@ -595,7 +614,7 @@ namespace Reservation
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string[] Stoelen, string zaal, string FilmDatum = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
+        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string FilmDatum = null, string[] Stoelen = null, string zaal = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {

@@ -34,11 +34,11 @@ namespace Chair
             this.FilmNaam = Naam;
             this.Datum = datum;
             this.Tijd = tijd;
-            string MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
+            string MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json");
+            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
+            string myRoomData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Stoelenuser.json");
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         }
@@ -491,7 +491,7 @@ namespace Chair
             var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
             string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
             string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
+            string myRoomData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Stoelenuser.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);

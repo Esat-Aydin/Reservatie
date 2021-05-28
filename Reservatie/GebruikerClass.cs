@@ -1193,6 +1193,7 @@ namespace Gebruiker
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             int isInt = 0;
             bool Break = true;
+
             while (Break)
             {
                 if (!int.TryParse(Chosen_film, out isInt))
@@ -1205,17 +1206,30 @@ namespace Gebruiker
                     Console.Write("\t\t\tWe hebben deze films gevonden onder de genre "); ConsoleCommands.Textkleur("rood"); Console.Write(SearchedGenre); ConsoleCommands.Textkleur("wit"); Console.Write(":\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
+                    Break = false;
+                }
+                else if(Int32.Parse(Chosen_film) > count - 1)
+                {
+                    Console.WriteLine("U heeft een verkeerde input gegeven probeer het opnieuw.");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    Scherm.Screens.CinemaBanner();
+                    Console.Write("\t\t\tWe hebben deze films gevonden onder de genre "); ConsoleCommands.Textkleur("rood"); Console.Write(SearchedGenre); ConsoleCommands.Textkleur("wit"); Console.Write(":\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
+                    Break = false;
                 }
                 else
                 {
                     if(Chosen_film != "0")
                     {
-                        for (int i = 0; i < Show_films.Count; i++)
+                        for (int i = 0; i < Show_films.Count+1; i++)
                         {
 
                             if (Chosen_film == i.ToString())
                             {
-                                Gezochte_Film = Show_films[i - 1];
+                                Gezochte_Film = Show_films[i-1];
                                 Break = false;
                             }
                             if (Show_films.Count == 1)
@@ -1228,6 +1242,7 @@ namespace Gebruiker
                     else
                     {
                         Chosen_film = "";
+                      
                     }
 
 
@@ -1688,7 +1703,6 @@ namespace Gebruiker
                         string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Saturday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
                         string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
                         Console.WriteLine("U heeft gekozen voor Zaterdag, voor welk tijdslot zou u willen reserveren?");
-                        Console.WriteLine(DictofTimes[Gezochte_Film].Count);
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         if (DictofTimes[Gezochte_Film]["Zaterdag"].Count == 1)
                         {
@@ -1825,6 +1839,7 @@ namespace Gebruiker
                         }
                     }
                 }
+
             }
 
         }
