@@ -27,7 +27,7 @@ namespace Chair
         public dynamic DynamicUserData;
         public string[] Alphabet;
         public string[][] AllData;
-        public List<string> chairsTaken;
+        public string[] chairsTaken;
 
         public StoelKeuze(string Naam, string datum = null, string tijd = null)
         {
@@ -487,15 +487,6 @@ namespace Chair
 
         public void Chair()
         {
-
-            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
-            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
-            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            dynamic DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             List<string> chairs = new List<string>();
             // From here
             var room = this.DynamicFilmData[0]["FilmRoom"];
@@ -516,9 +507,18 @@ namespace Chair
                         chairs.Add(this.DynamicUserData[i]["Stoel_num"][j].ToString());
                     }
                     chairs.Sort();
-                    this.chairsTaken = chairs;
-                    //Console.WriteLine(chairs[1][0]);
+                    Console.WriteLine(chairs.Count());
+                    string[] ChairsTaken = new string[chairs.Count];
+                    for (int p = 0; p < chairs.Count; p++)
+                    {
+                        ChairsTaken[p] = chairs[p];
+                    }
+                    this.chairsTaken = ChairsTaken;
                 }
+            }
+            if(this.chairsTaken == null)
+            {
+                this.chairsTaken = new string[] {""};
             }
             // To here can also be seperate method
             string[][] AllData = new string[this.DynamicRoomData[Int32.Parse((room - 1).ToString())]["row_number"].Count][];
