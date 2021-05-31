@@ -43,14 +43,21 @@ namespace Gebruiker
                 Scherm.Screens.CinemaBanner();
                 Console.WriteLine("\t\t\t ADMIN CONSOLE");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] PW edit [PLACEHOLDER]\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film toevoegen\n\n");
+//<<<<<<< Updated upstream
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
+//=======
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film verwijderen\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n\n");
 
+//>>>>>>> Stashed changes
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             Film.Film FilmObject = new Film.Film();

@@ -95,7 +95,6 @@ namespace Film
             for (int i = 0; i < DynamicData.Count; i++)
             {
                 string FilmTitleObject = (string)DynamicData[i]["FilmTitle"];
-                Console.WriteLine("dasdasd");
                 if (FilmTitleObject == FilmName)
                 {
                     Index = i;

@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
 using System.Net;
-using ConsoleTables;
-using Cinema;
 using Film;
 using Scherm;
 using Gebruiker;
@@ -156,22 +154,18 @@ namespace Reservation
 
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
                     }
-                    if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
+                    try
                     {
-                        Autofill.Add(Film_zoeken);
+                        if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
+                        {
+                            Autofill.Add(Film_zoeken);
+                        }
                     }
-                    else
+                    catch
                     {
-                        counter += 1;
+                        Autofill = Autofill;
                     }
-                }
-                if (counter >= DynamicFilmData.Count)
-                {
-
-                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
-                    Thread.Sleep(1500);
-                    Console.Clear();
-                    ReserveringMaken(UserInput);
+                    counter++;   
                 }
                 while (true)
                 {
@@ -202,6 +196,14 @@ namespace Reservation
                     Scherm.Screens.CinemaBanner();
 
                 }
+                if (counter >= DynamicFilmData.Count)
+                {
+
+                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
+                }
 
             }
             else if (UserInput == "2")
@@ -210,8 +212,8 @@ namespace Reservation
                 List<string> Show_films = new List<string>();
                 Dictionary<string, string[]> Show_tijden = new Dictionary<string, string[]>();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n");//Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                //ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Comedy\n");
@@ -222,6 +224,7 @@ namespace Reservation
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("8"); ConsoleCommands.Textkleur("wit"); Console.Write("] Horror\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
                 if (Genre_select == "0")
@@ -262,6 +265,12 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
 
+                /*string Film = Console.ReadLine();
+                /*if (Film == "0")
+                {
+                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }*/
+
                 var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
                 dynamic genres = DynamicFilmData[0]["FilmGenres"];
                 List<string> All_Films = new List<string>();
@@ -272,7 +281,7 @@ namespace Reservation
                     All_Films.Sort(); //Lijst met films gesorteerd
                 }
                 ConsoleCommands.Textkleur("wit");
-                for (int i = 0; i < DynamicFilmData.Count; i++)
+                for (int i = 0; i < All_Films.Count; i++)
                 {
 
                     for (int j = 0; j < DynamicFilmData.Count; j++)
@@ -285,20 +294,42 @@ namespace Reservation
                         }
                     }
                 }
+                table.AddRow("Toets [0] om terug te gaan", null, null, null, null);
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
-                int choice = Int32.Parse(Console.ReadLine());
-                if (choice.ToString() == "0")
+                int choice;
+                bool loop = true;
+                while (loop)
                 {
-                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                    choice = Int32.Parse(Console.ReadLine());
+                    try
+                    {
+                        if (choice.ToString() == "0")
+                        {
+                            Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                        }
+                        else if (choice >= 1 && choice <= All_Films.Count)
+                        {
+                            loop = false;
+                            ConsoleCommands.Textkleur("wit");
+                            Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    }
+                    Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                 }
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
-
                 //var stoelen = new StoelKeuze(All_Films[choice-1],"10-5-2021","11:00");
-                var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
-                stoelen.Chair();
+                //var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
+                // stoelen.Chair();
+                //Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
             }
 
             else if (UserInput == "4")
@@ -441,7 +472,9 @@ namespace Reservation
                                                 Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][0]); ConsoleCommands.Textkleur("wit");
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
-                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][0], FilmDateSearch);
+                                                //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][0], FilmDateSearch);
+                                                var stoelen = new StoelKeuze(ListofFilms[IntFilmKeuze-1], FilmDateSearch, DictofListofString[ListofFilms[IntFilmKeuze-1]][0]);
+                                                stoelen.Chair();
                                             }
                                             else if (intTijdKeuze == 2)
                                             {
@@ -449,7 +482,9 @@ namespace Reservation
                                                 Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]); ConsoleCommands.Textkleur("wit");
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
-                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][1], FilmDateSearch);
+                                                //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][1], FilmDateSearch);
+                                                var stoelen = new StoelKeuze(ListofFilms[IntFilmKeuze - 1], FilmDateSearch, DictofListofString[ListofFilms[IntFilmKeuze - 1]][1]);
+                                                stoelen.Chair();
                                             }
                                             else if (intTijdKeuze == 3)
                                             {
@@ -457,7 +492,9 @@ namespace Reservation
                                                 Console.Write("U heeft gekozen voor "); ConsoleCommands.Textkleur("rood"); Console.Write(DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]); ConsoleCommands.Textkleur("wit");
                                                 Console.WriteLine($"\n\nEen ogenblik geduld alstublieft..");
                                                 Thread.Sleep(1500);
-                                                ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][2], FilmDateSearch);
+                                                //ReserveerCodeMail(ListofFilms[IntFilmKeuze - 1], DictofListofString[ListofFilms[IntFilmKeuze - 1]][2], FilmDateSearch);
+                                                var stoelen = new StoelKeuze(ListofFilms[IntFilmKeuze - 1], FilmDateSearch, DictofListofString[ListofFilms[IntFilmKeuze - 1]][2]);
+                                                stoelen.Chair();
                                             }
                                         }
                                     }
@@ -538,6 +575,8 @@ namespace Reservation
             var TestDateTime = new DateTime(InputYear, InputMonth, InputDays, 10, 2, 0, DateTimeKind.Local);
             return TestDateTime;
         }
+
+
         public string ReserveringsCodeGenerator() // Deze method genereert een random code die fungeert als reserveringscode - Callen: [CLASSOBJECT].ReserveringsCodeGenerator(); -- Probeer: Klant.ReserveringsCodeGenerator();
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -552,11 +591,12 @@ namespace Reservation
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string FilmDatum = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
+        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string FilmDatum = null, string[] Stoelen = null, string zaal = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
                 List<JsonData> _data = new List<JsonData>();
+
                 var DataUser = File.ReadAllText(@".\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
                 var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                           ?? new List<JsonData>();
@@ -568,15 +608,16 @@ namespace Reservation
                     Email = Klant.Email,
                     Film = Klant.Film,
                     FilmTime = Klant.Film_Time,
-                    FilmDate = Klant.Film_Day
-
-                    //Zaal =
-                    //Stoel_num =
+                    FilmDate = Klant.Film_Day,
+                    Stoel_num = Klant.Stoel_num,
+                    Zaal = Klant.Zaal
 
                 });
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
+
                 File.WriteAllText(@".\SampleLog.json", DataUser);
+
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
             // informatie voor eventueel mailen reservatie code.
@@ -599,16 +640,58 @@ namespace Reservation
             Klant.Film = Gezochte_Film;
             Klant.Film_Time = Show_Tijden;
             Klant.Film_Day = FilmDatum;
+            Klant.Stoel_num = Stoelen;
+            Klant.Zaal = zaal;
             ReserveringStatus(Klant);
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
             Console.WriteLine("Kloppen de bovenstaande gegevens?\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart");
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            Klant.SnacksOption(Klant);
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Ja\t["); ConsoleCommands.Textkleur("zwart");
+            Console.Write(2);ConsoleCommands.Textkleur("wit"); Console.Write("] Nee\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+            string UserInput = Console.ReadLine();
+            bool CorrectInput = false;
+            while (CorrectInput != true)
+            {
+                if (UserInput == "1")
+                {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Klant.SnacksOption(Klant);
+                    CorrectInput = true;
+                }
+                else if (UserInput == "2")
+                {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.WriteLine("We vragen u opnieuw voor uw gegevens.");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("rood");
+                    Console.Write("Naam: ");
+                    ConsoleCommands.Textkleur("zwart");
+                    Naam_klant = Console.ReadLine();
+                    ConsoleCommands.Textkleur("rood");
+                    Console.Write("Email Adres: ");
+                    ConsoleCommands.Textkleur("zwart");
+                    Naam_email = Console.ReadLine();
+                    Klant.Naam = Naam_klant;
+                    Klant.Email = Naam_email;
+                    ReserveringStatus(Klant);
+                    Klant.SnacksOption(Klant);
+                    CorrectInput = true;
+                }
+                else
+                {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.WriteLine("Dat is niet correct! Gebruik een van de zwartgekleurde nummers als input.");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");ConsoleCommands.Textkleur("zwart");
+                    UserInput = Console.ReadLine();
+                }
+            }
 
             // Einde reserveren.
-            Console.WriteLine("Bedankt voor het reserveren!");
+            Scherm.Screens.CinemaBanner();
+            ReserveringStatus(Klant);
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            Console.WriteLine("Bedankt voor het reserveren!\n");
             Console.WriteLine("Een ogenblik geduld alstublieft uw reserveringscode wordt geladen.");
             Thread.Sleep(1000);
             ReservationCodePercentage();
@@ -627,23 +710,29 @@ namespace Reservation
             ReservationToJSon(Klant, GeneratedCode);
 
             ConsoleCommands.Textkleur("wit");
-            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop.");
+            Console.WriteLine("Bedankt voor het online reserveren en we zien u graag binnenkort in onze bioscoop."); ConsoleCommands.Textkleur("rood"); Console.Write("\nSla uw reserverings code op!\n"); ConsoleCommands.Textkleur("wit");
+            Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands CommandLine = new ConsoleCommands();
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om de mail opnieuw te verzenden\n[");
-            ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om af te sluiten\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("]  Om af te sluiten\n");
             // Email bevestiging.
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string Mail_Bevestiging = Console.ReadLine();
-            if (Mail_Bevestiging == "1")
+            while (true)
             {
-                Mail_Sender(Klant, GeneratedCode);
-                // Data Reservering toevoegen.
+                if (Mail_Bevestiging == "1")
+                {
+                    CommandLine.RestartOption();
+                    // Data Reservering toevoegen.
 
-            }
-            else
-            {
-                CommandLine.RestartOption();
+                }
+                else
+                {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("Dat is de verkeerde input. Probeer het opnieuw.");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");ConsoleCommands.Textkleur("zwart");
+                    Mail_Bevestiging = Console.ReadLine();
+                }
             }
             CommandLine.RestartOption();
 
@@ -699,8 +788,8 @@ We hopen u snel te zien in de bioscoop!
             catch
             {
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
+                Console.Write("Het versturen van de bevestiging is");ConsoleCommands.Textkleur("rood"); Console.Write(" niet "); ConsoleCommands.Textkleur("wit"); Console.Write("gelukt!\n");
+                Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             
         }
@@ -760,7 +849,7 @@ Hieronder vindt u de reservering die u heeft geannuleerd:
 " +
 
     @"
-We hopen u voldoende te hebben geïnformeerd.
+We hopen u voldoende te hebben geÃ¯nformeerd.
 " +
         "\nMet vriendelijke groet,\n\n" +
         "CinemaReservation"
@@ -808,6 +897,7 @@ We hopen u voldoende te hebben geïnformeerd.
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
+            ConsoleCommands.Textkleur("wit");
         }
         public bool DateInFutureCheck(DateTime UserInput)
         {
@@ -910,13 +1000,14 @@ We hopen u voldoende te hebben geïnformeerd.
             if (Mandje == null)
             {
                 totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); Console.Write($" {totaal} Euro\n"); ConsoleCommands.Textkleur("wit");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                Console.OutputEncoding = System.Text.Encoding.UTF8; ConsoleCommands.Textkleur("wit");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"Â€{totaal}\n"); ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
-                Console.ReadLine();
+                Console.ReadLine(); 
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 Thread.Sleep(3000);
@@ -928,7 +1019,9 @@ We hopen u voldoende te hebben geïnformeerd.
                 totaal -= korting;
                 stringTotaal = String.Format("{0:0.00}", totaal);
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); Console.Write($" {stringTotaal} Euro\n"); ConsoleCommands.Textkleur("wit");
+                Console.OutputEncoding = System.Text.Encoding.UTF8; ConsoleCommands.Textkleur("wit");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"Â€{stringTotaal}\n"); ConsoleCommands.Textkleur("wit");
+
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
                 Console.WriteLine("_____________________________________________________________________________________________\n");

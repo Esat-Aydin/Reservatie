@@ -142,7 +142,7 @@
   },
   {
     "FilmGenres": [ "Comedy", "Drama", "" ],
-    "FilmTitle": "The Wolf of Wall Street",
+    "FilmTitle": "The Wolf Of Wall Street",
     "FilmRoom": 3,
     "FilmTimes": [ "19:00", "21:00", "23:00" ],
     "FilmPrice": "10.99",
@@ -226,7 +226,9 @@
     }
   },
   {
-    "FilmGenres": [ "Thriller", "Horror", "" ],
+
+    "FilmGenres": [ "Thriller", "Horror", null ],
+
     "FilmTitle": "The Exorcism",
     "FilmRoom": 1,
     "FilmTimes": [ "18:00", "20:30", "23:30" ],
