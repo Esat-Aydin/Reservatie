@@ -96,6 +96,7 @@ namespace Film
             {
                 string FilmTitleObject = (string)DynamicData[i]["FilmTitle"];
                 if (FilmTitleObject == ObjectName)
+
                 {
                     Index = i;
                     DynamicData.Remove(DynamicData[Index]);
