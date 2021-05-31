@@ -532,6 +532,8 @@ namespace Gebruiker
                     Snacks1.AddObject(SnackObject, user_input_name);
                     Thread.Sleep(1500);
                     AdminCommands();
+                    string UserInputNew = Console.ReadLine();
+                    UserInputMethod(UserInputNew);
                 }
                 else if (user_input1 == "3")
                 {
@@ -554,29 +556,24 @@ namespace Gebruiker
                 else if (user_input1 == "2")
                 {
                     bool x = true;
-                    string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+                    string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
                     dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
 
                     Console.WriteLine("Welke snack wilt u verwijderen?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    string user_input_name = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
 
                     Scherm.Screens.CinemaBanner();
                     var table = new ConsoleTable("Snacks", "Prijs");
-                    for (int i = 0; i < DynamicData.snacks.Count; i++)
+                    for (int i = 0; i < DynamicData1.snacks.Count; i++)
                     {
 
 
-                        table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.snacks[i].Name, DynamicData.snacks[i].Price);
-
-
-                        Snacks1.RemoveObject(user_input_name);
-                        Thread.Sleep(1500);
-                        AdminCommands();
+                        table.AddRow("Toets [" + (i + 1) + "] " + DynamicData1.snacks[i].Name, DynamicData1.snacks[i].Price);
 
                     }
                     table.Write(Format.Alternative);
+
                     while (x == true)
                     {
                         string delete_snack = Console.ReadLine();
@@ -585,16 +582,18 @@ namespace Gebruiker
 
                         while (Bool == false)
                         {
-                            if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData.snacks.Count)
+                            if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData1.snacks.Count)
                             {
 
-                                user_input_name = (string)DynamicData["snacks"][int_snack - 1]["Name"];
+                                string user_input_name = (string)DynamicData1["snacks"][int_snack - 1]["Name"];
                                 Snacks1.SnacksCheck(user_input_name);
                                 if (Snacks1.SnacksCheck(user_input_name))
                                 {
                                     Snacks1.RemoveObject(user_input_name);
                                     Thread.Sleep(3000);
                                     AdminCommands();
+                                    string UserInputNew = Console.ReadLine();
+                                    UserInputMethod(UserInputNew);
                                 }
                                 Bool = true;
                             }
