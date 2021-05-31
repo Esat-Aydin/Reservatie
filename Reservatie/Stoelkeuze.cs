@@ -40,7 +40,7 @@ namespace Chair
             string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
 
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\abdel\source\repos\Esat-Aydin\Reservatie\Reservatie\seats (2).json");
+            string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
 
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
