@@ -125,8 +125,10 @@ namespace Scherm
             }
             else
             {
+
                 Klant.AdminCommands();
-                ConsoleCommands.Textkleur("zwart");
+
+                Console.ForegroundColor = ConsoleColor.Black;
                 string UserInput = Console.ReadLine();
                 Klant.UserInputMethod(UserInput);
             }
