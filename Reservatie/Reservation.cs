@@ -382,7 +382,7 @@ namespace Reservation
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
                     }
-                    if (FilmDateSearch == "0")
+                    else if (FilmDateSearch == "0")
                     {
                         Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
                     }

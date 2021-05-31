@@ -41,7 +41,7 @@ namespace Cinema
             }
             else if (kleur == "rood")
             {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
             }
         }
         public void RestartOption()
