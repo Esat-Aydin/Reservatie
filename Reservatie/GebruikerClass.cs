@@ -169,7 +169,7 @@ namespace Gebruiker
 
                     if (FilmObject.Film_check2(delete_movie) == true)
                     {
-                        FilmObject.RemoveFilm(delete_movie);
+                        FilmObject.RemoveObject(delete_movie);
                         x = false;
                     }
                     /*                    else
@@ -214,7 +214,7 @@ namespace Gebruiker
                     string user_input_price = Console.ReadLine();
                     var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
 
-                    Snacks1.SnacksAdd(SnackObject, user_input_name);
+                    Snacks1.AddObject(SnackObject, user_input_name);
                     Thread.Sleep(1500);
                     AdminCommands();
                 }
@@ -244,6 +244,7 @@ namespace Gebruiker
 
                     Console.WriteLine("Welke snack wilt u verwijderen?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    string user_input_name = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
 
                     Scherm.Screens.CinemaBanner();
@@ -255,7 +256,7 @@ namespace Gebruiker
                         table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.snacks[i].Name, DynamicData.snacks[i].Price);
 
 
-                        Snacks1.SnacksRemove(user_input_name);
+                        Snacks1.RemoveObject(user_input_name);
                         Thread.Sleep(1500);
                         AdminCommands();
 
@@ -272,11 +273,11 @@ namespace Gebruiker
                             if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData.snacks.Count)
                             {
 
-                                string user_input_name = (string)DynamicData["snacks"][int_snack - 1]["Name"];
+                                user_input_name = (string)DynamicData["snacks"][int_snack - 1]["Name"];
                                 Snacks1.SnacksCheck(user_input_name);
                                 if (Snacks1.SnacksCheck(user_input_name))
                                 {
-                                    Snacks1.SnacksRemove(user_input_name);
+                                    Snacks1.RemoveObject(user_input_name);
                                     Thread.Sleep(3000);
                                     AdminCommands();
                                 }
@@ -302,6 +303,7 @@ namespace Gebruiker
 
                     Console.WriteLine("Welke drank wilt u verwijderen?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    string user_input_name = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
 
                     Scherm.Screens.CinemaBanner();
@@ -328,7 +330,7 @@ namespace Gebruiker
                             if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
                             {
 
-                                string user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
+                                user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
                                 Snacks1.SnacksCheck(user_input_name);
                                 if (Snacks1.DrankenCheck(user_input_name) == true)
                                 {
