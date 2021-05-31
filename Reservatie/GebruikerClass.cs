@@ -44,13 +44,11 @@ namespace Gebruiker
             Scherm.Screens.CinemaBanner();
             Console.WriteLine("\t\t\t ADMIN CONSOLE");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] PW edit [PLACEHOLDER]\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film toevoegen\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film verwijderen\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
-
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film toevoegen\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film verwijderen\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
             Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
@@ -77,39 +75,7 @@ namespace Gebruiker
             }
 
 
-            if (UserInput == "1")
-            {
-                Scherm.Screens.CinemaBanner();
-                Console.WriteLine("\t\t\t ADMIN CONSOLE");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.WriteLine("Type nu het huidige admin wachtwoord in: ");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                UserInput = Console.ReadLine();
-
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                if (UserInput == Password)
-                {
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Type nu het nieuwe wachtwoord in: ");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    UserInput = Console.ReadLine();
-                    Password = UserInput;
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Het wachtwoord is succesvol veranderd naar: " + Password);
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                }
-            }
-
-            if (UserInput.ToLower() == "help")
-            {
-
-                AdminCommands();
-            }
-
-            if (UserInput == "4")
+            if (UserInput == "2")
             {
                 Scherm.Screens.CinemaBanner();
                 ConsoleCommands.Textkleur("wit");
@@ -169,7 +135,7 @@ namespace Gebruiker
 
                     if (FilmObject.Film_check2(delete_movie) == true)
                     {
-                        FilmObject.RemoveFilm(delete_movie);
+                        FilmObject.RemoveObject(delete_movie);
                         x = false;
                     }
                     /*                    else
@@ -180,7 +146,7 @@ namespace Gebruiker
                                         }*/
                 }
             }
-            if (UserInput == "6")
+            if (UserInput == "5")
             {
                 Scherm.Screens.CinemaBanner();
 
@@ -193,7 +159,7 @@ namespace Gebruiker
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
                 ConsoleCommands.Textkleur("zwart"); string user_input1 = Console.ReadLine();
-                if(user_input1 == "0")
+                if (user_input1 == "0")
 
                 {
                     Console.Clear();
@@ -214,11 +180,11 @@ namespace Gebruiker
                     string user_input_price = Console.ReadLine();
                     var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
 
-                    Snacks1.SnacksAdd(SnackObject, user_input_name);
+                    Snacks1.AddObject(SnackObject, user_input_name);
                     Thread.Sleep(1500);
                     AdminCommands();
                 }
-                else if (user_input1 == "3")
+                else if (user_input1 == "2")
                 {
                     Scherm.Screens.CinemaBanner();
                     Console.WriteLine("Hoe heet de drank die u wilt toevoegen?");
@@ -236,7 +202,7 @@ namespace Gebruiker
                     Thread.Sleep(1500);
                     AdminCommands();
                 }
-                else if (user_input1 == "2")
+                else if (user_input1 == "1")
                 {
                     bool x = true;
                     string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
@@ -244,6 +210,7 @@ namespace Gebruiker
 
                     Console.WriteLine("Welke snack wilt u verwijderen?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    string user_input_name = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
 
                     Scherm.Screens.CinemaBanner();
@@ -255,7 +222,7 @@ namespace Gebruiker
                         table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.snacks[i].Name, DynamicData.snacks[i].Price);
 
 
-                        Snacks1.SnacksRemove(user_input_name);
+                        Snacks1.RemoveObject(user_input_name);
                         Thread.Sleep(1500);
                         AdminCommands();
 
@@ -272,11 +239,11 @@ namespace Gebruiker
                             if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData.snacks.Count)
                             {
 
-                                string user_input_name = (string)DynamicData["snacks"][int_snack - 1]["Name"];
+                                user_input_name = (string)DynamicData["snacks"][int_snack - 1]["Name"];
                                 Snacks1.SnacksCheck(user_input_name);
                                 if (Snacks1.SnacksCheck(user_input_name))
                                 {
-                                    Snacks1.SnacksRemove(user_input_name);
+                                    Snacks1.RemoveObject(user_input_name);
                                     Thread.Sleep(3000);
                                     AdminCommands();
                                 }
@@ -291,10 +258,10 @@ namespace Gebruiker
                             }
                         }
                     }
-                            
+
 
                 }
-                else if (user_input1 == "4")
+                else if (user_input1 == "3")
                 {
                     bool x = true;
                     string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
@@ -302,6 +269,7 @@ namespace Gebruiker
 
                     Console.WriteLine("Welke drank wilt u verwijderen?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    string user_input_name = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit");
 
                     Scherm.Screens.CinemaBanner();
@@ -328,7 +296,7 @@ namespace Gebruiker
                             if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
                             {
 
-                                string user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
+                                user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
                                 Snacks1.SnacksCheck(user_input_name);
                                 if (Snacks1.DrankenCheck(user_input_name) == true)
                                 {
@@ -353,9 +321,9 @@ namespace Gebruiker
 
             }
 
-            
 
-            if(UserInput == "1")
+
+            if (UserInput == "1")
 
             {
                 Scherm.Screens.CinemaBanner();
@@ -654,7 +622,7 @@ namespace Gebruiker
 
             }
 
-            if (UserInput == "2")
+            if (UserInput == "3")
 
             {
                 while (true)
@@ -711,7 +679,8 @@ namespace Gebruiker
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 return res_code;
             }
-            string SecondScreen() { 
+            string SecondScreen()
+            {
                 Console.WriteLine("Weet u zeker dat u deze reservering wilt annuleren?");
                 Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren\n");
                 Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] Progamma afsluiten\n");
@@ -1295,7 +1264,7 @@ namespace Gebruiker
                         Thread.Sleep(1500);
                         var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Zondag"][1]);
                         stoelen.Chair();
-       
+
 
                     }
                     if (tijdslot == "3")
@@ -1316,7 +1285,7 @@ namespace Gebruiker
 
 
         }
-        public void GenreOptie(List<string>Show_films, dynamic DynamicFilmData, string SearchedGenre)
+        public void GenreOptie(List<string> Show_films, dynamic DynamicFilmData, string SearchedGenre)
         {
             string Gezochte_Film = null;
             List<string> DagenvdWeek = new();
@@ -1357,7 +1326,7 @@ namespace Gebruiker
                     GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
                     Break = false;
                 }
-                else if(Int32.Parse(Chosen_film) > count - 1)
+                else if (Int32.Parse(Chosen_film) > count - 1)
                 {
                     Console.WriteLine("U heeft een verkeerde input gegeven probeer het opnieuw.");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -1371,14 +1340,14 @@ namespace Gebruiker
                 }
                 else
                 {
-                    if(Chosen_film != "0")
+                    if (Chosen_film != "0")
                     {
-                        for (int i = 0; i < Show_films.Count+1; i++)
+                        for (int i = 0; i < Show_films.Count + 1; i++)
                         {
 
                             if (Chosen_film == i.ToString())
                             {
-                                Gezochte_Film = Show_films[i-1];
+                                Gezochte_Film = Show_films[i - 1];
                                 Break = false;
                             }
                             if (Show_films.Count == 1)
@@ -1391,7 +1360,7 @@ namespace Gebruiker
                     else
                     {
                         Chosen_film = "";
-                      
+
                     }
 
 
@@ -1458,7 +1427,7 @@ namespace Gebruiker
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             string DagenKeuze = Console.ReadLine();
-            
+
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             while (true)
             {
@@ -1518,7 +1487,7 @@ namespace Gebruiker
                             var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Maandag"][0]);
                             stoelen.Chair();
 
-                           
+
                         }
                         if (tijdslot == "2")
                         {
@@ -1529,7 +1498,7 @@ namespace Gebruiker
                             var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][1], ArrayofDates);
                             var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Maandag"][1]);
                             stoelen.Chair();
-                       
+
 
 
                         }
@@ -1542,7 +1511,7 @@ namespace Gebruiker
                             var GekozenTijd = DateChoice(Gezochte_Film, DictofTimes[Gezochte_Film]["Maandag"][2], ArrayofDates);
                             var stoelen = new StoelKeuze(Gezochte_Film, ConvertedToDate, DictofTimes[Gezochte_Film]["Maandag"][2]);
                             stoelen.Chair();
-                       
+
 
                         }
                     }
@@ -2034,7 +2003,7 @@ namespace Gebruiker
 
             //Eventuele snacks tijdens het reserveren
             Console.WriteLine("Zou u ook alvast snacks willen bestellen voor bij de film?\n");
-            Console.Write("Door online de snacks te reserveren krijgt u "); ConsoleCommands.Textkleur("rood"); Console.Write("15%");ConsoleCommands.Textkleur("wit");Console.Write(" korting op het gehele bedrag.\n");
+            Console.Write("Door online de snacks te reserveren krijgt u "); ConsoleCommands.Textkleur("rood"); Console.Write("15%"); ConsoleCommands.Textkleur("wit"); Console.Write(" korting op het gehele bedrag.\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks bestellen"); Console.Write("\n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering afronden\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");

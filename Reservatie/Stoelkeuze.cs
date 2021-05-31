@@ -27,7 +27,6 @@ namespace Chair
         public dynamic DynamicUserData;
         public string[] Alphabet;
         public string[][] AllData;
-        public List<string> chairsTaken;
         public string[] chairsTaken;
 
 
