@@ -210,7 +210,7 @@
     }
   },
   {
-    "FilmGenres": [ "Action", "Comedy" ],
+    "FilmGenres": [ "Action", "Comedy", "" ],
     "FilmTitle": "Bad Boys For Life",
     "FilmRoom": 1,
     "FilmTimes": [ "16:00", "19:00", "23:30" ],
@@ -226,7 +226,7 @@
     }
   },
   {
-    "FilmGenres": [ "Thriller", "Horror" ],
+    "FilmGenres": [ "Thriller", "Horror", "" ],
     "FilmTitle": "The Exorcism",
     "FilmRoom": 1,
     "FilmTimes": [ "18:00", "20:30", "23:30" ],

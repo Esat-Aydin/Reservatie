@@ -36,6 +36,11 @@ namespace ShoppingCart
 
             var tableDranken = new ConsoleTable("Dranken", "Prijs");
             var table = new ConsoleTable("Snacks", "Prijs");
+
+            ConsoleCommands.Textkleur("wit");
+            Console.Write("Toets "); Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug\n");
+            Console.WriteLine("");
+
             if (SnackorDrinks == "1")
             {
                 for (int i = 0; i < DynamicData.snacks.Count; i++)
@@ -47,6 +52,10 @@ namespace ShoppingCart
                 ConsoleCommands.Textkleur("zwart");
                 var SnacksKeuze = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                if(SnacksKeuze == "0")
+                {
+                    WinkelMandje(DynamicData, Mandje, Klant);
+                }
                 if (SnacksKeuze == "1")
                 {
                     Mandje.Add(DynamicData.snacks[0].Name.ToString());
@@ -96,6 +105,10 @@ namespace ShoppingCart
                 ConsoleCommands.Textkleur("zwart");
                 var DrankenKeuze = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                if(DrankenKeuze == "0")
+                {
+                    WinkelMandje(DynamicData, Mandje, Klant);
+                }
                 if (DrankenKeuze == "1")
                 {
                     Mandje.Add(DynamicData.dranken[0].Name.ToString());
