@@ -44,10 +44,13 @@ namespace Gebruiker
             Scherm.Screens.CinemaBanner();
             Console.WriteLine("\t\t\t ADMIN CONSOLE");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film toevoegen\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
-            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] PW edit [PLACEHOLDER]\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film toevoegen\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Film verwijderen\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Alle reserveringen bekijken\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("5"); ConsoleCommands.Textkleur("wit"); Console.Write("] Reserveringen per zaal bekijken\n\n");
+            Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snacks & Dranken configureren\n\n");
+
             Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
@@ -72,10 +75,115 @@ namespace Gebruiker
             {
                 Scherm.Screens.AdminOrUserScreen();
             }
+
+            if (UserInput == "1")
+            {
+                Scherm.Screens.CinemaBanner();
+                Console.WriteLine("\t\t\t ADMIN CONSOLE");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.WriteLine("Type nu het huidige admin wachtwoord in: ");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+                UserInput = Console.ReadLine();
+
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                if (UserInput == Password)
+                {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("Type nu het nieuwe wachtwoord in: ");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("zwart");
+                    UserInput = Console.ReadLine();
+                    Password = UserInput;
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("Het wachtwoord is succesvol veranderd naar: " + Password);
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                }
+            }
+
+            if (UserInput.ToLower() == "help")
+            {
+
+                AdminCommands();
+            }
+
             if (UserInput == "4")
             {
                 Scherm.Screens.CinemaBanner();
-               
+                ConsoleCommands.Textkleur("wit");
+                Console.Write("\t\t\tHieronder vind u een lijst met alle films: \n\n\t\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                ConsoleCommands.Textkleur("zwart");
+
+                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
+                dynamic genres = DynamicFilmData[0]["FilmGenres"];
+                List<string> All_Films = new List<string>();
+                var zaal = DynamicFilmData[0]["FilmRoom"];
+                for (int i = 0; i < DynamicFilmData.Count; i++)
+                {
+                    All_Films.Add(DynamicFilmData[i]["FilmTitle"].ToString()); //Lijst aangemaakt met alle films
+                    All_Films.Sort(); //Lijst met films gesorteerd
+                }
+                ConsoleCommands.Textkleur("wit");
+                for (int i = 0; i < DynamicFilmData.Count; i++)
+                {
+
+                    for (int j = 0; j < DynamicFilmData.Count; j++)
+                    {
+                        if (All_Films[i] == DynamicFilmData[j]["FilmTitle"].ToString())
+                        {
+                            genres = DynamicFilmData[j]["FilmGenres"]; //Juiste genres zoeken bij de films
+                            zaal = DynamicFilmData[j]["FilmRoom"]; //Juiste zaal zoeken bij de films
+                            table.AddRow($"Toets [{i + 1}] voor {All_Films[i]}", genres[0], genres[1], genres[2], zaal); //Tabel invullen met juiste data
+                        }
+                    }
+                }
+                table.Write(Format.Alternative); //Format veranderen ivm "Counter"
+                Console.WriteLine("Toets de nummer in van de film die u wilt verwijderen");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                bool x = true;
+                while (x == true)
+                {
+                    string delete_movie = Console.ReadLine();
+                    int int_movie;
+                    bool Bool = false;
+
+                    while (Bool == false)
+                    {
+                        if (Int32.TryParse(delete_movie, out int_movie) & int_movie < All_Films.Count)
+                        {
+                            delete_movie = All_Films[int_movie - 1];
+                            Bool = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Film niet kunnen vinden");
+                            Console.WriteLine("Probeer het alstublieft opnieuw");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Bool = true;
+                        }
+                    }
+
+
+                    if (FilmObject.Film_check2(delete_movie) == true)
+                    {
+                        FilmObject.RemoveFilm(delete_movie);
+                        x = false;
+                    }
+                    /*                    else
+                                        {
+                                            Console.WriteLine("Film niet kunnen vinden");
+                                            Console.WriteLine("Probeer het alstublieft opnieuw");
+                                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                        }*/
+                }
+            }
+            if (UserInput == "6")
+            {
+                Scherm.Screens.CinemaBanner();
+
+
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snack toevoegen\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snack verwijderen\n\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drank toevoegen\n\n");
@@ -83,7 +191,7 @@ namespace Gebruiker
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het progamma af te sluiten.\n\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 string user_input1 = Console.ReadLine();
-                if(user_input1 == "0")
+                if (user_input1 == "0")
                 {
                     Console.Clear();
                     Process.Start(Process.GetCurrentProcess().MainModule.FileName);
@@ -99,8 +207,7 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine($"Wat is de prijs van {user_input_name}?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    Console.OutputEncoding = System.Text.Encoding.UTF8;
-                    System.Console.Out.Write("€");
+
                     string user_input_price = Console.ReadLine();
                     var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.SnacksAdd(SnackObject, user_input_name);
@@ -118,8 +225,7 @@ namespace Gebruiker
 
                     Console.WriteLine($"Wat is de prijs van {user_input_name}?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    Console.OutputEncoding = System.Text.Encoding.UTF8;
-                    System.Console.Out.Write("€");
+
                     string user_input_price = Console.ReadLine();
                     SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.DrankenAdd(SnackObject, user_input_name);
@@ -128,40 +234,123 @@ namespace Gebruiker
                 }
                 else if (user_input1 == "2")
                 {
-                    Scherm.Screens.CinemaBanner();
-                    Console.WriteLine("Hoe heet de snack die u wilt verwijderen?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    bool x = true;
+                    string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+                    dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
 
-                    string user_input_name = Console.ReadLine();
-                    Snacks1.SnacksCheck(user_input_name);
-                    if (Snacks1.SnacksCheck(user_input_name))
+                    Console.WriteLine("Welke snack wilt u verwijderen?");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    ConsoleCommands.Textkleur("wit");
+
+                    Scherm.Screens.CinemaBanner();
+                    var table = new ConsoleTable("Snacks", "Prijs");
+                    for (int i = 0; i < DynamicData.snacks.Count; i++)
                     {
+
+                        table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.snacks[i].Name, DynamicData.snacks[i].Price);
+
                         Snacks1.SnacksRemove(user_input_name);
                         Thread.Sleep(1500);
                         AdminCommands();
+
                     }
+                    table.Write(Format.Alternative);
+                    while (x == true)
+                    {
+                        string delete_snack = Console.ReadLine();
+                        int int_snack;
+                        bool Bool = false;
+
+                        while (Bool == false)
+                        {
+                            if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData.snacks.Count)
+                            {
+
+                                string user_input_name = (string)DynamicData["snacks"][int_snack - 1]["Name"];
+                                Snacks1.SnacksCheck(user_input_name);
+                                if (Snacks1.SnacksCheck(user_input_name))
+                                {
+                                    Snacks1.SnacksRemove(user_input_name);
+                                    Thread.Sleep(3000);
+                                    AdminCommands();
+                                }
+                                Bool = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Snack niet kunnen vinden");
+                                Console.WriteLine("Probeer het alstublieft opnieuw");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Bool = true;
+                            }
+                        }
+                    }
+                            
 
                 }
                 else if (user_input1 == "4")
                 {
-                    Scherm.Screens.CinemaBanner();
-                    Console.WriteLine("Hoe heet de drank die u wilt verwijderen?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    bool x = true;
+                    string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+                    dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
 
-                    string user_input_name = Console.ReadLine();
-                    if (Snacks1.DrankenCheck(user_input_name) == true)
+                    Console.WriteLine("Welke drank wilt u verwijderen?");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    ConsoleCommands.Textkleur("wit");
+
+                    Scherm.Screens.CinemaBanner();
+                    var table = new ConsoleTable("Dranken", "Prijs");
+                    for (int i = 0; i < DynamicData.dranken.Count; i++)
                     {
+
+                        table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.dranken[i].Name, DynamicData.dranken[i].Price);
+
                         Snacks1.DrankenRemove(user_input_name);
                         Thread.Sleep(1500);
                         AdminCommands();
+
                     }
+                    table.Write(Format.Alternative);
+                    while (x == true)
+                    {
+                        string delete_drank = Console.ReadLine();
+                        int int_drank;
+                        bool Bool = false;
+
+                        while (Bool == false)
+                        {
+                            if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
+                            {
+
+                                string user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
+                                Snacks1.SnacksCheck(user_input_name);
+                                if (Snacks1.DrankenCheck(user_input_name) == true)
+                                {
+                                    Snacks1.DrankenRemove(user_input_name);
+                                    Thread.Sleep(3000);
+                                    AdminCommands();
+                                }
+                                Bool = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Drank niet kunnen vinden");
+                                Console.WriteLine("Probeer het alstublieft opnieuw");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Bool = true;
+                            }
+                        }
+                    }
+
+
                 }
-                else
-                {
-                    Console.WriteLine("Verkeerde input");
-                }
+
             }
+
+            
+
             if(UserInput == "1")
+
             {
                 Scherm.Screens.CinemaBanner();
                 Console.WriteLine("\t\t\t FILM TOEVOEGEN");
@@ -458,7 +647,9 @@ namespace Gebruiker
 
 
             }
+
             if (UserInput == "2")
+
             {
                 while (true)
                 {
