@@ -21,7 +21,7 @@ using System.Globalization;
 
 namespace SnackClass
 {
-    public class SnackType
+    public class SnackType 
     {
         [JsonProperty("dranken")]
         public List<Snacks> Drinks { get; set; }
@@ -29,7 +29,7 @@ namespace SnackClass
         public List<Snacks> Snacks { get; set; }
     }
 
-    public class Snacks
+    public class Snacks: Film.Film
     {
         public string Name;
         public string Price;
@@ -70,7 +70,7 @@ namespace SnackClass
             }
             return false;
         }
-        public void SnacksAdd(Snacks SnackObject, string SnackName)
+        public void AddObject(Snacks SnackObject, string SnackName)
         {
             if (SnacksCheck(SnackName) == false)
             {
@@ -90,22 +90,21 @@ namespace SnackClass
             }
         }
 
-        public void SnacksRemove(string SnackName)
-        {
+        public override void RemoveObject(string ObjectName) { 
             string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["snacks"].Count; i++)
             {
                 string Snack_code = (string)DynamicData["snacks"][i]["Name"];
-                if (Snack_code == SnackName)
+                if (Snack_code == ObjectName)
                 {
                     Index = i;
                     DynamicData["snacks"].Remove(DynamicData["snacks"][Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
                     File.WriteAllText(@".\snacksdrinks.json", UserData);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.Write("\nSnack "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
+                    Console.Write("\nSnack "); ConsoleCommands.Textkleur("rood"); Console.Write(ObjectName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
                 }

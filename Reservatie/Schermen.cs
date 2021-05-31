@@ -127,6 +127,7 @@ namespace Scherm
             {
 
                 Klant.AdminCommands();
+
                 Console.ForegroundColor = ConsoleColor.Black;
                 string UserInput = Console.ReadLine();
                 Klant.UserInputMethod(UserInput);
