@@ -132,10 +132,6 @@ namespace Reservation
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string Film = Console.ReadLine();
-                if (Film == "0")
-                {
-                    Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
-                }
                 string Film_search = UppercaseFirst(Film);
                 int counter = 0;
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -154,6 +150,13 @@ namespace Reservation
 
                         Klant.ZoekOptie(Film_search, DynamicFilmData);
                     }
+                    else
+                    {
+                        if (Film_search == "0")
+                        {
+                            Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                        }
+                    }
                     try
                     {
                         if (Film_search[0..Film_search.Length] == Film_zoeken[0..Film_search.Length])
@@ -165,7 +168,15 @@ namespace Reservation
                     {
                         Autofill = Autofill;
                     }
-                    counter++;   
+                    counter++;
+
+                }
+                if (Autofill.Count < 1)
+                {
+                    Console.WriteLine("U heeft de verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
                 }
                 while (true)
                 {
@@ -212,8 +223,7 @@ namespace Reservation
                 List<string> Show_films = new List<string>();
                 Dictionary<string, string[]> Show_tijden = new Dictionary<string, string[]>();
                 ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n");//Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
-                //ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                Console.Write("\t\t\t\tKies een genre uit\t\t\t\t\t \n\n");
                 ConsoleCommands.Textkleur("wit");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Action\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Comedy\n");
@@ -223,13 +233,21 @@ namespace Reservation
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("6"); ConsoleCommands.Textkleur("wit"); Console.Write("] Sci-Fi\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("7"); ConsoleCommands.Textkleur("wit"); Console.Write("] Familie\n");
                 Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write("8"); ConsoleCommands.Textkleur("wit"); Console.Write("] Horror\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 var Genre_select = Console.ReadLine();
                 if (Genre_select == "0")
                 {
                     Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
+                }
+                else if (Int32.Parse(Genre_select) > 8)
+                {
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.WriteLine("U heeft een verkeerde input gegeven, probeer het opnieuw.");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    ReserveringMaken(UserInput);
                 }
                 Console.Clear();
                 ConsoleCommands.Textkleur("wit");
@@ -298,11 +316,13 @@ namespace Reservation
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
+                
                 int choice;
                 bool loop = true;
                 while (loop)
                 {
                     choice = Int32.Parse(Console.ReadLine());
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     try
                     {
                         if (choice.ToString() == "0")
@@ -313,7 +333,7 @@ namespace Reservation
                         {
                             loop = false;
                             ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("U heeft gekozen voor de volgende film:\t" + All_Films[choice - 1]);
+                            Console.Write("U heeft gekozen voor de volgende film:\t"); ConsoleCommands.Textkleur("rood"); Console.WriteLine(All_Films[choice - 1]);
                         }
                         else
                         {
@@ -324,12 +344,10 @@ namespace Reservation
                     {
                         Console.WriteLine("Verkeerde input, probeer het opnieuw");
                     }
+            
                     Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                 }
-                //var stoelen = new StoelKeuze(All_Films[choice-1],"10-5-2021","11:00");
-                //var stoelen = new StoelKeuze("John Wick", "10-5-2021", "11:00");
-                // stoelen.Chair();
-                //Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
+
             }
 
             else if (UserInput == "4")
@@ -350,7 +368,8 @@ namespace Reservation
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
                 Dictionary<string, List<string>> DictofListofString = new();
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\t\tVoer hier de datum in (DD/MM/YYYY): ");
+                Console.WriteLine("\t\tVoer de datum in voor wanneer u zou willen reserveren (DD/MM/YYYY): ");
+                Console.Write("\n\t\t\t\t["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
                 string FilmDateSearch = Console.ReadLine();
@@ -362,6 +381,10 @@ namespace Reservation
                     {
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
+                    }
+                    if (FilmDateSearch == "0")
+                    {
+                        Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
                     }
                     else
                     {

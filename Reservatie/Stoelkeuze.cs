@@ -27,18 +27,18 @@ namespace Chair
         public dynamic DynamicUserData;
         public string[] Alphabet;
         public string[][] AllData;
-        public List<string> chairsTaken;
+        public string[] chairsTaken;
 
         public StoelKeuze(string Naam, string datum = null, string tijd = null)
         {
             this.FilmNaam = Naam;
             this.Datum = datum;
             this.Tijd = tijd;
-            string MyFilmsData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\Filmsdata.json");
+            string MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            string myUserData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\SampleLog.json");
+            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
+            string myRoomData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Stoelenuser.json");
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         }
@@ -206,14 +206,14 @@ namespace Chair
                 {
                     differentinput = "" + input[1] + input[2] + input[0];
                 }
-                if (this.chairsTaken.Contains(input)||this.chairsTaken.Contains(differentinput))
+                if (this.chairsTaken.Contains(input)|| this.chairsTaken.Contains(differentinput))
                 {
                     Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("Deze stoelen zijn al gereservereerd");
                     Console.WriteLine("_____________________________________________________________________________________________\n");
                     i--;
                 }
-                else if (newChairs.Contains(differentinput)||newChairs.Contains(input))
+                else if (newChairs.Contains(differentinput)|| newChairs.Contains(input))
                 {
                     Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine($"U heeft stoel al gekozen.");
@@ -334,8 +334,7 @@ namespace Chair
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.WriteLine("Type nu de volgende stoel in");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        //var newData = changeAllData(AllData, input);
-                        //console(room, newData);
+              
                     }
                     else
                     {
@@ -483,19 +482,10 @@ namespace Chair
             NewData[letterPos][numberPos] = what;
             return NewData;
         }
-            
+
 
         public void Chair()
         {
-
-            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
-            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
-            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            dynamic DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             List<string> chairs = new List<string>();
             // From here
             var room = this.DynamicFilmData[0]["FilmRoom"];
@@ -506,7 +496,7 @@ namespace Chair
                     room = this.DynamicFilmData[i]["FilmRoom"];
                 }
             }
-            
+
             for (int i = 0; i < this.DynamicUserData.Count; i++)
             {
                 if (this.DynamicUserData[i]["Film"] == this.FilmNaam && this.DynamicUserData[i]["FilmDate"] == this.Datum)
@@ -516,9 +506,18 @@ namespace Chair
                         chairs.Add(this.DynamicUserData[i]["Stoel_num"][j].ToString());
                     }
                     chairs.Sort();
-                    this.chairsTaken = chairs;
-                    //Console.WriteLine(chairs[1][0]);
+                    Console.WriteLine(chairs.Count());
+                    string[] ChairsTaken = new string[chairs.Count];
+                    for (int p = 0; p < chairs.Count; p++)
+                    {
+                        ChairsTaken[p] = chairs[p];
+                    }
+                    this.chairsTaken = ChairsTaken;
                 }
+            }
+            if (this.chairsTaken == null)
+            {
+                this.chairsTaken = new string[] { "" };
             }
             // To here can also be seperate method
             string[][] AllData = new string[this.DynamicRoomData[Int32.Parse((room - 1).ToString())]["row_number"].Count][];
@@ -526,47 +525,14 @@ namespace Chair
             {
                 AllData[d] = new string[this.DynamicRoomData[Int32.Parse((room - 1).ToString())]["seat_number"].Count];
             }
-            for(int i = 0; i< chairs.Count; i++)
+            for (int i = 0; i < chairs.Count; i++)
             {
                 AllData = changeAllData(AllData, chairs[i], "X");
             }
             this.AllData = AllData;
-            /*
-            int checkallchairs = 0;
-            for (int r = 0; r < AllData.Length; r++)
-            {
-                for (int s = 0; s < AllData[r].Length; s++)
-                {
-                    if (!(chairs.Count == 0))
-                    {
-                        if (chairs[checkallchairs].Length == 2)
-                        {
-                            if (chairs[checkallchairs][0].ToString() == $"{s + 1}" && chairs[checkallchairs][1].ToString() == Alphabet[r])
-                            {
-                                AllData[r][s] = "X";
-                                if (!(checkallchairs >= chairs.Count - 1))
-                                {
-                                    checkallchairs++;
-                                }
-                            }
-                        }
-                        else if (chairs[checkallchairs].Length == 3)
-                        {
-                            if (!(checkallchairs >= chairs.Count - 1))
-                            {
-                                checkallchairs++;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        AllData[r][s] = null;
-                    }
-                }
-            }
-            */
+
             Scherm.Screens.CinemaBanner();
-            Console.WriteLine($"U heeft gekozen voor de film: {this.FilmNaam}, op {this.Datum} om {this.Tijd} uur.");
+            Console.Write("U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(this.FilmNaam); ConsoleCommands.Textkleur("wit"); Console.Write(", op "); ConsoleCommands.Textkleur("rood"); Console.Write(this.Datum); ConsoleCommands.Textkleur("wit"); Console.Write(" om "); ConsoleCommands.Textkleur("rood"); Console.Write(this.Tijd); ConsoleCommands.Textkleur("wit"); Console.Write(" uur.");
             Console.WriteLine("");
             Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
             Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -589,15 +555,8 @@ namespace Chair
              */
             var Chosen = WhatChairs(stoelen, room);
             room = ("" + room);
-            ReserveerCodeMail(this.FilmNaam, this.Tijd, Chosen, room, this.Datum);
+            ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, Chosen, room);
 
-
-            /*for (int i = 0; i < DynamicRoomData[Int32.Parse((room - 1).ToString())]["row_number"].Count - 1; i++)
-            {
-                // So does this
-                table.AddRow(Alphabet[i], AllData[i][0], AllData[i][1], AllData[i][2], AllData[i][3], AllData[i][4], AllData[i][5], AllData[i][6], AllData[i][7], AllData[i][8], AllData[i][9], AllData[i][10], AllData[i][11], AllData[i][12], AllData[i][13], AllData[i][14], AllData[i][15], AllData[i][16], AllData[i][17], AllData[i][18], AllData[i][19]);
-            }*/
-            //table.Write(Format.Alternative);
 
 
 
