@@ -368,7 +368,7 @@ namespace Reservation
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
                 Dictionary<string, List<string>> DictofListofString = new();
                 ConsoleCommands.Textkleur("wit");
-                Console.WriteLine("\t\tVoer de datum in voor wanneer u zou willen reserveren (DD/MM/YYYY): ");
+                Console.WriteLine("\t\tVoer de datum in voor wanneer u zou willen reserveren (DD-MM-YYYY): ");
                 Console.Write("\n\t\t\t\t["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 ConsoleCommands.Textkleur("zwart");
