@@ -52,7 +52,9 @@ namespace Chair
                     table.AddRow(this.Alphabet[i], AllData[i][0], AllData[i][1], AllData[i][2], AllData[i][3], AllData[i][4], AllData[i][5], AllData[i][6], AllData[i][7], AllData[i][8], AllData[i][9], AllData[i][10], AllData[i][11], AllData[i][12], AllData[i][13], AllData[i][14]);
                 }
                 Scherm.Screens.CinemaBanner();
+                Console.WriteLine("\t\t\t\t\tVoor");
                 table.Write(Format.Alternative);
+                Console.WriteLine("\t\t\t\t\tAchter");
                 Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
@@ -64,7 +66,9 @@ namespace Chair
                     table.AddRow(this.Alphabet[i], AllData[i][0], AllData[i][1], AllData[i][2], AllData[i][3], AllData[i][4], AllData[i][5], AllData[i][6], AllData[i][7], AllData[i][8], AllData[i][9], AllData[i][10], AllData[i][11], AllData[i][12], AllData[i][13], AllData[i][14], AllData[i][15], AllData[i][16], AllData[i][17], AllData[i][18], AllData[i][19]);
                 }
                 Scherm.Screens.CinemaBanner();
+                Console.WriteLine("\t\t\t\t\tVoor");
                 table.Write(Format.Alternative);
+                Console.WriteLine("\t\t\t\t\tAchter");
                 Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
@@ -76,7 +80,9 @@ namespace Chair
                     table.AddRow(this.Alphabet[i], AllData[i][0], AllData[i][1], AllData[i][2], AllData[i][3], AllData[i][4], AllData[i][5], AllData[i][6], AllData[i][7], AllData[i][8], AllData[i][9], AllData[i][10], AllData[i][11], AllData[i][12], AllData[i][13], AllData[i][14], AllData[i][15], AllData[i][16], AllData[i][17], AllData[i][18], AllData[i][19], AllData[i][20], AllData[i][21], AllData[i][22], AllData[i][23], AllData[i][24]);
                 }
                 Scherm.Screens.CinemaBanner();
+                Console.WriteLine("\t\t\t\t\tVoor");
                 table.Write(Format.Alternative);
+                Console.WriteLine("\t\t\t\t\tAchter");
                 Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
