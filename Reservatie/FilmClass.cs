@@ -30,7 +30,7 @@ namespace Film
             this.FilmTimes = FilmTimes;
             this.FilmDays = DictofData;
         }
-        public void AddFilmtoDataBase(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
+        public void AddObject(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
             List<Film> _data = new();
             var FilmDataJson = File.ReadAllText(@".\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
@@ -87,7 +87,7 @@ namespace Film
             }
 
         }
-        public void RemoveFilm(string FilmName)
+        public virtual void RemoveObject(string ObjectName)
         {
             string myJsonString = new WebClient().DownloadString(@".\Filmsdata.json");
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -95,15 +95,15 @@ namespace Film
             for (int i = 0; i < DynamicData.Count; i++)
             {
                 string FilmTitleObject = (string)DynamicData[i]["FilmTitle"];
-                Console.WriteLine("dasdasd");
-                if (FilmTitleObject == FilmName)
+                if (FilmTitleObject == ObjectName)
+
                 {
                     Index = i;
                     DynamicData.Remove(DynamicData[Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
                     File.WriteAllText(@".\Filmsdata.json", UserData);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n");
-                    Console.Write("\nFilm "); ConsoleCommands.Textkleur("rood"); Console.Write(FilmName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
+                    Console.Write("\nFilm "); ConsoleCommands.Textkleur("rood"); Console.Write(ObjectName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n"); ConsoleCommands.Textkleur("zwart");
 
                 }
