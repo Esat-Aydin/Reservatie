@@ -456,10 +456,7 @@ namespace Gebruiker
                     Scherm.Screens.CinemaBanner();
                     Console.WriteLine("\t\t\t RESERVERINGEN BEKIJKEN");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                    var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
-
-                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
+                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(DynamicUserData);
 
                     Console.WriteLine("Hieronder vind u de lijst van alle reserveringen.");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -499,9 +496,8 @@ namespace Gebruiker
                     Console.WriteLine("\t\t\t BIOSCOOP ZALEN");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
-                    var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
 
-                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
+                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(DynamicUserData);
                     for (int i = 1; i < 4; i++)
                     {
                         Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(i); ConsoleCommands.Textkleur("wit"); Console.Write("] voor zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(i + "\n"); ConsoleCommands.Textkleur("wit");
@@ -650,8 +646,7 @@ namespace Gebruiker
                 else if (user_input1 == "2")
                 {
                     bool x = true;
-                    string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-                    dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
+                    dynamic DynamicData1 = JsonConvert.DeserializeObject(DynamicData);
 
                     Console.WriteLine("Welke snack wilt u verwijderen?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
@@ -706,8 +701,7 @@ namespace Gebruiker
                 else if (user_input1 == "4")
                 {
                     bool x = true;
-                    string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
-                    dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
+                    dynamic DynamicData1 = JsonConvert.DeserializeObject(DynamicData);
 
                     Console.WriteLine("Welke drank wilt u verwijderen?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
@@ -837,15 +831,15 @@ namespace Gebruiker
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
             List<Gebruiker> _data = new List<Gebruiker>();
-
-            var AccountUsers = new WebClient().DownloadString(@".\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            string FullPathAccounts = Path.GetFullPath(@"AccountUsers.json");
+            var AccountUsers = new WebClient().DownloadString(FullPathAccounts); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
 
             var AccountUsers_Gebruiker = JsonConvert.DeserializeObject<List<Gebruiker>>(AccountUsers);
             AccountUsers_Gebruiker.Add(Object);
 
             AccountUsers = JsonConvert.SerializeObject(AccountUsers_Gebruiker);
 
-            File.WriteAllText(@".\AccountUsers.json", AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
+            File.WriteAllText(FullPathAccounts, AccountUsers); // Net als AccountUsers de path veranderen als je hier errors krijgt!
 
         }
         public void ZoekOptie(string Gezochte_Film, dynamic DynamicFilmData)
@@ -2088,7 +2082,8 @@ namespace Gebruiker
         }
         public static void Snacks(Gebruiker Klant)
         {
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json"); // Path moet nog veranderd worden
+            string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(FullPathSnacks); // Path moet nog veranderd worden
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             ConsoleCommands CommandLine = new ConsoleCommands();
             List<string> Mandje = new List<string>();

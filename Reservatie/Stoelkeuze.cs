@@ -35,11 +35,17 @@ namespace Chair
             this.FilmNaam = Naam;
             this.Datum = datum;
             this.Tijd = tijd;
-            string MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
+            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
+            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
+            string myUserData = new WebClient().DownloadString(FullPathsReservations);
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Stoelkeuze.json");
+
+
+            string myRoomData = new WebClient().DownloadString(FullPathSeats);
+
 
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -495,10 +501,15 @@ namespace Chair
         {
 
 
-            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@"C:\Users\woute\source\repos\Esat-Aydin\Reservatie\Reservatie\Stoelkeuze.json");
+            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string FullPathSnacksDrinks = Path.GetFullPath(@"snacksdrinks.json");
+            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
+            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
+            string myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
+            string myUserData = new WebClient().DownloadString(FullPathsReservations);
+            string myRoomData = new WebClient().DownloadString(FullPathSeats);
+
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
