@@ -708,11 +708,11 @@ namespace Gebruiker
                     bool x = true;
                     string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
                     dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("wit");
 
                     Console.WriteLine("Welke drank wilt u verwijderen?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    string user_input_name = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); 
+                    
 
                     Scherm.Screens.CinemaBanner();
                     var table = new ConsoleTable("Dranken", "Prijs");
@@ -721,14 +721,13 @@ namespace Gebruiker
 
                         table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.dranken[i].Name, DynamicData.dranken[i].Price);
 
-                        Snacks1.DrankenRemove(user_input_name);
-                        Thread.Sleep(1500);
-                        AdminCommands();
+
 
                     }
                     table.Write(Format.Alternative);
                     while (x == true)
                     {
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                         string delete_drank = Console.ReadLine();
                         int int_drank;
                         bool Bool = false;
@@ -738,7 +737,7 @@ namespace Gebruiker
                             if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
                             {
 
-                                user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
+                                string user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
                                 Snacks1.SnacksCheck(user_input_name);
                                 if (Snacks1.DrankenCheck(user_input_name) == true)
                                 {
