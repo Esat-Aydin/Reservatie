@@ -550,10 +550,11 @@ namespace Gebruiker
                             ConsoleCommands.Textkleur("zwart"); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         }
                     }
-                    table.Write(Format.Alternative);
+                    
                     if (AantalReserveringen == 1)
                     {
                         ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reservering.\n");
+                        table.Write(Format.Alternative);
                     }
                     else if (AantalReserveringen == 0)
                     {
@@ -563,7 +564,7 @@ namespace Gebruiker
                     else
                     {
                         ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reserveringen.\n");
-
+                        table.Write(Format.Alternative);
                     }
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
