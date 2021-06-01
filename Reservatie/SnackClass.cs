@@ -43,18 +43,20 @@ namespace SnackClass
         public void AddSnack(Snacks SnackObject, bool isSnack)
         {
             List<Snacks> _data = new();
-            var SnackDataJson = File.ReadAllText(@".\snacksdrinks.json");
+            string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
+            var SnackDataJson = File.ReadAllText(FullPathSnacks);
             var SnackObjectJson = JsonConvert.DeserializeObject<SnackType>(SnackDataJson);
             if (isSnack)
                 SnackObjectJson.Snacks.Add(SnackObject);
             else
                 SnackObjectJson.Drinks.Add(SnackObject);
             SnackDataJson = JsonConvert.SerializeObject(SnackObjectJson);
-            File.WriteAllText(@".\snacksdrinks.json", SnackDataJson); 
+            File.WriteAllText(FullPathSnacks, SnackDataJson); 
         }
         public bool SnacksCheck(string SnackName)
         {
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+            string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(FullPathSnacks);
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["snacks"].Count; i++)
@@ -90,8 +92,9 @@ namespace SnackClass
             }
         }
 
-        public override void RemoveObject(string ObjectName) { 
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+        public override void RemoveObject(string ObjectName) {
+            string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(FullPathSnacks);
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["snacks"].Count; i++)
@@ -102,7 +105,7 @@ namespace SnackClass
                     Index = i;
                     DynamicData["snacks"].Remove(DynamicData["snacks"][Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@".\snacksdrinks.json", UserData);
+                    File.WriteAllText(FullPathSnacks, UserData);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.Write("\nSnack "); ConsoleCommands.Textkleur("rood"); Console.Write(ObjectName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
@@ -115,7 +118,8 @@ namespace SnackClass
 
         public bool DrankenCheck(string SnackName)
         {
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+            string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(FullPathSnacks);
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["dranken"].Count; i++)
@@ -153,7 +157,8 @@ namespace SnackClass
 
         public void DrankenRemove(string SnackName)
         {
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+            string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
+            string myJsonString = new WebClient().DownloadString(FullPathSnacks);
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData["dranken"].Count; i++)
@@ -164,7 +169,7 @@ namespace SnackClass
                     Index = i;
                     DynamicData["dranken"].Remove(DynamicData["dranken"][Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@".\snacksdrinks.json", UserData);
+                    File.WriteAllText(FullPathSnacks, UserData);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.Write("\nDrank "); ConsoleCommands.Textkleur("rood"); Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
