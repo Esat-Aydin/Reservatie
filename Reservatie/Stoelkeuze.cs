@@ -569,7 +569,7 @@ namespace Chair
 
             var Chosen = WhatChairs(stoelen, room);
             room = ("" + room);
-            ReserveerCodeMail(this.FilmNaam, this.Tijd, Chosen, room, this.Datum);
+            ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, Chosen, room);
 
 
 
