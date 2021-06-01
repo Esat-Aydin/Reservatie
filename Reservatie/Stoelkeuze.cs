@@ -284,7 +284,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if (Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0]))){
@@ -333,7 +333,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input);
                         //console(room, newData);
@@ -394,7 +394,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if(Letters.Contains("" + input[2]) && Numbers.Contains(Convert.ToInt32("" + input[0] + input[1])))
@@ -443,7 +443,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input, "-");
                     }
@@ -575,7 +575,7 @@ namespace Chair
             // Table needs to be somewhat dynamic
             ConsoleCommands.Textkleur("wit");
             console(room, AllData);
-            Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
+            Console.WriteLine("Type nu elke stoel of toets '0' in om terug te gaan, gevolgd door ENTER.");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
