@@ -27,7 +27,7 @@ namespace Chair
         public dynamic DynamicUserData;
         public string[] Alphabet;
         public string[][] AllData;
-        public List<string> chairsTaken;
+        public string[] chairsTaken;
 
         public StoelKeuze(string Naam, string datum = null, string tijd = null)
         {
@@ -41,7 +41,6 @@ namespace Chair
             string myRoomData = new WebClient().DownloadString(@"C:\Users\Dylan\Source\Repos\Reservatie\Reservatie\seats (2).json");
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-            this.chairsTaken = new List<string>();
         }
         public void console(dynamic room, string[][] AllData)
         {
@@ -207,7 +206,7 @@ namespace Chair
                 {
                     differentinput = "" + input[1] + input[2] + input[0];
                 }
-                if (this.chairsTaken.Contains(input) || this.chairsTaken.Contains(differentinput))
+                if (this.chairsTaken.Contains(input)||this.chairsTaken.Contains(differentinput))
                 {
                     Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.WriteLine("Deze stoelen zijn al gereservereerd");
@@ -284,7 +283,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if (Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0]))){
@@ -333,7 +332,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input);
                         //console(room, newData);
@@ -394,7 +393,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if(Letters.Contains("" + input[2]) && Numbers.Contains(Convert.ToInt32("" + input[0] + input[1])))
@@ -443,7 +442,7 @@ namespace Chair
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in of type '0' in om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input, "-");
                     }
@@ -488,16 +487,7 @@ namespace Chair
 
         public void Chair()
         {
-
-            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
-            string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
-            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
-            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            dynamic DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
-            //List<string> chairs = new List<string>();
+            List<string> chairs = new List<string>();
             // From here
             var room = this.DynamicFilmData[0]["FilmRoom"];
             for (int i = 0; i < this.DynamicFilmData.Count; i++)
@@ -514,11 +504,21 @@ namespace Chair
                 {
                     for (int j = 0; j < this.DynamicUserData[i]["Stoel_num"].Count; j++)
                     {
-                        this.chairsTaken.Add(this.DynamicUserData[i]["Stoel_num"][j].ToString());
+                        chairs.Add(this.DynamicUserData[i]["Stoel_num"][j].ToString());
                     }
-                    this.chairsTaken.Sort();
-                    //Console.WriteLine(chairs[1][0]);
+                    chairs.Sort();
+                    Console.WriteLine(chairs.Count());
+                    string[] ChairsTaken = new string[chairs.Count];
+                    for (int p = 0; p < chairs.Count; p++)
+                    {
+                        ChairsTaken[p] = chairs[p];
+                    }
+                    this.chairsTaken = ChairsTaken;
                 }
+            }
+            if(this.chairsTaken == null)
+            {
+                this.chairsTaken = new string[] {""};
             }
             // To here can also be seperate method
             string[][] AllData = new string[this.DynamicRoomData[Int32.Parse((room - 1).ToString())]["row_number"].Count][];
@@ -526,9 +526,9 @@ namespace Chair
             {
                 AllData[d] = new string[this.DynamicRoomData[Int32.Parse((room - 1).ToString())]["seat_number"].Count];
             }
-            for(int i = 0; i< this.chairsTaken.Count; i++)
+            for(int i = 0; i< chairs.Count; i++)
             {
-                AllData = changeAllData(AllData, this.chairsTaken[i], "X");
+                AllData = changeAllData(AllData, chairs[i], "X");
             }
             this.AllData = AllData;
             /*
@@ -575,7 +575,7 @@ namespace Chair
             // Table needs to be somewhat dynamic
             ConsoleCommands.Textkleur("wit");
             console(room, AllData);
-            Console.WriteLine("Type nu elke stoel of toets '0' in om terug te gaan, gevolgd door ENTER.");
+            Console.WriteLine("Type nu elke stoel, gevolgd door ENTER.");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();

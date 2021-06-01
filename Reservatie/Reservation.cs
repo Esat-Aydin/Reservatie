@@ -591,7 +591,7 @@ namespace Reservation
             var Reservatiecode = new String(stringChars);
             return Reservatiecode;
         }
-        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string[] Stoelen, string zaal, string FilmDatum = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
+        public void ReserveerCodeMail(string Gezochte_Film, string Show_Tijden, string FilmDatum = null, string[] Stoelen = null, string zaal = null) //[FILMDATUM NIET AF] Deze method regelt de reservering en mailt het vervolgens naar de gebruiker - Callen: Gebruiker.ReserveerCodeMail();
         {
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
