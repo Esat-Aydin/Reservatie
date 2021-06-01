@@ -495,6 +495,103 @@ namespace Gebruiker
                     }
                 }
             }
+            if (UserInput == "4")
+            {
+                while (true)
+                {
+                    Scherm.Screens.CinemaBanner();
+                    Console.WriteLine("\t\t\t BIOSCOOP ZALEN");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                    var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+
+                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
+                    for (int i = 1; i < 4; i++)
+                    {
+                        Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(i); ConsoleCommands.Textkleur("wit"); Console.Write("] voor zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(i + "\n"); ConsoleCommands.Textkleur("wit");
+                    }
+                    int x = 0;
+                    bool CorrectInput = false;
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                    string Input = Console.ReadLine();
+                    var table = new ConsoleTable("Naam","Reserverings code", "Film", "Datum");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    int AantalReserveringen = 0;
+                    while (CorrectInput != true)
+                    {
+                        if (Int32.TryParse(Input, out x))
+                        {
+                            if (x > 0 && x < 4)
+                            {
+                                Scherm.Screens.CinemaBanner();
+                                Console.WriteLine($"Hieronder vind u de lijst van alle reserveringen voor zaal {x}.");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                for (int i = 0; i < AlleReserveringen.Count; i++)
+                                {
+                                    if (AlleReserveringen[i]["Zaal"] == x.ToString())
+                                    {
+                                        AantalReserveringen++;
+                                        table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"]);
+                                    }
+                                }
+                                CorrectInput = true;
+                            }
+                            else
+                            {
+                                ConsoleCommands.Textkleur("rood");
+                                Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
+                                Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart"); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            }
+                        }
+                        else
+                        {
+                            ConsoleCommands.Textkleur("rood");
+                            Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
+                            Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            ConsoleCommands.Textkleur("zwart"); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        }
+                    }
+                    table.Write(Format.Alternative);
+                    if (AantalReserveringen == 1)
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reservering.\n");
+                    }
+                    else if (AantalReserveringen == 0)
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft geen reserveringen.\n");
+
+                    }
+                    else
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reserveringen.\n");
+
+                    }
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
+                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    if (input == "1")
+                    {
+                        AnnulerenAdmin(AlleReserveringen);
+                    }
+                    if (input == "0")
+                    {
+                        Console.Clear();
+                        Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                        Environment.Exit(1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
+                        Thread.Sleep(2000);
+                    }
+                }
+            }
             if (UserInput == "5")
             {
                 Scherm.Screens.CinemaBanner();
