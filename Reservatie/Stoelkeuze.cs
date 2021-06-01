@@ -567,9 +567,10 @@ namespace Chair
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
 
-            var Chosen = WhatChairs(stoelen, room);
+            var chosenChairs = WhatChairs(stoelen, room);
             room = ("" + room);
-            ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, Chosen, room);
+            Thread.Sleep(2000);
+            ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, chosenChairs, room);
 
 
 
