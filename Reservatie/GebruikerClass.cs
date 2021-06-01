@@ -74,10 +74,6 @@ namespace Gebruiker
             {
                 Scherm.Screens.AdminOrUserScreen();
             }
-
-
-            
-
             if (UserInput.ToLower() == "help")
             {
 
@@ -418,7 +414,7 @@ namespace Gebruiker
                 bool x = true;
                 while (x == true)
                 {
-                    string delete_movie = Console.ReadLine();
+                    ConsoleCommands.Textkleur("zwart"); string delete_movie = Console.ReadLine();
                     int int_movie;
                     bool Bool = false;
 
@@ -629,7 +625,7 @@ namespace Gebruiker
                     Snacks1.AddObject(SnackObject, user_input_name);
                     Thread.Sleep(1500);
                     AdminCommands();
-                    string UserInputNew = Console.ReadLine();
+                    ConsoleCommands.Textkleur("zwart"); string UserInputNew = Console.ReadLine();
                     UserInputMethod(UserInputNew);
                 }
                 else if (user_input1 == "3")
@@ -644,7 +640,7 @@ namespace Gebruiker
                     Console.WriteLine($"Wat is de prijs van {user_input_name}?");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
-                    string user_input_price = Console.ReadLine();
+                    ConsoleCommands.Textkleur("zwart"); string user_input_price = Console.ReadLine();
                     SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
                     Snacks1.DrankenAdd(SnackObject, user_input_name);
                     Thread.Sleep(1500);
@@ -673,7 +669,7 @@ namespace Gebruiker
 
                     while (x == true)
                     {
-                        string delete_snack = Console.ReadLine();
+                        ConsoleCommands.Textkleur("zwart"); string delete_snack = Console.ReadLine();
                         int int_snack;
                         bool Bool = false;
 
