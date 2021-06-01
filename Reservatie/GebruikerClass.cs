@@ -68,31 +68,6 @@ namespace Gebruiker
             {
                 Scherm.Screens.AdminOrUserScreen();
             }
-            if (UserInput == "1")
-            {
-                Scherm.Screens.CinemaBanner();
-                Console.WriteLine("\t\t\t ADMIN CONSOLE");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.WriteLine("Type nu het huidige admin wachtwoord in: ");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                UserInput = Console.ReadLine();
-
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                if (UserInput == Password)
-                {
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Type nu het nieuwe wachtwoord in: ");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    UserInput = Console.ReadLine();
-                    Password = UserInput;
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Het wachtwoord is succesvol veranderd naar: " + Password);
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                }
-            }
             if (UserInput.ToLower() == "help")
             {
 
