@@ -803,37 +803,63 @@ namespace Gebruiker
                             AantalReserveringen++;
                         }
                     }
-                    table.Write(Format.Alternative);
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     if (AantalReserveringen == 1)
                     {
+                        table.Write(Format.Alternative);
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("wit"); Console.Write($"\nDeze reservering "); ConsoleCommands.Textkleur("rood"); Console.Write("bestaat. \n"); ConsoleCommands.Textkleur("wit");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
+                        Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        bool correctInput = false;
+                        while (correctInput == false)
+                        {
+                            if (input == "1")
+                            {
+                                AnnulerenAdmin(AlleReserveringen);
+                                correctInput = true;
+                            }
+                            if (input == "0")
+                            {
+                                Console.Clear();
+                                Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                                Environment.Exit(1);
+                                correctInput = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
+                                Thread.Sleep(2000);
+                            }
+                        }
                     }
                     else
                     {
                         ConsoleCommands.Textkleur("wit"); Console.Write($"\nDeze reservering "); ConsoleCommands.Textkleur("rood"); Console.Write("bestaat niet\n"); ConsoleCommands.Textkleur("wit");
-
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
-                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (input == "1")
-                    {
-                        AnnulerenAdmin(AlleReserveringen);
-                    }
-                    if (input == "0")
-                    {
-                        Console.Clear();
-                        Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-                        Environment.Exit(1);
-                    }
-                    else
-                    {
-                        Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
-                        Thread.Sleep(2000);
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        bool correctInput = false;
+                        while (correctInput == false)
+                        {
+                            if (input == "0")
+                            {
+                                Console.Clear();
+                                Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                                Environment.Exit(1);
+                                correctInput = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
+                                Thread.Sleep(2000);
+                            }
+                        }
                     }
                 }
             }
