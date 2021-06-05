@@ -463,14 +463,31 @@ namespace Gebruiker
 
                     Console.WriteLine("Hieronder vind u de lijst van alle reserveringen.");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum");
+                    var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum", "Tijd", "Zaal");
+                    int AantalReserveringen = 0;
                     for (int i = 0; i < AlleReserveringen.Count; i++)
                     {
-                        table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"]);
+                        table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"], AlleReserveringen[i]["FilmTime"], AlleReserveringen[i]["Zaal"]);
+                        AantalReserveringen++;
                     }
                     table.Write(Format.Alternative);
-                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
+                    if (AantalReserveringen == 1)
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr is "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reservering.\n");
+                    }
+                    else if (AantalReserveringen == 0)
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr zijn geen reserveringen.\n");
+
+                    }
+                    else
+                    {
+                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr zijn "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reserveringen.\n");
+
+                    }
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
+                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
