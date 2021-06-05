@@ -115,17 +115,23 @@ namespace Cinema
 
         public static dynamic JsonSerializer(string Object)
         {
+            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string FullPathSnacksDrinks = Path.GetFullPath(@"snacksdrinks.json");
+            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
+
+            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
+            string myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
+            string myUserData = new WebClient().DownloadString(FullPathsReservations);
+            string myRoomData = new WebClient().DownloadString(FullPathSeats);
 
 
-
-            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
+            dynamic DynamicSeatsData = JsonConvert.DeserializeObject(myRoomData);
             
             if(Object == "Films")
             {
@@ -134,6 +140,10 @@ namespace Cinema
             else if(Object == "Snacks")
             {
                 return DynamicData;
+            }
+            else if(Object == "Seats")
+            {
+                return DynamicSeatsData;
             }
             else
             {

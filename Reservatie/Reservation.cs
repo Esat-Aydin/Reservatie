@@ -29,9 +29,12 @@ namespace Reservation
         {
             ConsoleCommands CommandLine = new ConsoleCommands();
             // Inladen Json Module 
-            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
+            string FullPathReservations = Path.GetFullPath(@"SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
+            string myJsonString = new WebClient().DownloadString(FullPathSnacks);
+            string myUserData = new WebClient().DownloadString(FullPathReservations);
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
@@ -619,8 +622,8 @@ namespace Reservation
             static void ReservationToJSon(Gebruiker.Gebruiker Klant, string GeneratedCode)
             {
                 List<JsonData> _data = new List<JsonData>();
-
-                var DataUser = File.ReadAllText(@".\SampleLog.json"); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
+                string FullPathReservations = Path.GetFullPath(@"SampleLog.json");
+                var DataUser = File.ReadAllText(FullPathReservations); //PATH VERANDEREN NAAR JOUW EIGEN BESTANDSLOCATIE ALS JE HIER EEN ERROR KRIJGT
                 var JsonData = JsonConvert.DeserializeObject<List<JsonData>>(DataUser)
                           ?? new List<JsonData>();
 
@@ -639,7 +642,7 @@ namespace Reservation
 
                 DataUser = JsonConvert.SerializeObject(JsonData);
 
-                File.WriteAllText(@".\SampleLog.json", DataUser);
+                File.WriteAllText(FullPathReservations, DataUser);
 
             }
             Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
@@ -898,9 +901,10 @@ We hopen u voldoende te hebben geïnformeerd.
                     ConsoleCommands.Textkleur("wit");
                     Console.WriteLine("Het versturen van de bevestiging is niet gelukt.");
                 }
+                string FullPathReservations = Path.GetFullPath(@"SampleLog.json");
                 DynamicUserData.Remove(DynamicUserData[Index]);
                 dynamic UserData = JsonConvert.SerializeObject(DynamicUserData);
-                File.WriteAllText(@".\SampleLog.json", UserData);
+                File.WriteAllText(FullPathReservations, UserData);
                 Console.WriteLine("Uw reservering is geannuleerd, we hopen u snel weer te zien in onze bioscoop");
             }
             if (Optie == "2")
