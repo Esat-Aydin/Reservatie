@@ -581,7 +581,7 @@ namespace Chair
             ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, chosenChairs, room);
 
 
-
+            //kleuren fixen en stoel ipv stoelen
         }
     }
 }

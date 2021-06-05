@@ -920,6 +920,8 @@ We hopen u voldoende te hebben geïnformeerd.
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Stoelen: "); ConsoleCommands.Textkleur("rood"); for (int i = 0; i < Klant.Stoel_num.Length; i++) { Console.Write(Klant.Stoel_num[i]+", "); } Console.Write("\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Zaal + "\n");
             ConsoleCommands.Textkleur("wit");
         }
         public bool DateInFutureCheck(DateTime UserInput)
