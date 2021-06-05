@@ -45,6 +45,7 @@ namespace Chair
 
             string myRoomData = new WebClient().DownloadString(FullPathSeats);
 
+
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         }
@@ -531,6 +532,7 @@ namespace Chair
             string myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
             string myUserData = new WebClient().DownloadString(FullPathsReservations);
             string myRoomData = new WebClient().DownloadString(FullPathSeats);
+
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
