@@ -360,19 +360,13 @@ namespace Gebruiker
                     }
                     catch
                     {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("rood");
-                        Console.WriteLine("U moet een getal invoeren! (1, 2, 3, 4, etc.");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        ConsoleCommands.Textkleur("zwart");
+                        Scherm.Screens.CustomError("U moet een getal invoeren!");
                     }
 
                 }
                 catch
                 {
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("rood");
-                    Console.WriteLine("U moet een getal invoeren! (1, 2, 3, 4, etc.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
+                    Scherm.Screens.CustomError("U moet een getal invoeren!");
                 }
 
 
@@ -428,9 +422,7 @@ namespace Gebruiker
                         }
                         else
                         {
-                            Console.WriteLine("Film niet kunnen vinden");
-                            Console.WriteLine("Probeer het alstublieft opnieuw");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Scherm.Screens.CustomError("We hebben die Film niet kunnen vinden. Probeer het opnieuw.");
                             Bool = true;
                         }
                     }
@@ -504,7 +496,7 @@ namespace Gebruiker
                     }
                     else
                     {
-                        Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
+                        Scherm.Screens.ErrorMessageInput();
                         Thread.Sleep(2000);
                     }
                 }
@@ -552,20 +544,12 @@ namespace Gebruiker
                             }
                             else
                             {
-                                ConsoleCommands.Textkleur("rood");
-                                Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
-                                Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                                ConsoleCommands.Textkleur("zwart"); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Scherm.Screens.ErrorMessageInput(); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             }
                         }
                         else
                         {
-                            ConsoleCommands.Textkleur("rood");
-                            Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
-                            Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("zwart"); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Scherm.Screens.ErrorMessageInput(); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         }
                     }
                     table.Write(Format.Alternative);
@@ -601,7 +585,7 @@ namespace Gebruiker
                     }
                     else
                     {
-                        Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
+                        Scherm.Screens.ErrorMessageInput();
                         Thread.Sleep(2000);
                     }
                 }
@@ -710,9 +694,7 @@ namespace Gebruiker
                             }
                             else
                             {
-                                Console.WriteLine("Snack niet kunnen vinden");
-                                Console.WriteLine("Probeer het alstublieft opnieuw");
-                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Scherm.Screens.CustomError("We hebben die Snack niet kunnen vinden!");
                                 Bool = true;
                             }
                         }
@@ -767,9 +749,7 @@ namespace Gebruiker
                             }
                             else
                             {
-                                Console.WriteLine("Drank niet kunnen vinden");
-                                Console.WriteLine("Probeer het alstublieft opnieuw");
-                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Scherm.Screens.CustomError("We hebben die Drank niet kunnen vinden!");
                                 Bool = true;
                             }
                         }
@@ -831,8 +811,8 @@ namespace Gebruiker
                             }
                             else
                             {
-                                Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
-                                Thread.Sleep(2000);
+                                Scherm.Screens.ErrorMessageInput();
+                                input = Console.ReadLine();
                             }
                         }
                     }
@@ -856,8 +836,8 @@ namespace Gebruiker
                             }
                             else
                             {
-                                Console.WriteLine("U heeft de verkeerde input gegeven probeer het opnieuw.");
-                                Thread.Sleep(2000);
+                                Scherm.Screens.ErrorMessageInput();
+                                input = Console.ReadLine();
                             }
                         }
                     }
@@ -914,8 +894,7 @@ namespace Gebruiker
                 }
                 if (ReservationFound == false)
                 {
-                    Console.WriteLine("We hebben geen reservering met die code kunnen vinden. Probeer het nogmaals.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Scherm.Screens.CustomError("We hebben geen reservering met die code kunnen vinden. Probeer het nogmaals.");
                     Thread.Sleep(3000);
                     AnnulerenAdmin(AlleReserveringen);
                 }

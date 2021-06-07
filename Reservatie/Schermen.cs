@@ -262,5 +262,12 @@ namespace Scherm
             Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
         }
+        public static void CustomError(string ErrorMessage)
+        {
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("rood"); Console.Write("\nERROR: "); ConsoleCommands.Textkleur("wit");
+            Console.Write(ErrorMessage + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+        }
     }
 }
