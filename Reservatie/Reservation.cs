@@ -191,13 +191,13 @@ namespace Reservation
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     ConsoleCommands.Textkleur("zwart");
                     string Filmkeuze = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                   
                     for (int i = 1; i < Autofill.Count + 1; i++)
                     {
                         if (Filmkeuze == i.ToString())
                         {
                             Scherm.Screens.CinemaBanner();
-                            ConsoleCommands.Textkleur("wit");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             Console.Write($"U heeft gekozen voor de volgende film: "); ConsoleCommands.Textkleur("rood"); Console.WriteLine(Autofill[i - 1]);
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("rood");
@@ -324,7 +324,7 @@ namespace Reservation
                 while (loop)
                 {
                     choice = Int32.Parse(Console.ReadLine());
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    
                     try
                     {
                         if (choice.ToString() == "0")
@@ -333,9 +333,15 @@ namespace Reservation
                         }
                         else if (choice >= 1 && choice <= All_Films.Count)
                         {
+
                             loop = false;
-                            ConsoleCommands.Textkleur("wit");
+                            Console.Clear();
+                            Scherm.Screens.CinemaBanner();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             Console.Write("U heeft gekozen voor de volgende film:\t"); ConsoleCommands.Textkleur("rood"); Console.WriteLine(All_Films[choice - 1]);
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            
+                            Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                         }
                         else
                         {
@@ -347,7 +353,7 @@ namespace Reservation
                         Scherm.Screens.ErrorMessageInput();
                     }
             
-                    Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
+                    
                 }
 
             }
@@ -714,9 +720,7 @@ namespace Reservation
                 }
                 else
                 {
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Dat is niet correct! Gebruik een van de zwartgekleurde nummers als input.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");ConsoleCommands.Textkleur("zwart");
+                    Scherm.Screens.ErrorMessageInput();
                     UserInput = Console.ReadLine();
                 }
             }
