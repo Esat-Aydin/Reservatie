@@ -146,12 +146,8 @@ namespace Scherm
             while (Start_options != "1" && Start_options != "2" && Start_options != "0")
 
             {
-                if (isErrorPrinted == false)
-                {
-                    ErrorMessageInput();
-                    isErrorPrinted = true;
-                }
 
+                ErrorMessageInput();
                 Console.ForegroundColor = ConsoleColor.Black;
                 Start_options = Console.ReadLine();
             }

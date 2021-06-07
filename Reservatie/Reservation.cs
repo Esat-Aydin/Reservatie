@@ -176,12 +176,13 @@ namespace Reservation
                 }
                 if (Autofill.Count < 1)
                 {
-                    Scherm.Screens.ErrorMessageInput();
+                    Scherm.Screens.CustomError("We hebben geen films gevonden met die criteria! Probeer het nogmaals met een andere zoekterm.");
                     Thread.Sleep(2000);
                     Console.Clear();
                     ReserveringMaken(UserInput);
                 }
-                while (true)
+                bool InWhile = true;
+                while (InWhile)
                 {
                     Console.WriteLine("Op basis van uw input hebben we deze films gevonden:\n");
                     for (int i = 1; i < Autofill.Count + 1; i++)
@@ -202,6 +203,7 @@ namespace Reservation
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             ConsoleCommands.Textkleur("rood");
                             Klant.ZoekOptie(Autofill[i - 1], DynamicFilmData);
+                            InWhile = false;
                         }
                     }
                     Scherm.Screens.ErrorMessageInput();
@@ -244,7 +246,7 @@ namespace Reservation
                 {
                     Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
                 }
-                else if (Int32.Parse(Genre_select) > 8)
+                else if (Genre_select != "0" && Genre_select != "1" && Genre_select != "2" && Genre_select != "3" && Genre_select != "4" && Genre_select != "5" && Genre_select != "6" && Genre_select != "7" && Genre_select != "8" )
                 {
                     Scherm.Screens.ErrorMessageInput();
                     Thread.Sleep(1500);
@@ -396,10 +398,8 @@ namespace Reservation
                     }
                     else
                     {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Dat is geen geldige input! Probeer het opnieuw met de format DD/MM/YYYY - Voorbeeld: 16/05/2021 of 16-05-2021");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        ConsoleCommands.Textkleur("zwart"); FilmDateSearch = Console.ReadLine();
+                        Screens.CustomError("Dat is geen geldige input! Probeer het opnieuw met de format DD/MM/YYYY - Voorbeeld: 16/05/2021 of 16-05-2021");
+                        FilmDateSearch = Console.ReadLine();
                     }
                 }
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -445,6 +445,7 @@ namespace Reservation
                         }
                         while (filmsShown == false)
                         {
+                            Screens.CinemaBanner();
                             table.Write(Format.Alternative);
                             filmsShown = true;
                         }
@@ -560,21 +561,21 @@ namespace Reservation
                         bool ErrorFixed = false;
                         while (ErrorFixed == false)
                         {
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("De ingevoerde datum is niet in de toekomst! Voer een toekomstige datum (vanaf vandaag) in.");
-                            Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            Screens.CustomError("De ingevoerde datum is niet in de toekomst! Voer een toekomstige datum (vanaf vandaag) in.");
                             FilmDateSearch = Console.ReadLine();
-                            if (DateInFutureCheck(DateTimeReturner(FilmDateSearch)) == true)
+                            if (IsDateUserInputInteger(FilmDateSearch) == true && ((FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/')) || (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-'))))
                             {
-                                TestDateTime = DateTimeReturner(FilmDateSearch);
-                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                                ErrorFixed = true;
+                                if (DateInFutureCheck(DateTimeReturner(FilmDateSearch)) == true)
+                                {
+                                    TestDateTime = DateTimeReturner(FilmDateSearch);
+                                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                    ErrorFixed = true;
+                                }
+                                else
+                                {
+                                    ErrorFixed = false;
+                                }
                             }
-                            else
-                            {
-                                ErrorFixed = false;
-                            }
-
                         }
                     }
                 }
@@ -601,19 +602,29 @@ namespace Reservation
         }
         DateTime DateTimeReturner(string FilmDateSearch)
         {
-            int InputDays = 0;
-            string DaysofInput = FilmDateSearch.Substring(0, 2);
-            Int32.TryParse(DaysofInput, out InputDays);
+            while (true) {
+                try
+                {
+                    int InputDays = 0;
+                    string DaysofInput = FilmDateSearch.Substring(0, 2);
+                    Int32.TryParse(DaysofInput, out InputDays);
 
-            int InputMonth = 0;
-            string MonthofInput = FilmDateSearch.Substring(3, 2);
-            Int32.TryParse(MonthofInput, out InputMonth);
+                    int InputMonth = 0;
+                    string MonthofInput = FilmDateSearch.Substring(3, 2);
+                    Int32.TryParse(MonthofInput, out InputMonth);
 
-            int InputYear = 0;
-            string YearofInput = FilmDateSearch.Substring(6, 4);
-            Int32.TryParse(YearofInput, out InputYear);
-            var TestDateTime = new DateTime(InputYear, InputMonth, InputDays, 10, 2, 0, DateTimeKind.Local);
-            return TestDateTime;
+                    int InputYear = 0;
+                    string YearofInput = FilmDateSearch.Substring(6, 4);
+                    Int32.TryParse(YearofInput, out InputYear);
+                    var TestDateTime = new DateTime(InputYear, InputMonth, InputDays, 10, 2, 0, DateTimeKind.Local);
+                    return TestDateTime;
+                }
+                catch
+                {
+                    Screens.CustomError("Dat is geen geldige datum! Probeer het opnieuw.");
+                    FilmDateSearch = Console.ReadLine();
+                }
+            }
         }
 
 
@@ -933,6 +944,21 @@ We hopen u voldoende te hebben geïnformeerd.
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Zaal + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write($"Stoel(en): ");
+            for (int i = 0; i < Klant.Stoel_num.Length; i++)
+            {
+                ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Stoel_num[i]);
+                if (i == Klant.Stoel_num.Length - 1)
+                {
+                    Console.Write("\n");
+                }
+                else
+                {
+                    Console.Write(", ");
+                }
+            }
+            
             ConsoleCommands.Textkleur("wit");
         }
         public bool DateInFutureCheck(DateTime UserInput)
