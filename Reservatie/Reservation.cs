@@ -766,13 +766,10 @@ namespace Reservation
                 }
                 else
                 {
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Dat is de verkeerde input. Probeer het opnieuw.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");ConsoleCommands.Textkleur("zwart");
+                    Screens.ErrorMessageInput();
                     Mail_Bevestiging = Console.ReadLine();
                 }
             }
-            CommandLine.RestartOption();
 
         }
         public void Mail_Sender(Gebruiker.Gebruiker Klant, string GeneratedCode)
@@ -936,20 +933,6 @@ We hopen u voldoende te hebben geïnformeerd.
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
-            ConsoleCommands.Textkleur("wit"); Console.Write($"Stoelen: ");
-            for (int i = 0; i < Klant.Stoel_num.Length; i++)
-            {
-                ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Stoel_num[i]);
-                if (i == Klant.Stoel_num.Length-1)
-                {
-                    Console.Write("\n");
-                }
-                else
-                {
-                    Console.Write(", ");
-                }
-            }
-            ConsoleCommands.Textkleur("wit"); Console.Write("Zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Zaal + "\n");
             ConsoleCommands.Textkleur("wit");
         }
         public bool DateInFutureCheck(DateTime UserInput)
@@ -1023,6 +1006,8 @@ We hopen u voldoende te hebben geïnformeerd.
             ConsoleCommands.Textkleur("wit"); Console.Write("Film: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Datum: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Day + "\n");
             ConsoleCommands.Textkleur("wit"); Console.Write("Tijd: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Film_Time + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Zaal + "\n");
+            ConsoleCommands.Textkleur("wit"); Console.Write("Stoel(en): "); ConsoleCommands.Textkleur("rood"); Console.Write(Klant.Stoel_num + "\n");
         }
         public void Betaling(Gebruiker.Gebruiker Klant = null, decimal totaal = 0, List<string> Mandje = null)
         {
