@@ -35,7 +35,11 @@ namespace Chair
             this.FilmNaam = Naam;
             this.Datum = datum;
             this.Tijd = tijd;
-            string MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
+            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
+            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
+            string myUserData = new WebClient().DownloadString(FullPathsReservations);
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
             string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
