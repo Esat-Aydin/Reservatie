@@ -36,7 +36,7 @@ namespace Chair
             this.Tijd = tijd;
             string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
             string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
-            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
+            string FullPathSeats = Path.GetFullPath(@"Stoelkeuze.json");
             var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
             string myUserData = new WebClient().DownloadString(FullPathsReservations);
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
@@ -524,19 +524,6 @@ namespace Chair
         {
 
 
-            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
-            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
-            string FullPathSnacksDrinks = Path.GetFullPath(@"snacksdrinks.json");
-            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
-            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
-            string myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
-            string myUserData = new WebClient().DownloadString(FullPathsReservations);
-            string myRoomData = new WebClient().DownloadString(FullPathSeats);
-
-            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
-            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            dynamic DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
 
 
             List<string> chairs = new List<string>();
