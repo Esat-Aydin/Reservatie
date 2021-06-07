@@ -705,7 +705,7 @@ namespace Gebruiker
                 else if (user_input1 == "4")
                 {
                     bool x = true;
-                    string myJsonString = new WebClient().DownloadString(@"C:\Users\esat6\source\repos\Reservatie\Reservatie\snacksdrinks.json");
+                    string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
                     dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
 
                     Console.WriteLine("Welke drank wilt u verwijderen?");
@@ -1006,8 +1006,7 @@ namespace Gebruiker
             {
                 if (table.Rows[0][1].ToString() == "Deze film draait niet op Maandag.")
                 {
-                    ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Scherm.Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1073,7 +1072,7 @@ namespace Gebruiker
             {
                 if (table.Rows[1][1].ToString() == "Deze film draait niet op Dinsdag.")
                 {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Scherm.Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1136,7 +1135,7 @@ namespace Gebruiker
             {
                 if (table.Rows[2][1].ToString() == "Deze film draait niet op Woensdag.")
                 {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Scherm.Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1200,7 +1199,7 @@ namespace Gebruiker
             {
                 if (table.Rows[3][1].ToString() == "Deze film draait niet op Donderdag.")
                 {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Scherm.Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1264,7 +1263,7 @@ namespace Gebruiker
             {
                 if (table.Rows[4][1].ToString() == "Deze film draait niet op Vrijdag.")
                 {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Scherm.Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1328,7 +1327,7 @@ namespace Gebruiker
             {
                 if (table.Rows[5][1].ToString() == "Deze film draait niet op Zaterdag.")
                 {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Scherm.Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1394,7 +1393,7 @@ namespace Gebruiker
             {
                 if (table.Rows[6][1].ToString() == "Deze film draait niet op Zondag.")
                 {
-                    Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                    Scherm.Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1498,7 +1497,7 @@ namespace Gebruiker
             {
                 if (!int.TryParse(Chosen_film, out isInt))
                 {
-                    Console.WriteLine("U heeft een verkeerde input gegeven probeer het opnieuw.");
+                    Scherm.Screens.ErrorMessageInput();
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     Thread.Sleep(2000);
                     Console.Clear();
@@ -1510,8 +1509,7 @@ namespace Gebruiker
                 }
                 else if(Int32.Parse(Chosen_film) > count - 1)
                 {
-                    Console.WriteLine("U heeft een verkeerde input gegeven probeer het opnieuw.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Scherm.Screens.ErrorMessageInput();
                     Thread.Sleep(2000);
                     Console.Clear();
                     Scherm.Screens.CinemaBanner();
@@ -1615,9 +1613,7 @@ namespace Gebruiker
             {
                 if (!int.TryParse(DagenKeuze, out isInt))
                 {
-                    Console.WriteLine("Dit is de verkeerde input, probeer het opnieuw.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
+                    Scherm.Screens.ErrorMessageInput();
                     DagenKeuze = Console.ReadLine();
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 }
@@ -1626,7 +1622,7 @@ namespace Gebruiker
                     if (table.Rows[0][1].ToString() == "Deze film draait niet op Maandag.")
                     {
                         ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                         Thread.Sleep(1500);
                         Console.Clear();
                         GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
@@ -1702,7 +1698,7 @@ namespace Gebruiker
                 {
                     if (table.Rows[1][1].ToString() == "Deze film draait niet op Dinsdag.")
                     {
-                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                         Thread.Sleep(1500);
                         Console.Clear();
                         GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
@@ -1777,7 +1773,7 @@ namespace Gebruiker
                 {
                     if (table.Rows[2][1].ToString() == "Deze film draait niet op Woensdag.")
                     {
-                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                         Thread.Sleep(1500);
                         Console.Clear();
                         GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
@@ -1787,8 +1783,7 @@ namespace Gebruiker
                         string ConvertedToDate = GetNextWeekday(DayOfWeek.Wednesday).ToString(); ConvertedToDate = ConvertedToDate.Substring(0, 9);
                         string ConvertedDate = GetTwoWeeksFromNow(DayOfWeek.Wednesday).ToString(); ConvertedDate = ConvertedDate.Substring(0, 9);
                         string[] ArrayofDates = { ConvertedToDate, ConvertedDate };
-                        Console.WriteLine("U heeft gekozen voor Woensdag, voor welk tijdslot zou u willen reserveren?");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("U heeft gekozen voor Woensdag, voor welk tijdslot zou u willen reserveren?");
                         if (DictofTimes[Gezochte_Film]["Woensdag"].Count == 1)
                         {
                             ConsoleCommands.Textkleur("wit"); Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write($"] voor {DictofTimes[Gezochte_Film]["Woensdag"][0]}\n");
@@ -1853,7 +1848,7 @@ namespace Gebruiker
                 {
                     if (table.Rows[3][1].ToString() == "Deze film draait niet op Donderdag.")
                     {
-                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                         Thread.Sleep(1500);
                         Console.Clear();
                         GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
@@ -1930,7 +1925,7 @@ namespace Gebruiker
                 {
                     if (table.Rows[4][1].ToString() == "Deze film draait niet op Vrijdag.")
                     {
-                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                         Thread.Sleep(1500);
                         Console.Clear();
                         GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
@@ -2007,7 +2002,7 @@ namespace Gebruiker
                 {
                     if (table.Rows[5][1].ToString() == "Deze film draait niet op Zaterdag.")
                     {
-                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                         Thread.Sleep(1500);
                         Console.Clear();
                         GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
@@ -2085,7 +2080,7 @@ namespace Gebruiker
                 {
                     if (table.Rows[6][1].ToString() == "Deze film draait niet op Zondag.")
                     {
-                        Console.WriteLine("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
+                        Screens.CustomError("Voor de geselecteerde dag draait de film niet.\nProbeer het opnieuw.");
                         Thread.Sleep(1500);
                         Console.Clear();
                         GenreOptie(Show_films, DynamicFilmData, SearchedGenre);
@@ -2260,9 +2255,7 @@ namespace Gebruiker
             string UserInput = Console.ReadLine();
             while (UserInput != "1" && UserInput != "2")
             {
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.WriteLine("Dat is geen correcte input, gebruik een van de zwartgekleurde nummers als input.");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                Screens.ErrorMessageInput();
                 UserInput = Console.ReadLine();
             }
             if (UserInput == "1")
