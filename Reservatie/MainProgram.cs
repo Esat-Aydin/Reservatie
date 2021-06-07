@@ -115,15 +115,16 @@ namespace Cinema
 
         public static dynamic JsonSerializer(string Object)
         {
-            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
+            string FullPathSeats = Path.GetFullPath(@"Stoelkeuze.json");
             string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
             string FullPathSnacksDrinks = Path.GetFullPath(@"snacksdrinks.json");
             string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
 
+
             var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
-            string myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
-            string myUserData = new WebClient().DownloadString(FullPathsReservations);
-            string myRoomData = new WebClient().DownloadString(FullPathSeats);
+            var myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
+            var myUserData = new WebClient().DownloadString(FullPathsReservations);
+            var myRoomData = new WebClient().DownloadString(FullPathSeats);
 
 
 
