@@ -495,6 +495,7 @@ namespace Chair
         {
 
 
+
             var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
             string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
             string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
