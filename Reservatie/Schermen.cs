@@ -63,11 +63,7 @@ namespace Scherm
             {
                 if (isErrorPrinted == false)
                 {
-                    ConsoleCommands.Textkleur("rood");
-                    Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
-                    Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    ErrorMessageInput();
                     isErrorPrinted = true;
                 }
 
@@ -77,7 +73,6 @@ namespace Scherm
             }
 
             Klant.UserInputMethod(Start_options);
-            ConsoleCommands.Textkleur("wit"); Console.WriteLine("---------------------------------------------------------------------------------------------");
 
 
 
@@ -108,11 +103,7 @@ namespace Scherm
             {
                 if (isErrorPrinted == false)
                 {
-                    ConsoleCommands.Textkleur("rood");
-                    Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
-                    Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    ErrorMessageInput();
                     isErrorPrinted = true;
                 }
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -157,11 +148,7 @@ namespace Scherm
             {
                 if (isErrorPrinted == false)
                 {
-                    ConsoleCommands.Textkleur("rood");
-                    Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
-                    Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    ErrorMessageInput();
                     isErrorPrinted = true;
                 }
 
@@ -212,11 +199,7 @@ namespace Scherm
             {
                 if (isErrorPrinted == false)
                 {
-                    ConsoleCommands.Textkleur("rood");
-                    Console.Write("ERROR: "); ConsoleCommands.Textkleur("wit");
-                    Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    ErrorMessageInput();
                     isErrorPrinted = true;
                 }
                 Console.ForegroundColor = ConsoleColor.Black;

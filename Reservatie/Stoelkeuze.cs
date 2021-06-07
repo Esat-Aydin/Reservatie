@@ -176,7 +176,7 @@ namespace Chair
                 }
                 else
                 {
-                    Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    Screens.ErrorMessageInput();
                 }
             }
             
@@ -217,33 +217,25 @@ namespace Chair
                 if (this.chairsTaken.Contains(input)|| this.chairsTaken.Contains(differentinput))
 
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Deze stoelen zijn al gereservereerd");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("Deze stoelen zijn al gereservereerd");
                     i--;
                 }
 
                 else if (newChairs.Contains(differentinput)|| newChairs.Contains(input))
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine($"U heeft stoel al gekozen.");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("U heeft die stoel al gekozen!");
                     i--;
                 }
                 else if (input.Length == 1)
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Verkeerde input, probeer '0X'");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("Verkeerde input. Kies een rij (bijv. 1) en een stoel (bijv. A): 1A");
                     i--;
                 }
                 else if (input.Length == 2)
                 {
                     if((Letters.Contains("" + input[0]))&& (Letters.Contains("" + input[1])))
                     {
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Verkeerde input, probeer '0X'");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("Verkeerde input. Kies een rij (bijv. 1) en een stoel (bijv. A): 1A");
                         i--;
                     }
                     else if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1])))
@@ -349,9 +341,7 @@ namespace Chair
                     }
                     else
                     {
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Verkeerde input, probeer '0X'");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("Verkeerde input. Kies een rij (bijv. 1) en een stoel (bijv. A): 1A");
                         i--;
                     }
                 }
@@ -458,17 +448,13 @@ namespace Chair
                     }
                     else
                     {
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Verkeerde input, probeer '0X'");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("Verkeerde input. Kies een rij (bijv. 1) en een stoel (bijv. A): 1A");
                         i--;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Verkeerde input, probeer '0X'");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("Verkeerde input. Kies een rij (bijv. 1) en een stoel (bijv. A): 1A");
                     i--;
                 }
 

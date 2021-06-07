@@ -140,9 +140,9 @@ namespace SnackClass
             if (SnacksCheck(SnackName) == false)
             {
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.Write("\nWilt u "); ConsoleCommands.Textkleur("rood");Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" toevoegen \n\n[");
-                ConsoleCommands.Textkleur("zwart");Console.Write(1);ConsoleCommands.Textkleur("wit");Console.Write("] JA\n\n[");ConsoleCommands.Textkleur("zwart");Console.Write(2);
-                ConsoleCommands.Textkleur("wit");Console.Write("]NEE\n");
+                Console.Write("\nWilt u "); ConsoleCommands.Textkleur("rood");Console.Write(SnackName); ConsoleCommands.Textkleur("wit"); Console.Write(" toevoegen? \n\n[");
+                ConsoleCommands.Textkleur("zwart");Console.Write(1);ConsoleCommands.Textkleur("wit");Console.Write("] Ja\n[");ConsoleCommands.Textkleur("zwart");Console.Write(2);
+                ConsoleCommands.Textkleur("wit");Console.Write("]Nee\n");
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 string user_input = Console.ReadLine();
                 if (user_input == "1")
