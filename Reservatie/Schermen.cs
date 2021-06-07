@@ -255,5 +255,12 @@ namespace Scherm
                 Functions[2]();
             }
         }
+        public static void ErrorMessageInput()
+        {
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+            ConsoleCommands.Textkleur("rood"); Console.Write("\nERROR: "); ConsoleCommands.Textkleur("wit");
+            Console.Write("Verkeerde input! Probeer het nogmaals met een van de zwartgekleurde nummers als input.\n");
+            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+        }
     }
 }
