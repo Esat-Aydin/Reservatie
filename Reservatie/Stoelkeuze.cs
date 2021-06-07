@@ -41,7 +41,6 @@ namespace Chair
             var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
             string myUserData = new WebClient().DownloadString(FullPathsReservations);
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
             this.DynamicUserData = JsonConvert.DeserializeObject(myUserData);
 
             string myRoomData = new WebClient().DownloadString(@".\seats (2).json");
