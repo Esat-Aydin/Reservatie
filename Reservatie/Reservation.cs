@@ -318,12 +318,13 @@ namespace Reservation
                 table.AddRow("Toets [0] om terug te gaan", null, null, null, null);
                 table.Write(Format.Alternative); //Format veranderen ivm "Counter"
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
+                
                 
                 int choice;
                 bool loop = true;
                 while (loop)
                 {
+                    ConsoleCommands.Textkleur("zwart");
                     choice = Int32.Parse(Console.ReadLine());
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     try
@@ -332,23 +333,29 @@ namespace Reservation
                         {
                             Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
                         }
+                        else if (choice >= All_Films.Count+1)
+                        {
+                            Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        }
                         else if (choice >= 1 && choice <= All_Films.Count)
                         {
                             loop = false;
                             ConsoleCommands.Textkleur("wit");
                             Console.Write("U heeft gekozen voor de volgende film:\t"); ConsoleCommands.Textkleur("rood"); Console.WriteLine(All_Films[choice - 1]);
+                            Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                         }
                         else
                         {
                             Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         }
                     }
                     catch
                     {
                         Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
-            
-                    Klant.ZoekOptie(All_Films[choice - 1], DynamicFilmData);
                 }
 
             }

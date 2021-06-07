@@ -45,6 +45,7 @@ namespace Chair
 
             string myRoomData = new WebClient().DownloadString(FullPathSeats);
 
+
             this.DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
             this.Alphabet = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         }
@@ -61,7 +62,7 @@ namespace Chair
                 Console.WriteLine("\t\t\t\t\tVoor");
                 table.Write(Format.Alternative);
                 Console.WriteLine("\t\t\t\t\tAchter");
-                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("  'X' = al gereserveerde stoelen.  '-' = uw gekozen stoelen.  '+' = de aanbevolen stoelen");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             else if (room == 2)
@@ -75,7 +76,7 @@ namespace Chair
                 Console.WriteLine("\t\t\t\t\tVoor");
                 table.Write(Format.Alternative);
                 Console.WriteLine("\t\t\t\t\tAchter");
-                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("  'X' = al gereserveerde stoelen.  '-' = uw gekozen stoelen.  '+' = de aanbevolen stoelen");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             else
@@ -89,7 +90,7 @@ namespace Chair
                 Console.WriteLine("\t\t\t\t\tVoor");
                 table.Write(Format.Alternative);
                 Console.WriteLine("\t\t\t\t\tAchter");
-                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("  'X' = al gereserveerde stoelen.  '-' = uw gekozen stoelen.  '+' = de aanbevolen stoelen");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
 
@@ -117,7 +118,9 @@ namespace Chair
 
             if (input.Length == 2)
             {
-                for (int i = 0; i < howMany; i++)
+                newChairs[0] = input;
+                newData = changeAllData(newData, newChairs[0], "-");
+                for (int i = 1; i < howMany; i++)
                 {
                     newChairs[i] = "" + (Convert.ToInt32("" + input[0]) + i) + input[1];
                     if (this.chairsTaken.Contains(newChairs[i]))
@@ -126,12 +129,14 @@ namespace Chair
                         i--;
                         return Tuple.Create(newChairs, i, newData);
                     }
-                    newData = changeAllData(newData, newChairs[i], "-");
+                    newData = changeAllData(newData, newChairs[i], "+");
                 }
             }
             else
             {
-                for (int i = 0; i < howMany; i++)
+                newChairs[0] = input;
+                newData = changeAllData(newData, newChairs[0], "-");
+                for (int i = 1; i < howMany; i++)
                 {
                     newChairs[i] = "" + (Convert.ToInt32("" + input[0] + input[1]) + i) + input[2];
                     if (this.chairsTaken.Contains(newChairs[i]))
@@ -140,7 +145,7 @@ namespace Chair
                         i--;
                         return Tuple.Create(newChairs, i, newData);
                     }
-                    newData = changeAllData(newData, newChairs[i], "-");
+                    newData = changeAllData(newData, newChairs[i], "+");
                 }
             }
             /*
@@ -152,16 +157,21 @@ namespace Chair
             console(room, newData);
             string newinput;
             Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.WriteLine("Toets [1] om de aangeraden stoelen te kiezen.");
-            Console.WriteLine("Toets [2] om zelf stoelen te kiezen");
-            Console.WriteLine("Toets [3] om opnieuw uw stoel uit te kiezen");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] om de aangeraden stoelen te kiezen.\n");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om zelf uw stoelen te kiezen.\n");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] om opnieuw uw stoelen te kiezen.\n");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] om opnieuw uw hoeveelheid stoelen te kiezen.\n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             while (true)
             {
                 ConsoleCommands.Textkleur("zwart");
                 newinput = Console.ReadLine();
                 ConsoleCommands.Textkleur("wit");
-                if (newinput == "1")
+                if (newinput == "0")
+                {
+                    this.Chair();
+                }
+                else if (newinput == "1")
                 {
                     return Tuple.Create(newChairs, howMany, newData);
                 }
@@ -235,7 +245,7 @@ namespace Chair
                         }
                         console(room, newAllData);
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in type '0' om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                 }
@@ -316,7 +326,7 @@ namespace Chair
                             console(room, newAllData);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in type '0' om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if (Letters.Contains("" + input[1]) && Numbers.Contains(Convert.ToInt32("" + input[0])))
@@ -365,7 +375,7 @@ namespace Chair
                             console(room, newAllData);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in type '0' om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input);
                         //console(room, newData);
@@ -427,7 +437,7 @@ namespace Chair
                             console(room, newAllData);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in type '0' om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                     }
                     else if (Letters.Contains("" + input[2]) && Numbers.Contains(Convert.ToInt32("" + input[0] + input[1])))
@@ -476,7 +486,7 @@ namespace Chair
                             console(room, newAllData);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Type nu de volgende stoel in type '0' om terug te gaan.");
+                        Console.WriteLine("Type nu de volgende stoel in of type '0' om terug te gaan.");
                         Console.WriteLine("_____________________________________________________________________________________________\n");
                         //var newData = changeAllData(AllData, input, "-");
                     }
@@ -531,6 +541,7 @@ namespace Chair
             string myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
             string myUserData = new WebClient().DownloadString(FullPathsReservations);
             string myRoomData = new WebClient().DownloadString(FullPathSeats);
+
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
@@ -603,7 +614,7 @@ namespace Chair
             ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, chosenChairs, room);
 
 
-            //kleuren fixen en stoel ipv stoelen
+
         }
     }
 }
