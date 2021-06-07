@@ -33,11 +33,13 @@ namespace Film
         public void AddObject(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
             List<Film> _data = new();
-            var FilmDataJson = File.ReadAllText(@".\AccountUsers.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+            string FullPathReservations = Path.GetFullPath("Filmsdata.json");
+            Console.WriteLine(FullPathReservations);
+            var FilmDataJson = File.ReadAllText("Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
             var FilmObjectJson = JsonConvert.DeserializeObject<List<Film>>(FilmDataJson);
             FilmObjectJson.Add(FilmObject);
             FilmDataJson = JsonConvert.SerializeObject(FilmObjectJson);
-            File.WriteAllText(@".\AccountUsers.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
+            File.WriteAllText("Filmsdata.json", FilmDataJson); // Net als FilmDataJson de path veranderen als je hier errors krijgt!
         }
         public void Film_check(dynamic DynamicFilmData, int i)
         {
@@ -46,8 +48,8 @@ namespace Film
         }
         public bool Film_check2(string FilmName)
         {
-
-            string myJsonString = new WebClient().DownloadString(@".\Filmsdata.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(FullPathFilms);
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             for (int i = 0; i < DynamicData.Count; i++)
             {
@@ -89,7 +91,8 @@ namespace Film
         }
         public virtual void RemoveObject(string ObjectName)
         {
-            string myJsonString = new WebClient().DownloadString(@".\Filmsdata.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string myJsonString = new WebClient().DownloadString(FullPathFilms);
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             int Index = 0;
             for (int i = 0; i < DynamicData.Count; i++)
@@ -101,7 +104,7 @@ namespace Film
                     Index = i;
                     DynamicData.Remove(DynamicData[Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
-                    File.WriteAllText(@".\Filmsdata.json", UserData);
+                    File.WriteAllText(FullPathFilms, UserData);
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n");
                     Console.Write("\nFilm "); ConsoleCommands.Textkleur("rood"); Console.Write(ObjectName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n"); ConsoleCommands.Textkleur("zwart");
