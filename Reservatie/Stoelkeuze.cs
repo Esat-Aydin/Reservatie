@@ -159,7 +159,7 @@ namespace Chair
             string newinput;
             Console.WriteLine("_____________________________________________________________________________________________\n");
             Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] om de aangeraden stoelen te kiezen.\n");
-            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om zelf uw stoelen te kiezen.\n");
+            Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] om zelf handmatig uw stoelen te kiezen.\n");
             Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] om opnieuw uw stoelen te kiezen.\n");
             Console.Write("Toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] om opnieuw uw hoeveelheid stoelen te kiezen.\n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
