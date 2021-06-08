@@ -26,7 +26,7 @@
     <None Update="Filmsdata.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SampleLog.json">
+    <None Update="samplelog.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="snacksdrinks.json">
@@ -41,7 +41,7 @@
     <None Update="Filmsdata.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SampleLog.json">
+    <None Update="samplelog.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="snacksdrinks.json">
