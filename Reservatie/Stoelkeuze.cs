@@ -192,7 +192,7 @@ namespace Chair
                 }
                 else
                 {
-                    Console.WriteLine("Verkeerde input, probeer het opnieuw");
+                    Screens.CustomError("U kunt alleen een getal kiezen tussen de 0 en 4! Probeer het opnieuw:");
                 }
             }
 
@@ -252,32 +252,24 @@ namespace Chair
                 }
                 else if (this.chairsTaken.Contains(input) || this.chairsTaken.Contains(differentinput))
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Deze stoelen zijn al gereservereerd");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("Deze stoel is al gereserveerd! Probeer het opnieuw:");
                     i--;
                 }
                 else if (newChairs.Contains(differentinput) || newChairs.Contains(input))
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine($"U heeft stoel al gekozen.");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("U heeft deze stoel al gekozen! Probeer het opnieuw:");
                     i--;
                 }
                 else if (input.Length == 1)
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Verkeerde input, probeer '0X'");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("U kunt een stoel opgeven met formaat: '0X'! Probeer het opnieuw:");
                     i--;
                 }
                 else if (input.Length == 2)
                 {
                     if ((Letters.Contains("" + input[0])) && (Letters.Contains("" + input[1])))
                     {
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Verkeerde input, probeer '0X'");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("U kunt een stoel opgeven met formaat: '0X'! Probeer het opnieuw:");
                         i--;
                     }
                     else if (Letters.Contains("" + input[0]) && Numbers.Contains(Convert.ToInt32("" + input[1])))
@@ -383,9 +375,7 @@ namespace Chair
                     }
                     else
                     {
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Verkeerde input, probeer '0X'");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("U kunt een stoel opgeven met formaat: '0X'! Probeer het opnieuw:");
                         i--;
                     }
                 }
@@ -493,17 +483,13 @@ namespace Chair
                     }
                     else
                     {
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Verkeerde input, probeer '0X'");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("U kunt een stoel opgeven met formaat: '0X'! Probeer het opnieuw:");
                         i--;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Verkeerde input, probeer '0X'");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("U kunt een stoel opgeven met formaat: '0X'! Probeer het opnieuw:");
                     i--;
                 }
 
