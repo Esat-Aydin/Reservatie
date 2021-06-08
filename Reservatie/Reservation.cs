@@ -325,10 +325,10 @@ namespace Reservation
                 bool loop = true;
                 while (loop)
                 {
-                    choice = Int32.Parse(Console.ReadLine());
                     
                     try
                     {
+                        choice = Int32.Parse(Console.ReadLine());
                         if (choice.ToString() == "0")
                         {
                             Scherm.Screens.ReturnToPreviousScreen("ReserveringMaken");
