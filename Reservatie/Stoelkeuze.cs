@@ -147,9 +147,9 @@ namespace Chair
             console(room, newData);
             string newinput;
             Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.WriteLine("Toets [1] om de aangeraden stoelen te kiezen.");
-            Console.WriteLine("Toets [2] om zelf stoelen te kiezen");
-            Console.WriteLine("Toets [3] om opnieuw uw stoel uit te kiezen");
+            Screens.KeuzeLine(1, "Automatisch aangeraden stoelen kiezen");
+            Screens.KeuzeLine(2, "Zelf handmatig stoelen kiezen");
+            Screens.KeuzeLine(3, "Opnieuw een stoel uitkiezen\n");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             while (true)
             {
