@@ -28,6 +28,7 @@ namespace Chair
         public string[] Alphabet;
         public string[][] AllData;
         public string[] chairsTaken;
+        public int hoeveelstoelen;
 
         public StoelKeuze(string Naam, string datum = null, string tijd = null)
         {
@@ -36,7 +37,7 @@ namespace Chair
             this.Tijd = tijd;
             string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
             string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
-            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
+            string FullPathSeats = Path.GetFullPath(@"Stoelkeuze.json");
             var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
             string myUserData = new WebClient().DownloadString(FullPathsReservations);
             this.DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
@@ -533,21 +534,6 @@ namespace Chair
         {
 
 
-            string FullPathSeats = Path.GetFullPath(@"Stoelenuser.json");
-            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
-            string FullPathSnacksDrinks = Path.GetFullPath(@"snacksdrinks.json");
-            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
-            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
-            string myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
-            string myUserData = new WebClient().DownloadString(FullPathsReservations);
-            string myRoomData = new WebClient().DownloadString(FullPathSeats);
-
-            dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
-            dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
-            dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
-            dynamic DynamicRoomData = JsonConvert.DeserializeObject(myRoomData);
-
-
             List<string> chairs = new List<string>();
             // From here
             var room = this.DynamicFilmData[0]["FilmRoom"];
@@ -599,7 +585,33 @@ namespace Chair
             Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
             Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
-            int stoelen = Int32.Parse(Console.ReadLine());
+            bool stoelenloop = true;
+            while (stoelenloop)
+            {
+                try
+                {
+                    ConsoleCommands.Textkleur("zwart");
+                    this.hoeveelstoelen = Int32.Parse(Console.ReadLine());
+                    if (this.hoeveelstoelen > 8 || this.hoeveelstoelen < 1)
+                    {
+                        ConsoleCommands.Textkleur("wit");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Error. Geef hier het aantal stoelen aan van 1-8");
+                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                    }
+                    else 
+                    {
+                        stoelenloop = false;
+                    }
+                }
+                catch
+                {
+                    ConsoleCommands.Textkleur("wit");
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Console.WriteLine("Error. Geef hier het aantal stoelen aan van 1-8");
+                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                }
+            }
             // Table needs to be somewhat dynamic
             ConsoleCommands.Textkleur("wit");
             console(room, AllData);
@@ -607,8 +619,7 @@ namespace Chair
             Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
-
-            var chosenChairs = WhatChairs(stoelen, room);
+            var chosenChairs = WhatChairs(this.hoeveelstoelen, room);
             room = ("" + room);
             Thread.Sleep(2000);
             ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, chosenChairs, room);
