@@ -70,69 +70,70 @@ namespace Gebruiker
             string TitleofFilm = null;
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
             ConsoleCommands.Textkleur("wit");
-
-            if (UserInput == "0")
+            while (true)
             {
-                Scherm.Screens.AdminOrUserScreen();
-            }
-            if (UserInput.ToLower() == "help")
-            {
-
-                AdminCommands();
-            }
-            if (UserInput == "1")
-
-            {
-                Scherm.Screens.CinemaBanner();
-                Console.WriteLine("\t\t\t FILM TOEVOEGEN");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                Console.WriteLine("Hoeveel genre's heeft de nieuwe film? Er is een maximum van drie genre's!");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-                var StringArrayGenreLength_Input = Console.ReadLine();
-                try
+                if (UserInput == "0")
                 {
-                    int StringArrayGenreLength = Int32.Parse(StringArrayGenreLength_Input);
-                    string[] FilmGenresArray = new string[StringArrayGenreLength];
+                    Scherm.Screens.AdminOrUserScreen();
+                }
+                if (UserInput.ToLower() == "help")
+                {
+
+                    AdminCommands();
+                }
+                if (UserInput == "1")
+
+                {
                     Scherm.Screens.CinemaBanner();
                     Console.WriteLine("\t\t\t FILM TOEVOEGEN");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (StringArrayGenreLength == 1)
+                    Console.WriteLine("Hoeveel genre's heeft de nieuwe film? Er is een maximum van drie genre's!");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("zwart");
+                    var StringArrayGenreLength_Input = Console.ReadLine();
+                    try
                     {
+                        int StringArrayGenreLength = Int32.Parse(StringArrayGenreLength_Input);
+                        string[] FilmGenresArray = new string[StringArrayGenreLength];
+                        Scherm.Screens.CinemaBanner();
+                        Console.WriteLine("\t\t\t FILM TOEVOEGEN");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("U kunt kiezen uit de volgende genres: "); ConsoleCommands.Textkleur("rood"); Console.Write("\n1. Action \n2. Comedy \n3. Thriller \n4. Romantic \n5. Horror \n6. Drama\n\n"); ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("Voer nu de genre van de film in: "); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        FilmGenresArray[0] = Console.ReadLine();
+                        if (StringArrayGenreLength == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("U kunt kiezen uit de volgende genres: "); ConsoleCommands.Textkleur("rood"); Console.Write("\n1. Action \n2. Comedy \n3. Thriller \n4. Romantic \n5. Horror \n6. Drama\n\n"); ConsoleCommands.Textkleur("wit");
+                            Console.WriteLine("Voer nu de genre van de film in: "); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            FilmGenresArray[0] = Console.ReadLine();
 
-                    }
-                    else if (StringArrayGenreLength == 2)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Voer nu de eerste genre van de film in:");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        FilmGenresArray[0] = Console.ReadLine();
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Voer nu de tweede genre van de film in:");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        FilmGenresArray[1] = Console.ReadLine();
-                    }
-                    else if (StringArrayGenreLength == 3)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Voer nu de eerste genre van de film in:");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        FilmGenresArray[0] = Console.ReadLine();
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Voer nu de tweede genre van de film in:");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        FilmGenresArray[1] = Console.ReadLine();
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Voer nu de derde genre van de film in:");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        FilmGenresArray[2] = Console.ReadLine();
-                    }
-                    //-Dictionary met alle genres-//
-                    Dictionary<string, string> DictOfGenres = new Dictionary<string, string>()
+                        }
+                        else if (StringArrayGenreLength == 2)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("Voer nu de eerste genre van de film in:");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            FilmGenresArray[0] = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("Voer nu de tweede genre van de film in:");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            FilmGenresArray[1] = Console.ReadLine();
+                        }
+                        else if (StringArrayGenreLength == 3)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("Voer nu de eerste genre van de film in:");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            FilmGenresArray[0] = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("Voer nu de tweede genre van de film in:");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            FilmGenresArray[1] = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("Voer nu de derde genre van de film in:");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            FilmGenresArray[2] = Console.ReadLine();
+                        }
+                        //-Dictionary met alle genres-//
+                        Dictionary<string, string> DictOfGenres = new Dictionary<string, string>()
                         {
                             {"1", "Action"},
                             {"2", "Comedy"},
@@ -141,95 +142,49 @@ namespace Gebruiker
                             {"5", "Horror"},
                             {"6", "Drama" }
                         };
-                    //---------------------------// Moet nog worden ingecodeerd in de code hieronder //
+                        //---------------------------// Moet nog worden ingecodeerd in de code hieronder //
 
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Voer nu de titel van de nieuwe film in:");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    TitleofFilm = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Voer nu de zaal in van de film " + TitleofFilm + ": ");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Voer nu de titel van de nieuwe film in:");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        TitleofFilm = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Voer nu de zaal in van de film " + TitleofFilm + ": ");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
-                    var FilmZaalInput = Console.ReadLine(); int RoomofFilm = Int32.Parse(FilmZaalInput); // Userinput (string) word hier verandert naar een int variabel
+                        var FilmZaalInput = Console.ReadLine(); int RoomofFilm = Int32.Parse(FilmZaalInput); // Userinput (string) word hier verandert naar een int variabel
 
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Voer nu de gewenste dag in"); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart");
-                    var dag_UserInput = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Hoeveel tijdssloten wilt u beschikbaar stellen per dag? (maximaal 3): ");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    try
-                    {
-                        var tijdsSlotenInput = Console.ReadLine();
-                        int TimeSlots = Int32.Parse(tijdsSlotenInput); // Userinput (string) word hier verandert naar een int variabel
-                        string[] FilmTimesArray = new string[TimeSlots];
-                        var listoftimes1 = new List<string>();
-
-                        var listoftimes2 = new List<string>();
-
-                        var listoftimes3 = new List<string>();
-
-                        var listoftimes4 = new List<string>();
-
-                        var listoftimes5 = new List<string>();
-
-                        var listoftimes6 = new List<string>();
-
-                        var listoftimes7 = new List<string>();
-
-
-
-                        if (TimeSlots == 1)
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Voer nu de gewenste dag in"); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        ConsoleCommands.Textkleur("zwart");
+                        var dag_UserInput = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Hoeveel tijdssloten wilt u beschikbaar stellen per dag? (maximaal 3): ");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        try
                         {
-                            Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
-                        {
-                            {"Maandag", listoftimes1},
-                            {"Dinsdag", listoftimes2 },
-                            {"Woensdag", listoftimes3},
-                            {"Donderdag", listoftimes4},
-                            {"Vrijdag", listoftimes5},
-                            {"Zaterdag", listoftimes6},
-                            {"Zondag", listoftimes7}
-                        };
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("Voer nu de tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("zwart");
+                            var tijdsSlotenInput = Console.ReadLine();
+                            int TimeSlots = Int32.Parse(tijdsSlotenInput); // Userinput (string) word hier verandert naar een int variabel
+                            string[] FilmTimesArray = new string[TimeSlots];
+                            var listoftimes1 = new List<string>();
 
-                            FilmTimesArray[0] = Console.ReadLine();
-                            if (dag_UserInput == "Maandag")
-                                DictOf["Maandag"].Add(FilmTimesArray[0]);
-                            else if (dag_UserInput == "Dinsdag")
-                                DictOf["Dinsdag"].Add(FilmTimesArray[0]);
-                            else if (dag_UserInput == "Woensdag")
-                                DictOf["Woensdag"].Add(FilmTimesArray[0]);
-                            else if (dag_UserInput == "Donderdag")
-                                DictOf["Donderdag"].Add(FilmTimesArray[0]);
-                            else if (dag_UserInput == "Vrijdag")
-                                DictOf["Vrijdag"].Add(FilmTimesArray[0]);
-                            else if (dag_UserInput == "Zaterdag")
-                                DictOf["Zaterdag"].Add(FilmTimesArray[0]);
-                            else
+                            var listoftimes2 = new List<string>();
+
+                            var listoftimes3 = new List<string>();
+
+                            var listoftimes4 = new List<string>();
+
+                            var listoftimes5 = new List<string>();
+
+                            var listoftimes6 = new List<string>();
+
+                            var listoftimes7 = new List<string>();
+
+
+
+                            if (TimeSlots == 1)
                             {
-                                DictOf["Zondag"].Add(FilmTimesArray[0]);
-                            }
-                            // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
-                            // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
-                            FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
-                            FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                            //-------------------------------------------------------------------------------------------------------------------------//
-                            // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
-                            UserInput = Console.ReadLine();
-                            UserInputMethod(UserInput);
-                        }
-                        else if (TimeSlots == 2)
-                        {
-                            Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
+                                Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
                         {
                             {"Maandag", listoftimes1},
                             {"Dinsdag", listoftimes2 },
@@ -239,60 +194,43 @@ namespace Gebruiker
                             {"Zaterdag", listoftimes6},
                             {"Zondag", listoftimes7}
                         };
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("wit");
-                            Console.WriteLine("Voer nu de eerste tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("zwart");
-                            FilmTimesArray[0] = Console.ReadLine();
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("Voer nu de tweede tijd van de film in: ");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("zwart");
-                            FilmTimesArray[1] = Console.ReadLine();
-                            if (dag_UserInput == "Maandag")
-                            {
-                                DictOf["Maandag"].Add(FilmTimesArray[0]); DictOf["Maandag"].Add(FilmTimesArray[1]);
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("Voer nu de tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
+
+                                FilmTimesArray[0] = Console.ReadLine();
+                                if (dag_UserInput == "Maandag")
+                                    DictOf["Maandag"].Add(FilmTimesArray[0]);
+                                else if (dag_UserInput == "Dinsdag")
+                                    DictOf["Dinsdag"].Add(FilmTimesArray[0]);
+                                else if (dag_UserInput == "Woensdag")
+                                    DictOf["Woensdag"].Add(FilmTimesArray[0]);
+                                else if (dag_UserInput == "Donderdag")
+                                    DictOf["Donderdag"].Add(FilmTimesArray[0]);
+                                else if (dag_UserInput == "Vrijdag")
+                                    DictOf["Vrijdag"].Add(FilmTimesArray[0]);
+                                else if (dag_UserInput == "Zaterdag")
+                                    DictOf["Zaterdag"].Add(FilmTimesArray[0]);
+                                else
+                                {
+                                    DictOf["Zondag"].Add(FilmTimesArray[0]);
+                                }
+                                // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
+                                // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
+                                FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
+                                FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                                //-------------------------------------------------------------------------------------------------------------------------//
+                                // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
+                                UserInput = Console.ReadLine();
+                                UserInputMethod(UserInput);
                             }
-                            else if (dag_UserInput == "Dinsdag")
+                            else if (TimeSlots == 2)
                             {
-                                DictOf["Dinsdag"].Add(FilmTimesArray[0]); DictOf["Dinsdag"].Add(FilmTimesArray[1]);
-                            }
-                            else if (dag_UserInput == "Woensdag")
-                            {
-                                DictOf["Woensdag"].Add(FilmTimesArray[0]); DictOf["Woensdag"].Add(FilmTimesArray[1]);
-                            }
-                            else if (dag_UserInput == "Donderdag")
-                            {
-                                DictOf["Donderdag"].Add(FilmTimesArray[0]); DictOf["Donderdag"].Add(FilmTimesArray[1]);
-                            }
-                            else if (dag_UserInput == "Vrijdag")
-                            {
-                                DictOf["Vrijdag"].Add(FilmTimesArray[0]); DictOf["Vrijdag"].Add(FilmTimesArray[1]);
-                            }
-                            else if (dag_UserInput == "Zaterdag")
-                            {
-                                DictOf["Zaterdag"].Add(FilmTimesArray[0]); DictOf["Zaterdag"].Add(FilmTimesArray[1]);
-                            }
-                            else
-                            {
-                                DictOf["Zondag"].Add(FilmTimesArray[0]); DictOf["Zondag"].Add(FilmTimesArray[1]);
-                            }
-                            // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
-                            // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
-                            FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
-                            FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                            //-------------------------------------------------------------------------------------------------------------------------//
-                            // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
-                            UserInput = Console.ReadLine();
-                            UserInputMethod(UserInput);
-                        }
-                        else if (TimeSlots == 3)
-                        {
-                            Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
+                                Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
                         {
                             {"Maandag", listoftimes1},
                             {"Dinsdag", listoftimes2 },
@@ -302,556 +240,618 @@ namespace Gebruiker
                             {"Zaterdag", listoftimes6},
                             {"Zondag", listoftimes7}
                         };
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("Voer nu de eerste tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("zwart");
-                            FilmTimesArray[0] = Console.ReadLine();
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("Voer nu de tweede tijd van de film in: ");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("zwart");
-                            FilmTimesArray[1] = Console.ReadLine();
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("Voer nu de derde tijd van de film in: ");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            ConsoleCommands.Textkleur("zwart");
-                            FilmTimesArray[2] = Console.ReadLine();
-                            if (dag_UserInput == "Maandag")
-                            {
-                                DictOf["Maandag"].Add(FilmTimesArray[0]); DictOf["Maandag"].Add(FilmTimesArray[1]); DictOf["Maandag"].Add(FilmTimesArray[2]);
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("wit");
+                                Console.WriteLine("Voer nu de eerste tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
+                                FilmTimesArray[0] = Console.ReadLine();
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("Voer nu de tweede tijd van de film in: ");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
+                                FilmTimesArray[1] = Console.ReadLine();
+                                if (dag_UserInput == "Maandag")
+                                {
+                                    DictOf["Maandag"].Add(FilmTimesArray[0]); DictOf["Maandag"].Add(FilmTimesArray[1]);
+                                }
+                                else if (dag_UserInput == "Dinsdag")
+                                {
+                                    DictOf["Dinsdag"].Add(FilmTimesArray[0]); DictOf["Dinsdag"].Add(FilmTimesArray[1]);
+                                }
+                                else if (dag_UserInput == "Woensdag")
+                                {
+                                    DictOf["Woensdag"].Add(FilmTimesArray[0]); DictOf["Woensdag"].Add(FilmTimesArray[1]);
+                                }
+                                else if (dag_UserInput == "Donderdag")
+                                {
+                                    DictOf["Donderdag"].Add(FilmTimesArray[0]); DictOf["Donderdag"].Add(FilmTimesArray[1]);
+                                }
+                                else if (dag_UserInput == "Vrijdag")
+                                {
+                                    DictOf["Vrijdag"].Add(FilmTimesArray[0]); DictOf["Vrijdag"].Add(FilmTimesArray[1]);
+                                }
+                                else if (dag_UserInput == "Zaterdag")
+                                {
+                                    DictOf["Zaterdag"].Add(FilmTimesArray[0]); DictOf["Zaterdag"].Add(FilmTimesArray[1]);
+                                }
+                                else
+                                {
+                                    DictOf["Zondag"].Add(FilmTimesArray[0]); DictOf["Zondag"].Add(FilmTimesArray[1]);
+                                }
+                                // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
+                                // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
+                                FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
+                                FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                                //-------------------------------------------------------------------------------------------------------------------------//
+                                // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
+                                UserInput = Console.ReadLine();
+                                UserInputMethod(UserInput);
                             }
-                            else if (dag_UserInput == "Dinsdag")
+                            else if (TimeSlots == 3)
                             {
-                                DictOf["Dinsdag"].Add(FilmTimesArray[0]); DictOf["Dinsdag"].Add(FilmTimesArray[1]); DictOf["Dinsdag"].Add(FilmTimesArray[2]);
+                                Dictionary<string, List<string>> DictOf = new Dictionary<string, List<string>>()
+                        {
+                            {"Maandag", listoftimes1},
+                            {"Dinsdag", listoftimes2 },
+                            {"Woensdag", listoftimes3},
+                            {"Donderdag", listoftimes4},
+                            {"Vrijdag", listoftimes5},
+                            {"Zaterdag", listoftimes6},
+                            {"Zondag", listoftimes7}
+                        };
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("Voer nu de eerste tijd van de film in (met de format UU:MM, voorbeeld: 12:15): ");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
+                                FilmTimesArray[0] = Console.ReadLine();
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("Voer nu de tweede tijd van de film in: ");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
+                                FilmTimesArray[1] = Console.ReadLine();
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("Voer nu de derde tijd van de film in: ");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                ConsoleCommands.Textkleur("zwart");
+                                FilmTimesArray[2] = Console.ReadLine();
+                                if (dag_UserInput == "Maandag")
+                                {
+                                    DictOf["Maandag"].Add(FilmTimesArray[0]); DictOf["Maandag"].Add(FilmTimesArray[1]); DictOf["Maandag"].Add(FilmTimesArray[2]);
+                                }
+                                else if (dag_UserInput == "Dinsdag")
+                                {
+                                    DictOf["Dinsdag"].Add(FilmTimesArray[0]); DictOf["Dinsdag"].Add(FilmTimesArray[1]); DictOf["Dinsdag"].Add(FilmTimesArray[2]);
+                                }
+                                else if (dag_UserInput == "Woensdag")
+                                {
+                                    DictOf["Woensdag"].Add(FilmTimesArray[0]); DictOf["Woensdag"].Add(FilmTimesArray[1]); DictOf["Woensdag"].Add(FilmTimesArray[2]);
+                                }
+                                else if (dag_UserInput == "Donderdag")
+                                {
+                                    DictOf["Donderdag"].Add(FilmTimesArray[0]); DictOf["Donderdag"].Add(FilmTimesArray[1]); DictOf["Donderdag"].Add(FilmTimesArray[2]);
+                                }
+                                else if (dag_UserInput == "Vrijdag")
+                                {
+                                    DictOf["Vrijdag"].Add(FilmTimesArray[0]); DictOf["Vrijdag"].Add(FilmTimesArray[1]); DictOf["Vrijdag"].Add(FilmTimesArray[2]);
+                                }
+                                else if (dag_UserInput == "Zaterdag")
+                                {
+                                    DictOf["Zaterdag"].Add(FilmTimesArray[0]); DictOf["Zaterdag"].Add(FilmTimesArray[1]); DictOf["Zaterdag"].Add(FilmTimesArray[2]);
+                                }
+                                else
+                                {
+                                    DictOf["Zondag"].Add(FilmTimesArray[0]); DictOf["Zondag"].Add(FilmTimesArray[1]); DictOf["Zondag"].Add(FilmTimesArray[2]);
+                                }
+                                // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
+                                // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
+                                FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
+                                FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
+                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                                //-------------------------------------------------------------------------------------------------------------------------//
+                                // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
+                                UserInput = Console.ReadLine();
+                                UserInputMethod(UserInput);
                             }
-                            else if (dag_UserInput == "Woensdag")
-                            {
-                                DictOf["Woensdag"].Add(FilmTimesArray[0]); DictOf["Woensdag"].Add(FilmTimesArray[1]); DictOf["Woensdag"].Add(FilmTimesArray[2]);
-                            }
-                            else if (dag_UserInput == "Donderdag")
-                            {
-                                DictOf["Donderdag"].Add(FilmTimesArray[0]); DictOf["Donderdag"].Add(FilmTimesArray[1]); DictOf["Donderdag"].Add(FilmTimesArray[2]);
-                            }
-                            else if (dag_UserInput == "Vrijdag")
-                            {
-                                DictOf["Vrijdag"].Add(FilmTimesArray[0]); DictOf["Vrijdag"].Add(FilmTimesArray[1]); DictOf["Vrijdag"].Add(FilmTimesArray[2]);
-                            }
-                            else if (dag_UserInput == "Zaterdag")
-                            {
-                                DictOf["Zaterdag"].Add(FilmTimesArray[0]); DictOf["Zaterdag"].Add(FilmTimesArray[1]); DictOf["Zaterdag"].Add(FilmTimesArray[2]);
-                            }
-                            else
-                            {
-                                DictOf["Zondag"].Add(FilmTimesArray[0]); DictOf["Zondag"].Add(FilmTimesArray[1]); DictOf["Zondag"].Add(FilmTimesArray[2]);
-                            }
-                            // Hier worden de FilmObject attributes verandert naar de values die net zijn doorgevoerd in de console door de admin-user //
-                            // this.FilmGenres = FilmGenresArray; this.FilmTitle = TitleofFilm; this.FilmTimes = FilmTimesArray; this.FilmRoom = RoomofFilm;
-                            FilmObject = new Film.Film(FilmGenresArray, TitleofFilm, RoomofFilm, FilmTimesArray, DictOf);
-                            FilmObject.AddObject(FilmObject); // Dit voegt het object toe aan de Json file
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            Console.WriteLine("De film: " + FilmObject.FilmTitle + " is succesvol toegevoegd aan de database.");
-                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                            //-------------------------------------------------------------------------------------------------------------------------//
-                            // Nu wordt de volgende console input gecheckt door de UserInputMethod() function te callen // 
-                            UserInput = Console.ReadLine();
-                            UserInputMethod(UserInput);
                         }
+                        catch
+                        {
+                            Scherm.Screens.CustomError("U moet een getal invoeren!");
+                        }
+
                     }
                     catch
                     {
                         Scherm.Screens.CustomError("U moet een getal invoeren!");
                     }
 
+
+
                 }
-                catch
-                {
-                    Scherm.Screens.CustomError("U moet een getal invoeren!");
-                }
-
-
-
-            }
-            if (UserInput == "2")
-            {
-                Scherm.Screens.CinemaBanner();
-                ConsoleCommands.Textkleur("wit");
-                Console.Write("\t\t\tHieronder vind u een lijst met alle films: \n\n\t\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                ConsoleCommands.Textkleur("zwart");
-
-                var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
-                dynamic genres = DynamicFilmData[0]["FilmGenres"];
-                List<string> All_Films = new List<string>();
-                var zaal = DynamicFilmData[0]["FilmRoom"];
-                for (int i = 0; i < DynamicFilmData.Count; i++)
-                {
-                    All_Films.Add(DynamicFilmData[i]["FilmTitle"].ToString()); //Lijst aangemaakt met alle films
-                    All_Films.Sort(); //Lijst met films gesorteerd
-                }
-                ConsoleCommands.Textkleur("wit");
-                for (int i = 0; i < DynamicFilmData.Count; i++)
-                {
-
-                    for (int j = 0; j < DynamicFilmData.Count; j++)
-                    {
-                        if (All_Films[i] == DynamicFilmData[j]["FilmTitle"].ToString())
-                        {
-                            genres = DynamicFilmData[j]["FilmGenres"]; //Juiste genres zoeken bij de films
-                            zaal = DynamicFilmData[j]["FilmRoom"]; //Juiste zaal zoeken bij de films
-                            table.AddRow($"Toets [{i + 1}] voor {All_Films[i]}", genres[0], genres[1], genres[2], zaal); //Tabel invullen met juiste data
-                        }
-                    }
-                }
-                table.Write(Format.Alternative); //Format veranderen ivm "Counter"
-                Console.WriteLine("Toets de nummer in van de film die u wilt verwijderen");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                bool x = true;
-                while (x == true)
-                {
-                    ConsoleCommands.Textkleur("zwart"); string delete_movie = Console.ReadLine();
-                    int int_movie;
-                    bool Bool = false;
-
-                    while (Bool == false)
-                    {
-                        if (Int32.TryParse(delete_movie, out int_movie) & int_movie < All_Films.Count)
-                        {
-                            delete_movie = All_Films[int_movie - 1];
-                            Bool = true;
-                        }
-                        else
-                        {
-                            Scherm.Screens.CustomError("We hebben die Film niet kunnen vinden. Probeer het opnieuw.");
-                            Bool = true;
-                        }
-                    }
-
-
-                    if (FilmObject.Film_check2(delete_movie) == true)
-                    {
-                        FilmObject.RemoveObject(delete_movie);
-                        x = false;
-                    }
-                    /*                    else
-                                        {
-                                            Console.WriteLine("Film niet kunnen vinden");
-                                            Console.WriteLine("Probeer het alstublieft opnieuw");
-                                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                                        }*/
-                }
-            }
-            if (UserInput == "3")
-
-            {
-                while (true)
+                if (UserInput == "2")
                 {
                     Scherm.Screens.CinemaBanner();
-                    Console.WriteLine("\t\t\t RESERVERINGEN BEKIJKEN");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                    var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
-
-                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
-
-                    Console.WriteLine("Hieronder vind u de lijst van alle reserveringen.");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum", "Tijd", "Zaal");
-                    int AantalReserveringen = 0;
-                    for (int i = 0; i < AlleReserveringen.Count; i++)
-                    {
-                        table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"], AlleReserveringen[i]["FilmTime"], AlleReserveringen[i]["Zaal"]);
-                        AantalReserveringen++;
-                    }
-                    table.Write(Format.Alternative);
-                    if (AantalReserveringen == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr is "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reservering.\n");
-                    }
-                    else if (AantalReserveringen == 0)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr zijn geen reserveringen.\n");
-
-                    }
-                    else
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr zijn "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reserveringen.\n");
-
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
-                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (input == "1")
-                    {
-                        AnnulerenAdmin(AlleReserveringen);
-                    }
-                    if (input == "0")
-                    {
-                        Console.Clear();
-                        Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-                        Environment.Exit(1);
-                    }
-                    else
-                    {
-                        Scherm.Screens.ErrorMessageInput();
-                        Thread.Sleep(2000);
-                    }
-                }
-            }
-            if (UserInput == "4")
-            {
-                while (true)
-                {
-                    Scherm.Screens.CinemaBanner();
-                    Console.WriteLine("\t\t\t BIOSCOOP ZALEN");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                    var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
-
-                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
-                    for (int i = 1; i < 4; i++)
-                    {
-                        Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(i); ConsoleCommands.Textkleur("wit"); Console.Write("] voor zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(i + "\n"); ConsoleCommands.Textkleur("wit");
-                    }
-                    int x = 0;
-                    bool CorrectInput = false;
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    string Input = Console.ReadLine();
-                    var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    int AantalReserveringen = 0;
-                    while (CorrectInput != true)
-                    {
-                        if (Int32.TryParse(Input, out x))
-                        {
-                            if (x > 0 && x < 4)
-                            {
-                                Scherm.Screens.CinemaBanner();
-                                Console.WriteLine($"Hieronder vind u de lijst van alle reserveringen voor zaal {x}.");
-                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                                for (int i = 0; i < AlleReserveringen.Count; i++)
-                                {
-                                    if (AlleReserveringen[i]["Zaal"] == x.ToString())
-                                    {
-                                        AantalReserveringen++;
-                                        table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"]);
-                                    }
-                                }
-                                CorrectInput = true;
-                            }
-                            else
-                            {
-                                Scherm.Screens.ErrorMessageInput(); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                            }
-                        }
-                        else
-                        {
-                            Scherm.Screens.ErrorMessageInput(); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        }
-                    }
-                    table.Write(Format.Alternative);
-                    if (AantalReserveringen == 1)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reservering.\n");
-                    }
-                    else if (AantalReserveringen == 0)
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft geen reserveringen.\n");
-
-                    }
-                    else
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reserveringen.\n");
-
-                    }
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
-                    Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    if (input == "1")
-                    {
-                        AnnulerenAdmin(AlleReserveringen);
-                    }
-                    if (input == "0")
-                    {
-                        Console.Clear();
-                        Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-                        Environment.Exit(1);
-                    }
-                    else
-                    {
-                        Scherm.Screens.ErrorMessageInput();
-                        Thread.Sleep(2000);
-                    }
-                }
-            }
-            if (UserInput == "5")
-            {
-                Scherm.Screens.CinemaBanner();
-
-
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snack toevoegen\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snack verwijderen\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drank toevoegen\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drank verwijderen\n\n");
-                Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het progamma af te sluiten.\n\n");
-                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
-                ConsoleCommands.Textkleur("zwart"); string user_input1 = Console.ReadLine();
-                if (user_input1 == "0")
-
-                {
-                    Console.Clear();
-                    Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-                    Environment.Exit(1);
-                }
-                if (user_input1 == "1")
-                {
-                    Scherm.Screens.CinemaBanner();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Hoe heet de snack die u wilt toevoegen?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    string user_input_name = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine($"Wat is de prijs van {user_input_name}?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
-                    string user_input_price = Console.ReadLine();
-                    var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
-
-                    Snacks1.AddObject(SnackObject, user_input_name);
-                    Thread.Sleep(1500);
-                    AdminCommands();
-                    ConsoleCommands.Textkleur("zwart"); string UserInputNew = Console.ReadLine();
-                    UserInputMethod(UserInputNew);
-                }
-                else if (user_input1 == "3")
-                {
-                    Scherm.Screens.CinemaBanner();
-                    Console.WriteLine("Hoe heet de drank die u wilt toevoegen?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
-                    string user_input_name = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                    Console.WriteLine($"Wat is de prijs van {user_input_name}?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
-                    ConsoleCommands.Textkleur("zwart"); string user_input_price = Console.ReadLine();
-                    SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
-                    Snacks1.DrankenAdd(SnackObject, user_input_name);
-                    Thread.Sleep(1500);
-                    AdminCommands();
-                }
-                else if (user_input1 == "2")
-                {
-                    bool x = true;
-                    string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-                    dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
-
-                    Console.WriteLine("Welke snack wilt u verwijderen?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                     ConsoleCommands.Textkleur("wit");
+                    Console.Write("\t\t\tHieronder vind u een lijst met alle films: \n\n\t\t\t\t ["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    ConsoleCommands.Textkleur("zwart");
 
-                    Scherm.Screens.CinemaBanner();
-                    var table = new ConsoleTable("Snacks", "Prijs");
-                    for (int i = 0; i < DynamicData1.snacks.Count; i++)
+                    var table = new ConsoleTable("Film Naam", "Film Genre 1", "Film Genre 2", "Film Genre 3", "Zaal"); //Preset Table
+                    dynamic genres = DynamicFilmData[0]["FilmGenres"];
+                    List<string> All_Films = new List<string>();
+                    var zaal = DynamicFilmData[0]["FilmRoom"];
+                    for (int i = 0; i < DynamicFilmData.Count; i++)
+                    {
+                        All_Films.Add(DynamicFilmData[i]["FilmTitle"].ToString()); //Lijst aangemaakt met alle films
+                        All_Films.Sort(); //Lijst met films gesorteerd
+                    }
+                    ConsoleCommands.Textkleur("wit");
+                    for (int i = 0; i < DynamicFilmData.Count; i++)
                     {
 
-
-                        table.AddRow("Toets [" + (i + 1) + "] " + DynamicData1.snacks[i].Name, DynamicData1.snacks[i].Price);
-
+                        for (int j = 0; j < DynamicFilmData.Count; j++)
+                        {
+                            if (All_Films[i] == DynamicFilmData[j]["FilmTitle"].ToString())
+                            {
+                                genres = DynamicFilmData[j]["FilmGenres"]; //Juiste genres zoeken bij de films
+                                zaal = DynamicFilmData[j]["FilmRoom"]; //Juiste zaal zoeken bij de films
+                                table.AddRow($"Toets [{i + 1}] voor {All_Films[i]}", genres[0], genres[1], genres[2], zaal); //Tabel invullen met juiste data
+                            }
+                        }
                     }
-                    table.Write(Format.Alternative);
-
+                    table.Write(Format.Alternative); //Format veranderen ivm "Counter"
+                    Console.WriteLine("Toets de nummer in van de film die u wilt verwijderen");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                    bool x = true;
                     while (x == true)
                     {
-                        ConsoleCommands.Textkleur("zwart"); string delete_snack = Console.ReadLine();
-                        int int_snack;
+                        ConsoleCommands.Textkleur("zwart"); string delete_movie = Console.ReadLine();
+                        int int_movie;
                         bool Bool = false;
 
                         while (Bool == false)
                         {
-                            if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData1.snacks.Count)
+                            if (Int32.TryParse(delete_movie, out int_movie) & int_movie < All_Films.Count)
                             {
-
-                                string user_input_name = (string)DynamicData1["snacks"][int_snack - 1]["Name"];
-                                Snacks1.SnacksCheck(user_input_name);
-                                if (Snacks1.SnacksCheck(user_input_name))
-                                {
-                                    Snacks1.RemoveObject(user_input_name);
-                                    Thread.Sleep(3000);
-                                    AdminCommands();
-                                    string UserInputNew = Console.ReadLine();
-                                    UserInputMethod(UserInputNew);
-                                }
+                                delete_movie = All_Films[int_movie - 1];
                                 Bool = true;
                             }
                             else
                             {
-                                Scherm.Screens.CustomError("We hebben die Snack niet kunnen vinden!");
+                                Scherm.Screens.CustomError("We hebben die Film niet kunnen vinden. Probeer het opnieuw.");
                                 Bool = true;
                             }
                         }
-                    }
 
 
-                }
-                else if (user_input1 == "4")
-                {
-                    bool x = true;
-                    string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-                    dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
-
-                    Console.WriteLine("Welke drank wilt u verwijderen?");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                    string user_input_name = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit");
-
-                    Scherm.Screens.CinemaBanner();
-                    var table = new ConsoleTable("Dranken", "Prijs");
-                    for (int i = 0; i < DynamicData.dranken.Count; i++)
-                    {
-
-                        table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.dranken[i].Name, DynamicData.dranken[i].Price);
-
-                        Snacks1.DrankenRemove(user_input_name);
-                        Thread.Sleep(1500);
-                        AdminCommands();
-
-                    }
-                    table.Write(Format.Alternative);
-                    while (x == true)
-                    {
-                        string delete_drank = Console.ReadLine();
-                        int int_drank;
-                        bool Bool = false;
-
-                        while (Bool == false)
+                        if (FilmObject.Film_check2(delete_movie) == true)
                         {
-                            if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
-                            {
-
-                                user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
-                                Snacks1.SnacksCheck(user_input_name);
-                                if (Snacks1.DrankenCheck(user_input_name) == true)
-                                {
-                                    Snacks1.DrankenRemove(user_input_name);
-                                    Thread.Sleep(3000);
-                                    AdminCommands();
-                                }
-                                Bool = true;
-                            }
-                            else
-                            {
-                                Scherm.Screens.CustomError("We hebben die Drank niet kunnen vinden!");
-                                Bool = true;
-                            }
+                            FilmObject.RemoveObject(delete_movie);
+                            x = false;
                         }
+                        /*                    else
+                                            {
+                                                Console.WriteLine("Film niet kunnen vinden");
+                                                Console.WriteLine("Probeer het alstublieft opnieuw");
+                                                ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                            }*/
                     }
-
-
                 }
+                if (UserInput == "3")
 
-            }
-            if (UserInput == "6") 
-            {
-                while (true)
                 {
-                    Scherm.Screens.CinemaBanner();
-                    Console.WriteLine("\t\t\t RESERVERING CONTROLEREN");
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                    var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
-
-                    dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
-
-                    Console.Write("\nVoer de reserverings code in die u wilt controleren: "); ConsoleCommands.Textkleur("zwart"); string MedewerkerInput = Console.ReadLine();
-                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                    var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum", "Tijd", "Zaal");
-                    int AantalReserveringen = 0;
-                    for (int i = 0; i < AlleReserveringen.Count; i++)
+                    while (true)
                     {
-                        if (AlleReserveringen[i]["Reservatie_code"] == MedewerkerInput)
+                        Scherm.Screens.CinemaBanner();
+                        Console.WriteLine("\t\t\t RESERVERINGEN BEKIJKEN");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                        var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+
+                        dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
+
+                        Console.WriteLine("Hieronder vind u de lijst van alle reserveringen.");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum", "Tijd", "Zaal");
+                        int AantalReserveringen = 0;
+                        for (int i = 0; i < AlleReserveringen.Count; i++)
                         {
                             table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"], AlleReserveringen[i]["FilmTime"], AlleReserveringen[i]["Zaal"]);
                             AantalReserveringen++;
                         }
-                    }
-                    if (AantalReserveringen == 1)
-                    {
                         table.Write(Format.Alternative);
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nDeze reservering "); ConsoleCommands.Textkleur("rood"); Console.Write("bestaat. \n"); ConsoleCommands.Textkleur("wit");
+                        if (AantalReserveringen == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr is "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reservering.\n");
+                        }
+                        else if (AantalReserveringen == 0)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr zijn geen reserveringen.\n");
+
+                        }
+                        else
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nEr zijn "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reserveringen.\n");
+
+                        }
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
                         Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        bool correctInput = false;
-                        while (correctInput == false)
+                        if (input == "1")
                         {
-                            if (input == "1")
+                            AnnulerenAdmin(AlleReserveringen);
+                        }
+                        if (input == "0")
+                        {
+                            Console.Clear();
+                            Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                            Environment.Exit(1);
+                        }
+                        else
+                        {
+                            Scherm.Screens.ErrorMessageInput();
+                            Thread.Sleep(2000);
+                        }
+                    }
+                }
+                if (UserInput == "4")
+                {
+                    while (true)
+                    {
+                        Scherm.Screens.CinemaBanner();
+                        Console.WriteLine("\t\t\t BIOSCOOP ZALEN");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                        var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+
+                        dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
+                        for (int i = 1; i < 4; i++)
+                        {
+                            Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(i); ConsoleCommands.Textkleur("wit"); Console.Write("] voor zaal: "); ConsoleCommands.Textkleur("rood"); Console.Write(i + "\n"); ConsoleCommands.Textkleur("wit");
+                        }
+                        int x = 0;
+                        bool CorrectInput = false;
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        string Input = Console.ReadLine();
+                        var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        int AantalReserveringen = 0;
+                        while (CorrectInput != true)
+                        {
+                            if (Int32.TryParse(Input, out x))
                             {
-                                AnnulerenAdmin(AlleReserveringen);
-                                correctInput = true;
-                            }
-                            if (input == "0")
-                            {
-                                Console.Clear();
-                                Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-                                Environment.Exit(1);
-                                correctInput = true;
+                                if (x > 0 && x < 4)
+                                {
+                                    Scherm.Screens.CinemaBanner();
+                                    Console.WriteLine($"Hieronder vind u de lijst van alle reserveringen voor zaal {x}.");
+                                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                    for (int i = 0; i < AlleReserveringen.Count; i++)
+                                    {
+                                        if (AlleReserveringen[i]["Zaal"] == x.ToString())
+                                        {
+                                            AantalReserveringen++;
+                                            table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"]);
+                                        }
+                                    }
+                                    CorrectInput = true;
+                                }
+                                else
+                                {
+                                    Scherm.Screens.ErrorMessageInput(); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                                }
                             }
                             else
                             {
-                                Scherm.Screens.ErrorMessageInput();
-                                input = Console.ReadLine();
+                                Scherm.Screens.ErrorMessageInput(); Input = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                             }
                         }
-                    }
-                    else
-                    {
-                        ConsoleCommands.Textkleur("wit"); Console.Write($"\nDeze reservering "); ConsoleCommands.Textkleur("rood"); Console.Write("bestaat niet\n"); ConsoleCommands.Textkleur("wit");
+                        table.Write(Format.Alternative);
+                        if (AantalReserveringen == 1)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reservering.\n");
+                        }
+                        else if (AantalReserveringen == 0)
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft geen reserveringen.\n");
+
+                        }
+                        else
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nZaal {x} heeft "); ConsoleCommands.Textkleur("rood"); Console.Write($"{AantalReserveringen} "); ConsoleCommands.Textkleur("wit"); Console.Write("reserveringen.\n");
+
+                        }
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
                         Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                         ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        bool correctInput = false;
-                        while (correctInput == false)
+                        if (input == "1")
                         {
-                            if (input == "0")
+                            AnnulerenAdmin(AlleReserveringen);
+                        }
+                        if (input == "0")
+                        {
+                            Console.Clear();
+                            Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                            Environment.Exit(1);
+                        }
+                        else
+                        {
+                            Scherm.Screens.ErrorMessageInput();
+                            Thread.Sleep(2000);
+                        }
+                    }
+                }
+                if (UserInput == "5")
+                {
+                    Scherm.Screens.CinemaBanner();
+
+
+                    Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("1"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snack toevoegen\n\n");
+                    Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("2"); ConsoleCommands.Textkleur("wit"); Console.Write("] Snack verwijderen\n\n");
+                    Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("3"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drank toevoegen\n\n");
+                    Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("4"); ConsoleCommands.Textkleur("wit"); Console.Write("] Drank verwijderen\n\n");
+                    Console.Write("["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het progamma af te sluiten.\n\n");
+                    ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+
+                    ConsoleCommands.Textkleur("zwart"); string user_input1 = Console.ReadLine();
+                    if (user_input1 == "0")
+
+                    {
+                        Console.Clear();
+                        Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                        Environment.Exit(1);
+                    }
+                    if (user_input1 == "1")
+                    {
+                        Scherm.Screens.CinemaBanner();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine("Hoe heet de snack die u wilt toevoegen?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        string user_input_name = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+
+                        string user_input_price = Console.ReadLine();
+                        var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
+
+                        Snacks1.AddObject(SnackObject, user_input_name);
+                        Thread.Sleep(1500);
+                        AdminCommands();
+                        ConsoleCommands.Textkleur("zwart"); string UserInputNew = Console.ReadLine();
+                        UserInputMethod(UserInputNew);
+                    }
+                    else if (user_input1 == "3")
+                    {
+                        Scherm.Screens.CinemaBanner();
+                        Console.WriteLine("Hoe heet de drank die u wilt toevoegen?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+
+                        string user_input_name = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                        Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+
+                        ConsoleCommands.Textkleur("zwart"); string user_input_price = Console.ReadLine();
+                        SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
+                        Snacks1.DrankenAdd(SnackObject, user_input_name);
+                        Thread.Sleep(1500);
+                        AdminCommands();
+                    }
+                    else if (user_input1 == "2")
+                    {
+                        bool x = true;
+                        string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+                        dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
+
+                        Console.WriteLine("Welke snack wilt u verwijderen?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        ConsoleCommands.Textkleur("wit");
+
+                        Scherm.Screens.CinemaBanner();
+                        var table = new ConsoleTable("Snacks", "Prijs");
+                        for (int i = 0; i < DynamicData1.snacks.Count; i++)
+                        {
+
+
+                            table.AddRow("Toets [" + (i + 1) + "] " + DynamicData1.snacks[i].Name, DynamicData1.snacks[i].Price);
+
+                        }
+                        table.Write(Format.Alternative);
+
+                        while (x == true)
+                        {
+                            ConsoleCommands.Textkleur("zwart"); string delete_snack = Console.ReadLine();
+                            int int_snack;
+                            bool Bool = false;
+
+                            while (Bool == false)
                             {
-                                Console.Clear();
-                                Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-                                Environment.Exit(1);
-                                correctInput = true;
+                                if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData1.snacks.Count)
+                                {
+
+                                    string user_input_name = (string)DynamicData1["snacks"][int_snack - 1]["Name"];
+                                    Snacks1.SnacksCheck(user_input_name);
+                                    if (Snacks1.SnacksCheck(user_input_name))
+                                    {
+                                        Snacks1.RemoveObject(user_input_name);
+                                        Thread.Sleep(3000);
+                                        AdminCommands();
+                                        string UserInputNew = Console.ReadLine();
+                                        UserInputMethod(UserInputNew);
+                                    }
+                                    Bool = true;
+                                }
+                                else
+                                {
+                                    Scherm.Screens.CustomError("We hebben die Snack niet kunnen vinden!");
+                                    Bool = true;
+                                }
                             }
-                            else
+                        }
+
+
+                    }
+                    else if (user_input1 == "4")
+                    {
+                        bool x = true;
+                        string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+                        dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
+
+                        Console.WriteLine("Welke drank wilt u verwijderen?");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        string user_input_name = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit");
+
+                        Scherm.Screens.CinemaBanner();
+                        var table = new ConsoleTable("Dranken", "Prijs");
+                        for (int i = 0; i < DynamicData.dranken.Count; i++)
+                        {
+
+                            table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.dranken[i].Name, DynamicData.dranken[i].Price);
+
+                            Snacks1.DrankenRemove(user_input_name);
+                            Thread.Sleep(1500);
+                            AdminCommands();
+
+                        }
+                        table.Write(Format.Alternative);
+                        while (x == true)
+                        {
+                            string delete_drank = Console.ReadLine();
+                            int int_drank;
+                            bool Bool = false;
+
+                            while (Bool == false)
                             {
-                                Scherm.Screens.ErrorMessageInput();
-                                input = Console.ReadLine();
+                                if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
+                                {
+
+                                    user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
+                                    Snacks1.SnacksCheck(user_input_name);
+                                    if (Snacks1.DrankenCheck(user_input_name) == true)
+                                    {
+                                        Snacks1.DrankenRemove(user_input_name);
+                                        Thread.Sleep(3000);
+                                        AdminCommands();
+                                    }
+                                    Bool = true;
+                                }
+                                else
+                                {
+                                    Scherm.Screens.CustomError("We hebben die Drank niet kunnen vinden!");
+                                    Bool = true;
+                                }
+                            }
+                        }
+
+
+                    }
+
+                }
+                if (UserInput == "6")
+                {
+                    while (true)
+                    {
+                        Scherm.Screens.CinemaBanner();
+                        Console.WriteLine("\t\t\t RESERVERING CONTROLEREN");
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                        var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+
+                        dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
+
+                        Console.Write("\nVoer de reserverings code in die u wilt controleren: "); ConsoleCommands.Textkleur("zwart"); string MedewerkerInput = Console.ReadLine();
+                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                        var table = new ConsoleTable("Naam", "Reserverings code", "Film", "Datum", "Tijd", "Zaal");
+                        int AantalReserveringen = 0;
+                        for (int i = 0; i < AlleReserveringen.Count; i++)
+                        {
+                            if (AlleReserveringen[i]["Reservatie_code"] == MedewerkerInput)
+                            {
+                                table.AddRow(AlleReserveringen[i]["Naam"], AlleReserveringen[i]["Reservatie_code"], AlleReserveringen[i]["Film"], AlleReserveringen[i]["FilmDate"], AlleReserveringen[i]["FilmTime"], AlleReserveringen[i]["Zaal"]);
+                                AantalReserveringen++;
+                            }
+                        }
+                        if (AantalReserveringen == 1)
+                        {
+                            table.Write(Format.Alternative);
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nDeze reservering "); ConsoleCommands.Textkleur("rood"); Console.Write("bestaat. \n"); ConsoleCommands.Textkleur("wit");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] Reservering annuleren.\n");
+                            Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            bool correctInput = false;
+                            while (correctInput == false)
+                            {
+                                if (input == "1")
+                                {
+                                    AnnulerenAdmin(AlleReserveringen);
+                                    correctInput = true;
+                                }
+                                if (input == "0")
+                                {
+                                    Console.Clear();
+                                    Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                                    Environment.Exit(1);
+                                    correctInput = true;
+                                }
+                                else
+                                {
+                                    Scherm.Screens.ErrorMessageInput();
+                                    input = Console.ReadLine();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            ConsoleCommands.Textkleur("wit"); Console.Write($"\nDeze reservering "); ConsoleCommands.Textkleur("rood"); Console.Write("bestaat niet\n"); ConsoleCommands.Textkleur("wit");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.Write("\n["); ConsoleCommands.Textkleur("zwart"); Console.Write(0); ConsoleCommands.Textkleur("wit"); Console.Write("] Om het programma af te sluiten.\n");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            ConsoleCommands.Textkleur("zwart"); string input = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            bool correctInput = false;
+                            while (correctInput == false)
+                            {
+                                if (input == "0")
+                                {
+                                    Console.Clear();
+                                    Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                                    Environment.Exit(1);
+                                    correctInput = true;
+                                }
+                                else
+                                {
+                                    Scherm.Screens.ErrorMessageInput();
+                                    input = Console.ReadLine();
+                                }
                             }
                         }
                     }
                 }
+                if (UserInput != "1" && UserInput != "2" && UserInput != "3" && UserInput != "4" && UserInput != "5" && UserInput != "6" && UserInput != "0")
+                {
+                    Screens.ErrorMessageInput();
+                    UserInput = Console.ReadLine(); ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                }
             }
-
             
 
-
-
-
-            ConsoleCommands.Textkleur("zwart");
-            UserInput = Console.ReadLine();
-            UserInputMethod(UserInput);
         }
         public void AnnulerenAdmin(dynamic AlleReserveringen)
         {
@@ -906,13 +906,6 @@ namespace Gebruiker
                 Environment.Exit(1);
             }
 
-
-
-
-
-
-
-
         }
         public void AccountCreate(Gebruiker Object) // Eerst een object maken, dan hier als parameter in vullen om het te pushen naar de JSon file
         {
@@ -935,7 +928,7 @@ namespace Gebruiker
             List<string> Legelist = new List<string>();
             List<string> DagenvdWeek = new List<string>();
             List<string> Show_Tijden = new List<string>();
-            Dictionary<string, Dictionary<string, List<string>>> DictofTimes = new();
+            Dictionary<string, Dictionary<string, List<string>>> DictofTimes = new Dictionary<string, Dictionary<string, List<string>>>();
             string Times = null;
             DagenvdWeek.Add("Maandag");
             DagenvdWeek.Add("Dinsdag");
@@ -1500,7 +1493,7 @@ namespace Gebruiker
         public void GenreOptie(List<string>Show_films, dynamic DynamicFilmData, string SearchedGenre)
         {
             string Gezochte_Film = null;
-            List<string> DagenvdWeek = new();
+            List<string> DagenvdWeek = new List<string>();
             string Times = null;
             DagenvdWeek.Add("Maandag");
             DagenvdWeek.Add("Dinsdag");
@@ -1509,7 +1502,7 @@ namespace Gebruiker
             DagenvdWeek.Add("Vrijdag");
             DagenvdWeek.Add("Zaterdag");
             DagenvdWeek.Add("Zondag");
-            Dictionary<string, Dictionary<string, List<string>>> DictofTimes = new();
+            Dictionary<string, Dictionary<string, List<string>>> DictofTimes = new Dictionary<string, Dictionary<string, List<string>>>();
             int count = 1;
             for (int y = 0; y < Show_films.Count; y++)
             {

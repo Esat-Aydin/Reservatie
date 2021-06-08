@@ -42,7 +42,7 @@ namespace SnackClass
 
         public void AddSnack(Snacks SnackObject, bool isSnack)
         {
-            List<Snacks> _data = new();
+            List<Snacks> _data = new List<Snacks>();
             string FullPathSnacks = Path.GetFullPath(@"snacksdrinks.json");
             var SnackDataJson = File.ReadAllText(FullPathSnacks);
             var SnackObjectJson = JsonConvert.DeserializeObject<SnackType>(SnackDataJson);

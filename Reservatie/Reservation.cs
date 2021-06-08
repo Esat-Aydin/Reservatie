@@ -117,11 +117,11 @@ namespace Reservation
         }
         public void ReserveringMaken(string UserInput)
         {
-            Film.Film FilmObject = new();
-            MedewerkerClass.Medewerker admin = new();
-            Gebruiker.Gebruiker Klant = new();
-            ConsoleCommands CommandLine = new();
-            List<string> Autofill = new();
+            Film.Film FilmObject = new Film.Film();
+            MedewerkerClass.Medewerker admin = new MedewerkerClass.Medewerker();
+            Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
+            ConsoleCommands CommandLine = new ConsoleCommands();
+            List<string> Autofill = new List<string>();
             // Inladen Json Module 
             dynamic DynamicData = JsonData.JsonSerializer("Snacks");
             dynamic DynamicUserData = JsonData.JsonSerializer("Users");
@@ -376,7 +376,7 @@ namespace Reservation
                 List<string> ListofFilms = new List<string>();
                 string Times = null;
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
-                Dictionary<string, List<string>> DictofListofString = new();
+                Dictionary<string, List<string>> DictofListofString = new Dictionary<string, List<string>>();
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("\t\tVoer de datum in voor wanneer u zou willen reserveren (DD-MM-YYYY): ");
                 Console.Write("\n\t\t\t\t["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
@@ -384,7 +384,7 @@ namespace Reservation
                 ConsoleCommands.Textkleur("zwart");
                 string FilmDateSearch = Console.ReadLine();
                 bool InputisDate = false;
-                DateTime TestDateTime = new();
+                DateTime TestDateTime = new DateTime();
                 while (InputisDate == false)
                 {
                     if (IsDateUserInputInteger(FilmDateSearch) == true && ((FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/')) || (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-'))))
