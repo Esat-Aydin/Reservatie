@@ -32,7 +32,7 @@ namespace Film
         }
         public void AddObject(Film FilmObject) // Dit voegt de FilmObject object toe aan de Json file
         {
-            List<Film> _data = new();
+            List<Film> _data = new List<Film>();
             string FullPathReservations = Path.GetFullPath("Filmsdata.json");
             Console.WriteLine(FullPathReservations);
             var FilmDataJson = File.ReadAllText("Filmsdata.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path

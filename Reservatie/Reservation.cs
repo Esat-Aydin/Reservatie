@@ -64,6 +64,7 @@ namespace Reservation
                     break;
                 }
             }
+
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
             Console.Write("Om uw reservering te annuleren toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] om het programma opnieuw op te starten toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("]\n");
@@ -100,7 +101,7 @@ namespace Reservation
                 Console.Write("\rProgress: ");
                 if (i != 100)
                 {
-                    ConsoleCommands.Textkleur("rood");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write($"{i}%   ");
                     Thread.Sleep(25);
                 }
@@ -117,11 +118,11 @@ namespace Reservation
         }
         public void ReserveringMaken(string UserInput)
         {
-            Film.Film FilmObject = new();
-            MedewerkerClass.Medewerker admin = new();
-            Gebruiker.Gebruiker Klant = new();
-            ConsoleCommands CommandLine = new();
-            List<string> Autofill = new();
+            Film.Film FilmObject = new Film.Film();
+            MedewerkerClass.Medewerker admin = new MedewerkerClass.Medewerker();
+            Gebruiker.Gebruiker Klant = new Gebruiker.Gebruiker();
+            ConsoleCommands CommandLine = new ConsoleCommands();
+            List<string> Autofill = new List<string>();
             // Inladen Json Module 
             dynamic DynamicData = JsonData.JsonSerializer("Snacks");
             dynamic DynamicUserData = JsonData.JsonSerializer("Users");
@@ -376,7 +377,7 @@ namespace Reservation
                 List<string> ListofFilms = new List<string>();
                 string Times = null;
                 dynamic Dagen = DynamicFilmData[0]["FilmDays"];
-                Dictionary<string, List<string>> DictofListofString = new();
+                Dictionary<string, List<string>> DictofListofString = new Dictionary<string, List<string>>();
                 ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("\t\tVoer de datum in voor wanneer u zou willen reserveren (DD-MM-YYYY): ");
                 Console.Write("\n\t\t\t\t["); ConsoleCommands.Textkleur("zwart"); Console.Write("0"); ConsoleCommands.Textkleur("wit"); Console.Write("] Terug gaan\n");
@@ -384,10 +385,10 @@ namespace Reservation
                 ConsoleCommands.Textkleur("zwart");
                 string FilmDateSearch = Console.ReadLine();
                 bool InputisDate = false;
-                DateTime TestDateTime = new();
+                DateTime TestDateTime = new DateTime();
                 while (InputisDate == false)
                 {
-                    if (IsDateUserInputInteger(FilmDateSearch) == true && ((FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/')) || (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-'))))
+                    if (IsDateUserInputInteger(FilmDateSearch) == true && (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-')))
                     {
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
@@ -398,7 +399,7 @@ namespace Reservation
                     }
                     else
                     {
-                        Screens.CustomError("Dat is geen geldige input! Probeer het opnieuw met de format DD/MM/YYYY - Voorbeeld: 16/05/2021 of 16-05-2021");
+                        Screens.CustomError("Dat is geen geldige input! Probeer het opnieuw met de format DD-MM-YYYY - Voorbeeld: 16-05-2021");
                         FilmDateSearch = Console.ReadLine();
                     }
                 }
@@ -1066,7 +1067,7 @@ We hopen u voldoende te hebben geïnformeerd.
                 totaal += Convert.ToDecimal(Filmprice, new CultureInfo("en-US"));
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
                 Console.OutputEncoding = System.Text.Encoding.UTF8; ConsoleCommands.Textkleur("wit");
-                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"{totaal}\n"); ConsoleCommands.Textkleur("wit");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write("€" + totaal + "\n");ConsoleCommands.Textkleur("wit");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -1084,7 +1085,7 @@ We hopen u voldoende te hebben geïnformeerd.
                 stringTotaal = String.Format("{0:0.00}", totaal);
                 ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.OutputEncoding = System.Text.Encoding.UTF8; ConsoleCommands.Textkleur("wit");
-                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write($"{stringTotaal}\n"); ConsoleCommands.Textkleur("wit");
+                Console.Write($"De totaal prijs is: "); ConsoleCommands.Textkleur("rood"); System.Console.Out.Write("€" + stringTotaal + "\n");ConsoleCommands.Textkleur("wit");
 
                 Console.WriteLine("_____________________________________________________________________________________________\n");
                 Console.Write("Hoe zou u willen betalen?\n\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] voor IDEAL\nToets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("] voor Paypal\n");
