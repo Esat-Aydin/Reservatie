@@ -59,7 +59,7 @@ namespace Chair
                 }
                 Scherm.Screens.CinemaBanner();
                 table.Write(Format.Alternative);
-                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("    'X' = al gereserveerde stoelen.                'V' = uw gekozen stoelen.");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             else if (room == 2)
@@ -71,7 +71,7 @@ namespace Chair
                 }
                 Scherm.Screens.CinemaBanner();
                 table.Write(Format.Alternative);
-                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("    'X' = al gereserveerde stoelen.                'V' = uw gekozen stoelen.");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
             else
@@ -83,7 +83,7 @@ namespace Chair
                 }
                 Scherm.Screens.CinemaBanner();
                 table.Write(Format.Alternative);
-                Console.WriteLine("    'X' = al gereserveerde stoelen.                '-' = uw gekozen stoelen.");
+                Console.WriteLine("    'X' = al gereserveerde stoelen.                'V' = uw gekozen stoelen.");
                 Console.WriteLine("_____________________________________________________________________________________________\n");
             }
 
@@ -121,7 +121,7 @@ namespace Chair
                         i--;
                         return Tuple.Create(newChairs, i, newData);
                     }
-                    newData = changeAllData(newData, newChairs[i], "-");
+                    newData = changeAllData(newData, newChairs[i], "V");
                 }
             }
             else
@@ -135,7 +135,7 @@ namespace Chair
                         i--;
                         return Tuple.Create(newChairs, i, newData);
                     }
-                    newData = changeAllData(newData, newChairs[i], "-");
+                    newData = changeAllData(newData, newChairs[i], "V");
                 }
             }
             /*
@@ -163,7 +163,7 @@ namespace Chair
                 else if (newinput == "2")
                 {
                     string [][] aData = NewAllData(this.AllData);
-                    aData = changeAllData(aData, newChairs[0],"-");
+                    aData = changeAllData(aData, newChairs[0],"V");
                     return Tuple.Create(newChairs, 0, aData);
                 }
                 else if (newinput == "3")
@@ -273,7 +273,7 @@ namespace Chair
                                 {
                                     if(A != "")
                                     {
-                                        ding = changeAllData(ding, A, "-");
+                                        ding = changeAllData(ding, A, "V");
                                     }
                                 }
                             }
@@ -281,7 +281,7 @@ namespace Chair
                         }
                         else
                         {
-                            ding = changeAllData(ding,newChairs[i], "-");
+                            ding = changeAllData(ding,newChairs[i], "V");
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -322,7 +322,7 @@ namespace Chair
                                 {
                                     if (A != "")
                                     {
-                                        ding = changeAllData(ding, A, "-");
+                                        ding = changeAllData(ding, A, "V");
                                     }
                                 }
                             }
@@ -330,7 +330,7 @@ namespace Chair
                         }
                         else
                         {
-                            ding = changeAllData(ding, newChairs[i], "-");
+                            ding = changeAllData(ding, newChairs[i], "V");
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -381,7 +381,7 @@ namespace Chair
                                 {
                                     if (A != "")
                                     {
-                                        ding = changeAllData(ding, A, "-");
+                                        ding = changeAllData(ding, A, "V");
                                     }
                                 }
                             }
@@ -430,7 +430,7 @@ namespace Chair
                                 {
                                     if (A != "")
                                     {
-                                        ding = changeAllData(ding, A, "-");
+                                        ding = changeAllData(ding, A, "V");
                                     }
                                 }
                             }
@@ -438,7 +438,7 @@ namespace Chair
                         }
                         else
                         {
-                            ding = changeAllData(ding, newChairs[i], "-");
+                            ding = changeAllData(ding, newChairs[i], "V");
                             console(room, ding);
                         }
                         Console.WriteLine("_____________________________________________________________________________________________\n");
