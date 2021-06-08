@@ -64,6 +64,7 @@ namespace Reservation
                     break;
                 }
             }
+
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
             Console.Write("Om uw reservering te annuleren toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(1); ConsoleCommands.Textkleur("wit"); Console.Write("] om het programma opnieuw op te starten toets ["); ConsoleCommands.Textkleur("zwart"); Console.Write(2); ConsoleCommands.Textkleur("wit"); Console.Write("]\n");
@@ -387,7 +388,7 @@ namespace Reservation
                 DateTime TestDateTime = new DateTime();
                 while (InputisDate == false)
                 {
-                    if (IsDateUserInputInteger(FilmDateSearch) == true && ((FilmDateSearch[2].Equals('/') && FilmDateSearch[5].Equals('/')) || (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-'))))
+                    if (IsDateUserInputInteger(FilmDateSearch) == true && (FilmDateSearch[2].Equals('-') && FilmDateSearch[5].Equals('-')))
                     {
                         TestDateTime = DateTimeReturner(FilmDateSearch);
                         InputisDate = true;
@@ -398,7 +399,7 @@ namespace Reservation
                     }
                     else
                     {
-                        Screens.CustomError("Dat is geen geldige input! Probeer het opnieuw met de format DD/MM/YYYY - Voorbeeld: 16/05/2021 of 16-05-2021");
+                        Screens.CustomError("Dat is geen geldige input! Probeer het opnieuw met de format DD-MM-YYYY - Voorbeeld: 16-05-2021");
                         FilmDateSearch = Console.ReadLine();
                     }
                 }
