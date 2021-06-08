@@ -100,7 +100,7 @@ namespace Reservation
                 Console.Write("\rProgress: ");
                 if (i != 100)
                 {
-                    ConsoleCommands.Textkleur("rood");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write($"{i}%   ");
                     Thread.Sleep(25);
                 }
