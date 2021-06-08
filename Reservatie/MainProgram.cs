@@ -109,7 +109,7 @@ namespace Cinema
             string FullPathSeats = Path.GetFullPath(@"Stoelkeuze.json");
             string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
             string FullPathSnacksDrinks = Path.GetFullPath(@"snacksdrinks.json");
-            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
+            string FullPathsReservations = Path.GetFullPath(@"SampleLog.json");
 
 
             var MyFilmsData = new WebClient().DownloadString(FullPathFilms);

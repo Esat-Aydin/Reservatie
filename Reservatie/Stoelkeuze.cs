@@ -36,7 +36,7 @@ namespace Chair
             this.Datum = datum;
             this.Tijd = tijd;
             string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
-            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
+            string FullPathsReservations = Path.GetFullPath(@"SampleLog.json");
             string FullPathSeats = Path.GetFullPath(@"Stoelkeuze.json");
             var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
             string myUserData = new WebClient().DownloadString(FullPathsReservations);
