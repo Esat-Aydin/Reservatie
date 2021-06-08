@@ -41,23 +41,14 @@ namespace Cinema
             }
             else if (kleur == "rood")
             {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
             }
         }
         public void RestartOption()
         {
-
-            Textkleur("wit");Console.WriteLine("_____________________________________________________________________________________________\n");
-            Console.Write("Toets ["); Textkleur("zwart"); Console.Write("R"); Textkleur("wit"); Console.Write("] om het progamma opnieuw op te starten.\n");
-            Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-            Textkleur("zwart");
-            string restart = Console.ReadLine();
-            if (restart.ToUpper() == "R")
-            {
                 Console.Clear();
                 Process.Start(Process.GetCurrentProcess().MainModule.FileName);
                 Environment.Exit(1);
-            }
         }
         public string Genre(string Genre_select)
         {
@@ -110,21 +101,29 @@ namespace Cinema
         public string Film_Day { get; set; }
         public string FilmTime { get; set; }
         public string Zaal { get; set; }
-        public string Stoel_num { get; set; }
+        public string[] Stoel_num { get; set; }
 
 
         public static dynamic JsonSerializer(string Object)
         {
+            string FullPathSeats = Path.GetFullPath(@"Stoelkeuze.json");
+            string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
+            string FullPathSnacksDrinks = Path.GetFullPath(@"snacksdrinks.json");
+            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
 
 
-            var MyFilmsData = new WebClient().DownloadString(@".\Filmsdata.json");
-            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-            string myUserData = new WebClient().DownloadString(@".\SampleLog.json");
+            var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
+            var myJsonString = new WebClient().DownloadString(FullPathSnacksDrinks);
+            var myUserData = new WebClient().DownloadString(FullPathsReservations);
+            var myRoomData = new WebClient().DownloadString(FullPathSeats);
+
+
 
             // Omzetten
             dynamic DynamicData = JsonConvert.DeserializeObject(myJsonString);
             dynamic DynamicUserData = JsonConvert.DeserializeObject(myUserData);
             dynamic DynamicFilmData = JsonConvert.DeserializeObject(MyFilmsData);
+            dynamic DynamicSeatsData = JsonConvert.DeserializeObject(myRoomData);
             
             if(Object == "Films")
             {
@@ -133,6 +132,10 @@ namespace Cinema
             else if(Object == "Snacks")
             {
                 return DynamicData;
+            }
+            else if(Object == "Seats")
+            {
+                return DynamicSeatsData;
             }
             else
             {
@@ -147,7 +150,7 @@ namespace Cinema
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(120, 40);
+            Console.SetWindowSize(120,40);
             Scherm.Screens.AdminOrUserScreen();
         }
     }
