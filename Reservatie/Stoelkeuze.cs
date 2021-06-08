@@ -594,10 +594,7 @@ namespace Chair
                     this.hoeveelstoelen = Int32.Parse(Console.ReadLine());
                     if (this.hoeveelstoelen > 8 || this.hoeveelstoelen < 1)
                     {
-                        ConsoleCommands.Textkleur("wit");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Error. Geef hier het aantal stoelen aan van 1-8");
-                        Console.WriteLine("_____________________________________________________________________________________________\n");
+                        Screens.CustomError("U kunt alleen een getal kiezen tussen 1 en 8! Probeer het opnieuw:");
                     }
                     else 
                     {
@@ -607,9 +604,7 @@ namespace Chair
                 catch
                 {
                     ConsoleCommands.Textkleur("wit");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
-                    Console.WriteLine("Error. Geef hier het aantal stoelen aan van 1-8");
-                    Console.WriteLine("_____________________________________________________________________________________________\n");
+                    Screens.CustomError("U kunt alleen een getal kiezen tussen 1 en 8! Probeer het opnieuw:");
                 }
             }
             // Table needs to be somewhat dynamic
