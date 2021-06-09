@@ -206,7 +206,7 @@ namespace Chair
                 }
                 else
                 {
-                    Screens.CustomError("U kunt alleen een getal kiezen tussen de 0 en 4! Probeer het opnieuw:");
+                    Screens.CustomError("U kunt alleen een getal kiezen tussen de 0 en 3! Probeer het opnieuw:");
                 }
             }
 
