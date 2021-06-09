@@ -604,161 +604,173 @@ namespace Gebruiker
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
                     ConsoleCommands.Textkleur("zwart"); string user_input1 = Console.ReadLine();
-                    if (user_input1 == "0")
-
+                    bool CorrectInput = false;
+                    bool ErrorShown = false;
+                    while (CorrectInput == false)
                     {
-                        Console.Clear();
-                        Process.Start(Process.GetCurrentProcess().MainModule.FileName);
-                        Environment.Exit(1);
-                    }
-                    if (user_input1 == "1")
-                    {
-                        Scherm.Screens.CinemaBanner();
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine("Hoe heet de snack die u wilt toevoegen?");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        string user_input_name = Console.ReadLine();
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-                        Console.WriteLine($"Wat is de prijs van {user_input_name}?");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                        if (user_input1 == "0")
 
-                        string user_input_price = Console.ReadLine();
-                        var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
-
-                        Snacks1.AddObject(SnackObject, user_input_name);
-                        Thread.Sleep(1500);
-                        AdminCommands();
-                        ConsoleCommands.Textkleur("zwart"); string UserInputNew = Console.ReadLine();
-                        UserInputMethod(UserInputNew);
-                    }
-                    else if (user_input1 == "3")
-                    {
-                        Scherm.Screens.CinemaBanner();
-                        Console.WriteLine("Hoe heet de drank die u wilt toevoegen?");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
-                        string user_input_name = Console.ReadLine();
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
-
-                        Console.WriteLine($"Wat is de prijs van {user_input_name}?");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-
-                        ConsoleCommands.Textkleur("zwart"); string user_input_price = Console.ReadLine();
-                        SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
-                        Snacks1.DrankenAdd(SnackObject, user_input_name);
-                        Thread.Sleep(1500);
-                        AdminCommands();
-                    }
-                    else if (user_input1 == "2")
-                    {
-                        bool x = true;
-                        string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-                        dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
-
-                        Console.WriteLine("Welke snack wilt u verwijderen?");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        ConsoleCommands.Textkleur("wit");
-
-                        Scherm.Screens.CinemaBanner();
-                        var table = new ConsoleTable("Snacks", "Prijs");
-                        for (int i = 0; i < DynamicData1.snacks.Count; i++)
                         {
-
-
-                            table.AddRow("Toets [" + (i + 1) + "] " + DynamicData1.snacks[i].Name, DynamicData1.snacks[i].Price);
-
+                            Console.Clear();
+                            Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                            Environment.Exit(1);
+                            CorrectInput = true;
                         }
-                        table.Write(Format.Alternative);
-
-                        while (x == true)
+                        else if (user_input1 == "1")
                         {
-                            ConsoleCommands.Textkleur("zwart"); string delete_snack = Console.ReadLine();
-                            int int_snack;
-                            bool Bool = false;
+                            Scherm.Screens.CinemaBanner();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine("Hoe heet de snack die u wilt toevoegen?");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            string user_input_name = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
-                            while (Bool == false)
-                            {
-                                if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData1.snacks.Count)
-                                {
+                            string user_input_price = Console.ReadLine();
+                            var SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
 
-                                    string user_input_name = (string)DynamicData1["snacks"][int_snack - 1]["Name"];
-                                    Snacks1.SnacksCheck(user_input_name);
-                                    if (Snacks1.SnacksCheck(user_input_name))
-                                    {
-                                        Snacks1.RemoveObject(user_input_name);
-                                        Thread.Sleep(3000);
-                                        AdminCommands();
-                                        string UserInputNew = Console.ReadLine();
-                                        UserInputMethod(UserInputNew);
-                                    }
-                                    Bool = true;
-                                }
-                                else
-                                {
-                                    Scherm.Screens.CustomError("We hebben die Snack niet kunnen vinden!");
-                                    Bool = true;
-                                }
-                            }
-                        }
-
-
-                    }
-                    else if (user_input1 == "4")
-                    {
-                        bool x = true;
-                        string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
-                        dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
-
-                        Console.WriteLine("Welke drank wilt u verwijderen?");
-                        ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                        string user_input_name = Console.ReadLine();
-                        ConsoleCommands.Textkleur("wit");
-
-                        Scherm.Screens.CinemaBanner();
-                        var table = new ConsoleTable("Dranken", "Prijs");
-                        for (int i = 0; i < DynamicData.dranken.Count; i++)
-                        {
-
-                            table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.dranken[i].Name, DynamicData.dranken[i].Price);
-
-                            Snacks1.DrankenRemove(user_input_name);
+                            Snacks1.AddObject(SnackObject, user_input_name);
                             Thread.Sleep(1500);
                             AdminCommands();
-
+                            ConsoleCommands.Textkleur("zwart"); string UserInputNew = Console.ReadLine();
+                            UserInputMethod(UserInputNew);
+                            CorrectInput = true;
                         }
-                        table.Write(Format.Alternative);
-                        while (x == true)
+                        else if (user_input1 == "3")
                         {
-                            string delete_drank = Console.ReadLine();
-                            int int_drank;
-                            bool Bool = false;
+                            Scherm.Screens.CinemaBanner();
+                            Console.WriteLine("Hoe heet de drank die u wilt toevoegen?");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
 
-                            while (Bool == false)
+                            string user_input_name = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+
+                            Console.WriteLine($"Wat is de prijs van {user_input_name}?");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+
+                            ConsoleCommands.Textkleur("zwart"); string user_input_price = Console.ReadLine();
+                            SnackClass.Snacks SnackObject = new SnackClass.Snacks(user_input_name, user_input_price);
+                            Snacks1.DrankenAdd(SnackObject, user_input_name);
+                            Thread.Sleep(1500);
+                            AdminCommands();
+                            CorrectInput = true;
+                        }
+                        else if (user_input1 == "2")
+                        {
+                            bool x = true;
+                            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+                            dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
+
+                            Console.WriteLine("Welke snack wilt u verwijderen?");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            ConsoleCommands.Textkleur("wit");
+
+                            Scherm.Screens.CinemaBanner();
+                            var table = new ConsoleTable("Snacks", "Prijs");
+                            for (int i = 0; i < DynamicData1.snacks.Count; i++)
                             {
-                                if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
-                                {
 
-                                    user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
-                                    Snacks1.SnacksCheck(user_input_name);
-                                    if (Snacks1.DrankenCheck(user_input_name) == true)
-                                    {
-                                        Snacks1.DrankenRemove(user_input_name);
-                                        Thread.Sleep(3000);
-                                        AdminCommands();
-                                    }
-                                    Bool = true;
-                                }
-                                else
+
+                                table.AddRow("Toets [" + (i + 1) + "] " + DynamicData1.snacks[i].Name, DynamicData1.snacks[i].Price);
+
+                            }
+                            table.Write(Format.Alternative);
+
+                            while (x == true)
+                            {
+                                ConsoleCommands.Textkleur("zwart"); string delete_snack = Console.ReadLine();
+                                int int_snack;
+                                bool Bool = false;
+
+                                while (Bool == false)
                                 {
-                                    Scherm.Screens.CustomError("We hebben die Drank niet kunnen vinden!");
-                                    Bool = true;
+                                    if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData1.snacks.Count)
+                                    {
+
+                                        string user_input_name = (string)DynamicData1["snacks"][int_snack - 1]["Name"];
+                                        Snacks1.SnacksCheck(user_input_name);
+                                        if (Snacks1.SnacksCheck(user_input_name))
+                                        {
+                                            Snacks1.RemoveObject(user_input_name);
+                                            Thread.Sleep(3000);
+                                            AdminCommands();
+                                            string UserInputNew = Console.ReadLine();
+                                            UserInputMethod(UserInputNew);
+                                        }
+                                        Bool = true;
+                                    }
+                                    else
+                                    {
+                                        Scherm.Screens.CustomError("We hebben die Snack niet kunnen vinden!");
+                                        Bool = true;
+                                    }
                                 }
                             }
+
+                            CorrectInput = true;
                         }
+                        else if (user_input1 == "4")
+                        {
+                            bool x = true;
+                            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+                            dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
 
+                            Console.WriteLine("Welke drank wilt u verwijderen?");
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
+                            string user_input_name = Console.ReadLine();
+                            ConsoleCommands.Textkleur("wit");
 
+                            Scherm.Screens.CinemaBanner();
+                            var table = new ConsoleTable("Dranken", "Prijs");
+                            for (int i = 0; i < DynamicData.dranken.Count; i++)
+                            {
+
+                                table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.dranken[i].Name, DynamicData.dranken[i].Price);
+
+                                Snacks1.DrankenRemove(user_input_name);
+                                Thread.Sleep(1500);
+                                AdminCommands();
+
+                            }
+                            table.Write(Format.Alternative);
+                            while (x == true)
+                            {
+                                string delete_drank = Console.ReadLine();
+                                int int_drank;
+                                bool Bool = false;
+
+                                while (Bool == false)
+                                {
+                                    if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
+                                    {
+
+                                        user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
+                                        Snacks1.SnacksCheck(user_input_name);
+                                        if (Snacks1.DrankenCheck(user_input_name) == true)
+                                        {
+                                            Snacks1.DrankenRemove(user_input_name);
+                                            Thread.Sleep(3000);
+                                            AdminCommands();
+                                        }
+                                        Bool = true;
+                                    }
+                                    else
+                                    {
+                                        Scherm.Screens.CustomError("We hebben die Drank niet kunnen vinden!");
+                                        Bool = true;
+                                    }
+                                }
+                            }
+                            CorrectInput = true;
+                        }
+                        else
+                        {
+                            
+                            Screens.ErrorMessageInput();
+                            user_input1 = Console.ReadLine();
+                        }
                     }
-
                 }
                 if (UserInput == "6")
                 {

@@ -206,7 +206,9 @@ namespace Chair
                 }
                 else
                 {
+
                     Screens.CustomError("U kunt alleen een getal kiezen tussen de 0 en 3! Probeer het opnieuw:");
+
                 }
             }
 
@@ -624,8 +626,8 @@ namespace Chair
             // Table needs to be somewhat dynamic
             ConsoleCommands.Textkleur("wit");
             console(room, AllData);
-            Console.WriteLine("Type nu elke stoel of type '0' om terug te gaan, gevolgd door ENTER.");
-            Console.WriteLine("_____________________________________________________________________________________________\n");
+            Screens.KeuzeLine(0, "Terug Gaan");
+            Console.Write("\nType nu een stoel die u wilt reserveren: ");
             ConsoleCommands.Textkleur("zwart");
             List<string> newChairs = new List<string>();
             var chosenChairs = WhatChairs(this.hoeveelstoelen, room);
