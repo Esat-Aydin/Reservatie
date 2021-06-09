@@ -36,7 +36,7 @@ namespace Chair
             this.Datum = datum;
             this.Tijd = tijd;
             string FullPathFilms = Path.GetFullPath(@"Filmsdata.json");
-            string FullPathsReservations = Path.GetFullPath(@"samplelog.json");
+            string FullPathsReservations = Path.GetFullPath(@"SampleLog.json");
             string FullPathSeats = Path.GetFullPath(@"Stoelkeuze.json");
             var MyFilmsData = new WebClient().DownloadString(FullPathFilms);
             string myUserData = new WebClient().DownloadString(FullPathsReservations);
@@ -206,7 +206,9 @@ namespace Chair
                 }
                 else
                 {
-                    Screens.ErrorMessageInput();
+
+                    Screens.CustomError("U kunt alleen een getal kiezen tussen de 0 en 3! Probeer het opnieuw:");
+
                 }
             }
 
@@ -594,7 +596,7 @@ namespace Chair
             this.AllData = AllData;
 
             Scherm.Screens.CinemaBanner();
-            Console.WriteLine($"U heeft gekozen voor de film: {this.FilmNaam}, op {this.Datum} om {this.Tijd} uur.");
+            Console.Write($"U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(this.FilmNaam); ConsoleCommands.Textkleur("wit"); Console.Write(", op "); ConsoleCommands.Textkleur("rood"); Console.Write(this.Datum); ConsoleCommands.Textkleur("wit"); Console.Write(" om "); ConsoleCommands.Textkleur("rood"); Console.Write(this.Tijd); ConsoleCommands.Textkleur("wit"); Console.Write(" uur.");
             Console.WriteLine("");
             Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
             Console.WriteLine("_____________________________________________________________________________________________\n");
@@ -632,6 +634,7 @@ namespace Chair
             room = ("" + room);
             Thread.Sleep(2000);
             ReserveerCodeMail(this.FilmNaam, this.Tijd, this.Datum, chosenChairs, room);
+
 
 
 
