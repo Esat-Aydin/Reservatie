@@ -150,7 +150,7 @@ namespace Cinema
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(120,40);
+            //Console.SetWindowSize(120,40);
             Scherm.Screens.AdminOrUserScreen();
         }
     }

@@ -125,6 +125,10 @@ namespace Scherm
             }
             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
         }
+        public static void KeuzeLine(int Keuze, string KeuzeTekst)
+        {
+            Console.Write("["); Console.ForegroundColor = ConsoleColor.Black; Console.Write(Keuze); ConsoleCommands.Textkleur("wit"); Console.Write("] " + KeuzeTekst +"\n");
+        }
         public static void VisitorScreen()
         {
             // Objects
