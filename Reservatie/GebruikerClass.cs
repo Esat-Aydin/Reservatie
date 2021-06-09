@@ -405,7 +405,7 @@ namespace Gebruiker
                         }
                     }
                     table.Write(Format.Alternative); //Format veranderen ivm "Counter"
-                    Console.WriteLine("Toets de nummer in van de film die u wilt verwijderen");
+                    Console.WriteLine("Toets het nummer in van de film die u wilt verwijderen");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
                     bool x = true;
                     while (x == true)
@@ -416,7 +416,7 @@ namespace Gebruiker
 
                         while (Bool == false)
                         {
-                            if (Int32.TryParse(delete_movie, out int_movie) & int_movie < All_Films.Count)
+                            if (Int32.TryParse(delete_movie, out int_movie) & int_movie < All_Films.Count+1)
                             {
                                 delete_movie = All_Films[int_movie - 1];
                                 Bool = true;
