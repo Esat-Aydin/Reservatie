@@ -172,7 +172,7 @@ namespace Chair
             Screens.KeuzeLine(1, "Automatisch aangeraden stoelen kiezen");
             Screens.KeuzeLine(2, "Zelf handmatig stoelen kiezen");
             Screens.KeuzeLine(3, "Opnieuw een stoel uitkiezen");
-            Screens.KeuzeLine(0, "Terug gaan"
+            Screens.KeuzeLine(0, "Terug gaan");
 
             Console.WriteLine("_____________________________________________________________________________________________\n");
             while (true)
@@ -594,7 +594,7 @@ namespace Chair
             this.AllData = AllData;
 
             Scherm.Screens.CinemaBanner();
-            Console.WriteLine($"U heeft gekozen voor de film: {this.FilmNaam}, op {this.Datum} om {this.Tijd} uur.");
+            Console.Write($"U heeft gekozen voor de film: "); ConsoleCommands.Textkleur("rood"); Console.Write(this.FilmNaam); ConsoleCommands.Textkleur("wit"); Console.Write(", op "); ConsoleCommands.Textkleur("rood"); Console.Write(this.Datum); ConsoleCommands.Textkleur("wit"); Console.Write(" om "); ConsoleCommands.Textkleur("rood"); Console.Write(this.Tijd); ConsoleCommands.Textkleur("wit"); Console.Write(" uur.");
             Console.WriteLine("");
             Console.WriteLine("Hoeveel stoelen zou u willen reserveren?");
             Console.WriteLine("_____________________________________________________________________________________________\n");
