@@ -782,7 +782,7 @@ namespace Gebruiker
                         Console.WriteLine("\t\t\t RESERVERING CONTROLEREN");
                         ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
 
-                        var Reserveringen = new WebClient().DownloadString(@".\SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
+                        var Reserveringen = new WebClient().DownloadString(@"SampleLog.json"); // even de full path kopieren en hier plakken  ---> in Solution Explorer --> rechter muisknop op FIlmsdata.json --> copy full path
 
                         dynamic AlleReserveringen = JsonConvert.DeserializeObject(Reserveringen);
 
