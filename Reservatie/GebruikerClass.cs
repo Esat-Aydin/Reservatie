@@ -667,36 +667,35 @@ namespace Gebruiker
                             }
                             table.Write(Format.Alternative);
 
-                            while (x == true)
+                            
+                            ConsoleCommands.Textkleur("zwart"); string delete_snack = Console.ReadLine();
+                            int int_snack;
+                            bool Bool = false;
+
+                            while (Bool == false)
                             {
-                                ConsoleCommands.Textkleur("zwart"); string delete_snack = Console.ReadLine();
-                                int int_snack;
-                                bool Bool = false;
-
-                                while (Bool == false)
+                                if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData1.snacks.Count+1)
                                 {
-                                    if (Int32.TryParse(delete_snack, out int_snack) & int_snack < DynamicData1.snacks.Count)
-                                    {
 
-                                        string user_input_name = (string)DynamicData1["snacks"][int_snack - 1]["Name"];
-                                        Snacks1.SnacksCheck(user_input_name);
-                                        if (Snacks1.SnacksCheck(user_input_name))
-                                        {
-                                            Snacks1.RemoveObject(user_input_name);
-                                            Thread.Sleep(3000);
-                                            AdminCommands();
-                                            string UserInputNew = Console.ReadLine();
-                                            UserInputMethod(UserInputNew);
-                                        }
-                                        Bool = true;
-                                    }
-                                    else
+                                    string user_input_name = (string)DynamicData1["snacks"][int_snack - 1]["Name"];
+
+                                    if (Snacks1.SnacksCheck(user_input_name))
                                     {
-                                        Scherm.Screens.CustomError("We hebben die Snack niet kunnen vinden!");
-                                        Bool = true;
+                                        Snacks1.RemoveObject(user_input_name);
+                                        Thread.Sleep(3000);
+                                        AdminCommands();
+                                        string UserInputNew = Console.ReadLine();
+                                        UserInputMethod(UserInputNew);
                                     }
+                                    Bool = true;
+                                }
+                                else
+                                {
+                                    Scherm.Screens.CustomError("We hebben die Snack niet kunnen vinden!");
+                                    Bool = true;
                                 }
                             }
+                            
 
                             CorrectInput = true;
                         }
