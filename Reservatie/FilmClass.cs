@@ -11,6 +11,7 @@ using System.Net;
 using ConsoleTables;
 using Cinema;
 using Gebruiker;
+using System.Threading;
 
 namespace Film
 {
@@ -105,6 +106,7 @@ namespace Film
                     DynamicData.Remove(DynamicData[Index]);
                     dynamic UserData = JsonConvert.SerializeObject(DynamicData);
                     File.WriteAllText(FullPathFilms, UserData);
+                    
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n");
                     Console.Write("\nFilm "); ConsoleCommands.Textkleur("rood"); Console.Write(ObjectName); ConsoleCommands.Textkleur("wit"); Console.Write(" is succesvol verwijderd.\n\n");
                     ConsoleCommands.Textkleur("wit"); Console.WriteLine("__\n"); ConsoleCommands.Textkleur("zwart");
