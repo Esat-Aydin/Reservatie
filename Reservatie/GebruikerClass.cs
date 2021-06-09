@@ -76,11 +76,7 @@ namespace Gebruiker
                 {
                     Scherm.Screens.AdminOrUserScreen();
                 }
-                if (UserInput.ToLower() == "help")
-                {
 
-                    AdminCommands();
-                }
                 if (UserInput == "1")
 
                 {
@@ -659,7 +655,7 @@ namespace Gebruiker
                         else if (user_input1 == "2")
                         {
                             bool x = true;
-                            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+                            string myJsonString = new WebClient().DownloadString(@"snacksdrinks.json");
                             dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
 
                             Console.WriteLine("Welke snack wilt u verwijderen?");
@@ -670,7 +666,6 @@ namespace Gebruiker
                             var table = new ConsoleTable("Snacks", "Prijs");
                             for (int i = 0; i < DynamicData1.snacks.Count; i++)
                             {
-
 
                                 table.AddRow("Toets [" + (i + 1) + "] " + DynamicData1.snacks[i].Name, DynamicData1.snacks[i].Price);
 
@@ -713,12 +708,12 @@ namespace Gebruiker
                         else if (user_input1 == "4")
                         {
                             bool x = true;
-                            string myJsonString = new WebClient().DownloadString(@".\snacksdrinks.json");
+                            string myJsonString = new WebClient().DownloadString(@"snacksdrinks.json");
                             dynamic DynamicData1 = JsonConvert.DeserializeObject(myJsonString);
 
                             Console.WriteLine("Welke drank wilt u verwijderen?");
                             ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n"); ConsoleCommands.Textkleur("zwart");
-                            string user_input_name = Console.ReadLine();
+
                             ConsoleCommands.Textkleur("wit");
 
                             Scherm.Screens.CinemaBanner();
@@ -728,43 +723,50 @@ namespace Gebruiker
 
                                 table.AddRow("Toets [" + (i + 1) + "] " + DynamicData.dranken[i].Name, DynamicData.dranken[i].Price);
 
-                                Snacks1.DrankenRemove(user_input_name);
-                                Thread.Sleep(1500);
-                                AdminCommands();
+
 
                             }
                             table.Write(Format.Alternative);
+                            ConsoleCommands.Textkleur("wit"); Console.WriteLine("_____________________________________________________________________________________________\n");
+                            
+                            
+              
+
+                            
+
+
                             while (x == true)
                             {
-                                string delete_drank = Console.ReadLine();
+                                ConsoleCommands.Textkleur("zwart");
+                                string user_input_name = Console.ReadLine();
+                                ConsoleCommands.Textkleur("wit");
                                 int int_drank;
-                                bool Bool = false;
-
-                                while (Bool == false)
+                                
+                                if (Int32.TryParse(user_input_name, out int_drank) & int_drank < DynamicData.dranken.Count+1)
                                 {
-                                    if (Int32.TryParse(delete_drank, out int_drank) & int_drank < DynamicData.dranken.Count)
-                                    {
 
-                                        user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
-                                        Snacks1.SnacksCheck(user_input_name);
-                                        if (Snacks1.DrankenCheck(user_input_name) == true)
-                                        {
-                                            Snacks1.DrankenRemove(user_input_name);
-                                            Thread.Sleep(3000);
-                                            AdminCommands();
-                                        }
-                                        Bool = true;
-                                    }
-                                    else
+                                    user_input_name = (string)DynamicData["dranken"][int_drank - 1]["Name"];
+                                       
+                                    if (Snacks1.DrankenCheck(user_input_name) == true)
                                     {
-                                        Scherm.Screens.CustomError("We hebben die Drank niet kunnen vinden!");
-                                        Bool = true;
+                                        Snacks1.DrankenRemove(user_input_name);
+                                        Thread.Sleep(3000);
+                                        x = false;
+                                     
+
                                     }
+                                    
                                 }
+                                else
+                                {
+                                    Scherm.Screens.CustomError("We hebben die Drank niet kunnen vinden!");
+                                    user_input_name = Console.ReadLine();
+                                }
+                                
                             }
                             CorrectInput = true;
                         }
-                        else
+                        else 
                         {
                             
                             Screens.ErrorMessageInput();
