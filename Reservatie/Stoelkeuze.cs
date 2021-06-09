@@ -172,7 +172,7 @@ namespace Chair
             Screens.KeuzeLine(1, "Automatisch aangeraden stoelen kiezen");
             Screens.KeuzeLine(2, "Zelf handmatig stoelen kiezen");
             Screens.KeuzeLine(3, "Opnieuw een stoel uitkiezen");
-            Screens.KeuzeLine(0, "Terug gaan"
+            Screens.KeuzeLine(0, "Terug gaan");
 
             Console.WriteLine("_____________________________________________________________________________________________\n");
             while (true)
