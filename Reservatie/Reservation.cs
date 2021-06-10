@@ -794,6 +794,12 @@ namespace Reservation
                 // Email onderwerp
                 message.Subject = $"Bevestiging Bioscoop Reservering {Klant.Film}";
                 // Email text
+                string StoelenKlant = "";
+                for (int i = 0; i < Klant.Stoel_num.Length; i++)
+                {
+                    StoelenKlant += Klant.Stoel_num[i] + " ";
+                    
+                }
                 message.Body = new TextPart("plain")
                 {
                     Text = @$"Hallo {Klant.Naam},
@@ -806,6 +812,8 @@ Reserverings code: {GeneratedCode}
 Film: {Klant.Film}
 Datum: {Klant.Film_Day}
 Tijd: {Klant.Film_Time}
+Zaal: {Klant.Zaal}
+Stoel(en): {StoelenKlant}
 
 " +
 
